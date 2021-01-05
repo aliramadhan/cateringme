@@ -8,7 +8,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+       <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('public/css/app.css') }}">
@@ -17,8 +17,15 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+        <style type="text/css">
+    body{
+        font-family: 'Poppins', sans-serif;
+        background-color: transparent;
+    }
+    
+</style>
     </head>
-    <body class="font-sans antialiased">
+    <body class=" antialiased">
         <div class="min-h-screen bg-gray-100">
             @livewire('navigation-dropdown')
 
