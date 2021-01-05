@@ -16,7 +16,7 @@
         @livewireStyles
 
         <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
+        <script src="{{ asset('public/js/app.js') }}" defer></script>
         <style type="text/css">
     body{
         font-family: 'Poppins', sans-serif;
