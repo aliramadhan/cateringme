@@ -14,7 +14,8 @@
         <div class="grid grid-cols-6 gap-4 h-4/5">
 
             <div class="col-span-1 lg:col-span-4">
-                  <div class="flex items-center absolute "><h1 class="text-3xl font-bold text-gray-600 tracking-tight ">Welcome Back <br>to 24Slides Catering App</h1></div>
+                  <div class="flex items-center absolute p-4"><h1 class="text-3xl font-bold text-gray-600 tracking-tight ">Welcome Back to<br> <span class="font-normal"><font class="text-red-600">24</font>Slides Catering App</span></h1>
+                  </div>
                 <img src="{{ asset('/resources/image/undraw_eating_together_tjhx.svg')}}" class="img-fluid p-5 relative " >
             </div>
 
@@ -48,19 +49,19 @@
 
                         <div class="block mt-4">
                             <label for="remember_me" class="flex items-center">
-                                <input id="remember_me" type="checkbox" class="form-checkbox" name="remember">
-                                <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                                <input id="remember_me" type="checkbox" class="form-checkbox  text-lg" name="remember">
+                                <span class="ml-2 text-sm text-gray-600  text-lg">{{ __('Remember me') }}</span>
                             </label>
                         </div>
 
                         <div class="flex items-center justify-end mt-4">
                             @if (Route::has('password.request'))
-                            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                            <a class="underline text-sm text-gray-600 hover:text-gray-900 text-lg" href="{{ route('password.request') }}">
                                 {{ __('Forgot your password?') }}
                             </a>
                             @endif
 
-                            <x-jet-button class="ml-4">
+                            <x-jet-button class="ml-4 bg-gradient-to-r  from-yellow-400 via-red-500 to-pink-500 px-6 py-2 text-center shadow  bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500">
                                 {{ __('Sign In') }}
                             </x-jet-button>
                         </div>
