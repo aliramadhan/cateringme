@@ -23,11 +23,12 @@ class EmployeeActionController extends Controller
     public function create_order($month)
     {
     	//declare variable
+        $now = Carbon::now();
     	$month =  Carbon::parse($month);
     	$dates = $month->daysInMonth;
     	$menus = Menu::where('show',1)->get();
 
-        return view('Employee.create_order',compact('dates','month','menus'));
+        return view('Employee.create_order',compact('dates','month','menus','now'));
     }
     public function store_order(Request $request)
     {    	
@@ -37,29 +38,29 @@ class EmployeeActionController extends Controller
             'menu' => ['required']
         ]);
 
-        //create code number for menu
-		$last_id = Order::all()->count();
-		$len = strlen(++$last_id);
-		for($i=$len; $i< 4; ++$i) {
-	        $last_id = '0'.$last_id;
-	    }
-	    $code_number = 'ORD'.$last_id;
-
         //declare
         $cek = 1;
         $user = auth()->user();
         $menu = Menu::where('menu_code',$request->menu)->first();
 
         foreach($request->dates as $date){
+            //create code number for order
+            $last_id = Order::all()->count();
+            $len = strlen(++$last_id);
+            for($i=$len; $i< 4; ++$i) {
+                $last_id = '0'.$last_id;
+            }
+            $code_number = 'ORD'.$last_id;
         	//inser into database
 			DB::beginTransaction();
 			try {
 				$order = Order::updateOrCreate([
 					'employee_id' => $user->id,
-					'menu_id' => $menu->id,
-					'order_number' => $code_number,
 					'order_date' => Carbon::parse($date)->format('Y-m-d')
-				],['menu_id' => $menu->id]);
+				],[
+                    'order_number' => $code_number,
+                    'menu_id' => $menu->id
+                ]);
 				if($order != null){
 					DB::commit();
 					$cek++;
@@ -69,7 +70,6 @@ class EmployeeActionController extends Controller
 	        	return redirect()->back()->withErrors(['message' => 'Error Accuired.']);
 			}
         }
-        return dd($cek);
 		return redirect()->route('employee.choose.order')->with(['message' => 'Order '.$cek.' submited successfully.']);
     }
 }

@@ -5,6 +5,9 @@
         </h2>
     </x-slot>
 
+    @if($errors->any())
+        {{ implode('', $errors->all('<div>:message</div>')) }}
+    @endif
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 
@@ -13,7 +16,10 @@
                 @csrf
                     <h2>Dates</h2>
                     @for($i = 1; $i <= $dates; $i++, $month->addDay())
-                        <input type="checkbox" name="dates[]" value="{{$month}}">{{$month->format('Y-m-d')}}<br>
+                        @php
+                            $order = App\Models\Order::where('employee_id',auth()->user()->id)->where('order_date',$month->format('Y-m-d'))->first();
+                        @endphp
+                        <input type="checkbox" name="dates[]" value="{{$month}}" @if($month < $now) disabled @endif>{{$month->format('Y-m-d')}}<br>
                     @endfor
                     <h2>Menu</h2>
                     @foreach($menus as $menu)
