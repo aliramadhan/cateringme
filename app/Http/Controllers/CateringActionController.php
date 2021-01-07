@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use \App\Models\Menu;
+use \App\Models\PhotoMenu;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
@@ -25,7 +26,8 @@ class CateringActionController extends Controller
 		//Validation Request
 		$this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
-            'photo' => ['required', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'photo' => ['required'],
+            'photo.*' => ['mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'desc' => ['required', 'string']
         ]);
 
@@ -36,8 +38,6 @@ class CateringActionController extends Controller
 	        $last_id = '0'.$last_id;
 	    }
 	    $code_number = 'MNU'.$last_id;
-	    //create name and store photo
-		$imageName = Str::slug($request->name).'.'.$request->photo->extension();
 
 		//inser into database
 		DB::beginTransaction();
@@ -46,19 +46,31 @@ class CateringActionController extends Controller
 		        'name' => $request->name,
         		'catering_id' => auth()->user()->id,
 		        'menu_code' => $code_number,
-		        'photo' => $imageName,
 		        'desc' => $request->desc,
 			]);
+			if($request->hasfile('photo')){
+				//save image to directory
+				$no = 1;
+				foreach ($request->file('photo') as $image) {
+				    //create name and store photo
+					$imageName = Str::slug($request->name).'_'.$no.'.'.$image->extension();
+					$image->move(public_path('images/photo-menu/'.$code_number), $imageName);
+					$fileName = 'images/photo-menu/'.$code_number.'/'.$imageName;
+
+					$menu->photos()->create(['file' => $fileName]);
+					$no++;
+				}
+			}
+
+
 			if($menu != null){
 		    	DB::commit();
-		    	//save image to directory
-				$request->photo->move(public_path('images/photo-menu/'.$code_number), $imageName);
         		return redirect()->route('catering.index.menu')->with(['message' => 'new Menu added successfully.']);
 			}
 		    // all good
 		} catch (\Exception $e) {
 		    DB::rollback();
-        	return redirect()->back()->withErrors(['message' => 'Error accuired.']);
+        	return redirect()->back()->withErrors(['message' => 'Error Accuired.']);
 		}
 	}
 }

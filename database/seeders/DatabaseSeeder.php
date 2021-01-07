@@ -28,5 +28,27 @@ class DatabaseSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
+        DB::table('users')->insert([
+            'name' => 'Catering 1',
+            'email' => 'catering1@cateringme.com',
+            'password' => Hash::make('qweqweqwe'),
+            'role' => 'Catering',
+            'number_phone' => '082236646621',
+            'code_number' => 'CTR0001',
+            'address' => 'Null',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Employee 1',
+            'email' => 'employee1@cateringme.com',
+            'password' => Hash::make('qweqweqwe'),
+            'role' => 'Employee',
+            'number_phone' => '082236646623',
+            'code_number' => 'EMP0001',
+            'address' => 'Null',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
     }
 }

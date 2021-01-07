@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Manage Account') }}
+            {{ __('Index Menu') }}
         </h2>
     </x-slot>
 
@@ -22,7 +22,7 @@
                         @foreach($menus as $menu)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td><img class="object-none h-48 w-full" src="{{url('images/photo-menu/'.$menu->menu_code.'/'.$menu->photo)}}"></td>
+                            <td><img class="object-none h-48 w-full" src="{{url('public/'.$menu->photos->first()->file)}}"></td>
                             <td>{{$menu->name}}</td>
                             <td>{{$menu->desc}}</td>
                         </tr>

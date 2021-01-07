@@ -27,7 +27,7 @@
                         {{ __('Manage Menu') }}
                     </x-jet-nav-link>
                     @else
-                    <x-jet-nav-link href="{{ route('employee.create.order') }}" :active="request()->routeIs('employee.create.order')">
+                    <x-jet-nav-link href="{{ route('employee.choose.order') }}" :active="request()->routeIs('employee.choose.order')">
                         {{ __('Create Order') }}
                     </x-jet-nav-link>
                     @endif

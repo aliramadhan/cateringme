@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\PhotoMenu;
 
 class Menu extends Model
 {
@@ -13,7 +14,12 @@ class Menu extends Model
         'name',
         'menu_code',
         'catering_id',
-        'photo',
         'desc',
+        'show',
     ];
+
+    public function photos()
+    {
+        return $this->hasMany(PhotoMenu::class,'menu_id');
+    }
 }

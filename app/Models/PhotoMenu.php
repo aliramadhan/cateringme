@@ -4,14 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Menu;
 
-class Order extends Model
+class PhotoMenu extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'employee_id',
         'menu_id',
-        'order_number',
-        'order_date',
+        'file',
     ];
+
+    public function menu()
+    {
+        return $this->belongsTo(Menu::class);
+    }
 }

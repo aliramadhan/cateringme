@@ -5,7 +5,9 @@
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
-
+        @if($errors->any())
+            {{ implode('', $errors->all('<div>:message</div>')) }}
+        @endif
         <form method="POST" action="{{ route('catering.store.menu') }}" enctype="multipart/form-data">
             @csrf
 
@@ -16,7 +18,7 @@
 
             <div class="mt-4">
                 <x-jet-label for="photo" value="{{ __('Photo') }}" />
-                <x-jet-input id="photo" class="block mt-1 w-full" type="file" accept="image/x-png,image/gif,image/jpeg" name="photo" :value="old('photo')" required />
+                <x-jet-input id="photo" class="block mt-1 w-full" type="file" accept="image/x-png,image/gif,image/jpeg" name="photo[]" :value="old('photo')" required multiple />
             </div>
             <div class="mt-4">
                 <x-jet-label for="address" value="{{ __('Address') }}" />
