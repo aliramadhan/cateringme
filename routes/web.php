@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\ManageAccountController;
 use \App\Http\Controllers\CateringActionController;
+use \App\Http\Controllers\EmployeeActionController;
 use \App\Http\Controllers\ManageOrderController;
 
 /*
@@ -23,7 +24,7 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
-
+//Role Admin
 Route::group(['prefix' => 'admin',  'middleware' => ['auth:sanctum','role:Admin']], function(){
 	//Manage Account
     Route::get('/account', [ ManageAccountController::class, 'index_account'])->name('admin.index.account');
@@ -33,9 +34,13 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth:sanctum','role:Admin'
     //Manage Order
     Route::get('/order', [ ManageAccountController::class, 'index_account'])->name('admin.index.account');
 });
-
-Route::group(['prefix' => 'admin',  'middleware' => ['auth:sanctum','role:Catering']], function(){
+//Role Catering
+Route::group(['prefix' => 'catering',  'middleware' => ['auth:sanctum','role:Catering']], function(){
     Route::get('/index/menu', [ CateringActionController::class, 'index_menu'])->name('catering.index.menu');
     Route::get('/create/menu', [ CateringActionController::class, 'create_menu'])->name('catering.create.menu');
     Route::post('/create/menu', [ CateringActionController::class, 'store_menu'])->name('catering.store.menu');
+});
+//Role Employee
+Route::group(['prefix' => 'employee',  'middleware' => ['auth:sanctum','role:Employee']], function(){
+    Route::get('/create/order', [ EmployeeActionController::class, 'create_order'])->name('employee.create.order');
 });
