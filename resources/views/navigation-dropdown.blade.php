@@ -6,8 +6,9 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-jet-application-mark class="block h-9 w-auto" />
+                       <img class="mb-1 logo-login h-10" src="{{ asset('resources/image/logo2.png')}}" alt="" height="38px">
                     </a>
+
                 </div>
 
                 <!-- Navigation Links -->
@@ -15,8 +16,10 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
+
                     @if(auth()->user()->role == 'Admin')
                     <x-jet-nav-link href="{{ route('admin.index.account') }}" :active="request()->routeIs('admin.index.account')">
+
                         {{ __('Manage Account') }}
                     </x-jet-nav-link>
                     @elseif(auth()->user()->role == 'Catering')

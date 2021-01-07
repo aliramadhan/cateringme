@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>kings</title>
+    <title>24Slides Catering App</title>
 </head>
 <body>
     <h1><strong>Email : </strong> {{$data['email']}}</h1>

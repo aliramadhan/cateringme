@@ -90,7 +90,7 @@
                             </a>
                             @endif
 
-                            <x-jet-button id="auto" class="ml-0 md:ml-4 bg-gradient-to-r  from-yellow-400 via-red-500 to-pink-500 px-6 py-2 text-center shadow w-full md:w-auto bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500">
+                            <x-jet-button id="auto" class="ml-0 md:ml-4 bg-gradient-to-r  from-yellow-400 via-red-500 to-pink-500 px-6 py-2 text-center shadow w-full md:w-auto bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-white">
                                 {{ __('Sign In') }}
                             </x-jet-button>
                         </div>
