@@ -23,4 +23,5 @@
           
         </div>
     </body>
+        <script src="{{ asset('resources/js/modal.js') }}"" defer></script>
 </html>
