@@ -87,4 +87,26 @@ class AdminActionController extends Controller
 
 		return view('Admin.index_menu',compact('menus'));
 	}
+	public function scheduled_menu(Request $request)
+	{
+		//Validation Request
+		$this->validate($request, [
+            'show' => ['required'],
+        ]);
+        //insert into database
+		DB::beginTransaction();
+		try {
+			foreach ($request->show as $show) {
+				$menu = Menu::where('menu_code',$show)->first();
+				$menu->show = 1;
+				$menu->save();
+			}
+		} catch (\Exception $e) {
+		    DB::rollback();
+        	return redirect()->back()->withInputs()->withErrors(['message' => 'Error accuired.']);
+		}
+	    // all good
+	    DB::commit();
+        return redirect()->back()->with(['message' => 'Menu has been scheduled.']);
+	}
 }

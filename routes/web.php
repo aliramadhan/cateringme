@@ -17,7 +17,7 @@ use \App\Http\Controllers\EmployeeActionController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Route::middleware(['auth:sanctum'])->get('/dashboard', function () {
@@ -35,6 +35,7 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth:sanctum','role:Admin'
 
     //Manage Menu
     Route::get('/menu', [ AdminActionController::class, 'index_menu'])->name('admin.index.menu');
+    Route::post('/menu', [ AdminActionController::class, 'scheduled_menu'])->name('admin.scheduled.menu');
 });
 //Role Catering
 Route::group(['prefix' => 'catering',  'middleware' => ['auth:sanctum','role:Catering']], function(){
