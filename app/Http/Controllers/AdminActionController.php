@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Models\User;
+use \App\Models\Menu;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RegisterSuccessfully;
 use Illuminate\Support\Facades\Hash;
 use DB;
 
-class ManageAccountController extends Controller
+class AdminActionController extends Controller
 {
     public function __construct()
 	{
@@ -19,11 +20,11 @@ class ManageAccountController extends Controller
 	public function index_account()
 	{
 		$users = User::where('role','!=','Admin')->get();
-		return view('ManageAccount.index_Account',compact('users'));
+		return view('Admin.index_account',compact('users'));
 	}
 	public function create_account()
 	{
-		return view('ManageAccount.create_Account');
+		return view('Admin.create_account');
 	}
 	public function store_account(Request $request)
 	{
@@ -79,5 +80,11 @@ class ManageAccountController extends Controller
         	return redirect()->back()->withInputs()->withErrors(['message' => 'new Account added.']);
 		}
         return redirect()->route('admin.index.account')->with(['message' => 'new Account added.']);
+	}
+	public function index_menu()
+	{
+		$menus = Menu::all();
+
+		return view('Admin.index_menu',compact('menus'));
 	}
 }

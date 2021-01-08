@@ -22,4 +22,8 @@ class Menu extends Model
     {
         return $this->hasMany(PhotoMenu::class,'menu_id');
     }
+    public function catering()
+    {
+        return $this->belongsTo(User::class,'catering_id','id');
+    }
 }
