@@ -11,17 +11,52 @@
                 <a href="{{route('admin.create.account')}}">tambah account</a>
                 <table class="table-auto w-full mx-auto">
                     <thead>
+                        <tr>
+                            <th class="bg-yellow-200" colspan="5">Employee</th>
+                        </tr>
                         <tr class="bg-blue-200">
                             <th>No.</th>
+                            <th>Pict</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
-                        @foreach($users as $user)
+                        @foreach($users->where('role','Employee') as $user)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
+                                <td>
+                                    <img src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" />
+                                </td>
+                                <td>{{$user->name}}</td>
+                                <td>{{$user->email}}</td>
+                                <td>{{$user->role}}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+
+                <table class="table-auto w-full mx-auto mt-5">
+                    <thead>
+                        <tr>
+                            <th class="bg-yellow-200" colspan="5">Catering</th>
+                        </tr>
+                        <tr class="bg-blue-200">
+                            <th>No.</th>
+                            <th>Pict</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        @foreach($users->where('role','Catering') as $user)
+                            <tr>
+                                <td>{{$loop->iteration}}</td>
+                                <td>
+                                    <img src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" />
+                                </td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->role}}</td>
