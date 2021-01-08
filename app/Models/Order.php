@@ -14,4 +14,8 @@ class Order extends Model
         'order_number',
         'order_date',
     ];
+    public function menu()
+    {
+        return $this->hasOne(Menu::class, 'id','menu_id');
+    }
 }

@@ -12,6 +12,17 @@ use Illuminate\Support\Facades\DB;
 
 class EmployeeActionController extends Controller
 {
+    public function dashboard()
+    {
+        //declare variable
+        $now = Carbon::now();
+        $user = auth()->user();
+        $menu_today = $user->orders()->where('order_date',$now->format('Y-m-d'))->first();
+        $menu_tomorrow = $user->orders()->where('order_date',$now->addDay()->format('Y-m-d'))->first();
+        $now = Carbon::now();
+
+        return view('Employee.dashboard',compact('menu_today','menu_tomorrow','now','user'));
+    }
     public function choose_order()
     {
     	foreach (CarbonPeriod::create(Carbon::parse('01-01-2020'), '1 month', Carbon::today()) as $month) {

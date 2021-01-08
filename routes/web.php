@@ -22,6 +22,9 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum'])->get('/dashboard', function () {
+    if (auth()->user()->role == 'Employee') {
+        return redirect()->route('employee.dashboard');
+    }
     return view('dashboard');
 })->name('dashboard');
 //Role Admin
@@ -42,6 +45,7 @@ Route::group(['prefix' => 'catering',  'middleware' => ['auth:sanctum','role:Cat
 });
 //Role Employee
 Route::group(['prefix' => 'employee',  'middleware' => ['auth:sanctum','role:Employee']], function(){
+    Route::get('/dashboard', [ EmployeeActionController::class, 'dashboard'])->name('employee.dashboard');
     Route::get('/create/order', [ EmployeeActionController::class, 'choose_order'])->name('employee.choose.order');
     Route::get('/create/order/{month}', [ EmployeeActionController::class, 'create_order'])->name('employee.create.order');
     Route::post('/create/order/', [ EmployeeActionController::class, 'store_order'])->name('employee.store.order');
