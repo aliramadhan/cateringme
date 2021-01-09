@@ -1,10 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\ManageAccountController;
+use \App\Http\Controllers\AdminActionController;
 use \App\Http\Controllers\CateringActionController;
 use \App\Http\Controllers\EmployeeActionController;
-use \App\Http\Controllers\ManageOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +17,7 @@ use \App\Http\Controllers\ManageOrderController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Route::middleware(['auth:sanctum'])->get('/dashboard', function () {
@@ -30,12 +29,13 @@ Route::middleware(['auth:sanctum'])->get('/dashboard', function () {
 //Role Admin
 Route::group(['prefix' => 'admin',  'middleware' => ['auth:sanctum','role:Admin']], function(){
 	//Manage Account
-    Route::get('/account', [ ManageAccountController::class, 'index_account'])->name('admin.index.account');
-    Route::get('/create/account', [ ManageAccountController::class, 'create_account'])->name('admin.create.account');
-    Route::post('/create/account', [ ManageAccountController::class, 'store_account'])->name('admin.store.account');
+    Route::get('/account', [ AdminActionController::class, 'index_account'])->name('admin.index.account');
+    Route::get('/create/account', [ AdminActionController::class, 'create_account'])->name('admin.create.account');
+    Route::post('/create/account', [ AdminActionController::class, 'store_account'])->name('admin.store.account');
 
-    //Manage Order
-    Route::get('/order', [ ManageAccountController::class, 'index_account'])->name('admin.index.account');
+    //Manage Menu
+    Route::get('/menu', [ AdminActionController::class, 'index_menu'])->name('admin.index.menu');
+    Route::post('/menu', [ AdminActionController::class, 'scheduled_menu'])->name('admin.scheduled.menu');
 });
 //Role Catering
 Route::group(['prefix' => 'catering',  'middleware' => ['auth:sanctum','role:Catering']], function(){

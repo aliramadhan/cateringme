@@ -15,22 +15,10 @@
     }
   </style>
         @if (session('status'))
-
-  
-
         <div class="mb-4 font-medium text-sm text-green-600">
-       
-
             {{ session('status') }}
-
-
-
         </div>
         @endif
-
-
-    
-
         <div class="grid md:grid-cols-6 sm:grid-cols-1 gap-4 h-4/5">
 
    <button class="modal-open visible absolute" id="modal-click"></button>

@@ -19,8 +19,10 @@
 
                     @if(auth()->user()->role == 'Admin')
                     <x-jet-nav-link href="{{ route('admin.index.account') }}" :active="request()->routeIs('admin.index.account')">
-
                         {{ __('Manage Account') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('admin.index.menu') }}" :active="request()->routeIs('admin.index.menu')">
+                        {{ __('Manage Menu') }}
                     </x-jet-nav-link>
                     @elseif(auth()->user()->role == 'Catering')
                     <x-jet-nav-link href="{{ route('catering.index.menu') }}" :active="request()->routeIs('catering.index.menu')">
