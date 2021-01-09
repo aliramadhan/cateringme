@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDateUnavailablesTable extends Migration
+class CreateOffDatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateDateUnavailablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('date_unavailables', function (Blueprint $table) {
+        Schema::create('off_dates', function (Blueprint $table) {
             $table->id();
             $table->string('year','5');
             $table->string('month','3');
@@ -29,6 +29,6 @@ class CreateDateUnavailablesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('date_unavailables');
+        Schema::dropIfExists('off_dates');
     }
 }

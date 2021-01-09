@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \App\Models\User;
 use \App\Models\Menu;
+use \App\Models\OffDate;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RegisterSuccessfully;
 use Illuminate\Support\Facades\Hash;
 use DB;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 
 class AdminActionController extends Controller
 {
@@ -117,5 +120,68 @@ class AdminActionController extends Controller
 	    // all good
 	    DB::commit();
         return redirect()->back()->with(['message' => 'Menu has been scheduled.']);
+	}
+	public function index_schedule()
+	{
+		return view('Admin.index_schedule');
+	}
+	public function get_month_schedule(Request $request)
+	{
+		//declare variable
+		$date = Carbon::parse($request->month);
+		$start = $date->startOfMonth();
+		$off_date = OffDate::where('year',$start->year)->where('month',$start->month)->first();
+		$total_days = $date->daysInMonth;
+		$days = new Collection;
+		for ($i=1; $i <= $total_days ; $i++, $start->addDay()) { 
+			$input = "<input type='checkbox' name='date[]' value='".$start->format('Y-m-d')."'> ".$start->format('l')."<br>";
+			if ($off_date != null) {
+				if (in_array($start->day, explode(',', $off_date->date_list))) {
+					$input = "<input type='checkbox' name='date[]' value='".$start->format('Y-m-d')."' checked> ".$start->format('l')."<br>";
+				}
+			}
+			$days->push($input);
+		}
+		return $days;
+	}
+	public function store_schedule(Request $request)
+	{
+		//Validation Request
+		$this->validate($request, [
+            'month' => ['required'],
+            'date' => ['required'],
+        ]);
+
+        //declare variable
+        $date_list = [];
+        foreach ($request->date as $date) {
+        	$date_list [] = Carbon::parse($date)->day;
+        }
+        $now = Carbon::parse($request->month);
+
+        //insert into database
+        $off_date = OffDate::where('year', $now->year)->where('month', $now->month)->first();
+		DB::beginTransaction();
+		try {
+			if($off_date == null){
+				$off_date = OffDate::create([
+					'year' => $now->year,
+					'month' => $now->month,
+					'date_list' => implode(',',$date_list)
+				]);
+			}
+			else{
+				$off_date->update([
+					'date_list' => implode(',',$date_list)
+				]);
+			}
+		} catch (\Exception $e) {
+		    DB::rollback();
+        	return redirect()->back()->withInputs()->withErrors(['message' => 'Error accuired.']);
+		}
+	    // all good
+	    DB::commit();
+        return redirect()->back()->with(['message' => 'Order has been scheduled.']);
+
 	}
 }

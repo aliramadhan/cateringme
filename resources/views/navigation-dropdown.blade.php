@@ -18,20 +18,23 @@
                     </x-jet-nav-link>
 
                     @if(auth()->user()->role == 'Admin')
-                    <x-jet-nav-link href="{{ route('admin.index.account') }}" :active="request()->routeIs('admin.index.account')">
-                        {{ __('Manage Account') }}
-                    </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('admin.index.menu') }}" :active="request()->routeIs('admin.index.menu')">
-                        {{ __('Manage Menu') }}
-                    </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('admin.index.account') }}" :active="request()->routeIs('admin.index.account')">
+                            {{ __('Manage Account') }}
+                        </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('admin.index.menu') }}" :active="request()->routeIs('admin.index.menu')">
+                            {{ __('Manage Menu') }}
+                        </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('admin.index.schedule') }}" :active="request()->routeIs('admin.index.schedule')">
+                            {{ __('Manage Schedule') }}
+                        </x-jet-nav-link>
                     @elseif(auth()->user()->role == 'Catering')
-                    <x-jet-nav-link href="{{ route('catering.index.menu') }}" :active="request()->routeIs('catering.index.menu')">
-                        {{ __('Manage Menu') }}
-                    </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('catering.index.menu') }}" :active="request()->routeIs('catering.index.menu')">
+                            {{ __('Manage Menu') }}
+                        </x-jet-nav-link>
                     @else
-                    <x-jet-nav-link href="{{ route('employee.choose.order') }}" :active="request()->routeIs('employee.choose.order')">
-                        {{ __('Create Order') }}
-                    </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('employee.choose.order') }}" :active="request()->routeIs('employee.choose.order')">
+                            {{ __('Create Order') }}
+                        </x-jet-nav-link>
                     @endif
                 </div>
             </div>

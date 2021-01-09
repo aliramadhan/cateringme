@@ -36,6 +36,11 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth:sanctum','role:Admin'
     //Manage Menu
     Route::get('/menu', [ AdminActionController::class, 'index_menu'])->name('admin.index.menu');
     Route::post('/menu', [ AdminActionController::class, 'scheduled_menu'])->name('admin.scheduled.menu');
+
+    //Manage Schedule
+    Route::get('/schedule', [ AdminActionController::class, 'index_schedule'])->name('admin.index.schedule');
+    Route::post('/schedule', [ AdminActionController::class, 'store_schedule'])->name('admin.store.schedule');
+    Route::post('/get-month-schedule', [ AdminActionController::class, 'get_month_schedule'])->name('admin.get_month_schedule');
 });
 //Role Catering
 Route::group(['prefix' => 'catering',  'middleware' => ['auth:sanctum','role:Catering']], function(){
