@@ -93,13 +93,22 @@ class AdminActionController extends Controller
 		$this->validate($request, [
             'show' => ['required'],
         ]);
+
+		//reset show menu
+		$reset = DB::table('menus')->update(array('show' => 0));
+
         //insert into database
 		DB::beginTransaction();
 		try {
-			foreach ($request->show as $show) {
-				$menu = Menu::where('menu_code',$show)->first();
-				$menu->show = 1;
-				$menu->save();
+			if($request->show == null){
+				//do something if null
+			}
+			else{
+				foreach ($request->show as $show) {
+					$menu = Menu::where('menu_code',$show)->first();
+					$menu->show = 1;
+					$menu->save();
+				}
 			}
 		} catch (\Exception $e) {
 		    DB::rollback();

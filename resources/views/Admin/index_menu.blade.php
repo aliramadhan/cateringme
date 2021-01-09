@@ -10,6 +10,9 @@
         {{ session('message') }}
     </div>
     @endif
+    @if($errors->any())
+        {{ implode('', $errors->all('<div>:message</div>')) }}
+    @endif
     <div class="py-12">
         <form action="{{route('admin.scheduled.menu')}}" method="POST">
         @csrf
@@ -43,7 +46,7 @@
 </x-app-layout>
 <script type="text/javascript">
     $('.schedule-menu').on('change', function (e) {
-        if ($('.schedule-menu:checked').length > 2) {
+        if($('.schedule-menu:checked').length > 2) {
             $(this).prop('checked', false);
             alert("allowed only 2");
         }
