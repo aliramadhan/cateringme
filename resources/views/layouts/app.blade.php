@@ -11,9 +11,21 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    
+  
+     
+         <!-- bootstrap -->
+    <link rel="stylesheet" href="{{asset('resources/css/bootstrapcustom.min.css')}}">
+     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css">
 
+       <!-- bootstrap table -->
+     <script src="{{asset('resources/table/tableExport.min.js')}}"></script>
+     <script src="{{asset('resources/table/bootstrap-table.min.js')}}"></script>
+     <script src="{{asset('resources/table/bootstrap-table-locale-all.min.js')}}"></script>
+     <script src="{{asset('resources/table/bootstrap-table-export.min.js')}}"></script>
+   
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('public/css/app.css') }}">
 
@@ -26,7 +38,20 @@
             font-family: 'Poppins', sans-serif;
             background-color: transparent;
         }
-
+        
+        .bootstrapiso .form-control{
+              height: min-content;
+        }
+        .pagination-info{
+            color: #fff;
+          }
+           .modal {
+          transition: opacity 0.25s ease;
+        }
+        body.modal-active {
+          overflow-x: hidden;
+          overflow-y: visible !important;
+        }
     </style>
 </head>
 <body class=" antialiased">
@@ -160,6 +185,7 @@
 @stack('modals')
 
 @livewireScripts
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="{{ asset('resources/js/modal.js') }}"" defer></script>
 </body>
 </html>

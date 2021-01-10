@@ -2,3 +2,6 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+.bootstrapiso .form-control{
+	    height: min-content;
+}
