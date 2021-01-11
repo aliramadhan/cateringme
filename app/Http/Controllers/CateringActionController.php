@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\DB;
 
 class CateringActionController extends Controller
 {
+	public function dashboard()
+	{
+		return view('Catering.dashboard');
+	}
 	public function index_menu()
 	{
 		$menus = auth()->user()->menus;

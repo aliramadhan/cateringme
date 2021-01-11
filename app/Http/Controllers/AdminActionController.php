@@ -16,9 +16,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 class AdminActionController extends Controller
 {
-    public function __construct()
+	public function dashboard()
 	{
-        $this->middleware('auth');
+		return view('Admin.dashboard');
 	}
 	public function index_account()
 	{

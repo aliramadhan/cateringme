@@ -24,10 +24,15 @@ Route::middleware(['auth:sanctum'])->get('/dashboard', function () {
     if (auth()->user()->role == 'Employee') {
         return redirect()->route('employee.dashboard');
     }
-    return view('dashboard');
+    elseif (auth()->user()->role == 'Catering') {
+        return redirect()->route('catering.dashboard');
+    }
+    return redirect()->route('admin.dashboard');
 })->name('dashboard');
 //Role Admin
 Route::group(['prefix' => 'admin',  'middleware' => ['auth:sanctum','role:Admin']], function(){
+    Route::get('/dashboard', [ AdminActionController::class, 'dashboard'])->name('admin.dashboard');
+
 	//Manage Account
     Route::get('/account', [ AdminActionController::class, 'index_account'])->name('admin.index.account');
     Route::get('/create/account', [ AdminActionController::class, 'create_account'])->name('admin.create.account');
@@ -44,6 +49,7 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth:sanctum','role:Admin'
 });
 //Role Catering
 Route::group(['prefix' => 'catering',  'middleware' => ['auth:sanctum','role:Catering']], function(){
+    Route::get('/dashboard', [ CateringActionController::class, 'dashboard'])->name('catering.dashboard');
     Route::get('/index/menu', [ CateringActionController::class, 'index_menu'])->name('catering.index.menu');
     Route::get('/create/menu', [ CateringActionController::class, 'create_menu'])->name('catering.create.menu');
     Route::post('/create/menu', [ CateringActionController::class, 'store_menu'])->name('catering.store.menu');
@@ -54,4 +60,7 @@ Route::group(['prefix' => 'employee',  'middleware' => ['auth:sanctum','role:Emp
     Route::get('/create/order', [ EmployeeActionController::class, 'choose_order'])->name('employee.choose.order');
     Route::get('/create/order/{month}', [ EmployeeActionController::class, 'create_order'])->name('employee.create.order');
     Route::post('/create/order/', [ EmployeeActionController::class, 'store_order'])->name('employee.store.order');
+
+    //Get date
+    Route::post('/get_date', [ EmployeeActionController::class, 'get_date'])->name('employee.get_date');
 });
