@@ -6,12 +6,13 @@
     var button4 = document.getElementById("btn-slide-dis-2x");
     var button6 = document.getElementById("btn-slide-disy");
     var button5 = document.getElementById("btn-slide-dis-2y");
+    var buttonSch = document.getElementById("searching");
 
     // Disable the button on initial page load
     button.disabled = true;
     button.style.backgroundColor ="#EEF2FF";
-    button.style.color ="#528CE0";
-
+    button.style.color ="#528CE0";    
+   
     button3.disabled = true;   
     button3.style.backgroundColor ="#EEF2FF";
     button3.style.color ="#528CE0";
@@ -31,6 +32,7 @@
         button3.style.color ="#528CE0";
         button4.style.backgroundColor ="";
         button4.style.color ="#9FA6B2";
+        buttonSch.style.visibility = "visible";
 
     });
 
@@ -48,6 +50,8 @@
         button3.style.color ="#9FA6B2";
         button4.style.backgroundColor ="#EEF2FF";
         button4.style.color ="#528CE0";
+        buttonSch.style.visibility = "hidden";
+
 
     });
 
@@ -65,6 +69,7 @@
      button2.style.color ="#9FA6B2";
      button.style.backgroundColor ="#EEF2FF";
      button.style.color ="#528CE0";
+      buttonSch.style.visibility = "visible";
  });
 
     button4.addEventListener('click', function(event) {
@@ -81,6 +86,7 @@
         button.style.color ="#9FA6B2";
         button2.style.backgroundColor ="#EEF2FF";
         button2.style.color ="#528CE0";
+        buttonSch.style.visibility = "hidden";
 
     });
 
