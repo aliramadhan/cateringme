@@ -117,7 +117,7 @@
                     <span>  
                         <div class=" text-xl font-semibold text-orange-600 mt-3 absolute  px-4 py-1 bg-white rounded-r-lg">{{$menu->name}}</div>
                     </span>
-                    <img src="{{url('public/'.$menu->photos->first()->file)}}" alt="{{ $menu->name }}" class="rounded-xl  object-cover ">
+                    <img src="{{url('public/'.$menu->photos->first()->file)}}" alt="{{ $menu->name }}" class="h-52 rounded-xl  object-cover ">
 
                   </div>
                  <div class=" text-base font-bold text-gray-600 text-left px-2">Description</div>

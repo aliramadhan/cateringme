@@ -60,14 +60,14 @@
 
                         <div class="block mt-4">
                             <label for="remember_me" class="flex items-center">
-                                <input id="remember_me" type="checkbox" class="form-checkbox  text-lg" name="remember">
-                                <span class="ml-2 text-sm text-gray-600  text-lg">{{ __('Remember me') }}</span>
+                                <input id="remember_me" type="checkbox" class="form-checkbox h-5 w-5" name="remember">
+                                <span class="ml-2 text-sm text-gray-600 font-semibold text-lg">{{ __('Remember me') }}</span>
                             </label>
                         </div>
 
                         <div class="flex md:flex-row flex-col-reverse justify-end md:mt-4 mt-12 gap-4 md:gap-0">
                             @if (Route::has('password.request'))
-                            <a class="underline text-sm text-gray-600 hover:text-gray-900 text-lg md:py-2 py-0 content-center text-right" href="{{ route('password.request') }}">
+                            <a class="underline  text-gray-600 hover:text-gray-900 text-lg md:py-2 py-0 content-center text-right text-purple-500 font-semibold no-underline hover:text-purple-700" href="{{ route('password.request') }}">
                                 {{ __('Forgot your password?') }}
                             </a>
                             @endif
