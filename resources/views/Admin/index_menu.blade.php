@@ -28,7 +28,7 @@
        <div class="ml-4 flex flex-shrink-0 items-center">
 
     <form action="{{route('admin.scheduled.menu')}}" method="POST" class="contents">
-
+    @csrf
         <input type="text" name="searching" class="focus:ring-red-100 focus:border-red-100 flex-1 block  bg-gray-100 rounded-l rounded-r-md sm:text-sm border-gray-100 py-2 px-4 mr-2 hover:border-blue-200 w-36 md:w-full" placeholder="Search" id="searching shadow-xl" onkeyup="searchingEmployee()" >
          <button type="submit" name="submit" id="btn-slide-dis-2y" class="bg-blue-500 px-4 py-2 rounded-lg text-white  duration-1000 hover:bg-blue-700 duration-1000 shadow-2xl  bottom-20 mx-auto "><i class="fas fa-save mr-2"></i> Save</button>
     </div>

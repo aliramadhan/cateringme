@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use App\Models\Menu;
+use App\Models\OffDate;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -32,11 +33,28 @@ class EmployeeActionController extends Controller
         $dates = new Collection;
         $month = $now->format('F');
         $total = $now->daysInMonth;
+        $off_date = OffDate::where('year',$now->year)->where('month',$now->month)->first();
+        if($off_date == null){
+            $off_date = ['0'];
+        }
+        else{
+            $off_date = explode(',', $off_date->date_list);
+        }
         for ($i=1; $i <= $total; $i++,$now->addDay()) { 
             $order = Order::where('employee_id',$user->id)->where('order_date',$now->format('Y-m-d'))->first();
-            if ($now < Carbon::now() && $order != null) {
+            if(in_array($now->day, $off_date)){
                 $input = "<label class='label flex-auto  duration-1000'>
-                    <input class='label__checkbox  duration-1000' type='checkbox' checked disabled value='".$now->format('d')."' name='dates[]'>
+                    <input class='label__checkbox  duration-1000' type='checkbox' disabled value='".$now->format('Y-m-d')."' name='dates[]'>
+                    <span class='label__text font-base'>
+                        <span class='label__check p-4  bg-red-400 rounded-lg text-white  hover:bg-orange-600 duration-1000 text-justify'>
+                          <i class='fa icon text-base font-bold absolute text-xl m-auto'>".$now->format('d')."</i>
+                        </span>
+                    </span>
+                </label>";
+            }
+            elseif ($now < Carbon::now() && $order != null) {
+                $input = "<label class='label flex-auto  duration-1000'>
+                    <input class='label__checkbox  duration-1000' type='checkbox' disabled value='".$now->format('Y-m-d')."' name='dates[]'>
                     <span class='label__text font-base'>
                         <span class='label__check p-4  bg-orange-400 rounded-lg text-white  hover:bg-orange-600 duration-1000 text-justify'>
                           <i class='fa icon text-base font-bold absolute text-xl m-auto'>".$now->format('d')."</i>
@@ -46,7 +64,7 @@ class EmployeeActionController extends Controller
             }
             elseif($order != null){
                 $input = "<label class='label flex-auto  duration-1000'>
-                    <input class='label__checkbox  duration-1000' type='checkbox' checked value='".$now->format('d')."' name='dates[]'>
+                    <input class='label__checkbox  duration-1000' type='checkbox' value='".$now->format('Y-m-d')."' name='dates[]'>
                     <span class='label__text font-base'>
                         <span class='label__check p-4  bg-orange-400 rounded-lg text-white  hover:bg-orange-600 duration-1000 text-justify'>
                           <i class='fa icon text-base font-bold absolute text-xl m-auto'>".$now->format('d')."</i>
@@ -56,7 +74,7 @@ class EmployeeActionController extends Controller
             }
             elseif($now < Carbon::now()){
                 $input = "<label class='label flex-auto  duration-1000'>
-                    <input class='label__checkbox  duration-1000' type='checkbox' disabled value='".$now->format('d')."' name='dates[]'>
+                    <input class='label__checkbox  duration-1000' type='checkbox' disabled value='".$now->format('Y-m-d')."' name='dates[]'>
                     <span class='label__text font-base'>
                         <span class='label__check p-4  bg-gray-400 rounded-lg text-white  hover:bg-orange-600 duration-1000 text-justify'>
                           <i class='fa icon text-base font-bold absolute text-xl m-auto'>".$now->format('d')."</i>
@@ -66,7 +84,7 @@ class EmployeeActionController extends Controller
             }
             else{
                 $input = "<label class='label flex-auto  duration-1000'>
-                    <input class='label__checkbox  duration-1000' type='checkbox' value='".$now->format('d')."' name='dates[]'>
+                    <input class='label__checkbox  duration-1000' type='checkbox' value='".$now->format('Y-m-d')."' name='dates[]'>
                     <span class='label__text font-base'>
                         <span class='label__check p-4  bg-blue-400 rounded-lg text-white  hover:bg-orange-600 duration-1000 text-justify'>
                           <i class='fa icon text-base font-bold absolute text-xl m-auto'>".$now->format('d')."</i>
@@ -81,11 +99,12 @@ class EmployeeActionController extends Controller
     }
     public function choose_order()
     {
+        $menus = Menu::where('show',1)->get();
     	foreach (CarbonPeriod::create(Carbon::parse('01-01-2020'), '1 month', Carbon::today()) as $month) {
 
             $months[$month->format('m-Y')] = $month;
         }
-        return view('Employee.choose_order',compact('months'));
+        return view('Employee.choose_order',compact('months','menus'));
     }
     public function create_order($month)
     {
@@ -104,12 +123,10 @@ class EmployeeActionController extends Controller
             'dates' => ['required'],
             'menu' => ['required']
         ]);
-
         //declare
-        $cek = 1;
+        $cek = 0;
         $user = auth()->user();
         $menu = Menu::where('menu_code',$request->menu)->first();
-
         foreach($request->dates as $date){
             //create code number for order
             $last_id = Order::all()->count();
@@ -118,25 +135,31 @@ class EmployeeActionController extends Controller
                 $last_id = '0'.$last_id;
             }
             $code_number = 'ORD'.$last_id;
-        	//inser into database
-			DB::beginTransaction();
-			try {
-				$order = Order::updateOrCreate([
-					'employee_id' => $user->id,
-					'order_date' => Carbon::parse($date)->format('Y-m-d')
-				],[
-                    'order_number' => $code_number,
-                    'menu_id' => $menu->id
-                ]);
+            //inser into database
+            DB::beginTransaction();
+            try {
+                $order = Order::where('employee_id',$user->id)->where('order_date',$date)->first();
+                if($order == null){
+                    $order = Order::create([
+                        'employee_id' => $user->id,
+                        'order_number' => $code_number,
+                        'menu_id' => $menu->id,
+                        'order_date' => Carbon::parse($date)->format('Y-m-d'),
+                    ]);
+                }
+                else{
+                    $order->menu_id = $menu->id;
+                    $order->save();
+                }
 				if($order != null){
 					DB::commit();
 					$cek++;
 				}
 			} catch (\Exception $e) {
 			    DB::rollback();
-	        	return redirect()->back()->withErrors(['message' => 'Error Accuired.']);
+	        	return redirect()->back()->withErrors(['message' => $e->message]);
 			}
         }
-		return redirect()->route('employee.choose.order')->with(['message' => 'Order '.$cek.' submited successfully.']);
+		return redirect()->route('employee.choose.order')->with(['message' => $cek.' Order submited successfully.']);
     }
 }

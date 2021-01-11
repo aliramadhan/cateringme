@@ -97,6 +97,11 @@ to {
 @if($errors->any())
 {{ implode('', $errors->all('<div>:message</div>')) }}
 @endif
+@if (session('message'))
+<div class="mb-4 font-medium text-sm text-green-600">
+    {{ session('message') }}
+</div>
+@endif
 <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
         {{ __('
@@ -144,8 +149,6 @@ to {
 
       <div class="relative md:h-screen ">
         <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide" >
-
-
           <div class="grid grid-rows-7 gap-1 w-full">
             <div class=" text-2xl row-span-1">
               Choose Schedule
@@ -160,7 +163,8 @@ to {
                 <?php $m++; ?>
                 @endforeach     
             </div>
-
+            <form action="{{route('employee.store.order')}}" method="POST" enctype="multipart/form-data">
+            @csrf
 
             <div class="flex-row gap-2 row-span-3 px-4 mb-8">                       
 
@@ -172,53 +176,43 @@ to {
               </div>
             </div>
             <div class="text-xl row-span-1 text-right pointer px-6">
-               <button  onclick="nextSlide()" id="btn-slide-dis-2y" class="bg-gray-700 px-6 py-2 rounded-lg text-white opacity-75 hover:opacity-100 duration-1000 focus:border-gray-200"> Next  <i class="fas fa-arrow-right ml-2"></i></button>
+               <a onclick="nextSlide()" id="btn-slide-dis-2y" class="cursor-pointer bg-gray-700 px-6 py-2 rounded-lg text-white opacity-75 hover:opacity-100 duration-1000 focus:border-gray-200"> Next  <i class="fas fa-arrow-right ml-2"></i></a>
             </div>
           </div>
         </div>
 
-<div class="absolute inset-0 w-full h-full bg-gray-900 text-white flex text-5xl transition-all ease-in-out duration-1000 transform translate-x-full slide p-6" >
+        <div class="absolute inset-0 w-full h-full bg-gray-900 text-white flex text-5xl transition-all ease-in-out duration-1000 transform translate-x-full slide p-6" >
 
-  <div class="flex flex-col  ">
-      <h3 class="flex-shrink min-w-0 font-regular text-2xl leading-snug truncate mb-5 text-center mt-2">
-       Select Your Menu
-   </h3>
+          <div class="flex flex-col  ">
+            <h3 class="flex-shrink min-w-0 font-regular text-2xl leading-snug truncate mb-5 text-center mt-2">
+             Select Your Menu
+            </h3>
 
-   <div class="grid grid-cols-2 row-span-2 md:row-span-1 gap-12 w-full p-8">
+            <div class="grid grid-cols-2 row-span-2 md:row-span-1 gap-12 w-full p-8">
+              @foreach($menus as $menu)
+              <div class=" text-2xl col-span-2 md:col-span-1">
+                <button type="submit" class="hover:opacity-100 opacity-75 duration-500 transition ease-in-out rounded-xl" name="menu" value="{{$menu->menu_code}}">
+                    <div class="relative flex flex-col min-w-0 break-words bg-white w-full shadow-xl rounded-lg bg-pink-600"><img alt="..." src="{{url('public/'.$menu->photos->random()->file)}}" class="w-full align-middle  rounded-t-lg"><blockquote class="relative p-8 mb-4"><svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 95" class="absolute left-0 w-full block" style="height:95px;top:-94px"><polygon points="-30,95 583,95 583,65" class="text-pink-600 fill-current"></polygon></svg><h4 class="text-xl font-bold text-white">{{$menu->name}}</h4><p class="text-md font-light mt-2 text-white">{{$menu->desc}}                               
+                    </p></blockquote></div>
+                </button>
+              </div>
+              @endforeach
+              </form>
+            </div>
 
-      <div class=" text-2xl col-span-2 md:col-span-1">
-        <button type="submit" class="hover:opacity-100 opacity-75 duration-500 transition ease-in-out rounded-xl  ">
-            <div class="relative flex flex-col min-w-0 break-words bg-white w-full shadow-xl rounded-lg bg-pink-600"><img alt="..." src="{{asset('resources/image/burger.jpg')}}" class="w-full align-middle  rounded-t-lg"><blockquote class="relative p-8 mb-4"><svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 95" class="absolute left-0 w-full block" style="height:95px;top:-94px"><polygon points="-30,95 583,95 583,65" class="text-pink-600 fill-current"></polygon></svg><h4 class="text-xl font-bold text-white">Burger with Soft Drinks</h4><p class="text-md font-light mt-2 text-white">The Arctic Ocean freezes                                    
-            </p></blockquote></div>
-        </button>
+            <div class=" text-xl row-span-1 text-left pointer px-6">
+               <button  onclick="previousSlide()" id="btn-slide-disy" class="ml-2 bg-gray-700 px-6 py-2 rounded-lg text-white opacity-75 hover:opacity-100 duration-1000 focus:border-gray-200"><i class="fas fa-arrow-left"></i> Back</button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
     </div>
-    <div class=" text-2xl col-span-2 md:col-span-1">
-        <button type="submit" class="hover:opacity-100 opacity-75 duration-500 transition ease-in-out rounded-xl  ">
-            <div class="relative flex flex-col min-w-0 break-words bg-white w-full shadow-xl rounded-lg bg-blue-500"><img alt="..." src="https://asset.kompas.com/crops/X8-o4ZjKlJYAnnLnW0aeqlSwegs=/0x0:739x493/750x500/data/photo/2020/03/24/5e79ac7be84d3.jpg" class="w-full align-middle  rounded-t-lg"><blockquote class="relative p-8 mb-4"><svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 95" class="absolute left-0 w-full block" style="height:95px;top:-94px"><polygon points="-30,95 583,95 583,65" class="text-blue-500 fill-current"></polygon></svg><h4 class="text-xl font-bold text-white">Pizza with Pop ez</h4><p class="text-md font-light mt-2 text-white">The Arctic Ocean freezes </p></blockquote></div>
-        </button>
-    </div>
+  </div>
 </div>
 
-<div class=" text-xl row-span-1 text-left pointer px-6">
-   <button  onclick="previousSlide()" id="btn-slide-disy" class="ml-2 bg-gray-700 px-6 py-2 rounded-lg text-white opacity-75 hover:opacity-100 duration-1000 focus:border-gray-200"><i class="fas fa-arrow-left"></i> Back</button>
-</div>
-
-</div>
-
-</div>
-
-
-
-
-</div>
-
-
-</div>
-</div>
-</div>
-
-
-  <script src="{{asset('resources/js/myJs.js')}}"></script>
+<script src="{{asset('resources/js/myJs.js')}}"></script>
 </x-app-layout>
 <script type="text/javascript">
   function get_date(month){
