@@ -13,6 +13,8 @@ class Order extends Model
         'menu_id',
         'order_number',
         'order_date',
+        'review',
+        'stars'
     ];
     public function menu()
     {

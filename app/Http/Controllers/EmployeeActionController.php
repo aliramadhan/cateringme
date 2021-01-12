@@ -169,4 +169,32 @@ class EmployeeActionController extends Controller
         }
 		return redirect()->route('employee.choose.order')->with(['message' => $cek.' Order submited successfully.']);
     }
+    public function store_review(Request $request, $code)
+    {
+        //Validation Request
+        $this->validate($request, [
+            'review' => ['required', 'min:5'],
+            'stars' => ['required', 'numeric']
+        ]);
+        //declare variable
+        $order = Order::where('order_number',$code)->first();
+        //check if order founded
+        if($order == null){
+            return redirect()->back()->withErrors(['message' => 'Order not found.']);
+        }
+
+        //add review and stars rating to order
+        DB::beginTransaction();
+        try {
+            $order->update([
+                'review' => $request->review,
+                'stars' => $request->stars
+            ]);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->withErrors(['message' => $e->message]);
+        }
+        DB::commit();
+        return redirect()->back()->with(['message' => 'Review submited successfully.']);
+    }
 }
