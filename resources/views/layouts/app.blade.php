@@ -28,6 +28,7 @@
    
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('public/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('resources/css/app.css') }}">
 
     @livewireStyles
 

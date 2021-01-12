@@ -4,11 +4,7 @@
             {{ __('Create Order') }}
         </h2>
     </x-slot>
-    
-    <style type="text/css">
-
-        
-</style>
+   <link rel="stylesheet" href="{{ asset('resources/css/date.css') }}">
 
 @if($errors->any())
 {{ implode('', $errors->all('<div>:message</div>')) }}
@@ -26,7 +22,7 @@
 </x-slot>
 
 <div class="py-12">
-  <div class="max-w-7xl mx-auto  lg:px-8">
+  <div class="max-w-7xl mx-auto lg:px-8">
     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg Static h-full">
       <div class="px-4 py-2 border-b border-gray-200 flex justify-between items-center bg-white sm:py-4 sm:px-6 sm:items-baseline">
         <div class="flex-shrink min-w-0 flex items-center">
@@ -63,13 +59,13 @@
         </div>
       </div>
 
-      <div class="relative md:h-screen ">
+      <div class="relative md:h-screen overflow-y-auto overflow-x-hidden mb-8">
         <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide" >
-          <div class="grid grid-rows-7 gap-1 w-full">
+          <div class="grid grid-rows-9 gap-1 w-full">
             <div class=" text-2xl row-span-1">
               Choose Schedule
             </div>
-            <div class="flex-row gap-2 row-span-2 px-4 sm:flex-col content-center text-center mb-8">
+            <div class="flex-row gap-2 row-span-3 px-4 sm:flex-col content-center text-center ">
                 <?php $m=1; ?>
                 @foreach($months as $month)
 
@@ -79,10 +75,11 @@
                 <?php $m++; ?>
                 @endforeach     
             </div>
-            <form action="{{route('employee.store.order')}}" method="POST" enctype="multipart/form-data">
+            <div class="h-10"></div>
+            <form action="{{route('employee.store.order')}}" method="POST" enctype="multipart/form-data" class=" row-span-4">
             @csrf
 
-            <div class="flex-row gap-2 row-span-3 px-4 mb-8">                       
+            <div class="flex-row gap-2 px-4 mb-8">                       
 
               <div id="div1" class=" duration-1000 targetDiv bg-gray-200 justify-content content-center text-center rounded-lg"> 
                   <h1 id="date-month" class="mb-4 text-center"></h1>
@@ -91,7 +88,7 @@
                   </div>
               </div>
             </div>
-            <div class="text-xl row-span-1 text-right pointer px-6">
+            <div class="text-xl row-span-1 text-right pointer px-6 ">
                <a onclick="nextSlide()" id="btn-slide-dis-2y" class="cursor-pointer bg-gray-700 px-6 py-2 rounded-lg text-white opacity-75 hover:opacity-100 duration-1000 focus:border-gray-200"> Next  <i class="fas fa-arrow-right ml-2"></i></a>
             </div>
           </div>
@@ -105,13 +102,15 @@
             </h3>
 
             <div class="grid grid-cols-2 row-span-2 md:row-span-1 gap-12 w-full p-8">
+              
               @foreach($menus as $menu)
               <div class=" text-2xl col-span-2 md:col-span-1">
                 <button type="submit" class="hover:opacity-100 opacity-75 duration-500 transition ease-in-out rounded-xl" name="menu" value="{{$menu->menu_code}}">
-                    <div class="relative flex flex-col min-w-0 break-words bg-white w-full shadow-xl rounded-lg bg-pink-600"><img alt="..." src="{{url('public/'.$menu->photos->random()->file)}}" class="w-full align-middle  rounded-t-lg"><blockquote class="relative p-8 mb-4"><svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 95" class="absolute left-0 w-full block" style="height:95px;top:-94px"><polygon points="-30,95 583,95 583,65" class="text-pink-600 fill-current"></polygon></svg><h4 class="text-xl font-bold text-white">{{$menu->name}}</h4><p class="text-md font-light mt-2 text-white">{{$menu->desc}}                               
+                    <div class="relative flex flex-col min-w-0 break-words bg-white w-full shadow-xl rounded-lg bg-pink-600"><img alt="..." src="{{url('public/'.$menu->photos->random()->file)}}" class="w-full align-middle h-64  object-cover  rounded-t-lg"><blockquote class="relative p-8 mb-4"><svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 95" class="absolute left-0 w-full block" style="height:95px;top:-94px"><polygon points="-30,95 583,95 583,65" class="text-pink-600 fill-current"></polygon></svg><h4 class="text-2xl font-bold text-white">{{$menu->name}}</h4><p class="text-lg font-light mt-2 text-white">{{$menu->desc}}                              
                     </p></blockquote></div>
                 </button>
               </div>
+
               @endforeach
               </form>
             </div>

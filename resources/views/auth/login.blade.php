@@ -4,7 +4,7 @@
 
         </x-slot>
 
-        <x-jet-validation-errors class="mb-4" />
+        <x-jet-validation-errors />
              <style>
     .modal {
       transition: opacity 0.25s ease;
