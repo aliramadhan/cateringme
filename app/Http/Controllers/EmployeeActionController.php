@@ -22,8 +22,15 @@ class EmployeeActionController extends Controller
         $menu_today = $user->orders()->where('order_date',$now->format('Y-m-d'))->first();
         $menu_tomorrow = $user->orders()->where('order_date',$now->addDay()->format('Y-m-d'))->first();
         $now = Carbon::now();
+        $off_date = OffDate::where('year',$now->year)->where('month',$now->month)->first();
+        if($off_date == null){
+            $off_date = ['0'];
+        }
+        else{
+            $off_date = explode(',', $off_date->date_list);
+        }
 
-        return view('Employee.dashboard',compact('menu_today','menu_tomorrow','now','user'));
+        return view('Employee.dashboard',compact('menu_today','menu_tomorrow','now','user','off_date'));
     }
     public function get_date(Request $request)
     {
@@ -31,7 +38,7 @@ class EmployeeActionController extends Controller
         $user = auth()->user();
         $now = Carbon::parse($request->month);
         $dates = new Collection;
-        $month = $now->format('F');
+        $month = $now->format('F Y');
         $total = $now->daysInMonth;
         $off_date = OffDate::where('year',$now->year)->where('month',$now->month)->first();
         if($off_date == null){
