@@ -112,9 +112,9 @@
 
                     {{$menu_today->menu->name}}
                 </div>
-                <div class="mt-4 ml-2">
-                    <button type="button" class="bg-blue-400 text-white py-2 px-4 rounded hover:bg-blue-500 duration-200 modal-open" id="modal-click"><i class="fas fa-feather-alt"></i>  Review</button>
-                    <button type="button" class="bg-yellow-400 text-white py-2 px-4 rounded ml-4 shadow hover:bg-orange-500 duration-200" ><i class="fas fa-star"></i> Send Rate </button>
+                <div class="mt-4 ">
+                    <button type="button" class="bg-blue-400 text-white py-2 px-4 rounded hover:bg-blue-500 duration-200 modal-open w-full" id="modal-click"><i class="fas fa-feather-alt"></i>  Review</button>
+                  
                 </div>
             </div>
         </div>
@@ -123,26 +123,25 @@
 
     @if($menu_tomorrow == null)
 
-    @else
+            @else
 
-    <div class="flex gap-4 ml-0 md:ml-2 md:mt-0 mt-4 text-gray-500">
-        <div><img src="{{ url('public/'.$menu_tomorrow->menu->photos->random()->file)}}" class="object-cover h-28 w-28 rounded opacity-75 hover:opacity-100"></div>
-        <div> 
-            <div class="flex-col gap-4">
-                <b class="text-lg">
-                    Tomorrow Breakfast
-                </b>
-                <div>
-                    {{$menu_tomorrow->menu->name}}
+            <div class="flex gap-4 ml-0 md:ml-2 md:mt-0 mt-4 text-gray-500">
+                <div><img src="{{ url('public/'.$menu_tomorrow->menu->photos->random()->file)}}" class="object-cover h-28 w-28 rounded opacity-75 hover:opacity-100"></div>
+                <div> 
+                    <div class="flex-col gap-4">
+                        <b class="text-lg">
+                            Tomorrow Breakfast
+                        </b>
+                        <div>
+                        {{$menu_tomorrow->menu->name}}
+                        </div>
+                        <div class="mt-4 ml-2">
+                            <button type="button" class="bg-blue-400 text-white py-2 px-4 rounded hover:bg-blue-500 duration-200d disabled:opacity-50" disabled><i class="fas fa-feather-alt"></i>  Review</button>                         
+                        </div>                     
+                    </div>
                 </div>
-                <div class="mt-4 ">
-                    <button type="button" class="bg-blue-400 text-white py-2 px-4 rounded hover:bg-blue-500 duration-200 w-full modal-open" id="modal-click" ><i class="fas fa-feather-alt"></i>  Review</button>
-
-                </div>                     
             </div>
-        </div>
-    </div>
-    @endif
+            @endif
 
 </div>
 </div>
