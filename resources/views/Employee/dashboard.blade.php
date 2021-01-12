@@ -125,7 +125,9 @@
                   {{$i}}
                 </div>
             @if(in_array($start_date->day, $off_date))
-                Off Date
+                <div class="ml-4 text-lg text-red-700 leading-7 font-base flex-auto">
+                    Off Date
+                </div>
             @elseif($order == null)
                 None
             @else    
