@@ -27,6 +27,8 @@
         
     </div>
 
+    <form action="{{route('admin.store.schedule')}}" method="POST">
+    @csrf
     <div class="relative md:h-screen ">
         <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide" >
             <div class="grid grid-rows-7 gap-1 w-full">  
@@ -38,18 +40,16 @@
               <div class="flex-auto">
                 <!-- <input type="month" name="month" class="month-select border py-2 px-3 rounded-lg w-full text-lg"> -->
                 <select class="form-select w-full month-select text-lg " name="month" >
-                    <option name="month" value="Januari 2021">Januari</option>
-                    <option>Februari</option>
-                    <option>Mei</option>                
-
+                  <option>Select</option>
+                  @foreach($months as $month)
+                    <option value="{{$month->format('Y-m')}}">{{$month->format('F Y')}}</option>
+                  @endforeach
                 </select>
             </div>   
         </div>
 
 
         <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5">                      
-           <form action="{{route('admin.store.schedule')}}" method="POST">
-               @csrf
                <div id="div1" class=" duration-1000 targetDiv bg-gray-200 justify-content content-center text-center rounded-lg"> 
                   <h1 id="date-month" class="mb-4 text-center"></h1>
                   <div id="showresults">     
@@ -60,7 +60,7 @@
              <button type="submit" id="btn-slide-dis-2y" class="cursor-pointer bg-gray-700 px-6 py-2 rounded-lg text-white opacity-75 hover:opacity-100 duration-1000 focus:border-gray-200 md:w-48 w-full"> Save  </i>
              </button>
          </div>
-     </form>
+    </form>
  </div>
 </div>
 

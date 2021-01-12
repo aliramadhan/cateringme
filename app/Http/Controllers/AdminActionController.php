@@ -144,7 +144,13 @@ class AdminActionController extends Controller
 	}
 	public function index_schedule()
 	{
-		return view('Admin.index_schedule');
+		$now = Carbon::now();
+		$start = $now->startOfMonth();
+		$months = new Collection;
+		for ($i=0; $i < 6; $i++, $start->addMonth()) { 
+			$months->push(Carbon::parse($start->format('Y-m')));
+		}
+		return view('Admin.index_schedule',compact('months'));
 	}
 	public function get_month_schedule(Request $request)
 	{
@@ -155,10 +161,24 @@ class AdminActionController extends Controller
 		$total_days = $date->daysInMonth;
 		$days = new Collection;
 		for ($i=1; $i <= $total_days ; $i++, $start->addDay()) { 
-			$input = "<input type='checkbox' name='date[]' value='".$start->format('Y-m-d')."'> ".$start->format('l')."<br>";
+			$input = "<label class='label flex-auto  duration-1000'>
+	                    <input class='label__checkbox  duration-1000' type='checkbox' value='".$start->format('Y-m-d')."' name='dates[]'>
+	                    <span class='label__text font-base'>
+	                        <span class='label__check p-4  bg-blue-400 rounded-lg text-white  hover:bg-orange-600 duration-1000 text-justify'>
+	                          <i class='fa icon text-base font-bold absolute text-xl m-auto'>".$start->format('l d')."</i>
+	                        </span>
+	                    </span>
+	                </label>";
 			if ($off_date != null) {
 				if (in_array($start->day, explode(',', $off_date->date_list))) {
-					$input = "<input type='checkbox' name='date[]' value='".$start->format('Y-m-d')."' checked> ".$start->format('l')."<br>";
+					$input = "<label class='label flex-auto  duration-1000'>
+			                    <input class='label__checkbox  duration-1000' type='checkbox' checked value='".$start->format('Y-m-d')."' name='dates[]'>
+			                    <span class='label__text font-base'>
+			                        <span class='label__check p-4  bg-red-400 rounded-lg text-white  hover:bg-orange-600 duration-1000 text-justify'>
+			                          <i class='fa icon text-base font-bold absolute text-xl m-auto'>".$start->format('l d')."</i>
+			                        </span>
+			                    </span>
+			                </label>";
 				}
 			}
 			$days->push($input);
@@ -170,12 +190,12 @@ class AdminActionController extends Controller
 		//Validation Request
 		$this->validate($request, [
             'month' => ['required'],
-            'date' => ['required'],
+            'dates' => ['required'],
         ]);
 
         //declare variable
         $date_list = [];
-        foreach ($request->date as $date) {
+        foreach ($request->dates as $date) {
         	$date_list [] = Carbon::parse($date)->day;
         }
         $now = Carbon::parse($request->month);
