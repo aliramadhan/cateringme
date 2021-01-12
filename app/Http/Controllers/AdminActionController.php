@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Models\User;
+use \App\Models\Order;
 use \App\Models\Menu;
 use \App\Models\OffDate;
 use Illuminate\Support\Facades\Validator;
@@ -18,7 +19,27 @@ class AdminActionController extends Controller
 {
 	public function dashboard()
 	{
-		return view('Admin.dashboard');
+		//describe variable
+		$now = Carbon::now();
+		$employees = User::where('role','Employee')->get();
+		$yesterday = Carbon::now()->subDay();
+		$menus = Menu::where('show',1)->get();
+
+		//statistik for catering takenss
+		$catering_taken = Order::where('order_date',$now->format('Y-m-d'))->count();
+		$subcatering_taken = Order::where('order_date',$yesterday->format('Y-m-d'))->count();
+		if($subcatering_taken == 0){
+			$persen_catering_taken = 100;
+		}
+		else{
+			$persen_catering_taken = ($catering_taken / $subcatering_taken) * 100;
+		}
+		//statistik for catering not taken
+		$not_taken = $employees->count() - $catering_taken;
+		$subnot_taken = $employees->count() - $subcatering_taken;
+		$persen_not_taken = ($not_taken / $subnot_taken) * 100;
+
+		return view('Admin.dashboard',compact('menus','catering_taken','subcatering_taken', 'persen_catering_taken', 'not_taken', 'subnot_taken', 'persen_not_taken'));
 	}
 	public function index_account()
 	{

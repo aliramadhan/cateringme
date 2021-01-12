@@ -65,8 +65,8 @@
 						<div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden">
 							<div class="px-3 pt-8 pb-10 text-center relative z-10">
 								<h4 class="text-sm uppercase text-gray-500 leading-tight">Catering Taken</h4>
-								<h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">3,682</h3>
-								<p class="text-xs text-green-500 leading-tight">▲ 57.1%</p>
+								<h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{$catering_taken}}</h3>
+								<p class="text-xs text-green-500 leading-tight">@if($catering_taken > $subcatering_taken) ▲ @else ▼ @endif {{$persen_catering_taken}} %</p>
 							</div>
 							<div class="absolute bottom-0 inset-x-0">
 								<canvas id="chart1" height="70"></canvas>
@@ -78,9 +78,9 @@
 					<div class="rounded-lg shadow-sm mb-4">
 						<div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden">
 							<div class="px-3 pt-8 pb-10 text-center relative z-10">
-								<h4 class="text-sm uppercase text-gray-500 leading-tight">catering is not taken</h4>
-								<h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">11,427</h3>
-								<p class="text-xs text-red-500 leading-tight">▼ 42.8%</p>
+								<h4 class="text-sm uppercase text-gray-500 leading-tight">Catering not Taken</h4>
+								<h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{$not_taken}}</h3>
+								<p class="text-xs text-red-500 leading-tight">@if($not_taken > $subnot_taken) ▲ @else ▼ @endif {{$persen_not_taken}}%</p>
 							</div>
 							<div class="absolute bottom-0 inset-x-0">
 								<canvas id="chart2" height="70"></canvas>
@@ -227,30 +227,20 @@
 	</div>
 	<div class="bg-white mb-4 rounded-xl shadow-lg">
 		<div class="sliderAx h-auto   ">
-			<div id="slider-1" class="container mx-auto ">
-				<div class="bg-cover bg-top  rounded-t-xl bg-center h-auto text-white pt-24 pb-10 px-10 object-fill" style="background-image: url(https://mmc.tirto.id/image/otf/1024x535/2018/05/23/ilustrasi-gorengan-2--istockphoto.jpg)">
+			@foreach($menus as $menu)
+			<div id="slider-{{$loop->iteration}}" class="container mx-auto ">
+				<div class="bg-cover bg-top  rounded-t-xl bg-center h-auto text-white pt-24 pb-10 px-10 object-fill" style="background-image: url({{url('public/'.$menu->photos->first()->file)}})">
 					<div class=" p-4 rounded-lg" style="  background: #3e3e3eba;">
-						<p class="font-bold text-sm uppercase mb-1">the first menu</p>
-						<p class="text-3xl font-bold">Gorengan</p>
-						<p class="text-2xl mb-4 leading-none">Pizza Hut Delivery Indonesia. Pesan Pizza Online. </p>
-						<a href="#" class="ml-1 rounded-lg font-semibold bg-purple-500 text-white px-4 py-2 hover:bg-purple-700 duration-1000">Manage</a>
+						<p class="font-bold text-sm uppercase mb-1">@if($loop->iteration == 1) First Menu @else Second Menu @endif</p>
+						<p class="text-3xl font-bold">{{$menu->name}}</p>
+						<p class="text-2xl mb-4 leading-none">{{$menu->desc}} </p>
+						<a href="{{route('admin.index.menu')}}" class="ml-1 rounded-lg font-semibold bg-purple-500 text-white px-4 py-2 hover:bg-purple-700 duration-1000">Manage</a>
 					</div>
 					
 				</div> <!-- container -->
 
 			</div>
-
-			<div id="slider-2" class="container mx-auto">
-				<div class="bg-cover bg-top  rounded-t-xl bg-center h-auto text-white pt-24 pb-10 px-10 object-fill" style="background-image: url({{ asset('/resources/image/burger.jpg')}})">
-					<div class=" p-4 rounded-lg" style="  background: #3e3e3eba;">
-						<p class="font-bold text-sm uppercase mb-1">the second menu</p>
-						<p class="text-3xl font-bold">Burger</p>
-						<p class="text-2xl mb-4 leading-none">Pizza Hut Delivery Indonesia. Pesan Pizza Online. </p>
-						<a href="#" class="ml-1 rounded-lg font-semibold bg-purple-500 text-white px-4 py-2 hover:bg-purple-700 duration-1000">Manage</a>
-					</div>
-				</div> 
-				
-			</div>
+			@endforeach
 		</div>
 		<div  class="flex justify-between w-12 mx-auto py-2">
 			<button id="sButton1" onclick="sliderButton1()" class="bg-purple-400 rounded-full w-4 pb-2 " ></button>

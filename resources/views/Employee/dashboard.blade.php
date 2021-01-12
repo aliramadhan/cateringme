@@ -124,7 +124,9 @@
                 <div class="ml-2 text-xl text-blue-700 leading-7 font-bold bg-blue flex-initial">
                   {{$i}}
                 </div>
-            @if($order == null)
+            @if(in_array($start_date->day, $off_date))
+                Off Date
+            @elseif($order == null)
                 None
             @else    
                 <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto">

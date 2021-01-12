@@ -143,7 +143,6 @@
             data: {month : month},
             success: function(data) {
                 var month = data.month;
-                console.log(data);
                 if (data == null) {
                     alert('Error get date.');
                 }
