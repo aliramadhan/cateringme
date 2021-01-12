@@ -61,27 +61,30 @@
 
       <div class="relative md:h-screen overflow-y-auto overflow-x-hidden mb-8">
         <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide" >
-          <div class="grid grid-rows-9 gap-1 w-full">
-            <div class=" text-2xl row-span-1">
-              Choose Schedule
-            </div>
-            <div class="flex-row gap-2 row-span-3 px-4 sm:flex-col content-center text-center ">
-                <?php $m=1; ?>
-                @foreach($months as $month)
+          
+            <div class="grid grid-rows-7 gap-1 w-full ">  
 
-                <!--  <a href="{{route('employee.create.order',$month->format('Y-m-d'))}}" class="flex-auto bg-orange-400 rounded-lg p-4 text-white font-base text-base hover:bg-orange-600 duration-1000" onchange="showUser(this.value)">{{$month->format('F')}}</a> -->
-
-                <button id="choose-month" class="flex-auto bg-orange-400 rounded-lg p-4 text-white font-base text-base hover:bg-orange-600 duration-1000" onclick="get_date('{!! $month->format('Y-m-d') !!}')">{{$month->format('F Y')}}</button>
-                <?php $m++; ?>
-                @endforeach     
-            </div>
-            <div class="h-10"></div>
+                <div class="flex md:flex-row flex-col px-4 content-center text-left ">
+                <div class="flex-initial">       
+                  <span class="text-gray-700 text-lg  mr-5">Choose Schedule</span>
+              </div>
+              <div class="flex-auto">
+                <!-- <input type="month" name="month" class="month-select border py-2 px-3 rounded-lg w-full text-lg"> -->
+                <select class="form-select w-full month-select text-lg " name="month" >
+                  <option>Select</option>
+                  @foreach($months as $month)
+                    <option value="{{$month->format('Y-m')}}">{{$month->format('F Y')}}</option>
+                  @endforeach
+                </select>
+            </div>   
+        </div>
+         
             <form action="{{route('employee.store.order')}}" method="POST" enctype="multipart/form-data" class=" row-span-4">
             @csrf
 
             <div class="flex-row gap-2 px-4 mb-8">                       
 
-              <div id="div1" class=" duration-1000 targetDiv bg-gray-200 justify-content content-center text-center rounded-lg"> 
+              <div id="div1" class=" duration-1000 targetDiv bg-gray-50 justify-content content-center text-center rounded-lg"> 
                   <h1 id="date-month" class="mb-4 text-center"></h1>
                   <div id="dates-list">
                     
@@ -106,7 +109,7 @@
               @foreach($menus as $menu)
               <div class=" text-2xl col-span-2 md:col-span-1">
                 <button type="submit" class="hover:opacity-100 opacity-75 duration-500 transition ease-in-out rounded-xl" name="menu" value="{{$menu->menu_code}}">
-      <div class="relative flex flex-col min-w-0 break-words bg-white w-full shadow-xl rounded-lg @if($loop->iteration == 1) bg-pink-600 @else bg-blue-600 @endif"><img alt="..." src="{{url('public/'.$menu->photos->random()->file)}}" class="w-full align-middle h-64 rounded-t-lg"><blockquote class="relative p-8 mb-4"><svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 95" class="absolute left-0 w-full block" style="height:95px;top:-94px"><polygon points="-30,95 583,95 583,65" class="@if($loop->iteration == 1) text-pink-600 @else text-blue-600 @endif fill-current"></polygon></svg><h4 class="text-xl font-bold text-white">{{$menu->name}}</h4><p class="text-md font-light mt-2 text-white">{{$menu->desc}}  
+               <div class="relative flex flex-col min-w-0 break-words bg-white w-full shadow-xl rounded-lg @if($loop->iteration == 1) bg-pink-600 @else bg-blue-600 @endif"><img alt="..." src="{{url('public/'.$menu->photos->random()->file)}}" class="w-full align-middle h-64 rounded-t-lg object-cover"><blockquote class="relative p-8 mb-4"><svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 95" class="absolute left-0 w-full block" style="height:95px;top:-94px"><polygon points="-30,95 583,95 583,65" class="@if($loop->iteration == 1) text-pink-600 @else text-blue-600 @endif fill-current"></polygon></svg><h4 class="text-3xl font-bold text-white">{{$menu->name}}</h4><p class="text-md font-light mt-2 text-white">{{$menu->desc}}  
                     </p></blockquote></div>
                 </button>
               </div>

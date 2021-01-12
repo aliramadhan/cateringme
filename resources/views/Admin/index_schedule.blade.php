@@ -4,7 +4,7 @@
             {{ __('Manage Schedule') }}
         </h2>
     </x-slot>
-    
+     <link rel="stylesheet" href="{{ asset('resources/css/date.css') }}">
     @if (session('message'))
     <div class="mb-4 font-medium text-sm text-green-600">
         {{ session('message') }}
@@ -29,29 +29,29 @@
 
     <form action="{{route('admin.store.schedule')}}" method="POST">
     @csrf
-    <div class="relative md:h-screen ">
+    <div class="relative md:h-92">
         <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide" >
-            <div class="grid grid-rows-7 gap-1 w-full">  
+            <div class="grid grid-rows-7 gap-1 w-full ">  
 
-                <div class="flex md:flex-row flex-col px-4 content-center text-left ">
+              <div class="flex md:flex-row flex-col px-4 content-center text-left ">
                 <div class="flex-initial">       
                   <span class="text-gray-700 text-lg  mr-5">Choose Schedule</span>
-              </div>
-              <div class="flex-auto">
-                <!-- <input type="month" name="month" class="month-select border py-2 px-3 rounded-lg w-full text-lg"> -->
-                <select class="form-select w-full month-select text-lg " name="month" >
-                  <option>Select</option>
-                  @foreach($months as $month)
+                </div>
+                <div class="flex-auto">
+                  <!-- <input type="month" name="month" class="month-select border py-2 px-3 rounded-lg w-full text-lg"> -->
+                  <select class="form-select w-full month-select text-lg " name="month" >
+                    <option>Select</option>
+                    @foreach($months as $month)
                     <option value="{{$month->format('Y-m')}}">{{$month->format('F Y')}}</option>
-                  @endforeach
-                </select>
-            </div>   
-        </div>
+                    @endforeach
+                  </select>
+                </div>   
+              </div>
 
 
-        <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5">                      
-               <div id="div1" class=" duration-1000 targetDiv bg-gray-200 justify-content content-center text-center rounded-lg"> 
-                  <h1 id="date-month" class="mb-4 text-center"></h1>
+        <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5 mt-4">                      
+               <div id="div1" class=" duration-1000 targetDiv bg-gray-50 justify-content content-center text-center rounded-lg pt-4"> 
+                  <h1 id="date-month" class=" text-center"></h1>
                   <div id="showresults">     
                   </div>
               </div>

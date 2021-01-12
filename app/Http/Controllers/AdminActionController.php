@@ -162,10 +162,15 @@ class AdminActionController extends Controller
 		$days = new Collection;
 		for ($i=1; $i <= $total_days ; $i++, $start->addDay()) { 
 			$input = "<label class='label flex-auto  duration-1000'>
-	                    <input class='label__checkbox  duration-1000' type='checkbox' value='".$start->format('Y-m-d')."' name='dates[]'>
-	                    <span class='label__text font-base'>
-	                        <span class='label__check p-4  bg-blue-400 rounded-lg text-white  hover:bg-orange-600 duration-1000 text-justify'>
-	                          <i class='fa icon text-base font-bold absolute text-xl m-auto'>".$start->format('l d')."</i>
+	                    <input class='label__checkbox  duration-1000' type='checkbox' value='".$start->format('Y-m-d')."' name='dates[]' >
+	                    <span class='label__text '>
+	                        <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);'>
+	                          <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-150 duration-1000' style='font-family: Poppins, sans-serif;'>
+	                       
+	                          	<div class='font-semibold text-4xl mb-2 '>".$start->format('d')."</div>
+	                          	<div class='text-xs font-base'>".$start->format('l')."</div>
+	                          	
+	                          	</i>
 	                        </span>
 	                    </span>
 	                </label>";
@@ -173,9 +178,14 @@ class AdminActionController extends Controller
 				if (in_array($start->day, explode(',', $off_date->date_list))) {
 					$input = "<label class='label flex-auto  duration-1000'>
 			                    <input class='label__checkbox  duration-1000' type='checkbox' checked value='".$start->format('Y-m-d')."' name='dates[]'>
-			                    <span class='label__text font-base'>
-			                        <span class='label__check p-4  bg-red-400 rounded-lg text-white  hover:bg-orange-600 duration-1000 text-justify'>
-			                          <i class='fa icon text-base font-bold absolute text-xl m-auto'>".$start->format('l d')."</i>
+			                      <span class='label__text '>
+			                        <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background: linear-gradient(to right, #ff416c, #ff4b2b);'>
+			                          <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-150 duration-1000' style='font-family: Poppins, sans-serif;'>
+			                       
+			                          	<div class='font-semibold text-4xl mb-2 '>".$start->format('d')."</div>
+			                          	<div class='text-xs font-base'>".$start->format('l')."</div>
+			                          	
+			                          	</i>
 			                        </span>
 			                    </span>
 			                </label>";
