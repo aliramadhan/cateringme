@@ -19,6 +19,8 @@ class CreateOrdersTable extends Migration
             $table->foreignId('menu_id')->constrained('menus');
             $table->string('order_number')->unique();
             $table->date('order_date');
+            $table->text('review')->nullable();
+            $table->string('stars', 5)->nullable();
             $table->timestamps();
         });
     }
