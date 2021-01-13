@@ -107,12 +107,11 @@
 
 
 
-<div class="p-6  bg-white border-b border-gray-200">
-    <div class=" text-2xl">
-     My Catering Schedule 
-
+<div class="p-6  border-b border-gray-200 bg-no-repeat bg-cover bg-center" style="background: url('{{ url('public/'.$menu_today->menu->photos->random()->file)}}')" >
+    <div class=" text-2xl" >
+       Today Breakfast
  </div>
- <div class="mt-6 text-gray-700 grid md:grid-cols-2 grid-rows-2 ">
+ <div class="mt-6 text-gray-700 grid grid-cols-2 md:grid-rows-1 px-8">
     @if($menu_today == null)
 
     @else

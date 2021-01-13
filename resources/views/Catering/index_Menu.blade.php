@@ -106,18 +106,18 @@
 <div class="relative md:h-screen h-full">
     <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide text-base overflow-y-auto" >      
 
-      <div class="grid grid-flow-row md:grid-cols-3 grid-cols-2 gap-6 w-full items-center text-center mt-10 h-max"   style="height: fit-content;">      
+      <div class="grid grid-flow-row md:grid-cols-3 grid-cols-2 gap-6 w-full text-center mt-6 h-max"   style="height: fit-content;">      
 
         <ul id="myUL" class="contents">         
           @foreach($menus as $menu)
            <li>
               <a href="#">
-                <div class="flex flex-col text-center mb-6 gap-2 h-80  w-full mx-auto ">
+                <div class="flex flex-col text-center mb-6 gap-2 border-2 border-opacity-25 h-auto top-0 w-full mx-auto check-resize bg-white p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500 ">
                    <div >
                     <span>  
                         <div class=" text-xl font-semibold text-orange-600 mt-3 absolute  px-4 py-1 bg-white rounded-r-lg">{{$menu->name}}</div>
                     </span>
-                    <img src="{{url('public/'.$menu->photos->first()->file)}}" alt="{{ $menu->name }}" class="h-52 rounded-xl  object-cover ">
+                    <img src="{{url('public/'.$menu->photos->first()->file)}}" alt="{{ $menu->name }}" class="h-52 rounded-xl object-cover w-full">
 
                   </div>
                  <div class=" text-base font-bold text-gray-600 text-left px-2">Description</div>
