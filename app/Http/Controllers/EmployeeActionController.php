@@ -21,7 +21,7 @@ class EmployeeActionController extends Controller
         $user = auth()->user();
         $menu_today = $user->orders()->where('order_date',$now->format('Y-m-d'))->first();
         $menu_tomorrow = $user->orders()->where('order_date',$now->addDay()->format('Y-m-d'))->first();
-        $now = Carbon::now();
+        $reviews = Order::orderBy('reviewed_at','desc')->limit(10)->get();
         $off_date = OffDate::where('year',$now->year)->where('month',$now->month)->first();
         if($off_date == null){
             $off_date = ['0'];
@@ -30,7 +30,8 @@ class EmployeeActionController extends Controller
             $off_date = explode(',', $off_date->date_list);
         }
 
-        return view('Employee.dashboard',compact('menu_today','menu_tomorrow','now','user','off_date'));
+        $now = Carbon::now();
+        return view('Employee.dashboard',compact('menu_today','menu_tomorrow','now','user','off_date','reviews'));
     }
     public function get_date(Request $request)
     {
@@ -202,6 +203,7 @@ class EmployeeActionController extends Controller
             'stars' => ['required', 'numeric']
         ]);
         //declare variable
+        $now = Carbon::now();
         $order = Order::where('order_number',$code)->first();
         //check if order founded
         if($order == null){
@@ -213,7 +215,8 @@ class EmployeeActionController extends Controller
         try {
             $order->update([
                 'review' => $request->review,
-                'stars' => $request->stars
+                'stars' => $request->stars,
+                'reviewed_at' => $now
             ]);
         } catch (\Exception $e) {
             DB::rollback();
