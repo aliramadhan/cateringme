@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('number_phone')->nullable();
             $table->string('code_number')->unique()->nullable();
             $table->string('address')->nullable();
+            $table->boolean('can_order')->default(1);
             $table->timestamps();
         });
     }

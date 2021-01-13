@@ -165,7 +165,6 @@
         </div>
     </div>
 
-
     <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 ">  
         <div class="p-6 px-8 mt-6">       
             <div class="col-span-2 text-2xl text-center mb-6 font-base">          
