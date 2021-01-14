@@ -21,7 +21,7 @@
             <div class="flex-shrink min-w-0 flex items-center">
               <h3 class="flex-shrink min-w-0 font-regular text-base md:text-lg leading-snug truncate">
 
-                Schedule selection for catering
+                Schedule selection Off Days for catering
             </h3>
         </div>
         
