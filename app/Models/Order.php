@@ -21,4 +21,8 @@ class Order extends Model
     {
         return $this->hasOne(Menu::class, 'id','menu_id');
     }
+    public function employee()
+    {
+        return $this->belongsTo(User::class, 'employee_id','id');
+    }
 }
