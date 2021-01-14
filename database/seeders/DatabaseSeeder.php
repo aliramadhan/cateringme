@@ -50,5 +50,47 @@ class DatabaseSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
+        DB::table('menus')->insert([
+            'menu_code' => 'MNU0001',
+            'catering_id' => 2,
+            'name' => 'Nasi Pecel',
+            'desc' => 'Nasi Pecel Mantap',
+            'show' => true,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+        DB::table('menus')->insert([
+            'menu_code' => 'MNU0002',
+            'catering_id' => 2,
+            'name' => 'Gado-gado',
+            'desc' => 'Gado gado Mantap',
+            'show' => true,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+        DB::table('photo_menus')->insert([
+            'menu_id' => 1,
+            'file' => 'images/photo-menu/MNU0001/nasi-pecel_1.jpg',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+        DB::table('photo_menus')->insert([
+            'menu_id' => 1,
+            'file' => 'images/photo-menu/MNU0001/nasi-pecel_2.jpg',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+        DB::table('photo_menus')->insert([
+            'menu_id' => 2,
+            'file' => 'images/photo-menu/MNU0002/gado-gado_1.jpg',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+        DB::table('photo_menus')->insert([
+            'menu_id' => 2,
+            'file' => 'images/photo-menu/MNU0002/gado-gado_2.jpg',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
     }
 }

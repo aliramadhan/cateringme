@@ -8,7 +8,7 @@
             {{ __('Report Catering') }}
         </h2>
     </x-slot>
-    <style type="text/css">
+<style type="text/css">
         .pagination-info{
             color: #2b2f3f;
         }
@@ -45,18 +45,35 @@
             <th class="w-12">No</th>
             <th>Menu</th>
             <th>Qty Order</th>
+            <th>Qty Served</th>
         </tr>
     </thead>
     <tbody class="text-center  bg-white py-4" >
 
-        @foreach($user->menus as $menu)
-        <tr >
-            <td>{{$loop->iteration}}</td>
-            <td>{{$menu->name}}</td>
-            <td>{{$menu->orders->count()}}</td>
-        </tr>
-        @endforeach
-       
+       @foreach($user->menus as $menu)
+            @php
+                $qty = $menu->orders->count();
+                $start = Carbon\Carbon::parse(request()->month)->startOfMonth();
+                $stop = Carbon\Carbon::parse(request()->month)->endOfMonth();
+                $now = Carbon\Carbon::now();
+                $served = $menu->orders()->where('order_date','<=', $now->format('Y-m-d'))->count();
+                if(request()->month != null){
+                    $qty = $menu->orders()->whereBetween('order_date',[$start,$stop])->count();
+                    if($now < $stop){
+                        $served = $menu->orders()->whereBetween('order_date',[$start,$now])->count();
+                    }
+                    else{
+                        $served = $menu->orders()->whereBetween('order_date',[$start,$stop])->count();
+                    }
+                }
+            @endphp
+            <tr>
+                <td>{{$loop->iteration}}</td>
+                <td>{{$menu->name}}</td>
+                <td>{{$qty}}</td>
+                <td>{{$served}}</td>
+            </tr>
+            @endforeach
         
     </tbody>
 </table>
@@ -64,6 +81,4 @@
 </div>
 </div>
 </div>
-
-
 </x-app-layout>
