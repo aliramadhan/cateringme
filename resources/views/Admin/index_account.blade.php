@@ -126,7 +126,7 @@
           <div class="grid grid-flow-row md:grid-cols-3 grid-cols-1 gap-4  items-center text-center mt-10 h-max mx-auto"   style="height: fit-content;">      
 
             <ul id="myUL" class="contents">         
-             @foreach($users->where('role','Employee') as $user)
+             @foreach($users as $user)
              <li>
                 <a href="#">
               <div class="bg-white shadow-xl rounded-lg py-3">
@@ -142,11 +142,11 @@
                         
                           <div class="flex flex-row mt-2">
                             <div class="px-2 py-1 text-gray-500 font-semibold w-20 text-left">Address</div>
-                            <div class="px-2 py-1  text-left flex-auto">Singosari</div>
+                            <div class="px-2 py-1  text-left flex-auto">{{$user->address}}</div>
                         </div>
                         <div class="flex flex-row ">
                             <div class="px-2 py-1 text-gray-500 font-semibold w-20 text-left">Phone</div>
-                            <div class="px-2 py-1  text-left flex-auto">2242</div>
+                            <div class="px-2 py-1  text-left flex-auto">{{$user->number_phone}}</div>
                         </div>
                         <div class="flex flex-row " >
                             <div class="px-2 py-1 text-gray-500 font-semibold w-20 text-left">Email</div>
@@ -160,41 +160,6 @@
           </a>
           </li>
           @endforeach
-
-          @foreach($users->where('role','Catering') as $user)
-          <li>
-            <a href="#">
-              <div class="bg-white shadow-xl rounded-lg py-3">
-                <div class="photo-wrapper p-2">
-                    <img class="w-32 h-32 rounded-full mx-auto" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}">
-                </div>
-                <div class="p-2">
-                    <h3 class="text-center text-xl text-gray-900 font-medium leading-8">{{$user->name}}</h3>
-                    <div class="text-center text-gray-400 text-sm font-semibold">
-                        <p>{{$user->role}}</p>
-                    </div>
-                    <div class="flex flex-col text-sm">
-                        
-                          <div class="flex flex-row mt-2">
-                            <div class="px-2 py-1 text-gray-500 font-semibold w-20 text-left">Address</div>
-                            <div class="px-2 py-1  text-left flex-auto">Singosari</div>
-                        </div>
-                        <div class="flex flex-row ">
-                            <div class="px-2 py-1 text-gray-500 font-semibold w-20 text-left">Phone</div>
-                            <div class="px-2 py-1  text-left flex-auto">2242</div>
-                        </div>
-                        <div class="flex flex-row " >
-                            <div class="px-2 py-1 text-gray-500 font-semibold w-20 text-left">Email</div>
-                            <div class="px-2 py-1  text-left flex-auto">{{$user->email}}</div>
-                        </div>
-                    </div>
-
-                   
-                </div>
-            </div>
-          </a>
-        </li>
-        @endforeach
         
       </ul>
     </div>

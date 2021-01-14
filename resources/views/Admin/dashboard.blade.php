@@ -131,95 +131,74 @@
 			</div>
 
 			<div class="grid grid-cols-9 mx-auto p-2 text-blue-50">
-				<!-- left -->
-				<div class="contents">
-					<div class="bg-blue-500 col-start-1 col-end-5 p-4 rounded-xl my-4 ml-auto shadow-md animate transform transition-transform hover:-translate-x-2 cursor-default duration-1000">
-						<img src="{{ asset('/resources/image/burger.jpg')}}" class="object-cover h-10 w-10 rounded-full mx-auto">
-						<h3 class="font-semibold text-lg mb-1 text-center">Ali Parkour</h3>
-						<p class="leading-tight text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, quaerat?</p>
+				@foreach($reviews as $review)
+				@if($review->review == null)
+					@php continue; @endphp
+				@endif
+				@if($loop->iteration % 2 == 0)
+					<!-- left -->
+					<div class="contents">
+						<div class="bg-blue-500 col-start-1 col-end-5 p-4 rounded-xl my-4 ml-auto shadow-md animate transform transition-transform hover:-translate-x-2 cursor-default duration-1000">
+							<img src="{{ asset('/resources/image/burger.jpg')}}" class="object-cover h-10 w-10 rounded-full mx-auto">
+							<h3 class="font-semibold text-lg mb-1 text-center">{{$review->employee->name}}</h3>
+							<p class="leading-tight text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, quaerat?</p>
+						</div>
+						<div class="col-start-5 col-end-6 mx-auto relative">
+							<div class="h-full w-6 flex items-center justify-center">
+								<div class="h-full w-1 bg-blue-800 pointer-events-none"></div>
+							</div>
+							<div class="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-500 shadow my-4 ml-auto"></div>        
+						</div>
+						<div class="col-start-6 col-end-10 text-left relative text-black my-auto animate transform transition-transform hover:translate-x-2 
+						duration-1000">
+							<h3 class="font-semibold text-lg mb-1">Burger And Pizza</h3>
+							<p class="leading-tight text-justify">10.00, 3 Jan</p>     
+						</div>
+
+
 					</div>
+				@else
+					<!-- right -->
+					<div class="contents">
+							<div class="col-start-1 col-end-5 text-right relative text-black my-auto animate transform transition-transform hover:-translate-x-2 
+							duration-1000">
+							<h3 class="font-semibold text-lg mb-1">{{$review->menu->name}}</h3>
+							<p class="leading-tight ">{{Carbon\Carbon::parse($review->reviewed_at)->format('H:s, Y-m-d')}}</p>     
+						</div>
+						<div class="col-start-5 col-end-6 mx-auto relative">
+							<div class="h-full w-6 flex items-center justify-center">
+								<div class="h-full w-1 bg-blue-800 pointer-events-none"></div>
+							</div>
+							<div class="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-500 shadow"></div>
+						</div>
+						<div class="bg-blue-500 col-start-6 col-end-10 p-4 rounded-xl my-4 mr-auto shadow-md animate transform transition-transform hover:translate-x-2 cursor-default md:flex flex-row duration-1000">
+							<img src="{{ asset('/resources/image/burger.jpg')}}" class="object-cover h-10 w-10 rounded-full md:mr-3 mx-auto my-auto">
+							<div>
+								<h3 class="font-semibold text-lg mb-1">{{$review->employee->name}}</h3>
+								<p class="leading-tight text-justify">{{$review->review}}</p>
+							</div>
+						</div>
+					</div>
+				@endif
+				@endforeach
+				<!-- delok kabeh -->
+				<div class="contents">
 					<div class="col-start-5 col-end-6 mx-auto relative">
 						<div class="h-full w-6 flex items-center justify-center">
 							<div class="h-full w-1 bg-blue-800 pointer-events-none"></div>
 						</div>
-						<div class="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-500 shadow my-4 ml-auto"></div>        
+
 					</div>
-					<div class="col-start-6 col-end-10 text-left relative text-black my-auto animate transform transition-transform hover:translate-x-2 
-					duration-1000">
-					<h3 class="font-semibold text-lg mb-1">Burger And Pizza</h3>
-					<p class="leading-tight text-justify">10.00, 3 Jan</p>     
-				</div>
+					<a href="{{route('admin.index.review')}}" class="contents cursor-pointer">
+						<div class="bg-gray-500 col-start-4 col-end-7 p-4 rounded-xl my-4 mr-auto shadow-md animate transform transition-transform hover:translate-y-2 hover:bg-gray-700 duration-1000 w-full text-center cursor-pointer">
 
+							<h3 class="font-semibold text-lg mb-1">See More</h3>	
 
-			</div>
-			<!-- right -->
-			<div class="contents">
-				<div class="col-start-1 col-end-5 text-right relative text-black my-auto animate transform transition-transform hover:-translate-x-2 
-				duration-1000">
-				<h3 class="font-semibold text-lg mb-1">Burger And Pizza</h3>
-				<p class="leading-tight ">10.00, 3 Jan</p>     
-			</div>
-			<div class="col-start-5 col-end-6 mx-auto relative">
-				<div class="h-full w-6 flex items-center justify-center">
-					<div class="h-full w-1 bg-blue-800 pointer-events-none"></div>
-				</div>
-				<div class="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-500 shadow"></div>
-			</div>
-			<div class="bg-blue-500 col-start-6 col-end-10 p-4 rounded-xl my-4 mr-auto shadow-md animate transform transition-transform hover:translate-x-2 cursor-default md:flex flex-row duration-1000">
-				<img src="{{ asset('/resources/image/burger.jpg')}}" class="object-cover h-10 w-10 rounded-full md:mr-3 mx-auto my-auto">
-				<div>
-					<h3 class="font-semibold text-lg mb-1">Ali Parkour</h3>
-					<p class="leading-tight text-justify">Send 5 Star</p>
+						</div>
+					</a>	
 				</div>
 			</div>
 		</div>
-		<!-- left -->
-		<div class="contents">
-			<div class="bg-blue-500 col-start-1 col-end-5 p-4 rounded-xl my-4 ml-auto shadow-md animate transform transition-transform hover:-translate-x-2 cursor-default duration-1000">
-				<h3 class="font-semibold text-lg mb-1">Ali Parkour</h3>
-				<p class="leading-tight text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, quaerat?</p>
-			</div>
-			<div class="col-start-5 col-end-6 mx-auto relative">
-				<div class="h-full w-6 flex items-center justify-center">
-					<div class="h-full w-1 bg-blue-800 pointer-events-none"></div>
-				</div>
-				<div class="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-500 shadow"></div>
-			</div>
-		</div>
-		<!-- left -->
-		<div class="contents">
-			<div class="bg-blue-500 col-start-1 col-end-5 p-4 rounded-xl my-4 ml-auto shadow-md animate transform transition-transform hover:-translate-x-2 cursor-default duration-1000">
-				<h3 class="font-semibold text-lg mb-1">Ali Parkour</h3>
-				<p class="leading-tight text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, quaerat?</p>
-			</div>
-			<div class="col-start-5 col-end-6 mx-auto relative">
-				<div class="h-full w-6 flex items-center justify-center">
-					<div class="h-full w-1 bg-blue-800 pointer-events-none"></div>
-				</div>
-				<div class="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-500 shadow"></div>
-			</div>
-		</div>
-
-		<!-- delok kabeh -->
-		<div class="contents">
-			<div class="col-start-5 col-end-6 mx-auto relative">
-				<div class="h-full w-6 flex items-center justify-center">
-					<div class="h-full w-1 bg-blue-800 pointer-events-none"></div>
-				</div>
-
-			</div>
-			<a href="kemanaya.php" class="contents cursor-pointer">
-				<div class="bg-gray-500 col-start-4 col-end-7 p-4 rounded-xl my-4 mr-auto shadow-md animate transform transition-transform hover:translate-y-2 hover:bg-gray-700 duration-1000 w-full text-center cursor-pointer">
-
-					<h3 class="font-semibold text-lg mb-1">See More</h3>	
-
-				</div>
-			</a>	
-		</div>
-	</div>
-
-
-</div>
 
 <div class="p-6 mt-6">       
 	<div class="col-span-2 text-2xl text-center mb-6 font-base">          

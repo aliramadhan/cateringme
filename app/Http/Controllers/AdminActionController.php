@@ -24,6 +24,7 @@ class AdminActionController extends Controller
 		$employees = User::where('role','Employee')->get();
 		$yesterday = Carbon::now()->subDay();
 		$menus = Menu::where('show',1)->get();
+		$reviews = Order::orderBy('order_date','desc')->get();
 
 		//statistik for catering takenss
 		$catering_taken = Order::where('order_date',$now->format('Y-m-d'))->count();
@@ -37,13 +38,18 @@ class AdminActionController extends Controller
 		//statistik for catering not taken
 		$not_taken = $employees->count() - $catering_taken;
 		$subnot_taken = $employees->count() - $subcatering_taken;
-		$persen_not_taken = ($not_taken / $subnot_taken) * 100;
+		if($subnot_taken == 0){
+			$persen_not_taken = 0;
+		}
+		else{
+			$persen_not_taken = ($not_taken / $subnot_taken) * 100;
+		}
 
-		return view('Admin.dashboard',compact('menus','catering_taken','subcatering_taken', 'persen_catering_taken', 'not_taken', 'subnot_taken', 'persen_not_taken'));
+		return view('Admin.dashboard',compact('menus','catering_taken','subcatering_taken', 'persen_catering_taken', 'not_taken', 'subnot_taken', 'persen_not_taken','reviews'));
 	}
 	public function index_account()
 	{
-		$users = User::where('role','!=','Admin')->get();
+		$users = User::where('role','!=','Admin')->orderBy('role','desc')->get();
 		return view('Admin.index_account',compact('users'));
 	}
 	public function create_account()
@@ -233,6 +239,11 @@ class AdminActionController extends Controller
 	    // all good
 	    DB::commit();
         return redirect()->back()->with(['message' => 'Order has been scheduled.']);
+	}
+	public function index_review()
+	{
+		$reviews = Order::where('review','!=',null)->orWhere('stars','!=',null)->orderBy('order_date','desc')->get();
 
+		return view('Admin.index_review',compact('reviews'));
 	}
 }

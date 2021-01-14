@@ -31,7 +31,12 @@ Route::middleware(['auth:sanctum'])->get('/dashboard', function () {
 })->name('dashboard');
 //Role Admin
 Route::group(['prefix' => 'admin',  'middleware' => ['auth:sanctum','role:Admin']], function(){
+    //Dashboard
     Route::get('/dashboard', [ AdminActionController::class, 'dashboard'])->name('admin.dashboard');
+    //Index Review
+    Route::get('/review', [ AdminActionController::class, 'index_review'])->name('admin.index.review');
+    //Manage Employee who can order catering
+    Route::get('/review', [ AdminActionController::class, 'index_review'])->name('admin.index.review');
 
 	//Manage Account
     Route::get('/account', [ AdminActionController::class, 'index_account'])->name('admin.index.account');
@@ -53,6 +58,9 @@ Route::group(['prefix' => 'catering',  'middleware' => ['auth:sanctum','role:Cat
     Route::get('/index/menu', [ CateringActionController::class, 'index_menu'])->name('catering.index.menu');
     Route::get('/create/menu', [ CateringActionController::class, 'create_menu'])->name('catering.create.menu');
     Route::post('/create/menu', [ CateringActionController::class, 'store_menu'])->name('catering.store.menu');
+
+    //Report
+    Route::get('/index/report', [ CateringActionController::class, 'index_report'])->name('catering.index.report');
 });
 //Role Employee
 Route::group(['prefix' => 'employee',  'middleware' => ['auth:sanctum','role:Employee']], function(){

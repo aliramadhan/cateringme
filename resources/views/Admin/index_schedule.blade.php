@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Manage Schedule') }}
+            {{ __('Manage Off Date') }}
         </h2>
     </x-slot>
      <link rel="stylesheet" href="{{ asset('resources/css/date.css') }}">
@@ -21,7 +21,7 @@
             <div class="flex-shrink min-w-0 flex items-center">
               <h3 class="flex-shrink min-w-0 font-regular text-base md:text-lg leading-snug truncate">
 
-                Schedule selection for catering
+                Off date selection for catering
             </h3>
         </div>
         
@@ -35,7 +35,7 @@
 
               <div class="flex md:flex-row flex-col px-4 content-center text-left ">
                 <div class="flex-initial">       
-                  <span class="text-gray-700 text-lg  mr-5">Choose Schedule</span>
+                  <span class="text-gray-700 text-lg  mr-5">Choose Month</span>
                 </div>
                 <div class="flex-auto">
                   <!-- <input type="month" name="month" class="month-select border py-2 px-3 rounded-lg w-full text-lg"> -->
