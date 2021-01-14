@@ -44,7 +44,7 @@
       <div class="modal-content py-4 text-left px-6">
         <!--Title-->
         <div class="flex justify-between items-center pb-3">
-          <p class="text-2xl font-bold">Review {{$menu_today->menu->name}}</p>
+          <p class="text-2xl font-bold text-gray-600">Review <font class="text-orange-500">{{$menu_today->menu->name}}</font></p>
           <div class="modal-close cursor-pointer z-50">
             <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
               <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
@@ -107,78 +107,49 @@
 
 
 
-<div class="p-6  border-b border-gray-200 bg-no-repeat bg-cover  bg-center" style="" >
+<div class=" border-gray-200 bg-no-repeat bg-cover  bg-center" style="" >
 
-  <div class="bg-white mb-4 rounded-xl shadow-lg">
+  <div class="bg-white mb-4 rounded-xl shadow-lg flex md:flex-row flex-col">
         @if($menu_today == null)
 
     @else
-        <div class="bg-cover bg-top   bg-gradient-to-t bg-blue-400 to bg-green-400 rounded-t-xl bg-center h-80 text-white  object-fill" style="background-image: url({{ url('public/'.$menu_today->menu->photos->random()->file)}});background-position-y: -70px;">
-          <div class=" p-4 rounded-lg bg-gradient-to-t from-gray-700 to-transparent h-full pt-20 px-10" >
+        <div class="bg-cover bg-top text-center bg-gradient-to-t bg-blue-400 to bg-green-400  bg-center text-white  object-fill" style="background-image: url(https://miro.medium.com/max/2800/0*oTfm1pTXLxitHHFy.jpg);background-position-y: -70px;">
+          <div class="h-full md:p-20 p-8" style="background-image: linear-gradient(0deg,#252525,#27272769) !important;">
             <p class="font-bold text-2xl uppercase"> Today Breakfast </p>
-            <p class="text-4xl font-bold"> {{$menu_today->menu->name}}</p>
-            <p class="text-2xl mb-4 leading-none">Use align-text-bottom to align the bottom of an element with the bottom of the parent element's font.Use align-text-bottom to align the bottom of an element with the bottom of the parent element's font.Use align-text-bottom to align the bottom of an element with the bottom of the parent element's font. </p>
+            <div class="flex md:flex-row flex-col justify-center mb-8">
+            <p class="text-5xl font-bold leading-none "> {{$menu_today->menu->name}}   </p>
+               <p class=" text-xl text-orange-500 leading-7 font-bold border border-orange-300 p-1 px-2 rounded-xl bg-white h-full ml-2  md:mt-0 mt-5">
+                <i class="fas fa-star"></i> 5 Star
+              </p>
+           
+            </div>
+            <p class="text-2xl mb-4 leading-none">Use align-text-bottom to align the bottom of an element with the bottom of the parent element's font.Use align-text-bottom to align the bottom of an element with the  </p>
              <div class="mt-4 ">
-                      <button @if($menu_today->review != null || $menu_today->stars != null) disabled @endif type="button" class="@if($menu_today->review != null || $menu_today->stars != null) cursor-not-allowed @endif bg-blue-400 text-white py-2 px-4 rounded hover:bg-blue-500 duration-200 modal-open w-full" id="modal-click"><i class="fas fa-feather-alt"></i>@if($menu_today->review != null || $menu_today->stars != null) Review Submited @else Review @endif</button>
+                      <button @if($menu_today->review != null || $menu_today->stars != null) disabled @endif type="button" class="@if($menu_today->review != null || $menu_today->stars != null) cursor-not-allowed @endif bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-white py-3 px-8 rounded-xl opacity-75 hover:opacity-100 duration-200 modal-open text-2xl shadow-2xl mt-6" id="modal-click"><i class="fas fa-feather-alt"></i>@if($menu_today->review != null || $menu_today->stars != null) Review Submited @else Review @endif</button>
                     
                   </div>
           </div>
           
-        </div> <!-- container -->
-    @endif
-
-  </div>
-
-    <div class=" text-2xl" >
-       Today Breakfast
- </div>
- <div class="mt-6 text-gray-700 grid grid-cols-2 md:grid-rows-1 px-8">
-    @if($menu_today == null)
-
-    @else
-    <div class="flex gap-4">
-        <div><img src="{{ url('public/'.$menu_today->menu->photos->random()->file)}}" class="object-cover h-28 w-28 rounded"></div>
-        <div> 
-            <div class="flex-col gap-4">
-                <b class="text-lg">
-                    Today Breakfast
-                </b>
-                <div>
-
-                    {{$menu_today->menu->name}}
-                </div>
-                <div class="mt-4 ">
-                    <button @if($menu_today->review != null || $menu_today->stars != null) disabled @endif type="button" class="@if($menu_today->review != null || $menu_today->stars != null) cursor-not-allowed @endif bg-blue-400 text-white py-2 px-4 rounded hover:bg-blue-500 duration-200 modal-open w-full" id="modal-click"><i class="fas fa-feather-alt"></i>@if($menu_today->review != null || $menu_today->stars != null) Review Submited @else Review @endif</button>
-                  
-                </div>
-            </div>
-        </div>
-    </div>
+        </div> 
     @endif
 
     @if($menu_tomorrow == null)
 
-            @else
+    @else
 
-            <div class="flex gap-4 ml-0 md:ml-2 md:mt-0 mt-4 text-gray-500">
-                <div><img src="{{ url('public/'.$menu_tomorrow->menu->photos->random()->file)}}" class="object-cover h-28 w-28 rounded opacity-75 hover:opacity-100"></div>
-                <div> 
-                    <div class="flex-col gap-4">
-                        <b class="text-lg">
-                            Tomorrow Breakfast
-                        </b>
-                        <div>
-                        {{$menu_tomorrow->menu->name}}
-                        </div>
-                        <div class="mt-4 ml-2">
-                            <button type="button" class="bg-blue-400 text-white py-2 px-4 rounded hover:bg-blue-500 duration-200d disabled:opacity-50" disabled><i class="fas fa-feather-alt"></i>  Review</button>                         
-                        </div>                     
-                    </div>
-                </div>
-            </div>
-            @endif
+    <div class="bg-cover bg-top w-full md:w-1/4 bg-gradient-to-t bg-blue-400 to bg-green-400 bg-center text-white  object-fill" style="background-image: url(https://miro.medium.com/max/2800/0*oTfm1pTXLxitHHFy.jpg);">
+      <div class=" p-4 h-full px-10 grid grid-rows-4" style="background-image: linear-gradient(60deg,#252525,#27272769) !important;">
+        <p class="font-bold text-lg uppercase mb-8 border-b-2 "> Tomorrow Breakfast </p>
+        <p class="text-4xl font-bold row-span-2"> {{$menu_today->menu->name}}</p>
+        <p class="text-4xl font-bold"> 
+          <div class=" text-xl text-orange-500 leading-7 font-bold border border-orange-300 p-1 px-2 rounded-xl bg-white">
+            <i class="fas fa-star"></i> 5 Star
+          </div></p>      
+      </div>
 
-</div>
+    </div> <!-- container -->
+    @endif
+  </div>
 </div>
 
 

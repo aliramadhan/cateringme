@@ -59,7 +59,7 @@
         </div>
       </div>
 
-      <div class="relative md:h-screen overflow-y-auto overflow-x-hidden mb-8">
+      <div class="relative md:h-screen overflow-y-auto overflow-x-hidden ">
         <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide" >
           
             <div class="grid grid-rows-7 gap-1 w-full ">  
@@ -100,7 +100,7 @@
         <div class="absolute inset-0 w-full h-full bg-gray-900 text-white flex text-5xl transition-all ease-in-out duration-1000 transform translate-x-full slide p-6" >
 
           <div class="flex flex-col  ">
-            <h3 class="flex-shrink min-w-0 font-regular text-2xl leading-snug truncate mb-5 text-center mt-2">
+            <h3 class="flex-shrink min-w-0 font-regular text-2xl leading-snug truncate text-center mt-2">
              Select Your Menu
             </h3>
 
