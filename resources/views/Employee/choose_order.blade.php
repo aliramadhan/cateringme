@@ -70,7 +70,7 @@
               </div>
               <div class="flex-auto">
                 <!-- <input type="month" name="month" class="month-select border py-2 px-3 rounded-lg w-full text-lg"> -->
-                <select class="form-select w-full month-select text-lg " name="month" >
+                <select class="form-select w-full month-select text-lg" onchange="get_date()" name="month" >
                   <option>Select</option>
                   @foreach($months as $month)
                     <option value="{{$month->format('Y-m')}}">{{$month->format('F Y')}}</option>
@@ -133,7 +133,9 @@
 <script src="{{asset('resources/js/myJs.js')}}"></script>
 </x-app-layout>
 <script type="text/javascript">
-  function get_date(month){
+  function get_date(){
+    var month = $('select.month-select').children("option:selected").val();
+    console.log(month);
     $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -144,6 +146,7 @@
             type: "POST",
             data: {month : month},
             success: function(data) {
+                console.log(data);
                 var month = data.month;
                 if (data == null) {
                     alert('Error get date.');
