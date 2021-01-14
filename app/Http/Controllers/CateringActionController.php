@@ -8,12 +8,19 @@ use \App\Models\Menu;
 use \App\Models\PhotoMenu;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class CateringActionController extends Controller
 {
 	public function dashboard()
 	{
-		return view('Catering.dashboard');
+		//declare variable
+		$now = Carbon::now();
+		$menu_today = Menu::where('show',1)->get();
+		foreach ($menu_today as $menu) {
+			$menu->total_order = $menu->orders->where('order_date',$now->format('Y-m-d'))->count();
+		}
+		return view('Catering.dashboard',compact('menu_today'));
 	}
 	public function index_menu()
 	{

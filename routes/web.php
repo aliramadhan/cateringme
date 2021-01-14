@@ -36,7 +36,7 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth:sanctum','role:Admin'
     //Index Review
     Route::get('/review', [ AdminActionController::class, 'index_review'])->name('admin.index.review');
     //Manage Employee who can order catering
-    Route::get('/review', [ AdminActionController::class, 'index_review'])->name('admin.index.review');
+    Route::get('/can_order/{code}', [ AdminActionController::class, 'can_order'])->name('admin.can_order');
 
 	//Manage Account
     Route::get('/account', [ AdminActionController::class, 'index_account'])->name('admin.index.account');

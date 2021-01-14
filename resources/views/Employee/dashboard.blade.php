@@ -24,8 +24,8 @@
     <style type="text/css">
 
     </style>
-
-    <!--Modal-->
+  @if($menu_today != null)
+  <!--Modal-->
  <form action="{{route('employee.store.review',$menu_today->order_number)}}" method="POST">
     @csrf
     <div class="modal z-10 opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
@@ -104,16 +104,16 @@
 </div>
 </div>
     </form>
-
+@endif
 
 
 <div class=" border-gray-200 bg-no-repeat bg-cover  bg-center" style="" >
 
   <div class="bg-white mb-4 rounded-xl shadow-lg flex md:flex-row flex-col">
-        @if($menu_today == null)
+    @if($menu_today == null)
 
     @else
-        <div class="bg-cover bg-top text-center bg-gradient-to-t bg-blue-400 to bg-green-400  bg-center text-white  object-fill" style="background-image: url(https://miro.medium.com/max/2800/0*oTfm1pTXLxitHHFy.jpg);background-position-y: -70px;">
+        <div class="bg-cover bg-top text-center bg-gradient-to-t bg-blue-400 to bg-green-400  bg-center text-white  object-fill" style="background-image: url({{ url('public/'.$menu_today->menu->photos->random()->file)}});background-position-y: -70px;">
           <div class="h-full md:p-20 p-8" style="background-image: linear-gradient(0deg,#252525,#27272769) !important;">
             <p class="font-bold text-2xl uppercase"> Today Breakfast </p>
             <div class="flex md:flex-row flex-col justify-center mb-8">
@@ -137,7 +137,7 @@
 
     @else
 
-    <div class="bg-cover bg-top w-full md:w-1/4 bg-gradient-to-t bg-blue-400 to bg-green-400 bg-center text-white  object-fill" style="background-image: url(https://miro.medium.com/max/2800/0*oTfm1pTXLxitHHFy.jpg);">
+    <div class="bg-cover bg-top w-full md:w-1/4 bg-gradient-to-t bg-blue-400 to bg-green-400 bg-center text-white  object-fill" style="background-image: url({{ url('public/'.$menu_tomorrow->menu->photos->random()->file)}});">
       <div class=" p-4 h-full px-10 grid grid-rows-4" style="background-image: linear-gradient(60deg,#252525,#27272769) !important;">
         <p class="font-bold text-lg uppercase mb-8 border-b-2 "> Tomorrow Breakfast </p>
         <p class="text-4xl font-bold row-span-2"> {{$menu_today->menu->name}}</p>

@@ -8,5 +8,20 @@
             {{ __('Dashboard Catering') }}
         </h2>
     </x-slot>
-
+    <table>
+    	<thead>
+    		<tr>
+    			<th>Menu</th>
+    			<th>Total Order</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		@foreach($menu_today as $menu)
+    		<tr>
+    			<td>{{$menu->name}}</td>
+    			<td>{{$menu->total_order}}</td>
+    		</tr>
+    		@endforeach
+    	</tbody>
+    </table>
 </x-app-layout>

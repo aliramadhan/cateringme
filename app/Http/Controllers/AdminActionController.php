@@ -246,4 +246,25 @@ class AdminActionController extends Controller
 
 		return view('Admin.index_review',compact('reviews'));
 	}
+	public function can_order($code)
+	{
+		//declare variable
+		$user = User::where('code_number',$code)->first();
+		//check if user founded
+		if($user == null){
+			return redirect()->back()->withErrors(['message' => 'User not found.']);
+		}
+		//toggle for employee who can order catering
+		if($user->can_order == 1){
+			$user->can_order = 0;
+			$message = "Feature can order catering has been disabled for ".$user->name;
+		}
+		else{
+			$user->can_order = 1;
+			$message = "Feature can order catering has been enabl,ed for ".$user->name;
+		}
+		$user->save();
+
+		return redirect()->back()->with(['message' => $message]);
+	}
 }
