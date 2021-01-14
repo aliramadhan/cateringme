@@ -161,7 +161,7 @@
        <th class="overflow-hidden">Deskripsi</th>
    </tr>
 </thead>
-<tbody class="text-center font-semibold">
+<tbody class="text-center font-semibold tracking-wider">
     <?php $a=1;?>
     @foreach($menus as $menu)
     <tr>

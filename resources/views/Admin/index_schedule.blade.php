@@ -5,6 +5,23 @@
         </h2>
     </x-slot>
      <link rel="stylesheet" href="{{ asset('resources/css/date.css') }}">
+      <style type="text/css">
+      
+      @keyframes check {
+ 
+        50% {
+          
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            border: 1;
+            opacity: 0.6;
+        }
+        100% {
+           
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            border: 1;
+            opacity: 1;
+        }
+    </style>
     @if (session('message'))
     <div class="mb-4 font-medium text-sm text-green-600">
         {{ session('message') }}

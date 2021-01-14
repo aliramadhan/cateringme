@@ -1,4 +1,5 @@
 <x-app-layout>
+  <div class="notify z-50 font-semibold absolute left-0"><span id="notifyType" class=""></span></div>
   <x-slot name="header">
 
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -6,22 +7,36 @@
     </h2>
   </x-slot>
 
-  <div class="max-w-7xl mx-auto  lg:px-8">
-    @if (session('message'))
-    <div class="max-w-7xl mx-auto lg:px-8 bg-white border-t-4 rounded-b text-teal-darkest px-4 py-3 shadow-md my-2 " role="alert">
-      <div class="flex">
-        <svg class="h-6 w-6 text-teal mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg>
-        <div>
-          <p class="font-bold"> {{ session('message') }}</p>
-          <p class="text-sm">Make sure you know how these changes affect you.</p>
-        </div>
-      </div>
-    </div>  
-    @endif
-    @if($errors->any())
-    {{ implode('', $errors->all('<div>:message</div>')) }}
-    @endif
-  </div>
+  <div id="success" class="invisible absolute"></div>
+   <div id="failure" class="invisible absolute"></div>
+  
+      @if (session('message'))
+        <script type="text/javascript">
+          window.onload = function(){
+          document.getElementById('success').click();
+          var scriptTag = document.createElement("script");        
+          document.getElementsByTagName("head")[0].appendChild(scriptTag);
+        }          
+      </script>
+      <style type="text/css">  .success:before{
+        Content:" {{ session('message') }}";
+      }</style>
+       
+            
+        @endif
+        @if($errors->any())
+        <script type="text/javascript">
+          window.onload = function(){
+          document.getElementById('failure').click();
+          var scriptTag = document.createElement("script");        
+          document.getElementsByTagName("head")[0].appendChild(scriptTag);
+        }          
+      </script>
+        <style type="text/css">  .success:before{
+          Content:"The catering menu cannot be left blank";
+        }</style>
+       
+        @endif
 
   <!--Modal-->
   <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50">
@@ -146,11 +161,24 @@
              @foreach($users as $user)
              <li>
                 <a href="@if($user->role == 'Employee') {{route('admin.can_order',$user->code_number)}} @else # @endif" @if($user->can_order == 1) onclick="return confirm('Disable feature can order for {!! $user->name !!} ?')" @else onclick="return confirm('enable feature can order for {!! $user->name !!} ?')" @endif>
-              <div class="bg-white shadow-xl rounded-lg py-3">
+              <div class="transform bg-white shadow-xl rounded-xl pb-3 hover:-translate-y-2 hover:shadow-2xl duration-500">
+               @if($user->role == 'Employee')                         
+                 <div class="flex flex-row text-base absolute bg-gray-600 absolute rounded-tl-xl rounded-br-xl text-white px-4 hover:bg-gray-700 duration-500 cursor-pointer">
+                  <div class="px-2 py-1 font-semibold ">Can Order?</div>
+                  <div class="px-2 py-1 font-bold"> 
+                    @if($user->can_order == 1) 
+                       <font class="text-green-400">Yes</font> 
+                    @else 
+                      <font class="text-red-400">No</font> 
+                    @endif</div>
+                </div>
+              @endif
                 <div class="photo-wrapper p-2">
-                    <img class="w-32 h-32 rounded-full mx-auto" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}">
+
+                    <img class="w-32 h-32 rounded-full mx-auto object-cover mt-8" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}">
                 </div>
                 <div class="p-2">
+                   
                     <h3 class="text-center text-xl text-gray-900 font-medium leading-8">{{$user->name}}</h3>
                     <div class="text-center text-gray-400 text-sm font-semibold">
                         <p>{{$user->role}}</p>
@@ -169,12 +197,7 @@
                             <div class="px-2 py-1 text-gray-500 font-semibold w-20 text-left">Email</div>
                             <div class="px-2 py-1  text-left flex-auto">{{$user->email}}</div>
                         </div>
-                        @if($user->role == 'Employee')
-                          <div class="flex flex-row " >
-                              <div class="px-2 py-1 text-gray-500 font-semibold w-20 text-left">Can Order?</div>
-                              <div class="px-2 py-1  text-left flex-auto">@if($user->can_order == 1) Yes @else No @endif</div>
-                          </div>
-                        @endif
+                       
                     </div>
 
                    
@@ -216,6 +239,7 @@
       <th >Name</th>
       <th>Email</th>
       <th data-visible="true">Role</th>
+      <th data-visible="true">Order</th>
     </tr>
   </thead>
   <tbody class="text-center">
@@ -226,6 +250,15 @@
       <td>{{$user->name}}</td>
       <td>{{$user->email}}</td>
       <td>{{$user->role}}</td>
+      <td>
+        <a class="contents" href="@if($user->role == 'Employee') {{route('admin.can_order',$user->code_number)}} @else # @endif" @if($user->can_order == 1) onclick="return confirm('Disable feature can order for {!! $user->name !!} ?')" @else onclick="return confirm('enable feature can order for {!! $user->name !!} ?')" @endif>
+            @if($user->can_order == 1)  
+        <button class="bg-green-200 text-green-600 py-2 font-semibold px-4 hover:bg-green-300 hover:text-green-700 transition-500" style="border-radius: 20px;">Active</button>
+        @else
+        <button class="bg-red-200 text-red-600 py-2 font-semibold px-4 hover:bg-red-300 hover:text-red-700 transition-500" style="border-radius: 20px;">
+        non-Active</button></a>
+        @endif
+      </td>
     </tr>
     @endforeach
 

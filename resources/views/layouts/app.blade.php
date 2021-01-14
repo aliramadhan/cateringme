@@ -36,7 +36,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ asset('public/js/app.js') }}" defer></script>
     <style type="text/css">
-        body{
+        body,table{
             font-family: 'Poppins', sans-serif;
             background-color: transparent;
         }
@@ -54,12 +54,36 @@
           overflow-x: hidden;
           overflow-y: visible !important;
         }
+
+        .notify{  
+          position:fixed;
+          top:0px;
+          width:100%;
+          height:0;  
+          box-sizing:border-box;
+          color:white;  
+          text-align:center;
+          background:rgba(0,0,0,.6);
+          overflow:hidden;
+          box-sizing:border-box;
+          transition:height .2s;
+        }
+
+        #notifyType:before{
+          display:block;
+          margin-top:22px; 
+
+        }
+
+        .active{  
+          height:70px;
+        }
     </style>
 </head>
-<body class=" antialiased">
+<body class="antialiased">
     <div class="min-h-screen " style="background-image: linear-gradient(60deg,#575fcf,#4bcffa) !important;">
         <div class="grid grid-cols-10 gap-1 ">
-            <div class="col-span-0 md:col-span-2 hidden md:block ">
+           <!--  <div class="col-span-0 md:col-span-2 hidden md:block ">
                 <div class="flex flex-col p-8 gap-2 ">
                   <div>
                     <div class="relative flex w-full flex-wrap items-stretch mb-3">
@@ -165,10 +189,10 @@
 
 
 </div>
-</div>
-<!-- Page Heading -->
+</div> -->
 
-<div class="col-span-10 md:col-span-8">
+<!-- <div class="col-span-10 md:col-span-8"> -->
+<div class="col-span-10 md:col-span-10">
     @livewire('navigation-dropdown')
     <header class="bg-white shadow">
         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -177,7 +201,7 @@
     </header>
 
     <!-- Page Content -->
-    <main class="bg-gray-100 rounded-bl-2xl mb-10">
+    <main class="bg-gray-100 ">
         {{ $slot }}
     </main>
 </div>
@@ -188,6 +212,7 @@
 
 @livewireScripts
 
-<script src="{{ asset('resources/js/modal.js') }}"" defer></script>
+<script src="{{ asset('resources/js/modal.js') }}"></script>
+<script src="{{ asset('resources/js/notif.js') }}"></script>
 </body>
 </html>

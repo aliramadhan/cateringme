@@ -5,8 +5,8 @@
         switch(cont)
         {
           case 0:{
-            $("#slider-1").fadeOut(400);
-            $("#slider-2").delay(400).fadeIn(400);
+            $("#slider-1").fadeOut(100);
+            $("#slider-2").delay(100).fadeIn(100);
             $("#sButton1").removeClass("bg-purple-800");
             $("#sButton2").addClass("bg-purple-800");
             cont=1;
@@ -16,8 +16,8 @@
           case 1:
           {
 
-            $("#slider-2").fadeOut(400);
-            $("#slider-1").delay(400).fadeIn(400);
+            $("#slider-2").fadeOut(100);
+            $("#slider-1").delay(100).fadeIn(100);
             $("#sButton2").removeClass("bg-purple-800");
             $("#sButton1").addClass("bg-purple-800");
 

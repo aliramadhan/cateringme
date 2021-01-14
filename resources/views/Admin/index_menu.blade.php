@@ -1,27 +1,43 @@
 <x-app-layout>
+ <div class="notify z-50 font-semibold absolute left-0"><span id="notifyType" class=""></span></div>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Manage Menu') }}
         </h2>
     </x-slot>
       
-    <link rel="stylesheet" href="{{asset('resources/css/Foodcheckbox.css')}}" /> 
-      <div class="max-w-7xl mx-auto  lg:px-8">
-        @if (session('message'))
-        <div class="max-w-7xl mx-auto lg:px-8 bg-white border-t-4 rounded-b text-teal-darkest px-4 py-3 shadow-md my-2 " role="alert">
-          <div class="flex">
-            <svg class="h-6 w-6 text-teal mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg>
-            <div>
-              <p class="font-bold"> {{ session('message') }}</p>
-              <p class="text-sm">Make sure you know how these changes affect you.</p>
-            </div>
-          </div>
-        </div>  
+    <link rel="stylesheet" href="{{asset('resources/css/Foodcheckbox.css')}}" />
+   <div id="success" class="invisible absolute"></div>
+   <div id="failure" class="invisible absolute"></div>
+  
+      @if (session('message'))
+        <script type="text/javascript">
+          window.onload = function(){
+          document.getElementById('success').click();
+          var scriptTag = document.createElement("script");        
+          document.getElementsByTagName("head")[0].appendChild(scriptTag);
+        }          
+      </script>
+      <style type="text/css">  .success:before{
+        Content:" {{ session('message') }}";
+      }</style>
+       
+            
         @endif
         @if($errors->any())
-        {{ implode('', $errors->all('<div>:message</div>')) }}
+        <script type="text/javascript">
+          window.onload = function(){
+          document.getElementById('failure').click();
+          var scriptTag = document.createElement("script");        
+          document.getElementsByTagName("head")[0].appendChild(scriptTag);
+        }          
+      </script>
+        <style type="text/css">  .success:before{
+          Content:"The catering menu cannot be left blank";
+        }</style>
+       
         @endif
-      </div>
+
     <div class="py-12">
 
       <div class="max-w-7xl mx-auto  lg:px-8">
@@ -63,7 +79,7 @@
 
                             </div>
                         </span>
-                        <img src="{{url('public/'.$menu->photos->first()->file)}}" alt="{{ $menu->name }}" class="rounded-xl  object-cover h-44">
+                        <img src="{{url('public/'.$menu->photos->first()->file)}}" alt="{{ $menu->name }}" class="rounded-xl  object-cover w-full h-44">
 
                     </div>
                     <div class=" text-base font-bold text-gray-600 text-left px-3 ">Description</div>
@@ -93,6 +109,8 @@
 
 
 </div>
+
+
 <script src="{{asset('resources/js/myJs.js')}}"></script>
 <script src="{{asset('resources/js/searching.js')}}"></script>
 </x-app-layout>

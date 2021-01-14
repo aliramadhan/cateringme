@@ -59,7 +59,7 @@
         </div>
       </div>
 
-      <div class="relative md:h-screen overflow-y-auto overflow-x-hidden ">
+      <div class="relative h-full overflow-y-auto overflow-x-hidden ">
         <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide" >
           
             <div class="grid grid-rows-7 gap-1 w-full ">  
@@ -71,7 +71,7 @@
               <div class="flex-auto">
                 <!-- <input type="month" name="month" class="month-select border py-2 px-3 rounded-lg w-full text-lg"> -->
                 <select class="form-select w-full month-select text-lg" onchange="get_date()" name="month" >
-                  <option>Select</option>
+                  <option>Select Month</option>
                   @foreach($months as $month)
                     <option value="{{$month->format('Y-m')}}">{{$month->format('F Y')}}</option>
                   @endforeach
@@ -85,9 +85,9 @@
             <div class="flex-row gap-2 px-4 mb-8">                       
 
               <div id="div1" class=" duration-1000 targetDiv bg-gray-50 justify-content content-center text-center rounded-lg"> 
-                  <h1 id="date-month" class="mb-4 text-center"></h1>
-                  <div id="dates-list">
-                    
+                  <h1 id="date-month" class="mb-4 text-center mt-8"></h1>
+                  <div id="dates-list" >
+                  Tampilno  Bulan sakiki li
                   </div>
               </div>
             </div>

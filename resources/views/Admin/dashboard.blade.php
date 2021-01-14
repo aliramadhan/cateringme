@@ -211,8 +211,8 @@
 				<div class="bg-cover bg-top  rounded-t-xl bg-center h-auto text-white pt-24 pb-10 px-10 object-fill" style="background-image: url({{url('public/'.$menu->photos->first()->file)}})">
 					<div class=" p-4 rounded-lg" style="  background: #3e3e3eba;">
 						<p class="font-bold text-sm uppercase mb-1">@if($loop->iteration == 1) First Menu @else Second Menu @endif</p>
-						<p class="text-3xl font-bold">{{$menu->name}}</p>
-						<p class="text-2xl mb-4 leading-none">{{$menu->desc}} </p>
+						<p class="text-3xl font-bold mb-6">{{$menu->name}}</p>
+						<p class="text-2xl mb-4 leading-none h-52 overflow-ellipsis overflow-hidden">{{$menu->desc}} </p>
 						<a href="{{route('admin.index.menu')}}" class="ml-1 rounded-lg font-semibold bg-purple-500 text-white px-4 py-2 hover:bg-purple-700 duration-1000">Manage</a>
 					</div>
 					
