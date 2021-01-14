@@ -84,10 +84,10 @@ class CateringActionController extends Controller
         	return redirect()->back()->withErrors(['message' => 'Error Accuired.']);
 		}
 	}
-	public function index_report()
+	public function index_report(Request $request)
 	{
 		$user = auth()->user();
-
+		
 		return view('Catering.index_report',compact('user'));
 	}
 }
