@@ -132,12 +132,24 @@ class EmployeeActionController extends Controller
     }
     public function choose_order()
     {
+        //declare variable
+        $user = auth()->user();
+        $now = Carbon::now();
+        $date = $now->startofMonth();
+        $dates = $now->daysInMonth;
         $menus = Menu::where('show',1)->get();
-    	foreach (CarbonPeriod::create(Carbon::parse('01-01-2020'), '1 month', Carbon::today()) as $month) {
+        foreach ($menus as $menu) {
+            $rate = $menu->orders()->where('order_date','<=',$now->format('Y-m-d'))->avg('stars');
+            $menu->rate = $rate;
+            if($rate == null){
+                $menu->rate = 0;
+            }
+        }
+    	foreach (CarbonPeriod::create(Carbon::parse('01-01-2021'), '1 month', Carbon::today()) as $month) {
 
             $months[$month->format('m-Y')] = $month;
         }
-        return view('Employee.choose_order',compact('months','menus'));
+        return view('Employee.choose_order',compact('months','menus','date','dates','now','user'));
     }
     public function create_order($month)
     {
@@ -161,6 +173,12 @@ class EmployeeActionController extends Controller
         $now = Carbon::now();
         $user = auth()->user();
         $menu = Menu::where('menu_code',$request->menu)->first();
+
+        //cek if employee can order
+        if($user->can_order == 0){
+            return redirect()->back()->withErrors(['message' => "Can't submit order, please call admin to activated feature order catering."]);
+        }
+
         foreach($request->dates as $date){
             //create code number for order
             $last_id = Order::all()->count();

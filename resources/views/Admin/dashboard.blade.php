@@ -22,6 +22,7 @@
 			<div class="-mx-2 md:flex">
 				<div class="w-full md:w-1/3 px-2">
 					<div class="rounded-lg shadow-sm mb-4">
+						<a href="{{route('admin.index.order')}}">
 						<div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden">
 							<div class="px-3 pt-8 pb-10 text-center relative z-10">
 								<h4 class="text-sm uppercase text-gray-500 leading-tight">Catering Taken</h4>
@@ -32,10 +33,12 @@
 								<canvas id="chart1" height="70"></canvas>
 							</div>
 						</div>
+						</a>
 					</div>
 				</div>
 				<div class="w-full md:w-1/3 px-2">
 					<div class="rounded-lg shadow-sm mb-4">
+						<a href="{{route('admin.index.order_not_taken')}}">
 						<div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden">
 							<div class="px-3 pt-8 pb-10 text-center relative z-10">
 								<h4 class="text-sm uppercase text-gray-500 leading-tight">Catering not Taken</h4>
@@ -46,6 +49,7 @@
 								<canvas id="chart2" height="70"></canvas>
 							</div>
 						</div>
+						</a>
 					</div>
 				</div>
 				<div class="w-full md:w-1/3 px-2">
@@ -101,7 +105,7 @@
 						<div class="bg-blue-500 col-start-1 col-end-5 p-4 rounded-xl my-4 ml-auto shadow-md animate transform transition-transform hover:-translate-x-2 cursor-default duration-1000">
 							<img src="{{ asset('/resources/image/burger.jpg')}}" class="object-cover h-10 w-10 rounded-full mx-auto">
 							<h3 class="font-semibold text-lg mb-1 text-center">{{$review->employee->name}}</h3>
-							<p class="leading-tight text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, quaerat?</p>
+							<p class="leading-tight text-justify">{{$review->review}}</p>
 						</div>
 						<div class="col-start-5 col-end-6 mx-auto relative">
 							<div class="h-full w-6 flex items-center justify-center">
@@ -111,8 +115,8 @@
 						</div>
 						<div class="col-start-6 col-end-10 text-left relative text-black my-auto animate transform transition-transform hover:translate-x-2 
 						duration-1000">
-							<h3 class="font-semibold text-lg mb-1">Burger And Pizza</h3>
-							<p class="leading-tight text-justify">10.00, 3 Jan</p>     
+							<h3 class="font-semibold text-lg mb-1">{{$review->menu->name}}</h3>
+							<p class="leading-tight text-justify">{{Carbon\Carbon::parse($review->reviewed_at)->format('H:s, Y-m-d')}}</p>     
 						</div>
 
 
@@ -188,39 +192,19 @@
 	</div>
 
 	<div class="col-span-2 text-center mt-6 font-base bg-white rounded-xl py-6">       
-	<p class="text-3xl font-bold text-green-500 mb-4">Our Report</p>   
-		
-
+	<p class="text-3xl font-bold text-green-500 mb-4">Our Report</p>
+		@foreach($orders as $order)
 		<div class=" p-4 cursor-default flex  border-b-2  border-gray-200">
-			<img src="{{ asset('/resources/image/burger.jpg')}}" class="object-cover h-10 w-10 rounded-full mr-3  my-auto">
+			<img src="{{ url('public/'.$order->menu->photos->random()->file)}}" class="object-cover h-10 w-10 rounded-full mr-3  my-auto">
 			<div class="text-base flex-auto text-left">
-				<h3 class="font-semibold text-lg mb-1">Schedule Files</h3>
-				<p class="leading-tight ">January 2020</p>
+				<h3 class="font-semibold text-lg mb-1">{{$order->employee->name}}</h3>
+				<p class="leading-tight ">{{$order->menu->name}}</p>
 			</div>
-			<button class="bg-green-500 py-1 px-4 text-2xl text-white rounded-lg  animate transform transition-transform hover:translate-y-2 hover:bg-green-700 duration-1000">
-				<i class="fas fa-file-download"></i>
-			</button>
+			@if($now->format('H') >= 9 )
+			<p>Served</p>
+			@endif
 		</div>
-		<div class=" p-4  a cursor-default flex  border-b-2  border-gray-200">
-			<img src="{{ asset('/resources/image/burger.jpg')}}" class="object-cover h-10 w-10 rounded-full mr-3  my-auto">
-			<div class="text-base flex-auto text-left">
-				<h3 class="font-semibold text-lg mb-1">Employee Files</h3>
-				<p class="leading-tight ">January 2020</p>
-			</div>
-			<button class="bg-green-500 py-1 px-4 text-2xl text-white rounded-lg  animate transform transition-transform hover:translate-y-2 hover:bg-green-700 duration-1000">
-				<i class="fas fa-file-download"></i>
-			</button>
-		</div>
-		<div class=" p-4  a cursor-default flex  border-b-2  border-gray-200">
-			<img src="{{ asset('/resources/image/burger.jpg')}}" class="object-cover h-10 w-10 rounded-full mr-3  my-auto">
-			<div class="text-base flex-auto text-left">
-				<h3 class="font-semibold text-lg mb-1">Calculation Files</h3>
-				<p class="leading-tight ">January 2020</p>
-			</div>
-			<button class="bg-green-500 py-1 px-4 text-2xl text-white rounded-lg  animate transform transition-transform hover:translate-y-2 hover:bg-green-700 duration-1000">
-				<i class="fas fa-file-download"></i>
-			</button>
-		</div>
+		@endforeach
 	</div>
 	
 

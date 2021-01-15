@@ -115,10 +115,16 @@
           <p class="font-bold text-2xl uppercase"> Today Breakfast </p>
           <div class="flex md:flex-row flex-col justify-center mb-8">
             <p class="text-5xl font-bold leading-none "> {{$menu_today->menu->name}}   </p>
-            <p class=" text-xl text-orange-500 leading-7 font-bold border border-orange-300 p-1 px-2 rounded-xl bg-white h-full ml-2  md:mt-0 mt-5">
-              <i class="fas fa-star"></i> 5 Star
-            </p>
-
+ <p class=" text-xl text-orange-500 leading-7 font-bold border border-orange-300 p-1 px-2 rounded-xl bg-white h-full ml-2  md:mt-0 mt-5">
+                <i class="fas fa-star"></i> @if($menu_today->stars != null) {{$menu_today->stars}} Star  @endif
+              </p>
+           
+            </div>
+            <p class="text-2xl mb-4 leading-none">{{$menu_today->menu->desc}}</p>
+             <div class="mt-4 ">
+                      <button @if($menu_today->review != null || $menu_today->stars != null) disabled @endif type="button" class="@if($menu_today->review != null || $menu_today->stars != null) cursor-not-allowed @endif bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-white py-3 px-8 rounded-xl opacity-75 hover:opacity-100 duration-200 modal-open text-2xl shadow-2xl mt-6" id="modal-click"><i class="fas fa-feather-alt"></i>@if($menu_today->review != null || $menu_today->stars != null) Review Submited @else Review @endif</button>
+                    
+                  </div>
           </div>
           <p class="text-2xl mb-4 leading-none">Use align-text-bottom to align the bottom of an element with the bottom of the parent element's font.Use align-text-bottom to align the bottom of an element with the  </p>
           <div class="mt-4 ">
@@ -130,19 +136,19 @@
       </div> 
       @endif
 
-      @if($menu_tomorrow == null)
+ @if($menu_tomorrow == null)
 
       @else
 
-      <div class="bg-cover bg-top w-full md:w-1/4 bg-gradient-to-t bg-blue-400 to bg-green-400 bg-center text-white  object-fill" style="background-image: url({{ url('public/'.$menu_tomorrow->menu->photos->random()->file)}});">
-        <div class=" p-4 h-full px-10 grid grid-rows-4" style="background-image: linear-gradient(60deg,#252525,#27272769) !important;">
-          <p class="font-bold text-lg uppercase mb-8 border-b-2 "> Tomorrow Breakfast </p>
-          <p class="text-4xl font-bold row-span-2"> {{$menu_today->menu->name}}</p>
-          <p class="text-4xl font-bold"> 
-            <div class=" text-xl text-orange-500 leading-7 font-bold border border-orange-300 p-1 px-2 rounded-xl bg-white">
-              <i class="fas fa-star"></i> 5 Star
-            </div></p>      
-          </div>
+     <div class="bg-cover bg-top w-full md:w-1/4 bg-gradient-to-t bg-blue-400 to bg-green-400 bg-center text-white  object-fill" style="background-image: url({{ url('public/'.$menu_tomorrow->menu->photos->random()->file)}});">
+      <div class=" p-4 h-full px-10 grid grid-rows-4" style="background-image: linear-gradient(60deg,#252525,#27272769) !important;">
+        <p class="font-bold text-lg uppercase mb-8 border-b-2 "> Tomorrow Breakfast </p>
+        <p class="text-4xl font-bold row-span-2"> {{$menu_tomorrow->menu->name}}</p>
+        <p class="text-4xl font-bold"> 
+          <div class=" text-xl text-orange-500 leading-7 font-bold border border-orange-300 p-1 px-2 rounded-xl bg-white">
+            <i class="fas fa-star"></i> @if($menu_tomorrow->stars != null){{$menu_tomorrow}} Star  @endif
+          </div></p>      
+      </div>
 
         </div> <!-- container -->
         @endif

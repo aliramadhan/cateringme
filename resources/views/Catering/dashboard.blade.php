@@ -192,7 +192,7 @@
     	<thead>
     		<tr>
     			<th>Menu</th>
-    			<th>Total Order</th>
+    			<th>Total Order Today</th>
     		</tr>
     	</thead>
     	<tbody>

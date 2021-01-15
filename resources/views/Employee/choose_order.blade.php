@@ -110,6 +110,8 @@
               <div class=" text-2xl col-span-2 md:col-span-1">
                 <button type="submit" class="hover:opacity-100 opacity-75 duration-500 transition ease-in-out rounded-xl" name="menu" value="{{$menu->menu_code}}">
                <div class="relative flex flex-col min-w-0 break-words bg-white w-full shadow-xl rounded-lg @if($loop->iteration == 1) bg-pink-600 @else bg-blue-600 @endif"><img alt="..." src="{{url('public/'.$menu->photos->random()->file)}}" class="w-full align-middle h-64 rounded-t-lg object-cover"><blockquote class="relative p-8 mb-4"><svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 95" class="absolute left-0 w-full block" style="height:95px;top:-94px"><polygon points="-30,95 583,95 583,65" class="@if($loop->iteration == 1) text-pink-600 @else text-blue-600 @endif fill-current"></polygon></svg><h4 class="text-3xl font-bold text-white">{{$menu->name}}</h4><p class="text-md font-light mt-2 text-white">{{$menu->desc}}  
+                <br>
+                @for($i = 1; $i <= $menu->rate; $i++) <i class="fas fa-star"></i> @endfor
                     </p></blockquote></div>
                 </button>
               </div>

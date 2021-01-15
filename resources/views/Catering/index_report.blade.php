@@ -8,6 +8,12 @@
             {{ __('Report Catering') }}
         </h2>
     </x-slot>
+    <form action="{{route('catering.index.report')}}" method="GET">
+    @csrf
+    <input type="month" name="month" @if(request()->month != null) value="{{request()->month}}" @endif>
+    <input type="submit" name="submit">
+        
+    </form>
 <style type="text/css">
         .pagination-info{
             color: #2b2f3f;
@@ -44,6 +50,7 @@
             ">
             <th class="w-12">No</th>
             <th>Menu</th>
+            <th>Rates</th>
             <th>Qty Order</th>
             <th>Qty Served</th>
         </tr>
@@ -66,10 +73,12 @@
                         $served = $menu->orders()->whereBetween('order_date',[$start,$stop])->count();
                     }
                 }
+                $menu->rate = $menu->orders()->where('order_date','<=',$now->format('Y-m-d'))->avg('stars');
             @endphp
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$menu->name}}</td>
+                <td>@for($i = 1; $i <= $menu->rate; $i++) <i class="fas fa-star"></i> @endfor</td>
                 <td>{{$qty}}</td>
                 <td>{{$served}}</td>
             </tr>

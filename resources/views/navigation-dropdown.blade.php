@@ -31,6 +31,9 @@
                         <x-jet-nav-link href="{{ route('catering.index.menu') }}" :active="request()->routeIs('catering.index.menu')">
                             {{ __('Manage Menu') }}
                         </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('catering.index.catering') }}" :active="request()->routeIs('catering.index.catering')">
+                            {{ __('Menu Today') }}
+                        </x-jet-nav-link>
                         <x-jet-nav-link href="{{ route('catering.index.report') }}" :active="request()->routeIs('catering.index.report')">
                             {{ __('Report Menu') }}
                         </x-jet-nav-link>
