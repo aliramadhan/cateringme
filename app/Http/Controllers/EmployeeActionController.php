@@ -175,7 +175,7 @@ class EmployeeActionController extends Controller
         $menu = Menu::where('menu_code',$request->menu)->first();
 
         //cek if employee can order
-        if($user->can_order){
+        if($user->can_order == 0){
             return redirect()->back()->withErrors(['message' => "Can't submit order, please call admin to activated feature order catering."]);
         }
 

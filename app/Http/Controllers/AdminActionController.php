@@ -268,4 +268,26 @@ class AdminActionController extends Controller
 
 		return redirect()->back()->with(['message' => $message]);
 	}
+	public function index_order()
+	{
+		//declare variable
+		$now = Carbon::now();
+		$orders = Order::where('order_date',$now->format('Y-m-d'))->get();
+
+		return view('Admin.index_order',compact('orders','now'));
+	}
+	public function index_order_not_taken()
+	{
+		//declare variable
+		$now = Carbon::now();
+		$data = User::where('role','Employee')->get();
+		$employees = new Collection;
+		foreach ($data as $item) {
+			$order = $item->orders()->where('order_date',$now->format('Y-m-d'))->first();
+			if ($order == null) {
+				$employees->push($item);
+			}
+		}
+		return view('Admin.index_order_not_taken',compact('employees','now'));
+	}
 }

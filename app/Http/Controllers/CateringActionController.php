@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use \App\Models\Menu;
+use \App\Models\Order;
 use \App\Models\PhotoMenu;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -92,8 +93,17 @@ class CateringActionController extends Controller
         	return redirect()->back()->withErrors(['message' => 'Error Accuired.']);
 		}
 	}
+	public function index_catering()
+	{
+		//declare variable
+		$now = Carbon::now();
+		$orders = Order::where('order_date',$now->format('Y-m-d'))->get();
+
+		return view('Catering.index_catering',compact('now','orders'));
+	}
 	public function index_report(Request $request)
 	{
+		//declare variable
 		$user = auth()->user();
 		$now = Carbon::now();
 		return view('Catering.index_report',compact('user','now'));

@@ -62,6 +62,7 @@
 			<div class="-mx-2 md:flex">
 				<div class="w-full md:w-1/3 px-2">
 					<div class="rounded-lg shadow-sm mb-4">
+						<a href="{{route('admin.index.order')}}">
 						<div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden">
 							<div class="px-3 pt-8 pb-10 text-center relative z-10">
 								<h4 class="text-sm uppercase text-gray-500 leading-tight">Catering Taken</h4>
@@ -72,10 +73,12 @@
 								<canvas id="chart1" height="70"></canvas>
 							</div>
 						</div>
+						</a>
 					</div>
 				</div>
 				<div class="w-full md:w-1/3 px-2">
 					<div class="rounded-lg shadow-sm mb-4">
+						<a href="{{route('admin.index.order_not_taken')}}">
 						<div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden">
 							<div class="px-3 pt-8 pb-10 text-center relative z-10">
 								<h4 class="text-sm uppercase text-gray-500 leading-tight">Catering not Taken</h4>
@@ -86,6 +89,7 @@
 								<canvas id="chart2" height="70"></canvas>
 							</div>
 						</div>
+						</a>
 					</div>
 				</div>
 				<div class="w-full md:w-1/3 px-2">
@@ -141,7 +145,7 @@
 						<div class="bg-blue-500 col-start-1 col-end-5 p-4 rounded-xl my-4 ml-auto shadow-md animate transform transition-transform hover:-translate-x-2 cursor-default duration-1000">
 							<img src="{{ asset('/resources/image/burger.jpg')}}" class="object-cover h-10 w-10 rounded-full mx-auto">
 							<h3 class="font-semibold text-lg mb-1 text-center">{{$review->employee->name}}</h3>
-							<p class="leading-tight text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, quaerat?</p>
+							<p class="leading-tight text-justify">{{$review->review}}</p>
 						</div>
 						<div class="col-start-5 col-end-6 mx-auto relative">
 							<div class="h-full w-6 flex items-center justify-center">
@@ -151,8 +155,8 @@
 						</div>
 						<div class="col-start-6 col-end-10 text-left relative text-black my-auto animate transform transition-transform hover:translate-x-2 
 						duration-1000">
-							<h3 class="font-semibold text-lg mb-1">Burger And Pizza</h3>
-							<p class="leading-tight text-justify">10.00, 3 Jan</p>     
+							<h3 class="font-semibold text-lg mb-1">{{$review->menu->name}}</h3>
+							<p class="leading-tight text-justify">{{Carbon\Carbon::parse($review->reviewed_at)->format('H:s, Y-m-d')}}</p>     
 						</div>
 
 
