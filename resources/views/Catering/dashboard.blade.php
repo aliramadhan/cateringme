@@ -11,9 +11,56 @@
 
      <div class="p-6 border-b border-gray-200">
        
-        <div class="w-full px-8">
+        <div class="w-full lg:px-8">
             <div class="-mx-2 md:flex">
                 <div class="w-full md:w-full px-2">
+
+                    <div class="flex gap-4 block lg:hidden overflow-x-auto">
+                          <div class="w-full md:w-1/2 ">
+                          <div class="rounded-lg shadow-sm mb-4 opacity-75 hover:opacity-100 duration-500 hover:shadow-xl cursor-pointer">
+                            <a href="{{ route('catering.index.menu') }}" class="contents">
+                              <div class="rounded-lg shadow-lg md:shadow-xl relative overflow-hidden">
+                                <div class="px-3 py-3 lg:py-13 text-center relative z-10" style="background-color: #8BC6EC;
+                                background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+                                ">
+
+                                <h3 class="text-5xl text-blue-500 font-semibold leading-tight my-2">
+                                  <i class="fas fa-plus text-blue-400 py-6 px-7 rounded-full bg-gray-600" aria-hidden="true"></i></h3>
+                                <h4 class="text-xl uppercase text-gray-700 leading-tight font-semibold ">Menu</h4>
+                              </div>                                
+                            </div>
+                          </a>
+                          </div>                    
+                        </div>
+                        <div class="w-full md:w-1/2 ">
+                          <div class="rounded-lg shadow-sm mb-4 opacity-75 hover:opacity-100 duration-500 hover:shadow-xl cursor-pointer">
+                            <a href="{{ route('catering.index.catering') }}" class="contents">
+                            <div class="rounded-lg shadow-lg md:shadow-xl relative overflow-hidden">
+                              <div class="px-3 py-3 lg:py-13 text-center relative z-10" style="background-color: #FBAB7E;background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);">
+                              <h3 class="text-5xl text-green-500 font-semibold leading-tight my-2">
+                               <i class="fa fa-utensils text-orange-300 py-6 px-7 rounded-full bg-gray-600" aria-hidden="true"></i></h3>
+                              <h4 class="text-xl uppercase text-gray-700 leading-tight font-semibold ">Catering</h4>
+                            </div>
+                          </div>
+                        </a>
+                        </div>                    
+                      </div> 
+                      <div class="w-full md:w-1/2 ">
+                        <div class="rounded-lg shadow-sm mb-4 opacity-75 hover:opacity-100 duration-500 hover:shadow-xl cursor-pointer">
+                          <a href="{{ route('catering.index.report') }}" class="contents">
+                          <div class="rounded-lg shadow-lg md:shadow-xl relative overflow-hidden">
+                            <div class="px-3 py-3 lg:py-13 text-center relative z-10" style="background-color: #85FFBD;
+                            background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);">
+                            <h3 class="text-5xl text-gray-700 font-semibold leading-tight my-2">
+                             <i class="fas fa-book text-green-200 py-6 px-7 rounded-full bg-gray-600" aria-hidden="true"></i></h3>
+                            <h4 class="text-xl uppercase text-gray-700 leading-tight font-semibold "> Report</h4>
+                          </div>
+                        </div>
+                      </a>
+                      </div>                    
+                    </div> 
+                  </div>
+
                     <div class="rounded-lg shadow-sm mb-4">
                         <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden">
                             <div class="px-3 py-24 text-center relative z-10">
@@ -23,19 +70,19 @@
                                 <p class="text-lg text-green-500 leading-tight">50 % ▲</p>
                             </div>
                             <div class="absolute bottom-0 inset-x-0">
-                                <canvas id="chart1" height="300"></canvas>
+                                <canvas id="chart1" height="300" style="width: 100%;"></canvas>
                             </div>
                         </div>
                     </div> 
-                    <div class="flex gap-4">
+                    <div class="flex gap-4 overflow-x-auto">
                         <div class="w-full md:w-1/2 ">
                         <div class="rounded-lg shadow-sm mb-4">
                             <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden">
-                                <div class="px-3 py-16 text-center relative z-10">
+                                <div class="px-3 py-3 lg:py-13 text-center relative z-10">
                                     
                                     <h3 class="text-5xl text-orange-700 font-semibold leading-tight my-2">
                                         4</h3>
-                                    <h4 class="text-xl uppercase text-gray-500 leading-tight"> Catering Menu</h4>
+                                    <h4 class="text-xl uppercase text-gray-500 leading-tight">Total Catering Menu</h4>
                                 </div>                                
                             </div>
                         </div>                    
@@ -43,10 +90,10 @@
                      <div class="w-full md:w-1/2 ">
                         <div class="rounded-lg shadow-sm mb-4">
                             <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden">
-                                <div class="px-3 py-16 text-center relative z-10">
+                                <div class="px-3 py-3 lg:py-13 text-center relative z-10">
                                     <h3 class="text-5xl text-green-500 font-semibold leading-tight my-2">
                                         1</h3>
-                                    <h4 class="text-xl uppercase text-gray-500 leading-tight"> Menu Active</h4>
+                                    <h4 class="text-xl uppercase text-gray-500 leading-tight">total Catering Active</h4>
                                 </div>
                                
                             </div>
@@ -55,11 +102,11 @@
                      <div class="w-full md:w-1/2 ">
                         <div class="rounded-lg shadow-sm mb-4">
                             <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden">
-                                <div class="px-3 py-16 text-center relative z-10">
+                                <div class="px-3 py-3 lg:py-13 text-center relative z-10">
                                    
                                     <h3 class="text-5xl text-gray-700 font-semibold leading-tight my-2">
                                          5 </h3>
-                                     <h4 class="text-xl uppercase text-gray-500 leading-tight"> Total Review</h4>
+                                     <h4 class="text-xl uppercase text-gray-500 leading-tight"> Total Catering Review</h4>
                                 </div>
                                
                             </div>
@@ -125,8 +172,8 @@
               <div class="flex flex-row text-base absolute bg-gray-600 absolute rounded-tl-xl rounded-br-xl text-white px-4 hover:bg-gray-700 duration-500 cursor-pointer">
                   <div class="px-2 py-1 font-semibold ">Pizza Keju Coklat</div>                 
                 </div>
-          <img src="https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2020/06/11/3650390209.jpg" class="object-cover flex-none bg-cover h-48 lg:h-auto lg:w-52 overflow-hidden rounded-l-lg">
-          <div class="flex flex-col py-3 px-6 flex-auto">
+          <img src="https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2020/06/11/3650390209.jpg" class="object-cover flex-none bg-cover h-48 lg:h-auto lg:w-52 w-20 overflow-hidden rounded-l-lg">
+          <div class="flex flex-col lg:py-3 pt-9 px-6 flex-auto ">
             <div class="flex items-center">           
               <div class=" text-lg flex-auto text-gray-600 leading-7 font-semibold flex items-center">
                  <img src="https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2020/06/11/3650390209.jpg" class="object-cover h-10 w-10 rounded-full">
@@ -156,8 +203,8 @@
           <div class="flex flex-row text-base absolute bg-gray-600 absolute rounded-tr-xl rounded-bl-xl text-white px-4 hover:bg-gray-700 duration-500 cursor-pointer">
               <div class="px-2 py-1 font-semibold ">Pizza Keju Coklat</div>                 
           </div>
-          <img src="https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2020/06/11/3650390209.jpg" class="object-cover flex-none bg-cover h-48 lg:h-auto lg:w-52 overflow-hidden rounded-r-lg">
-          <div class="flex flex-col py-3 px-6 flex-auto flex-row-reverse">
+          <img src="https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2020/06/11/3650390209.jpg" class="object-cover flex-none bg-cover h-48 lg:h-auto lg:w-52 w-20 overflow-hidden rounded-r-lg">
+          <div class="flex flex-col lg:py-3 pt-9 px-6 flex-auto flex-row-reverse">
             <div class="flex flex-row-reverse items-center">           
               <div class=" text-lg flex-auto text-gray-600 leading-7 font-semibold flex items-center flex-row-reverse text-right">
                  <img src="https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2020/06/11/3650390209.jpg" class="object-cover h-10 w-10 rounded-full">
@@ -188,22 +235,7 @@
       </div>
 
 
-    <table>
-    	<thead>
-    		<tr>
-    			<th>Menu</th>
-    			<th>Total Order Today</th>
-    		</tr>
-    	</thead>
-    	<tbody>
-    		@foreach($menu_today as $menu)
-    		<tr>
-    			<td>{{$menu->name}}</td>
-    			<td>{{$menu->total_order}}</td>
-    		</tr>
-    		@endforeach
-    	</tbody>
-    </table>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 <script src="{{asset('resources/js/stat.js')}}"></script>
 </x-app-layout>

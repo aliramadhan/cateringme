@@ -122,7 +122,7 @@
                   </div>
                   <div class=" text-base font-bold text-gray-600 text-left px-2">Description</div>
                   <div class=" text-base font-base text-gray-600 text-left px-2">{{$menu->desc}}</div>     
-                  <div class=" text-base font-base text-gray-600 text-left px-2">@for($i = 1; $i <= $menu->rate; $i++) <i class="fas fa-star"></i> @endfor</div>     
+                  <div class=" text-base font-base text-orange-500 text-right px-2">@for($i = 1; $i <= $menu->rate; $i++) <i class="fas fa-star"></i> @endfor</div>     
 
               </div>
           </a>
