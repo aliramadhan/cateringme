@@ -228,39 +228,19 @@
 	</div>
 
 	<div class="col-span-2 text-center mt-6 font-base bg-white rounded-xl py-6">       
-	<p class="text-3xl font-bold text-green-500 mb-4">Our Report</p>   
-		
-
+	<p class="text-3xl font-bold text-green-500 mb-4">Our Report</p>
+		@foreach($orders as $order)
 		<div class=" p-4 cursor-default flex  border-b-2  border-gray-200">
-			<img src="{{ asset('/resources/image/burger.jpg')}}" class="object-cover h-10 w-10 rounded-full mr-3  my-auto">
+			<img src="{{ url('public/'.$order->menu->photos->random()->file)}}" class="object-cover h-10 w-10 rounded-full mr-3  my-auto">
 			<div class="text-base flex-auto text-left">
-				<h3 class="font-semibold text-lg mb-1">Schedule Files</h3>
-				<p class="leading-tight ">January 2020</p>
+				<h3 class="font-semibold text-lg mb-1">{{$order->employee->name}}</h3>
+				<p class="leading-tight ">{{$order->menu->name}}</p>
 			</div>
-			<button class="bg-green-500 py-1 px-4 text-2xl text-white rounded-lg  animate transform transition-transform hover:translate-y-2 hover:bg-green-700 duration-1000">
-				<i class="fas fa-file-download"></i>
-			</button>
+			@if($now->format('H') >= 9 )
+			<p>Served</p>
+			@endif
 		</div>
-		<div class=" p-4  a cursor-default flex  border-b-2  border-gray-200">
-			<img src="{{ asset('/resources/image/burger.jpg')}}" class="object-cover h-10 w-10 rounded-full mr-3  my-auto">
-			<div class="text-base flex-auto text-left">
-				<h3 class="font-semibold text-lg mb-1">Employee Files</h3>
-				<p class="leading-tight ">January 2020</p>
-			</div>
-			<button class="bg-green-500 py-1 px-4 text-2xl text-white rounded-lg  animate transform transition-transform hover:translate-y-2 hover:bg-green-700 duration-1000">
-				<i class="fas fa-file-download"></i>
-			</button>
-		</div>
-		<div class=" p-4  a cursor-default flex  border-b-2  border-gray-200">
-			<img src="{{ asset('/resources/image/burger.jpg')}}" class="object-cover h-10 w-10 rounded-full mr-3  my-auto">
-			<div class="text-base flex-auto text-left">
-				<h3 class="font-semibold text-lg mb-1">Calculation Files</h3>
-				<p class="leading-tight ">January 2020</p>
-			</div>
-			<button class="bg-green-500 py-1 px-4 text-2xl text-white rounded-lg  animate transform transition-transform hover:translate-y-2 hover:bg-green-700 duration-1000">
-				<i class="fas fa-file-download"></i>
-			</button>
-		</div>
+		@endforeach
 	</div>
 	
 

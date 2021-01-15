@@ -24,9 +24,17 @@ class CateringActionController extends Controller
 	}
 	public function index_menu()
 	{
+		$now = Carbon::now();
 		$menus = auth()->user()->menus;
+		foreach ($menus as $menu) {
+			$rate = $menu->orders()->where('order_date','<=',$now->format('Y-m-d'))->avg('stars');
+			$menu->rate = $rate;
+			if($rate == null){
+				$menu->rate = 0;
+			}
+		}
 
-		return view('Catering.index_Menu',compact('menus'));
+		return view('Catering.index_Menu',compact('menus','now'));
 	}
 	public function create_menu()
 	{
@@ -87,7 +95,7 @@ class CateringActionController extends Controller
 	public function index_report(Request $request)
 	{
 		$user = auth()->user();
-		
-		return view('Catering.index_report',compact('user'));
+		$now = Carbon::now();
+		return view('Catering.index_report',compact('user','now'));
 	}
 }
