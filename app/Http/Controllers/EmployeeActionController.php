@@ -135,9 +135,17 @@ class EmployeeActionController extends Controller
         //declare variable
         $user = auth()->user();
         $now = Carbon::now();
-        $date = $now->startofMonth();
-        $dates = $now->daysInMonth;
+        $start = $now->startofMonth();
+        $total_date = $now->daysInMonth;
         $menus = Menu::where('show',1)->get();
+        //declare off date
+        $off_date = OffDate::where('year',$now->year)->where('month',$now->month)->first();
+        if($off_date == null){
+            $off_date = ['0'];
+        }
+        else{
+            $off_date = explode(',', $off_date->date_list);
+        }
         foreach ($menus as $menu) {
             $rate = $menu->orders()->where('order_date','<=',$now->format('Y-m-d'))->avg('stars');
             $menu->rate = $rate;
@@ -149,7 +157,7 @@ class EmployeeActionController extends Controller
 
             $months[$month->format('m-Y')] = $month;
         }
-        return view('Employee.choose_order',compact('months','menus','date','dates','now','user'));
+        return view('Employee.choose_order',compact('months','menus','start','total_date','now','user','off_date'));
     }
     public function create_order($month)
     {

@@ -87,7 +87,23 @@
               <div id="div1" class=" duration-1000 targetDiv bg-gray-50 justify-content content-center text-center rounded-lg"> 
                   <h1 id="date-month" class="mb-4 text-center mt-8"></h1>
                   <div id="dates-list" >
-                  Tampilno  Bulan sakiki li
+                    @for($i = 1; $i <= $total_date; $i++, $start->addDay())
+                    @php
+                      $order = \App\Models\Order::where('employee_id',$user->id)->where('order_date',$start->format('Y-m-d'))->first();
+                    @endphp
+                    <label class='label flex-auto  duration-1000'>
+                        <input class='label__checkbox  duration-1000' @if(in_array($start->day, $off_date) || $start < Carbon\Carbon::now()) disabled  @endif type='checkbox' value="{{$now->format('Y-m-d')}}" name='dates[]'>
+                        <span class='label__text '>
+                          <span class='label__check rounded-lg text-white  duration-1000 text-justify' style="@if(in_array($start->day, $off_date)) background: linear-gradient(to right, #ff416c, #ff4b2b); @elseif($order != null) background-image: linear-gradient( 135deg, #FCCF31 10%, #F55555 100%); @elseif($start < Carbon\Carbon::now()) background-image: linear-gradient(160deg, #bdbdbe 0%, #032a32 100%); @else background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%); @endif" >
+                            <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 duration-1000 p-10' style='font-family: Poppins, sans-serif;'>
+                         
+                              <div class='font-semibold text-4xl'>{{$now->format('d')}}</div>
+                              <div class='text-xs font-base'>{{$now->format('l')}}</div>
+                              </i>
+                          </span>
+                        </span>
+                    </label>
+                    @endfor
                   </div>
               </div>
             </div>
