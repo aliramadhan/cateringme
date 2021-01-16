@@ -67,7 +67,7 @@
                                 <h4 class="text-xl uppercase text-gray-500 leading-tight"> My Catering Scores</h4>
                                 <h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">
                                     <i class="fas fa-star"></i> {{$stars}} Rate</h3>
-                                <p class="text-lg text-green-500 leading-tight">50 % ▲</p>
+                                <p class="text-lg text-green-500 leading-tight">{{$persen_stars}} % @if($stars > $prev_stars) ▲ @else ▼ @endif</p>
                             </div>
                             <div class="absolute bottom-0 inset-x-0">
                                 <canvas id="chart1" height="300" style="width: 100%;"></canvas>
@@ -151,11 +151,11 @@
               <div class="flex flex-row text-base absolute bg-gray-600 absolute rounded-tl-xl rounded-br-xl text-white px-4 hover:bg-gray-700 duration-500 cursor-pointer">
                   <div class="px-2 py-1 font-semibold ">{{$review->menu->name}}</div>                 
                 </div>
-          <img src="https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2020/06/11/3650390209.jpg" class="object-cover flex-none bg-cover h-48 lg:h-auto lg:w-52 w-20 overflow-hidden rounded-l-lg">
+          <img src="{{url('public/'.$review->menu->photos->first()->file)}}" class="object-cover flex-none bg-cover h-48 lg:h-auto lg:w-52 w-20 overflow-hidden rounded-l-lg">
           <div class="flex flex-col lg:py-3 pt-9 px-6 flex-auto ">
             <div class="flex items-center">           
               <div class=" text-lg flex-auto text-gray-600 leading-7 font-semibold flex items-center">
-                 <img src="https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2020/06/11/3650390209.jpg" class="object-cover h-10 w-10 rounded-full">
+                 <img src="{{url('public/'.$review->menu->photos->first()->file)}}" class="object-cover h-10 w-10 rounded-full">
                  <div class="ml-2">
                     <a href="#">{{$review->employee->name}}</a>
                     <div class=" text-sm font-semibold text-indigo-700 -mt-2">

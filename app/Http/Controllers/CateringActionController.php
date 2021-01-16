@@ -18,22 +18,33 @@ class CateringActionController extends Controller
 		//declare variable
 		$user = auth()->user();
 		$now = Carbon::now();
+		$prev_month = Carbon::parse($now->format('Y-m'))->subMonth(1);
 		$menus = $user->menus;
 		$menu_today = Menu::where('show',1)->get();
 		$total_review = 0;
 		$stars = 0;
+		$prev_stars = 0;
 		foreach ($menu_today as $item) {
 			$item->total_order = $item->orders->where('order_date',$now->format('Y-m-d'))->count();
 		}
 		foreach ($menus as $menu) {
 			$menu_id [] = $menu->id;
 			$total_review += $menu->orders->where('reviewed_at','!=',null)->count();
-			$stars += $menu->orders->sum('stars');
+			$stars += $menu->orders->whereBetween('reviewed_at',[$now->startOfMonth()->format('Y-m-d'),$now->endOfMonth()->format('Y-m-d')])->sum('stars');
+			$prev_stars += $menu->orders->whereBetween('reviewed_at',[$prev_month->startOfMonth()->format('Y-m-d'),$prev_month->endOfMonth()->format('Y-m-d')])->sum('stars');
 		}
+		//calculation		
 		$stars = $stars/$menus->count();
+		$prev_stars = $prev_stars/$menus->count();
+		if($prev_stars == 0){
+			$persen_stars = 100;
+		}
+		else{
+			$persen_stars = ($stars / $prev_stars) * 100;
+		}
 		$reviews = Order::whereIn('menu_id',$menu_id)->where('review','!=',null)->orderBy('reviewed_at')->get();
 
-		return view('Catering.dashboard',compact('menu_today','user','menus','total_review','stars','reviews'));
+		return view('Catering.dashboard',compact('menu_today','user','menus','total_review','stars','prev_stars','persen_stars','reviews'));
 	}
 	public function index_menu()
 	{

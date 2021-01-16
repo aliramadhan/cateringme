@@ -70,7 +70,7 @@
                                 
                             </div>
                             <div class="absolute bottom-0 inset-x-0">
-                               <img src="https://doyanresep.com/wp-content/uploads/2020/03/resep-rawon-daging-sapi.jpg" class="object-cover ">
+                               <img src="{{url('public/'.$order->menu->photos->random()->file)}}" class="object-cover ">
                             </div>
 
                             <div class="flex flex-row text-base bg-white py-2 z-10 bottom-0 absolute rounded-br-xl text-gray-600 px-4 hover:bg-gray-900 hover:text-white duration-500 cursor-pointer flex items-center">
