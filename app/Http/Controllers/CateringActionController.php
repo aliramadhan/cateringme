@@ -16,12 +16,24 @@ class CateringActionController extends Controller
 	public function dashboard()
 	{
 		//declare variable
+		$user = auth()->user();
 		$now = Carbon::now();
+		$menus = $user->menus;
 		$menu_today = Menu::where('show',1)->get();
-		foreach ($menu_today as $menu) {
-			$menu->total_order = $menu->orders->where('order_date',$now->format('Y-m-d'))->count();
+		$total_review = 0;
+		$stars = 0;
+		foreach ($menu_today as $item) {
+			$item->total_order = $item->orders->where('order_date',$now->format('Y-m-d'))->count();
 		}
-		return view('Catering.dashboard',compact('menu_today'));
+		foreach ($menus as $menu) {
+			$menu_id [] = $menu->id;
+			$total_review += $menu->orders->where('reviewed_at','!=',null)->count();
+			$stars += $menu->orders->sum('stars');
+		}
+		$stars = $stars/$menus->count();
+		$reviews = Order::whereIn('menu_id',$menu_id)->where('review','!=',null)->orderBy('reviewed_at')->get();
+
+		return view('Catering.dashboard',compact('menu_today','user','menus','total_review','stars','reviews'));
 	}
 	public function index_menu()
 	{
