@@ -27,6 +27,16 @@
                         <x-jet-nav-link href="{{ route('admin.index.schedule') }}" :active="request()->routeIs('admin.index.schedule')">
                             {{ __('Manage Schedule') }}
                         </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('admin.index.review') }}" :active="request()->routeIs('admin.index.review')">
+                            {{ __('Report Review (sing iki gaween dropdown)') }}
+                        </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('admin.index.order') }}" :active="request()->routeIs('admin.index.order')">
+                            {{ __('Report Order Taken (sing iki gaween dropdown)') }}
+                        </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('admin.index.order_not_taken') }}" :active="request()->routeIs('admin.index.order_not_taken')">
+                            {{ __('Report Order not taken (sing iki gaween dropdown)') }}
+                        </x-jet-nav-link>
+
                     @elseif(auth()->user()->role == 'Catering')
                         <x-jet-nav-link href="{{ route('catering.index.menu') }}" :active="request()->routeIs('catering.index.menu')">
                             {{ __('Manage Menu') }}

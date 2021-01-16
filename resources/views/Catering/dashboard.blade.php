@@ -129,7 +129,7 @@
                                   <div class="flex-auto text-left">{{$menu->name}}</div>      
                                   <div class=" text-base font-base mr-1">({{$menu->orders()->where('review','!=',null)->count()}} Review)</div> 
                                   <div class=" text-lg text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl">
-                                    <i class="fas fa-star"></i> {{$menu->orders->avg('stars')}}
+                                    <i class="fas fa-star"></i> {{round($menu->orders->avg('stars'))}}
                                   </div>                             
                                 </div> 
                               @endforeach

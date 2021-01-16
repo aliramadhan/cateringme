@@ -241,12 +241,6 @@ class AdminActionController extends Controller
 	    DB::commit();
         return redirect()->back()->with(['message' => 'Order has been scheduled.']);
 	}
-	public function index_review()
-	{
-		$reviews = Order::where('review','!=',null)->orWhere('stars','!=',null)->orderBy('order_date','desc')->get();
-
-		return view('Admin.index_review',compact('reviews'));
-	}
 	public function can_order($code)
 	{
 		//declare variable
@@ -268,26 +262,74 @@ class AdminActionController extends Controller
 
 		return redirect()->back()->with(['message' => $message]);
 	}
-	public function index_order()
+	public function index_review(Request $request)
+	{
+		//declare variable
+		$from = null;
+		$to = null;
+
+		if ($request->from != null && $request->to != null) {
+			$from = Carbon::parse($request->from);
+			$to = Carbon::parse($request->to);
+			$reviews = Order::where('review','!=',null)->where('stars','!=',null)->whereBetween('reviewed_at',[$from->format('Y-m-d 00:00:00'), $to->format('Y-m-d 23:59:59')])->orderBy('order_date','desc')->get();
+		}
+		else{
+			$reviews = Order::where('review','!=',null)->where('stars','!=',null)->orderBy('order_date','desc')->get();
+		}
+
+		return view('Admin.index_review',compact('reviews','from','to'));
+	}
+	public function index_order(Request $request)
 	{
 		//declare variable
 		$now = Carbon::now();
 		$orders = Order::where('order_date',$now->format('Y-m-d'))->get();
+		$from = null;
+		$to = null;
 
-		return view('Admin.index_order',compact('orders','now'));
+		if ($request->from != null && $request->to != null) {
+			$from = Carbon::parse($request->from);
+			$to = Carbon::parse($request->to);
+			$orders = Order::whereBetween('order_date',[$from->format('Y-m-d'),$to->format('Y-m-d')])->orderBy('order_date','desc')->get();
+		}
+
+		return view('Admin.index_order',compact('orders','now','from','to'));
 	}
-	public function index_order_not_taken()
+	public function index_order_not_taken(Request $request)
 	{
 		//declare variable
 		$now = Carbon::now();
 		$data = User::where('role','Employee')->get();
 		$employees = new Collection;
+		$from = null;
+		$to = null;
+
+
 		foreach ($data as $item) {
-			$order = $item->orders()->where('order_date',$now->format('Y-m-d'))->first();
-			if ($order == null) {
-				$employees->push($item);
+			if($request->from != null && $request->to != null){
+				$from = Carbon::parse($request->from);
+				$to = Carbon::parse($request->to);
+				$total_day = $from->diffInDays($to);
+				for ($i=0; $i <= $total_day; $i++,$from->addDay()) { 
+					$order = $item->orders()->where('order_date',$from->format('Y-m-d'))->first();
+					if ($order == null) {
+						$employees->push(['date' => $from->format('Y-m-d'), 'employee' => $item]);
+					}
+				}
+				//redeclare variable
+				$from = Carbon::parse($request->from);
+				$to = Carbon::parse($request->to);
+			}
+			else{
+				$order = $item->orders()->where('order_date',$now->format('Y-m-d'))->first();
+				if ($order == null) {
+					$employees->push(['date' => $now->format('Y-m-d'), 'employee' => $item]);
+				}
 			}
 		}
-		return view('Admin.index_order_not_taken',compact('employees','now'));
+		//Sort
+		$employees->sortBy('date');
+
+		return view('Admin.index_order_not_taken',compact('employees','now','from','to'));
 	}
 }

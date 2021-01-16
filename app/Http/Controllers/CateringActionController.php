@@ -42,7 +42,7 @@ class CateringActionController extends Controller
 		else{
 			$persen_stars = ($stars / $prev_stars) * 100;
 		}
-		$reviews = Order::whereIn('menu_id',$menu_id)->where('review','!=',null)->orderBy('reviewed_at')->get();
+		$reviews = Order::whereIn('menu_id',$menu_id)->where('review','!=',null)->orderBy('reviewed_at','desc')->get();
 
 		return view('Catering.dashboard',compact('menu_today','user','menus','total_review','stars','prev_stars','persen_stars','reviews'));
 	}
