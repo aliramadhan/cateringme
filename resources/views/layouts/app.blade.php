@@ -81,7 +81,7 @@
     </style>
 </head>
 <body class="antialiased">
-    <div class="min-h-screen " style="background-image: linear-gradient(60deg,#575fcf,#4bcffa) !important;">
+    <div class="min-h-screen bg-gray-100" >
         <div class="grid grid-cols-10 gap-1 ">
            <!--  <div class="col-span-0 md:col-span-2 hidden md:block ">
                 <div class="flex flex-col p-8 gap-2 ">

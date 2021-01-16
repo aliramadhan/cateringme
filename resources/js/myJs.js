@@ -32,7 +32,7 @@
         button3.style.color ="#528CE0";
         button4.style.backgroundColor ="";
         button4.style.color ="#9FA6B2";
-        buttonSch.style.visibility = "visible";
+        buttonSch.style.display = "block";
 
     });
 
@@ -50,7 +50,7 @@
         button3.style.color ="#9FA6B2";
         button4.style.backgroundColor ="#EEF2FF";
         button4.style.color ="#528CE0";
-        buttonSch.style.visibility = "hidden";
+        buttonSch.style.display = "none";
 
 
     });
