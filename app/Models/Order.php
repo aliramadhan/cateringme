@@ -13,6 +13,7 @@ class Order extends Model
         'menu_id',
         'order_number',
         'order_date',
+        'status',
         'review',
         'stars',
         'reviewed_at'

@@ -62,8 +62,10 @@ Route::group(['prefix' => 'catering',  'middleware' => ['auth:sanctum','role:Cat
     Route::get('/index/menu', [ CateringActionController::class, 'index_menu'])->name('catering.index.menu');
     Route::get('/create/menu', [ CateringActionController::class, 'create_menu'])->name('catering.create.menu');
     Route::post('/create/menu', [ CateringActionController::class, 'store_menu'])->name('catering.store.menu');
+    Route::post('/served/menu', [ CateringActionController::class, 'served_menu'])->name('catering.served.menu');
 
     //Report
+    Route::get('/index/review', [ CateringActionController::class, 'index_review'])->name('catering.index.review');
     Route::get('/index/report', [ CateringActionController::class, 'index_report'])->name('catering.index.report');
     Route::get('/index/catering-today', [ CateringActionController::class, 'index_catering'])->name('catering.index.catering');
 });

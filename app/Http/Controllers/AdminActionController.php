@@ -186,7 +186,7 @@ class AdminActionController extends Controller
 					$input = "<label class='label flex-auto  duration-1000'>
 			                    <input class='label__checkbox  duration-1000' type='checkbox' checked value='".$start->format('Y-m-d')."' name='dates[]'>
 			                      <span class='label__text '>
-			                        <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background: linear-gradient(to right, #ff416c, #ff4b2b);'>
+			                        <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background: linear-gradient(135deg, #FCCF31 10%, #F55555 100%);'>
 			                          <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 p-10 duration-1000' style='font-family: Poppins, sans-serif;'>
 			                       
 			                          	<div class='font-semibold text-4xl mb-2 '>".$start->format('d')."</div>

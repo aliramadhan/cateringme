@@ -40,12 +40,13 @@
               Tables
             </button>
           </div>
-
+          <form action="{{route('catering.served.menu')}}" method="POST">
+          @csrf            
           <div class="flex items-center md:block hidden">
             <div class="pl-4 pr-4 self-stretch">
               <div class="h-full border-l border-gray-200"></div>
             </div>
-              <button type="submit" name="submit" id="btn-slide-dis-2y" class="bg-blue-500  rounded-lg text-white pr-4 duration-1000 hover:bg-blue-700 duration-1000 shadow-2xl bottom-20 mx-auto ">
+              <button type="submit" name="submit" value="submit" id="btn-slide-dis-2y" class="bg-blue-500  rounded-lg text-white pr-4 duration-1000 hover:bg-blue-700 duration-1000 shadow-2xl bottom-20 mx-auto ">
                 <i class="fas fa-save mr-2 bg-blue-700 p-3 rounded-l-lg"></i> Save</button>
           </div>
 
@@ -69,42 +70,39 @@
              <?php $a=1;?>
              @foreach($orders as $order)
             <li>
-                <input type="checkbox" id="myCheckbox{{$a}}" class="schedule-menu" >
-             <label for="myCheckbox{{$a++}}">
-                 <div class="rounded-lg shadow-sm mb-4">
-                        <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden transform hover:-translate-y-2 hover:shadow-2xl duration-500 cursor-pointer">
-                            
-                            <div class="px-3 text-center pt-4 pb-52 relative z-10 bg-gradient-to-b from-gray-900 to-transparent ">
-                                <h4 class="font-semibold text-xl text-white ">{{$order->menu->name}}</h4>
-                                
-                            </div>
-                            <div class="absolute bottom-0 inset-x-0">
-                               <img src="{{url('public/'.$order->menu->photos->random()->file)}}" class="object-cover h-full">
-                            </div>
-
-                            <div class="flex flex-col md:flex-row text-base bg-white py-2 z-10 bottom-0 absolute rounded-br-xl text-gray-600 px-1 md:px-4 hover:bg-gray-900 hover:text-white duration-500 cursor-pointer flex items-center w-full">
-
-                                   
-                                     <img src="{{ $order->employee->profile_photo_url }}" class="object-cover h-10 w-10 rounded-full">
-                                     <div class="ml-2 text-left">
-                                        <a href="#" class=" font-semibold ">{{$order->employee->name}}</a>
-                                        <div class=" text-sm font-semibold text-indigo-700 -mt-1 truncate">
-                                          {{$order->employee->role}}
-                                      </div>
-                                    </div>
-                                 
-
-                              
-                            </div>
+            <input type="checkbox" id="myCheckbox{{$a}}" @if($order->status == 1) disabled @endif name="orders[]" value="{{$order->id}}" class="schedule-menu" >
+              <label for="myCheckbox{{$a++}}">
+                  <div class="rounded-lg shadow-sm mb-4">
+                    <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden transform hover:-translate-y-2 hover:shadow-2xl duration-500 cursor-pointer">
+                      <div class="px-3 text-center pt-4 pb-52 relative z-10 bg-gradient-to-b from-gray-900 to-transparent ">
+                          <h4 class="font-semibold text-xl text-white ">{{$order->menu->name}}</h4>
+                      </div>
+                      <div class="absolute bottom-0 inset-x-0">
+                         <img src="{{url('public/'.$order->menu->photos->random()->file)}}" class="object-cover h-full">
+                      </div>
+                      <div class="flex flex-col md:flex-row text-base bg-white py-2 z-10 bottom-0 absolute rounded-br-xl text-gray-600 px-1 md:px-4 hover:bg-gray-900 hover:text-white duration-500 cursor-pointer flex items-center w-full">
+                        <img src="{{ $order->employee->profile_photo_url }}" class="object-cover h-10 w-10 rounded-full">
+                        <div class="ml-2 text-left">
+                          <a href="#" class=" font-semibold ">{{$order->employee->name}}</a>
+                          <div class=" text-sm font-semibold text-indigo-700 -mt-1 truncate">
+                            @if($order->status == 0)
+                              not served
+                            @else
+                              served
+                            @endif
+                          </div>
                         </div>
-                    </div> 
-                </label>
+                      </div>
+                    </div>
+                  </div> 
+              </label>
             </li>
 
             @endforeach
         
       </ul>
     </div>
+          </form>
     
 
   </div>

@@ -68,20 +68,22 @@
             ">
             <th class="w-12">No</th>
             <th>Menu</th>
+            <th>Employee</th>
+            <th>Review</th>
             <th>Rates</th>
-            <th>Total Order</th>
-            <th>Total Served</th>
+            <th>Reviewed at</th>
         </tr>
     </thead>
     <tbody class="text-center bg-white py-4" >
 
-       @foreach($user->menus as $menu)
+       @foreach($reviews as $review)
             <tr>
                 <td>{{$loop->iteration}}</td>
-                <td>{{$menu->name}}</td>
-                <td>({{ $menu->stars}}) @for($i = 1; $i <= $menu->stars; $i++) <i class="fas fa-star text-orange-500"></i> @endfor</td>
-                <td>{{$menu->total_order}}</td>
-                <td>{{$menu->total_served}}</td>
+                <td>{{$review->menu->name}}</td>
+                <td>{{$review->employee->name}}</td>
+                <td>{{$review->review}}</td>
+                <td>{{$review->stars}}</td>
+                <td>{{Carbon\Carbon::parse($review->reviewed_at)->format('l F Y')}}</td>
             </tr>
             @endforeach
 

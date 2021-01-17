@@ -122,7 +122,7 @@
                         background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
                         ">
                          <div class="py-4 text-center relative z-10 text-gray-700 ">
-                             <h3 class="text-2xl font-bold leading-tight mb-5">Food Ranking</h3>
+                             <h3 class="text-2xl font-bold leading-tight mb-5">10 Food Ranking</h3>
                               @foreach($menus as $menu)
                                 <div class="flex font-semibold text-lg mb-2 items-center px-3 ">
                                   <div class="w-10">{{$loop->iteration}}</div>                                    
@@ -179,7 +179,7 @@
         </div>
         @endforeach
         <div class="w-full text-center  animate transform transition-transform hover:translate-y-1 duration-1000">
-          <a href="#kemanaya" class="bg-gray-700 px-6 py-2 rounded-lg  shadow-lg text-white opacity-75 transform hover:opacity-100  focus:border-gray-200 hover:translate-x-2  "> Show More</a>
+          <a href="{{route('catering.index.review')}}" class="bg-gray-700 px-6 py-2 rounded-lg  shadow-lg text-white opacity-75 transform hover:opacity-100  focus:border-gray-200 hover:translate-x-2  "> Show More</a>
         </div>
       </div>
 
