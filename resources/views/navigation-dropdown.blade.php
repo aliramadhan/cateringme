@@ -27,15 +27,46 @@
                         <x-jet-nav-link href="{{ route('admin.index.schedule') }}" :active="request()->routeIs('admin.index.schedule')">
                             {{ __('Manage Schedule') }}
                         </x-jet-nav-link>
-                        <x-jet-nav-link href="{{ route('admin.index.review') }}" :active="request()->routeIs('admin.index.review')">
-                            {{ __('Report Review (sing iki gaween dropdown)') }}
-                        </x-jet-nav-link>
-                        <x-jet-nav-link href="{{ route('admin.index.order') }}" :active="request()->routeIs('admin.index.order')">
-                            {{ __('Report Order Taken (sing iki gaween dropdown)') }}
-                        </x-jet-nav-link>
-                        <x-jet-nav-link href="{{ route('admin.index.order_not_taken') }}" :active="request()->routeIs('admin.index.order_not_taken')">
-                            {{ __('Report Order not taken (sing iki gaween dropdown)') }}
-                        </x-jet-nav-link>
+                       
+                        <div class="hidden sm:flex sm:items-center sm:ml-6 hover:border-gray-300  focus:outline-none focus:text-gray-700 focus:border-gray-300  border-transparent 
+                        transition duration-150 ease-in-out  hover:text-gray-700">
+                            <x-jet-dropdown align="right" width="48">
+                                <x-slot name="trigger">
+
+                                    <button class="inline-flex items-center px-1 pt-1 border-b-2text-sm font-medium leading-5 text-gray-500 focus:outline-none ">
+                                        <div>Report</div>
+
+                                        <div class="ml-1">
+                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </button>
+
+                                </x-slot>
+
+                                <x-slot name="content">
+
+                                    <!-- User Management -->
+                                    <div class="block px-4 py-2 text-base text-gray-700 font-semibold border-b">
+                                        {{ __('Report') }}
+                                    </div>
+
+                                    <x-jet-dropdown-link href="{{ route('admin.index.review') }}">
+                                        {{ __('Review ') }}
+                                    </x-jet-dropdown-link>
+                                      <x-jet-dropdown-link href="{{ route('admin.index.order') }}">
+                                        {{ __('Order Taken ') }}
+                                    </x-jet-dropdown-link>
+                                      <x-jet-dropdown-link href="{{ route('admin.index.order_not_taken') }}">
+                                        {{ __('Order Not Taken  ') }}
+                                    </x-jet-dropdown-link>
+
+                                </x-slot>
+
+                            </x-jet-dropdown>
+                        </div>
+                      
 
                     @elseif(auth()->user()->role == 'Catering')
                         <x-jet-nav-link href="{{ route('catering.index.menu') }}" :active="request()->routeIs('catering.index.menu')">

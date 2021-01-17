@@ -3,7 +3,6 @@
 @import 'tailwindcss/utilities';
 
 
-
 .rating {
 	display: inline-block;
 	position: relative;
@@ -74,8 +73,6 @@
 }
 
 
-
-
 .notify{  
 	position:fixed;
 	top:0px;
@@ -98,4 +95,8 @@
 
 .active{  
 	height:70px;
+}
+
+.fixed-table-body{
+	    border-radius: 12px;
 }

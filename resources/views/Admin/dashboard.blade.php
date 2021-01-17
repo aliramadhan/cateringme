@@ -172,12 +172,21 @@
 		<div class="sliderAx h-auto   ">
 			@foreach($menus as $menu)
 			<div id="slider-{{$loop->iteration}}" class="container mx-auto ">
-				<div class="bg-cover bg-top  rounded-t-xl bg-center h-auto text-white pt-24 pb-10 px-10 object-fill" style="background-image: url({{url('public/'.$menu->photos->first()->file)}})">
+				
+                  <div class="px-6 py-2 font-semibold absolute bg-gray-600 rounded-tl-xl rounded-br-xl text-white hover:bg-gray-700 duration-500 cursor-pointer text-2xl"><i class="fas fa-cog"></i></div>                
+                
+				<div class="bg-cover bg-top  rounded-xl bg-center h-auto text-white pt-24 pb-10 px-10 object-fill" style="background-image: url({{url('public/'.$menu->photos->first()->file)}})">
+					
 					<div class=" p-4 rounded-lg" style="  background: #3e3e3eba;">
 						<p class="font-bold text-sm uppercase mb-1">@if($loop->iteration == 1) First Menu @else Second Menu @endif</p>
-						<p class="text-3xl font-bold mb-6">{{$menu->name}}</p>
-						<p class="text-2xl mb-4 leading-none h-52 overflow-ellipsis overflow-hidden">{{$menu->desc}} </p>
-						<a href="{{route('admin.index.menu')}}" class="ml-1 rounded-lg font-semibold bg-purple-500 text-white px-4 py-2 hover:bg-purple-700 duration-1000">Manage</a>
+						<div class="flex items-center mb-6">
+							<p class="text-3xl font-bold  uppercase mr-2">{{$menu->name}}</p>
+							<div class=" text-lg text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl">
+								<i class="fas fa-star"></i> 2
+							</div>   
+						</div>
+						<p class="text-xl mb-4 leading-none overflow-ellipsis overflow-hidden h-20">{{$menu->desc}} </p>
+						
 					</div>
 					
 				</div> <!-- container -->
@@ -185,10 +194,7 @@
 			</div>
 			@endforeach
 		</div>
-		<div  class="flex justify-between w-12 mx-auto py-2">
-			<button id="sButton1" onclick="sliderButton1()" class="bg-purple-400 rounded-full w-4 pb-2 " ></button>
-			<button id="sButton2" onclick="sliderButton2() " class="bg-purple-400 rounded-full w-4 p-2"></button>
-		</div>
+	
 	</div>
 
 	<div class="col-span-2 text-center mt-6 font-base bg-white rounded-xl py-6">       

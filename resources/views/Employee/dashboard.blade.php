@@ -3,7 +3,11 @@
   @if($errors->any())
   {{ implode('', $errors->all('<div>:message</div>')) }}
   @endif
-
+  <style type="text/css">
+    .pagination-info{
+            color: #fff;
+          }
+  </style>
   @if (session('message'))
   <div class="max-w-7xl mx-auto lg:px-8 bg-white border-t-4 rounded-b text-teal-darkest px-4 py-3 shadow-md my-2 " role="alert">
     <div class="flex">
