@@ -33,7 +33,7 @@
           }          
         </script>
           <style type="text/css">  .success:before{
-            Content:"  {{ implode('', $errors->all('<div>:message</div>')) }}";
+            Content:"  aa";
           }</style>
          
           @endif
