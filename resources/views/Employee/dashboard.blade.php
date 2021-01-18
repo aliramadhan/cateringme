@@ -207,7 +207,9 @@
             <a href="#">empty schedule</a>
           </div>
           @else    
-           <div class="flex items-center bg-gradient-to-r from-transparent to-blue-200 border-blue-500 gap-2 p-2 rounded border-l-4 mb-2">
+
+
+          <div class="flex items-center bg-gradient-to-r from-transparent to-blue-200 border-blue-500 gap-2 p-2 rounded border-l-4 mb-2">
           <div class=" text-center w-8 text-xl text-blue-400 leading-7 font-bold flex-initial">
             {{$i}}
           </div>
@@ -215,9 +217,25 @@
           <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto">
             <a href="#">{{$order->menu->name}}</a>
           </div>
-          <img src="{{ url('public/'.$order->menu->photos->random()->file)}}" class="object-cover h-8 w-8 rounded flex-initial">
+          <button onclick="showimg{{$i}}()">
+            <img src="{{ url('public/'.$order->menu->photos->random()->file)}}" class="object-cover h-8 w-8 rounded flex-initial">
+          </button>
+          <div id="imagine{{$i}}" class="hidden">
+            <img src="{{ url('public/'.$order->menu->photos->random()->file)}}" class="object-cover h-8 w-8 rounded flex-initial">
+          </div>
+           <script type="text/javascript">
+            function showimg{{$i}}() {
+              var x{{$i}} = document.getElementById("imagine{{$i}}");
+              if (x{{$i}}.style.display === "none") {
+                x{{$i}}.style.display = "block";
+              } else {
+                x{{$i}}.style.display = "none";
+              }
+          }
+       </script>
           @endif
         </div>
+
         @endfor
       </div>
 

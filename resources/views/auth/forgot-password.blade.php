@@ -1,12 +1,11 @@
 <x-guest-layout>
-    <x-jet-authentication-card>
+    <div class="min-h-screen  flex flex-col sm:justify-center items-center pt-0 md:pt-6  " style="background-image: linear-gradient(60deg,#575fcf,#4bcffa) !important;">
+    <div class="w-full md:w-2/6 h-screen sm:h-4/5 px-6 py-6 bg-white shadow-md overflow-hidden sm:rounded-lg  shadow ">
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+        
         </x-slot>
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-        </div>
+      
 
         @if (session('status'))
             <div class="mb-4 font-medium text-sm text-green-600">
@@ -16,19 +15,26 @@
 
         <x-jet-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('password.email') }}">
+        <form method="POST" action="{{ route('password.email') }}" class="flex flex-col">
+              <a href="javascript:history.back()" class="px-5 py-2 font-semibold absolute bg-gray-500 rounded-full text-white hover:bg-gray-700 duration-500 cursor-pointer text-2xl"><i class="fas fa-chevron-left"></i></a>                
             @csrf
-
-            <div class="block">
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+            <img src="{{ asset('/resources/image/logo.png')}}" class="img-fluid mx-auto md:mb-5 mb-10" width="138px" height="138px">
+            <div class="mb-4 text-base text-gray-600 ">             
+              <b>Forgot your password?</b> No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.
+           </div>
+            <div class="relative flex w-full flex-wrap items-stretch mb-3">
+                <span class="z-10 h-full leading-snug font-normal absolute text-center text-gray-400 absolute bg-transparent rounded text-base items-center justify-center w-10 pl-3 py-3">
+                    <img src="{{ asset('resources/image/name.svg')}}" alt="username" class="w-6 opacity-50" >
+                </span>
+                <x-jet-input type="email" name="email" :value="old('email')" required autofocus placeholder="{{ __('Email') }}" class="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-12 text-lg hover:border-blue-400 duration-1000"/>
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <x-jet-button>
-                    {{ __('Email Password Reset Link') }}
-                </x-jet-button>
+                <x-jet-button id="auto" class="ml-0 md:ml-4 px-6 py-2 text-center shadow w-full md:w-auto bg-gradient-to-r from-red-400  to-blue-500 text-white">
+                {{ __('Reset Password') }}
+            </x-jet-button>
             </div>
         </form>
-    </x-jet-authentication-card>
+    </div>
+</div>
 </x-guest-layout>
