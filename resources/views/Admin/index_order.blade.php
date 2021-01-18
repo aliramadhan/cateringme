@@ -76,7 +76,7 @@
                 <a> Star with Clav</a></div>
             </td>
             <td>{{$order->menu->name}}</td>
-            <td>{{$order->order_date}}</td>
+            <td>{{$order->order_date->format('H:s, d, M Y')}}</td>
             <td><p class="m-0 border-green-300 border rounded-2xl bg-green-200 text-green-600 py-2 font-semibold px-4 hover:bg-green-300 hover:text-green-700 transition-500">Served</p></td>
         </tr>
         @endforeach

@@ -113,15 +113,28 @@
     <div class="bg-white mb-4 rounded-xl shadow-lg flex md:flex-row flex-col">
       @if($menu_today == null)
 
+       <div class="bg-cover bg-top text-center bg-gradient-to-t bg-blue-400 to bg-green-400  bg-center text-white  object-fill w-full" style="background-image: url(https://assets.kompasiana.com/items/album/2018/04/16/suasana-kantor-24slides-indonesia-3-5ad4a44bcaf7db40dd0deff2.jpg?t=o&v=760);background-position-y: -70px;">
+        <div class="h-full md:p-20 p-8" style="background-image: linear-gradient(0deg,#252525,#27272769) !important;">
+          <p class="font-bold text-2xl uppercase"> Today Breakfast </p>
+          <div class="flex md:flex-row flex-col justify-center mb-8 ">
+            <p class="text-5xl font-bold leading-none capitalize"> no catering schedule today   </p>        
+
+            </div>
+            <p class="text-2xl mb-4 leading-none">Sorry you dont have catering schedule today, Please comeback tommorow  </p>
+             
+          </div>
+         
+
+      </div> 
+
       @else
       <div class="bg-cover bg-top text-center bg-gradient-to-t bg-blue-400 to bg-green-400  bg-center text-white  object-fill w-full" style="background-image: url({{ url('public/'.$menu_today->menu->photos->random()->file)}});background-position-y: -70px;">
         <div class="h-full md:p-20 p-8" style="background-image: linear-gradient(0deg,#252525,#27272769) !important;">
           <p class="font-bold text-2xl uppercase"> Today Breakfast </p>
           <div class="flex md:flex-row flex-col justify-center mb-8">
-            <p class="text-5xl font-bold leading-none "> {{$menu_today->menu->name}}   </p>
-          
+            <p class="text-5xl font-bold leading-none "> {{$menu_today->menu->name}}   </p>         
 
- <p class=" text-xl text-orange-500 leading-7 font-bold border border-orange-300 p-1 px-2 rounded-xl bg-white h-full ml-2  md:mt-0 mt-5">
+              <p class=" text-xl text-orange-500 leading-7 font-bold border border-orange-300 p-1 px-2 rounded-xl bg-white h-full ml-2  md:mt-0 mt-5">
                 <i class="fas fa-star"></i> @if($menu_today->stars != null) {{$menu_today->stars}} Star  @endif
               </p>
            
@@ -140,20 +153,25 @@
    
  @if($menu_tomorrow == null)
 
-      @else
-
-     
-     <div class="bg-cover bg-top w-full md:w-1/4 bg-gradient-to-t bg-blue-400 to bg-green-400 bg-center text-white  object-fill" style="background-image: url({{ url('public/'.$menu_tomorrow->menu->photos->random()->file)}});">
+       <div class="bg-cover bg-top w-full md:w-1/4 bg-gradient-to-t bg-blue-400 to bg-green-400 bg-center text-white  object-fill" style="background-image: url(https://assets.kompasiana.com/items/album/2018/04/16/suasana-kantor-24slides-indonesia-3-5ad4a44bcaf7db40dd0deff2.jpg?t=o&v=760});">
       <div class=" p-4 h-full px-10 grid grid-rows-4" style="background-image: linear-gradient(60deg,#252525,#27272769) !important;">
         <p class="font-bold text-lg uppercase mb-8 border-b-2 "> Tomorrow Breakfast </p>
-        <p class="text-4xl font-bold row-span-2"> {{$menu_tomorrow->menu->name}}</p>
-        <p class="text-4xl font-bold"> 
-          <div class=" text-xl text-orange-500 leading-7 font-bold border border-orange-300 p-1 px-2 rounded-xl bg-white">
-            <i class="fas fa-star"></i> @if($menu_tomorrow->stars != null){{$menu_tomorrow}} Star  @endif
-          </div></p>      
+        <p class="text-4xl font-bold row-span-2 capitalize"> no catering schedule for tomorrow </p>
+         
       </div>
 
-        </div> <!-- container -->
+        </div> 
+
+      @else
+     
+     <div class="bg-cover bg-top w-full md:w-1/4 bg-gradient-to-t bg-blue-400 to bg-green-400 bg-center text-white  object-fill" style="background-image: url(https://assets.kompasiana.com/items/album/2018/04/16/suasana-kantor-24slides-indonesia-3-5ad4a44bcaf7db40dd0deff2.jpg?t=o&v=760});">
+      <div class=" p-4 h-full px-10 grid grid-rows-4" style="background-image: linear-gradient(60deg,#252525,#27272769) !important;">
+        <p class="font-bold text-lg uppercase mb-8 border-b-2 "> Tomorrow Breakfast </p>
+        <p class="text-4xl font-bold row-span-2 capitalize"> no catering schedule for tomorrow </p>
+         
+      </div>
+
+        </div> 
         @endif
       </div>
     </div>
@@ -171,17 +189,31 @@
         @php
         $order = $user->orders->where('order_date',$start_date->format('Y-m-d'))->first();
         @endphp
-        <div class="flex items-center bg-gradient-to-r from-transparent to-gray-200 border-orange-500 gap-2 p-2 rounded border-l-4 mb-2">
-          <div class="ml-2 text-xl text-blue-700 leading-7 font-bold bg-blue flex-initial">
+        
+          @if(in_array($start_date->day, $off_date))
+          <div class="flex items-center bg-gradient-to-r from-red-400 to-red-200 border-orange-500 gap-2 p-2 rounded border-l-4 mb-2">
+          <div class=" text-center w-8 text-xl text-white leading-7 font-bold flex-initial">
+            {{$i}}
+          </div>            
+          <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto uppercase font-semibold">
+            <a href="#">day off</a>
+          </div>
+          @elseif($order == null)
+          <div class="flex items-center bg-gradient-to-r from-transparent to-gray-200 border-gray-500 gap-2 p-2 rounded border-l-4 mb-2">
+          <div class=" text-center w-8 text-xl text-gray-700 leading-7 font-bold flex-initial">
             {{$i}}
           </div>
-          @if(in_array($start_date->day, $off_date))
-          Off Date
-          @elseif($order == null)
-          None
+          <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto uppercase font-semibold">
+            <a href="#">empty schedule</a>
+          </div>
           @else    
+           <div class="flex items-center bg-gradient-to-r from-transparent to-blue-200 border-blue-500 gap-2 p-2 rounded border-l-4 mb-2">
+          <div class=" text-center w-8 text-xl text-blue-400 leading-7 font-bold flex-initial">
+            {{$i}}
+          </div>
+
           <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto">
-            <a href="https://laravel.com/docs">{{$order->menu->name}}</a>
+            <a href="#">{{$order->menu->name}}</a>
           </div>
           <img src="{{ url('public/'.$order->menu->photos->random()->file)}}" class="object-cover h-8 w-8 rounded flex-initial">
           @endif
@@ -194,6 +226,65 @@
           My Feed & Review
         </div>
         @foreach($reviews as $review)
+        @if($review->review == null)
+        @php continue; @endphp
+        @endif
+        @if($loop->iteration % 2 != 0)
+        <div class=" rounded-lg bg-gradient-to-r from-white to-purple-50 shadow mb-4 flex ">
+          <img src="{{ url('public/'.$review->menu->photos->random()->file)}}" class="object-cover h-10 w-10 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-l-lg">
+          <div class="flex flex-col p-3 flex-auto">
+            <div class="flex items-center">           
+              <div class=" text-lg flex-auto text-gray-600 leading-7 font-semibold"><a href="https://laravel.com/docs">{{$review->menu->name}}</a>
+                <div class=" text-sm font-semibold text-indigo-700 -mt-2">
+                  {{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}
+                </div>
+              </div>
+              <div class=" text-xl text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl">
+                <i class="fas fa-star"></i> {{$review->stars}}
+              </div>
+            </div>        
+            <div >
+              <div class="mt-2 text-sm text-gray-500">
+                {{$review->review}}
+              </div>           
+              <div class="mt-3 flex items-center">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        {{$loop->iteration}}
+        @else
+        <div class=" rounded-lg bg-gradient-to-r from-white to-purple-50 shadow mb-4 flex flex-row-reverse">
+          <img src="{{ url('public/'.$review->menu->photos->random()->file) }}" class="object-cover h-10 w-10 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-r-lg">
+          <div class="flex flex-col p-3 flex-auto">
+            <div class="flex flex-row-reverse items-center">           
+              <div class=" text-lg flex-auto text-right text-gray-600 leading-7 font-semibold">
+                <a href="https://laravel.com/docs">{{$review->menu->name}}</a>
+                <div class=" text-sm font-semibold text-indigo-700 -mt-2">
+                  {{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}
+                </div>
+              </div>
+              <div class=" text-xl text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl mr-2">
+                <i class="fas fa-star"></i> {{$review->stars}}
+              </div>
+            </div>        
+            <div>
+              <div class="mt-2 text-sm text-gray-500 text-right">
+                {{$review->review}}
+              </div>           
+              <div class="mt-3 flex items-center">
+
+              </div>           
+            </div>
+          </div>
+        </div>
+         {{$loop->iteration}}
+        @endif
+        @endforeach
+
+         <span id="pc1" class="contents hidden"> 
+           @foreach($reviews as $review)
         @if($review->review == null)
         @php continue; @endphp
         @endif
@@ -248,9 +339,33 @@
         </div>
         @endif
         @endforeach
-        <div class="w-full text-center  animate transform transition-transform hover:translate-y-1 duration-1000">
+         </span>
+        <button onclick="pcsh1()" class="contents cursor-pointer" id="pc2">
+            <div class="bg-gray-500 col-start-4 col-end-7 rounded-full my-4 mr-auto shadow-md animate transform transition-transform hover:translate-y-2 hover:bg-gray-700 duration-1000 text-center mx-auto cursor-pointer w-4/12 py-3">
+              <h3 class="font-semibold text-white "><i class="fas fa-chevron-down text-4xl"></i></h3>          
+
+            </div>
+          </button> 
+
+          <div class="hidden contents" id="pc3">
+            <button onclick="pcsh1()" class="contents cursor-pointer">
+              <div class="bg-gray-500 col-start-4 col-end-7 rounded-full my-4 mr-auto shadow-md animate transform transition-transform hover:-translate-y-2 hover:bg-gray-700 duration-1000 mx-auto text-center cursor-pointer  w-4/12 py-3">
+                <h3 class="font-semibold text-white "><i class="fas fa-chevron-up text-4xl"></i></h3>  
+
+              </div>
+            </button>
+            <a href="{{route('admin.index.review')}}" class="contents cursor-pointer">
+              <div class="bg-orange-500 col-start-4 col-end-7 rounded-full my-4 mx-auto shadow-md animate transform transition-transform hover:translate-y-2 hover:bg-orange-700 duration-1000 w-4/12 py-3 text-center cursor-pointer">
+
+                <h3 class="font-semibold text-xl mb-1 text-white">See All</h3> 
+
+              </div>
+            </a>  
+          </div>
+
+       <!--  <div class="w-full text-center  animate transform transition-transform hover:translate-y-1 duration-1000">
           <a href="#kemanaya" class="bg-gray-700 px-6 py-2 rounded-lg  shadow-lg text-white opacity-75 transform hover:opacity-100  focus:border-gray-200 hover:translate-x-2  "> Show More</a>
-        </div>
+        </div> -->
       </div>
 
 
@@ -259,6 +374,23 @@
 
     </div>
   </div>
+      <script type="text/javascript">
+        function pcsh1() {
+        var x = document.getElementById("pc1");
+        var x1 = document.getElementById("pc2");
+        var x2 = document.getElementById("pc3");
+        if (x.classList.contains("hidden")) {
+          x.classList.remove("hidden");
+          x1.classList.add("hidden");
+          x2.classList.remove("hidden");
+        } else {
+          x.classList.add("hidden");
+          x1.classList.remove("hidden");
+          x2.classList.add("hidden");
+        }
+      }
+
+    </script>
     <script type="text/javascript">
       $(':radio').change(function() {
       });

@@ -35,53 +35,32 @@
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ asset('public/js/app.js') }}" defer></script>
-    <style type="text/css">
-        body,table{
-            font-family: 'Poppins', sans-serif;
-            background-color: transparent;
-        }
-        
-        .bootstrapiso .form-control{
-              height: min-content;
-        }
-        
-           .modal {
-          transition: opacity 0.25s ease;
-        }
-        body.modal-active {
-          overflow-x: hidden;
-          overflow-y: visible !important;
-        }
+    <link rel="stylesheet" href="{{ asset('resources/css/style.css') }}">
 
-        .notify{  
-          position:fixed;
-          top:0px;
-          width:100%;
-          height:0;  
-          box-sizing:border-box;
-          color:white;  
-          text-align:center;
-          background:rgba(0,0,0,.6);
-          overflow:hidden;
-          box-sizing:border-box;
-          transition:height .2s;
-        }
-
-        #notifyType:before{
-          display:block;
-          margin-top:22px; 
-
-        }
-
-        .active{  
-          height:70px;
-        }
-        .fixed-table-body{
-          border-radius: 12px;
-        }
-    </style>
 </head>
-<body class="antialiased">
+<body class="antialiased" onload="loader24();notifu()">
+    <div id="loader-bk" >
+    <div id="loader">
+      <div class="spinner">
+        <svg version="1.1" id="L3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+        <circle fill="none" stroke="#fff" stroke-width="4" cx="50" cy="50" r="44" style="opacity:0.7;"/>
+        <circle fill="#fff" stroke="#5294E3" stroke-width="3" cx="8" cy="54" r="6" >
+         <animateTransform
+         attributeName="transform"
+         dur="2s"
+         type="rotate"
+         from="0 50 48"
+         to="360 50 52"
+         repeatCount="indefinite" />
+
+       </circle>
+     </svg>
+      </div>
+
+    </div>
+  </div>
+   <div style="display:none;" id="myDiv" class="animate-bottom contents">
     <div class="min-h-screen bg-gray-100" >
         <div class="grid grid-cols-10 gap-1 ">
            <!--  <div class="col-span-0 md:col-span-2 hidden md:block ">
@@ -193,28 +172,47 @@
 </div> -->
 
 <!-- <div class="col-span-10 md:col-span-8"> -->
-<div class="col-span-10 md:col-span-10">
-    @livewire('navigation-dropdown')
-    <header class="bg-white shadow">
+ 
+    <div class="col-span-10 md:col-span-10">
+      @livewire('navigation-dropdown')
+      <header class="bg-white shadow">
         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            {{ $header }}
+          {{ $header }}
         </div>
-    </header>
+      </header>
 
-    <!-- Page Content -->
+      <!-- Page Content -->
 
-    <main class="bg-gray-100 ">
-     
+      <main class="bg-gray-100 ">
+
         {{ $slot }}
-    </main>
-</div>
+      </main>
+    </div>
+  </div>
+
 </div>
 </div>
 
 @stack('modals')
 
 @livewireScripts
+<script type="text/javascript">
+  
+var myVar;
 
+function loader24() {
+  myVar = setTimeout(showPage, 300);
+}
+
+function showPage() {
+document.getElementById("loader-bk").style.display = "none";
+  document.getElementById("loader").style.display = "none";
+  
+  document.getElementById("myDiv").style.display = "block";
+}
+
+
+</script>
 <script src="{{ asset('resources/js/modal.js') }}"></script>
 <script src="{{ asset('resources/js/notif.js') }}"></script>
 </body>

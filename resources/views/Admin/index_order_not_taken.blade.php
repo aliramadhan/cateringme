@@ -76,7 +76,7 @@
                 <a> Star with Clav</a></div>
             </td>
             <td>{{$employee['employee']->name}}</td>
-            <td>{{$employee['date']}} / 17 Jan 2021</td>
+            <td>{{$employee['date']->format('H:s, d, M Y')}}</td>
             <td><p class="m-0 border-red-300 border rounded-2xl bg-red-200 text-red-600 py-2 font-semibold px-4 hover:bg-red-300 hover:text-red-700 transition-500">Not Served</p></td>
         </tr>
         @endforeach

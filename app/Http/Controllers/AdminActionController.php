@@ -257,7 +257,7 @@ class AdminActionController extends Controller
 		}
 		else{
 			$user->can_order = 1;
-			$message = "Feature can order catering has been enabl,ed for ".$user->name;
+			$message = "Feature can order catering has been enabled for ".$user->name;
 		}
 		$user->save();
 

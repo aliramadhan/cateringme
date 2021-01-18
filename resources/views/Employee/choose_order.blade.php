@@ -31,7 +31,7 @@
     
         @if (session('message'))
           <script type="text/javascript">
-            window.onload = function(){
+           function notifu(){
             document.getElementById('success').click();
             var scriptTag = document.createElement("script");        
             document.getElementsByTagName("head")[0].appendChild(scriptTag);
@@ -45,7 +45,7 @@
           @endif
           @if($errors->any())
           <script type="text/javascript">
-            window.onload = function(){
+           function notifuct(){
             document.getElementById('failure').click();
             var scriptTag = document.createElement("script");        
             document.getElementsByTagName("head")[0].appendChild(scriptTag);
