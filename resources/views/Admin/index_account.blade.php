@@ -33,7 +33,7 @@
         }          
       </script>
         <style type="text/css">  .success:before{
-          Content:"The catering menu cannot be left blank";
+          Content:"{{ implode('', $errors->all(':message')) }}";
         }</style>
        
         @endif
@@ -155,7 +155,7 @@
 
 
 
-          <div class="grid grid-flow-row md:grid-cols-3 grid-cols-1 gap-4  items-center text-center mt-10 h-max mx-auto"   style="height: fit-content;">      
+          <div class="grid grid-flow-row md:grid-cols-3 grid-cols-1 gap-8  items-center text-center mt-6 h-max mx-auto"   style="height: fit-content;">      
 
             <ul id="myUL" class="contents">         
              @foreach($users as $user)

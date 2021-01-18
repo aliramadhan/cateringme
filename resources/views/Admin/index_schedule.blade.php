@@ -1,7 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
+      <div class="notify z-50 font-semibold absolute left-0"><span id="notifyType" class=""></span></div>
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Manage Off Date') }}
+            {{ __('Manage Schedule Off ') }}
         </h2>
     </x-slot>
      <link rel="stylesheet" href="{{ asset('resources/css/date.css') }}">
@@ -22,14 +23,36 @@
             opacity: 1;
         }
     </style>
-    @if (session('message'))
-    <div class="mb-4 font-medium text-sm text-green-600">
-        {{ session('message') }}
-    </div>
-    @endif
-    @if($errors->any())
-    {{ implode('', $errors->all('<div>:message</div>')) }}
-    @endif
+      <div id="success" class="invisible absolute"></div>
+       <div id="failure" class="invisible absolute"></div>
+      
+          @if (session('message'))
+            <script type="text/javascript">
+              window.onload = function(){
+              document.getElementById('success').click();
+              var scriptTag = document.createElement("script");        
+              document.getElementsByTagName("head")[0].appendChild(scriptTag);
+            }          
+          </script>
+          <style type="text/css">  .success:before{
+            Content:" {{ session('message') }}";
+          }</style>
+           
+                
+            @endif
+            @if($errors->any())
+            <script type="text/javascript">
+              window.onload = function(){
+              document.getElementById('failure').click();
+              var scriptTag = document.createElement("script");        
+              document.getElementsByTagName("head")[0].appendChild(scriptTag);
+            }          
+          </script>
+            <style type="text/css">  .success:before{
+              Content:"  {{ implode('', $errors->all(':message')) }}";
+            }</style>
+           
+            @endif
     <div class="py-12">
 
        <div class="max-w-7xl mx-auto  lg:px-8">
@@ -90,6 +113,7 @@
 
 </div>
 </x-app-layout>
+
 <script type="text/javascript">
     $('.month-select').change(function() {
         var date = $(this).val();

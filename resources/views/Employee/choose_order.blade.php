@@ -1,19 +1,62 @@
 <x-app-layout>
+   <div class="notify z-50 font-semibold absolute left-0"><span id="notifyType" class=""></span></div>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Create Order') }}
         </h2>
     </x-slot>
    <link rel="stylesheet" href="{{ asset('resources/css/date.css') }}">
+   <style type="text/css">
+     .overlay {
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+      right: 0;
+      background-color: #008CBA;
+      overflow: hidden;
+      width: 100%;
+      height:0;
+      transition: .5s ease;
+    }
 
-@if($errors->any())
-{{ implode('', $errors->all('<div>:message</div>')) }}
-@endif
-@if (session('message'))
-<div class="mb-4 font-medium text-sm text-green-600">
-    {{ session('message') }}
-</div>
-@endif
+    .container:hover .overlay {
+      bottom: 0;
+      height: 100%;
+    }
+   </style>
+
+
+    <div id="success" class="invisible absolute"></div>
+     <div id="failure" class="invisible absolute"></div>
+    
+        @if (session('message'))
+          <script type="text/javascript">
+            window.onload = function(){
+            document.getElementById('success').click();
+            var scriptTag = document.createElement("script");        
+            document.getElementsByTagName("head")[0].appendChild(scriptTag);
+          }          
+        </script>
+        <style type="text/css">  .success:before{
+          Content:" {{ session('message') }}";
+        }</style>
+         
+              
+          @endif
+          @if($errors->any())
+          <script type="text/javascript">
+            window.onload = function(){
+            document.getElementById('failure').click();
+            var scriptTag = document.createElement("script");        
+            document.getElementsByTagName("head")[0].appendChild(scriptTag);
+          }          
+        </script>
+          <style type="text/css">  .success:before{
+            Content:"  {{ implode('', $errors->all('<div>:message</div>')) }}";
+          }</style>
+         
+          @endif
+
 <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
         {{ __('
@@ -59,7 +102,7 @@
         </div>
       </div>
 
-      <div class="relative h-full overflow-y-auto overflow-x-hidden ">
+      <div class="relative h-full  overflow-y-hidden overflow-x-hidden ">
         <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide" >
           
             <div class="grid grid-rows-7 gap-1 w-full ">  
@@ -124,8 +167,8 @@
               
               @foreach($menus as $menu)
               <div class=" text-2xl col-span-2 md:col-span-1">
-                <button type="submit" class="hover:opacity-100 opacity-75 duration-500 transition ease-in-out rounded-xl" name="menu" value="{{$menu->menu_code}}">
-               <div class="relative flex flex-col min-w-0 break-words bg-white w-full shadow-xl rounded-lg @if($loop->iteration == 1) bg-pink-600 @else bg-blue-600 @endif"><img alt="..." src="{{url('public/'.$menu->photos->random()->file)}}" class="w-full align-middle h-64 rounded-t-lg object-cover"><blockquote class="relative p-8 mb-4"><svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 95" class="absolute left-0 w-full block" style="height:95px;top:-94px"><polygon points="-30,95 583,95 583,65" class="@if($loop->iteration == 1) text-pink-600 @else text-blue-600 @endif fill-current"></polygon></svg><h4 class="text-3xl font-bold text-white">{{$menu->name}}</h4><p class="text-md font-light mt-2 text-white">{{$menu->desc}}  
+                <button type="submit" class="hover:opacity-100 opacity-75 duration-500 transition w-full ease-in-out rounded-xl" name="menu" value="{{$menu->menu_code}}">
+               <div class="relative flex flex-col min-w-0 break-words bg-white w-full shadow-xl rounded-lg @if($loop->iteration == 1) bg-pink-600 @else bg-blue-600 @endif"><img alt="..." src="{{url('public/'.$menu->photos->random()->file)}}" class="w-full align-middle h-64 rounded-t-lg object-cover"><blockquote class="relative p-8 mb-4"><svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 95" class="absolute left-0 w-full block" style="height:95px;top:-94px"><polygon points="-30,95 583,95 583,65" class="@if($loop->iteration == 1) text-pink-600 @else text-blue-600 @endif fill-current"></polygon></svg><h4 class="text-3xl font-bold text-white">{{$menu->name}}</h4><p class="text-md font-light mt-2 text-white overflow-ellipsis overflow-hidden h-32 leading-none">{{$menu->desc}}  
                 <br>
                 @for($i = 1; $i <= $menu->rate; $i++) <i class="fas fa-star"></i> @endfor
                     </p></blockquote></div>
@@ -137,7 +180,7 @@
             </div>
 
             <div class=" text-xl row-span-1 text-left pointer px-6">
-               <button  onclick="previousSlide()" id="btn-slide-disy" class="ml-2 bg-gray-700 px-6 py-2 rounded-lg text-white opacity-75 hover:opacity-100 duration-1000 focus:border-gray-200"><i class="fas fa-arrow-left"></i> Back</button>
+               <button  onclick="previousSlide()" id="btn-slide-disy" class="ml-2 bg-gray-700 px-6 py-2 rounded-lg text-white opacity-75 hover:opacity-100 duration-1000 focus:border-none><i class="fas fa-arrow-left"></i> Back</button>
             </div>
 
           </div>

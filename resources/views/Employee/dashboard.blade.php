@@ -3,7 +3,11 @@
   @if($errors->any())
   {{ implode('', $errors->all('<div>:message</div>')) }}
   @endif
-
+  <style type="text/css">
+    .pagination-info{
+            color: #fff;
+          }
+  </style>
   @if (session('message'))
   <div class="max-w-7xl mx-auto lg:px-8 bg-white border-t-4 rounded-b text-teal-darkest px-4 py-3 shadow-md my-2 " role="alert">
     <div class="flex">
@@ -110,7 +114,7 @@
       @if($menu_today == null)
 
       @else
-      <div class="bg-cover bg-top text-center bg-gradient-to-t bg-blue-400 to bg-green-400  bg-center text-white  object-fill" style="background-image: url({{ url('public/'.$menu_today->menu->photos->random()->file)}});background-position-y: -70px;">
+      <div class="bg-cover bg-top text-center bg-gradient-to-t bg-blue-400 to bg-green-400  bg-center text-white  object-fill w-full" style="background-image: url({{ url('public/'.$menu_today->menu->photos->random()->file)}});background-position-y: -70px;">
         <div class="h-full md:p-20 p-8" style="background-image: linear-gradient(0deg,#252525,#27272769) !important;">
           <p class="font-bold text-2xl uppercase"> Today Breakfast </p>
           <div class="flex md:flex-row flex-col justify-center mb-8">

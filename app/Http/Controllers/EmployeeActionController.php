@@ -84,7 +84,7 @@ class EmployeeActionController extends Controller
                 $input = "<label class='label flex-auto  duration-1000'>
                     <input class='label__checkbox  duration-1000' type='checkbox' value='".$now->format('Y-m-d')."' name='dates[]'>
                     <span class='label__text font-base'>
-                        <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient( 135deg, #FCCF31 10%, #F55555 100%);'>
+                        <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: radial-gradient( circle 422px at -10.3% 110.7%, rgba(219,76,180,1) 9.5%, rgba(231,119,209,1) 50.8%, rgba(255,180,241,1) 88.5% );'>
                               <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col ' style='font-family: Poppins, sans-serif;'>
                            
                                 <div class='font-semibold text-4xl'>".$now->format('d')."</div>

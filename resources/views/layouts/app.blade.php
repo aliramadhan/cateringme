@@ -44,9 +44,7 @@
         .bootstrapiso .form-control{
               height: min-content;
         }
-        .pagination-info{
-            color: #fff;
-          }
+        
            .modal {
           transition: opacity 0.25s ease;
         }
@@ -77,6 +75,9 @@
 
         .active{  
           height:70px;
+        }
+        .fixed-table-body{
+          border-radius: 12px;
         }
     </style>
 </head>
@@ -201,7 +202,9 @@
     </header>
 
     <!-- Page Content -->
+
     <main class="bg-gray-100 ">
+     
         {{ $slot }}
     </main>
 </div>

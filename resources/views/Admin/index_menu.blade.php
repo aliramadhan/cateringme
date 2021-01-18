@@ -7,36 +7,36 @@
     </x-slot>
       
     <link rel="stylesheet" href="{{asset('resources/css/Foodcheckbox.css')}}" />
-   <div id="success" class="invisible absolute"></div>
-   <div id="failure" class="invisible absolute"></div>
-  
-      @if (session('message'))
-        <script type="text/javascript">
-          window.onload = function(){
-          document.getElementById('success').click();
-          var scriptTag = document.createElement("script");        
-          document.getElementsByTagName("head")[0].appendChild(scriptTag);
-        }          
-      </script>
-      <style type="text/css">  .success:before{
-        Content:" {{ session('message') }}";
-      }</style>
-       
-            
-        @endif
-        @if($errors->any())
-        <script type="text/javascript">
-          window.onload = function(){
-          document.getElementById('failure').click();
-          var scriptTag = document.createElement("script");        
-          document.getElementsByTagName("head")[0].appendChild(scriptTag);
-        }          
-      </script>
+      <div id="success" class="invisible absolute"></div>
+     <div id="failure" class="invisible absolute"></div>
+    
+        @if (session('message'))
+          <script type="text/javascript">
+            window.onload = function(){
+            document.getElementById('success').click();
+            var scriptTag = document.createElement("script");        
+            document.getElementsByTagName("head")[0].appendChild(scriptTag);
+          }          
+        </script>
         <style type="text/css">  .success:before{
-          Content:"The catering menu cannot be left blank";
+          Content:" {{ session('message') }}";
         }</style>
-       
-        @endif
+         
+              
+          @endif
+          @if($errors->any())
+          <script type="text/javascript">
+            window.onload = function(){
+            document.getElementById('failure').click();
+            var scriptTag = document.createElement("script");        
+            document.getElementsByTagName("head")[0].appendChild(scriptTag);
+          }          
+        </script>
+          <style type="text/css">  .success:before{
+            Content:"  aa";
+          }</style>
+         
+          @endif
 
     <div class="py-12">
 
