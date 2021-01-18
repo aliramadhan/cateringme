@@ -13,11 +13,11 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-jet-nav-link>
 
                     @if(auth()->user()->role == 'Admin')
+                        <x-jet-nav-link href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-jet-nav-link>
                         <x-jet-nav-link href="{{ route('admin.index.account') }}" :active="request()->routeIs('admin.index.account')">
                             {{ __('Manage Account') }}
                         </x-jet-nav-link>
@@ -69,6 +69,9 @@
                       
 
                     @elseif(auth()->user()->role == 'Catering')
+                        <x-jet-nav-link href="{{ route('catering.dashboard') }}" :active="request()->routeIs('catering.dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-jet-nav-link>
                         <x-jet-nav-link href="{{ route('catering.index.menu') }}" :active="request()->routeIs('catering.index.menu')">
                             {{ __('Manage Menu') }}
                         </x-jet-nav-link>
@@ -79,6 +82,9 @@
                             {{ __('Report Menu') }}
                         </x-jet-nav-link>
                     @else
+                        <x-jet-nav-link href="{{ route('employee.dashboard') }}" :active="request()->routeIs('employee.dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-jet-nav-link>
                         <x-jet-nav-link href="{{ route('employee.choose.order') }}" :active="request()->routeIs('employee.choose.order')">
                             {{ __('Create Order') }}
                         </x-jet-nav-link>
