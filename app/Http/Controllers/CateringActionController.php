@@ -21,7 +21,7 @@ class CateringActionController extends Controller
 		$now = Carbon::now();
 		$prev_month = Carbon::parse($now->format('Y-m'))->subMonth(1);
 		$menus = $user->menus->take(10);
-		$menu_today = Menu::where('show',1)->get();
+		$menu_today = Menu::all();
 		$total_review = 0;
 		$stars = 0;
 		$prev_stars = 0;

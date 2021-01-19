@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\AdminActionController;
 use \App\Http\Controllers\CateringActionController;
 use \App\Http\Controllers\EmployeeActionController;
-
+use \App\Notifications\TeleNotif;
+use Illuminate\Support\Facades\Notification;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +19,11 @@ use \App\Http\Controllers\EmployeeActionController;
 
 Route::get('/', function () {
     return redirect()->route('login');
+});
+Route::get('/tes_notif', function () {
+    $tes = 'tes';
+
+    return Notification::send('tes',new TeleNotif());
 });
 
 Route::middleware(['auth:sanctum'])->get('/dashboard', function () {
