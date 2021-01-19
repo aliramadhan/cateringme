@@ -48,7 +48,7 @@
       <div class="px-4 py-2 border-b border-gray-200 flex justify-between items-center bg-white sm:py-4 sm:px-6 sm:items-baseline">
         <div class="flex-shrink min-w-0 flex items-center">
           <h3 class="flex-shrink min-w-0 font-regular text-base md:text-lg leading-snug truncate">
-            Selection of dates for catering
+            Selection of schedule for order
           </h3>
         </div>
         <div class="ml-4 flex flex-shrink-0 items-center">
@@ -80,6 +80,8 @@
         </div>
       </div>
  
+      <form action="{{route('admin.store.schedule')}}" method="POST" enctype="multipart/form-data" class=" row-span-4">
+      @csrf
 
       <div class="relative h-full  overflow-y-hidden overflow-x-hidden ">
         <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide" >
@@ -101,8 +103,6 @@
             </div>   
         </div>
          
-            <form action="{{route('employee.store.order')}}" method="POST" enctype="multipart/form-data" class=" row-span-4">
-            @csrf
 
             <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5 mt-4">                      
                <div id="div1" class=" duration-1000 targetDiv bg-gray-50 justify-content content-center text-center rounded-lg pt-4"> 
@@ -127,39 +127,28 @@
 
             <div class="grid grid-cols-2 md:grid-cols-4 row-span-2 md:row-span-1 w-full overflow-y-auto">
               
-              <ul id="myUL" class="contents">         
-                <?php 
-                for ($i=0; $i < 10; $i++) { 
-                
-                
-                ?>
-               
+              <ul id="myUL" class="contents">   
+                @foreach($menus as $menu) 
                 <li>
-
-                 <input type="checkbox" id="{{$i}}" class="schedule-menu hidden" >
-                 <label for="{{$i}}">
-
-                  <div class="flex flex-col text-center mb-6 gap-2 border-2 border-gray-700 border-opacity-25 h-auto top-0 w-full mx-auto check-resize bg-gray-700  p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500">
-
-                    <div>
-                      <span>  
-                        <div class="  text-xl font-semibold text-white capitalize mt-3 absolute  px-1 py-1 bg-gray-700 rounded-r-lg truncate w-3/4">Pizza     {{$i}}              
-
-                        </div>
-                      </span>
-                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Pepperoni_pizza.jpg/350px-Pepperoni_pizza.jpg" alt="" class="rounded-xl  object-cover w-full h-44">
-
-                    </div>
-                    <div class=" text-base font-bold text-gray-400 text-left px-3 ">Description Pizza {{$i}}</div>
-                    <div class=" text-base font-base text-gray-400 text-left px-3  ">des</div>  
-                    <div class=" text-base font-semibold text-purple-400 text-right px-3">From : cat</div> 
-
-                  </div>           
-                </label>
-              </li>
-             <?php } ?>
+                  <input type="checkbox" id="{{$menu->id}}" name="menu[]" class="schedule-menu hidden" >
+                  <label for="{{$menu->id}}">
+                    <div class="flex flex-col text-center mb-6 gap-2 border-2 border-gray-700 border-opacity-25 h-auto top-0 w-full mx-auto check-resize bg-gray-700  p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500">
+                      <div>
+                        <span>  
+                          <div class="  text-xl font-semibold text-white capitalize mt-3 absolute  px-1 py-1 bg-gray-700 rounded-r-lg truncate w-3/4">{{$menu->name}}             
+                          </div>
+                        </span>
+                        <img src="{{url('public/'.$menu->photos->random()->file)}}" alt="" class="rounded-xl  object-cover w-full h-44">
+                      </div>
+                      <div class=" text-base font-bold text-gray-400 text-left px-3 ">Description :</div>
+                      <div class=" text-base font-base text-gray-400 text-left px-3  ">{{$menu->desc}}</div>  
+                      <div class=" text-base font-semibold text-purple-400 text-right px-3">From : {{$menu->catering->name}}</div> 
+                    </div>           
+                  </label>
+                </li>
+                @endforeach
+                <input type="submit" name="submit">
             </form>
-            @csrf
           </ul>
               
             </div>
@@ -180,6 +169,13 @@
 </x-app-layout>
 
 <script type="text/javascript">
+
+    $('.schedule-menu').on('change', function (e) {
+        if($('.schedule-menu:checked').length > 2) {
+            $(this).prop('checked', false);
+            alert("allowed only 2");
+        }
+    });
     $('.month-select').change(function() {
         var date = $(this).val();
         $.ajaxSetup({

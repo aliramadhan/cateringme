@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use \App\Models\User;
 use \App\Models\Order;
 use \App\Models\Menu;
-use \App\Models\OffDate;
+use \App\Models\ScheduleMenu;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RegisterSuccessfully;
@@ -23,7 +23,7 @@ class AdminActionController extends Controller
 		$now = Carbon::now();
 		$employees = User::where('role','Employee')->get();
 		$yesterday = Carbon::now()->subDay();
-		$menus = Menu::where('show',1)->get();
+		$menus = Menu::get();
 		$reviews = Order::orderBy('order_date','desc')->get();
 		$orders = Order::where('order_date',$now->format('Y-m-d'))->get();
 
@@ -151,54 +151,37 @@ class AdminActionController extends Controller
 	}
 	public function index_schedule()
 	{
+		//declare variable
 		$now = Carbon::now();
 		$start = $now->startOfMonth();
+		$menus = Menu::all();
 		$months = new Collection;
 		for ($i=0; $i < 6; $i++, $start->addMonth()) { 
 			$months->push(Carbon::parse($start->format('Y-m')));
 		}
-		return view('Admin.index_schedule',compact('months'));
+		return view('Admin.index_schedule',compact('months','menus'));
 	}
 	public function get_month_schedule(Request $request)
 	{
 		//declare variable
 		$date = Carbon::parse($request->month);
 		$start = $date->startOfMonth();
-		$off_date = OffDate::where('year',$start->year)->where('month',$start->month)->first();
 		$total_days = $date->daysInMonth;
 		$days = new Collection;
 		for ($i=1; $i <= $total_days ; $i++, $start->addDay()) { 
-			$input = "
-			<label class='label flex-auto contents duration-1000'>
-	                    <input class='label__checkbox  duration-1000' type='checkbox' value='".$start->format('Y-m-d')."' name='dates[]' >
-	                    <span class='label__text '>
-	                        <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);'>
-	                          <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 p-10 duration-1000' style='font-family: Poppins, sans-serif;'>
-	                       
-	                          	<div class='font-semibold text-4xl mb-2 '>".$start->format('d')."</div>
-	                          	<div class='text-xs font-base'>".$start->format('l')."</div>
-	                          	
-	                          	</i>
-	                        </span>
-	                    </span>
-	                </label>";
-			if ($off_date != null) {
-				if (in_array($start->day, explode(',', $off_date->date_list))) {
-					$input = "<label class='label flex-auto contents duration-1000'>
-			                    <input class='label__checkbox  duration-1000' type='checkbox' checked value='".$start->format('Y-m-d')."' name='dates[]'>
-			                    <span class='label__text '>
-			                    <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);'>
-			                    <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 p-10 duration-1000' style='font-family: Poppins, sans-serif;'>
-			                       
-			                          	<div class='font-semibold text-4xl mb-2 '>".$start->format('d')."</div>
-			                          	<div class='text-xs font-base'>".$start->format('l')."</div>
-			                          	
-			                          	</i>
-			                        </span>
-			                    </span>
-			                </label>";
-				}
-			}
+			$input = "<label class='label flex-auto contents duration-1000'>
+		                <input class='label__checkbox  duration-1000' type='checkbox' value='".$start->format('Y-m-d')."' name='dates[]' >
+		                <span class='label__text '>
+		                    <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);'>
+		                      <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 p-10 duration-1000' style='font-family: Poppins, sans-serif;'>
+		                   
+		                      	<div class='font-semibold text-4xl mb-2 '>".$start->format('d')."</div>
+		                      	<div class='text-xs font-base'>".$start->format('l')."</div>
+		                      	
+		                      	</i>
+		                    </span>
+		                </span>
+		            </label>";
 			$days->push($input);
 		}
 		return $days;
@@ -210,7 +193,7 @@ class AdminActionController extends Controller
             'month' => ['required'],
             'dates' => ['required'],
         ]);
-
+		return dd($request->all());
         //declare variable
         $date_list = [];
         foreach ($request->dates as $date) {

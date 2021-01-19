@@ -8,7 +8,7 @@
             color: #fff;
           }
   </style>
-  @if (session('message'))
+  @if(session('message'))
   <div class="max-w-7xl mx-auto lg:px-8 bg-white border-t-4 rounded-b text-teal-darkest px-4 py-3 shadow-md my-2 " role="alert">
     <div class="flex">
       <svg class="h-6 w-6 text-teal mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg>
@@ -180,25 +180,25 @@
     <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 ">  
       <div class="p-6 px-8 mt-6">       
         <div class="col-span-2 text-2xl text-center mb-6 font-base">          
-          {{Carbon\Carbon::now()->format('F')}} Schedule
+          {{Carbon\Carbon::now()->format('F Y')}} Schedule
         </div>
         @php
-        $start_date = $now->startOfMonth    ();
+        $start_date = $now;
         @endphp
-        @for($i = 1; $i <= $now->daysInMonth;$i++,$start_date->addDay())
+        @for($i = 0 ; $i <= $total_days;$i++,$start_date->addDay())
         @php
         $order = $user->orders->where('order_date',$start_date->format('Y-m-d'))->first();
         @endphp
         
-          @if(in_array($start_date->day, $off_date))
+          @if(!in_array($start_date->day, $schedule))
           <div class="flex items-center bg-gradient-to-r from-red-400 to-red-200 border-orange-500 gap-2 p-2 rounded border-l-4 mb-2">
           <div class=" text-center w-8 text-xl text-white leading-7 font-bold flex-initial">
-            {{$i}}
+            {{$start_date->format('d')}}
           </div>            
           <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto uppercase font-semibold">
             <a href="#">day off</a>
           </div>
-          @elseif($order == null)
+          @elseif($order == null && in_array($start_date->day, schedule))
           <div class="flex items-center bg-gradient-to-r from-transparent to-gray-200 border-gray-500 gap-2 p-2 rounded border-l-4 mb-2">
           <div class=" text-center w-8 text-xl text-gray-700 leading-7 font-bold flex-initial">
             {{$i}}
@@ -206,10 +206,10 @@
           <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto uppercase font-semibold">
             <a href="#">empty schedule</a>
           </div>
-          @else    
-
 
           <div class="flex items-center bg-gradient-to-r from-transparent to-blue-200 border-blue-500 gap-2 p-2 rounded border-l-4 mb-2">
+          @elseif($order != null && in_array($start_date->day, schedule))    
+           <div class="flex items-center bg-gradient-to-r from-transparent to-blue-200 border-blue-500 gap-2 p-2 rounded border-l-4 mb-2">
           <div class=" text-center w-8 text-xl text-blue-400 leading-7 font-bold flex-initial">
             {{$i}}
           </div>

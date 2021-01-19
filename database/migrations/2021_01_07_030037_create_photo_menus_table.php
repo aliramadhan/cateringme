@@ -15,7 +15,7 @@ class CreatePhotoMenusTable extends Migration
     {
         Schema::create('photo_menus', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('menu_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('menu_id')->constrained('menus')->onDelete('cascade');
             $table->text('file');
             $table->timestamps();
         });

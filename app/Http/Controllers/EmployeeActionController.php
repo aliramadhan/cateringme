@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use App\Models\Menu;
-use App\Models\OffDate;
+use App\Models\ScheduleMenu;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -18,20 +18,22 @@ class EmployeeActionController extends Controller
     {
         //declare variable
         $now = Carbon::now();
+        $stop = Carbon::now()->endOfMonth();
+        $total_days = $now->diffInDays($stop);
         $user = auth()->user();
         $menu_today = $user->orders()->where('order_date',$now->format('Y-m-d'))->first();
         $menu_tomorrow = $user->orders()->where('order_date',$now->addDay()->format('Y-m-d'))->first();
         $reviews = Order::orderBy('reviewed_at','desc')->limit(10)->get();
-        $off_date = OffDate::where('year',$now->year)->where('month',$now->month)->first();
-        if($off_date == null){
-            $off_date = ['0'];
+        $schedule = ScheduleMenu::where('year',$now->year)->where('month',$now->month)->first();
+        if ($schedule == null) {
+            $schedule = ['0'];
         }
         else{
-            $off_date = explode(',', $off_date->date_list);
+            $schedule = explode(',', $schedule->date_list);
         }
 
         $now = Carbon::now();
-        return view('Employee.dashboard',compact('menu_today','menu_tomorrow','now','user','off_date','reviews'));
+        return view('Employee.dashboard',compact('menu_today','menu_tomorrow','now','user','schedule','reviews','stop','total_days'));
     }
     public function get_date(Request $request)
     {

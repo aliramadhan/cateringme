@@ -23,6 +23,7 @@ class CreateOrdersTable extends Migration
             $table->text('review')->nullable();
             $table->string('stars', 5)->nullable();
             $table->timestamp('reviewed_at')->nullable()->default(null);
+            $table->float('fee')->default(0);
             $table->timestamps();
         });
     }
