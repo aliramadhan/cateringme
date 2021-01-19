@@ -1,6 +1,6 @@
 @if ($errors->any())
 <script type="text/javascript">
-  window.onload = function(){
+   function modalfu(){
     document.getElementById('modal-click').click();
 
     var scriptTag = document.createElement("script");
