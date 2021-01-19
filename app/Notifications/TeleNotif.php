@@ -16,9 +16,9 @@ class TeleNotif extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(array $arr)
     {
-        //
+        $this->data = $arr;
     }
 
     /**
@@ -47,11 +47,9 @@ class TeleNotif extends Notification
                     ->line('Thank you for using our application!');
     }
 
-    public function toTelegram($notifiable)
-    {
-        return TelegramMessage::create()
-            ->to('@notif_catering')
-            ->content('Tes Notifikasi');
+    public function toTelegram() {
+        return (new TelegramMessage())
+            ->text($this->data['text']);
     }
 
     /**
