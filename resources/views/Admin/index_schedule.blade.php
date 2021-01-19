@@ -14,7 +14,7 @@
       
           @if (session('message'))
             <script type="text/javascript">
-              window.onload = function(){
+              function notifu(){
               document.getElementById('success').click();
               var scriptTag = document.createElement("script");        
               document.getElementsByTagName("head")[0].appendChild(scriptTag);
@@ -28,7 +28,7 @@
             @endif
             @if($errors->any())
             <script type="text/javascript">
-              window.onload = function(){
+              function notifu(){
               document.getElementById('failure').click();
               var scriptTag = document.createElement("script");        
               document.getElementsByTagName("head")[0].appendChild(scriptTag);
@@ -53,29 +53,29 @@
         </div>
         <div class="ml-4 flex flex-shrink-0 items-center">
           <div class="flex items-center text-sm sm:hidden">
-            <button type="button" onclick="previousSlide()" id="btn-slide-dis" class="inline-block rounded-lg font-medium leading-none py-3 px-3 focus:outline-none text-gray-400 hover:text-gray-600 focus:text-gray-600">
+            <a onclick="previousSlide()" id="btn-slide-dis" class="inline-block rounded-lg font-medium leading-none py-3 px-3 focus:outline-none text-gray-400 hover:text-gray-600 focus:text-gray-600">
               <i class="fas fa-calendar-week"></i>
-            </button>
-            <button type="button" onclick="nextSlide()" id="btn-slide-dis-2"  class="inline-block rounded-lg font-medium leading-none py-3 px-3 focus:outline-none text-gray-400 hover:text-gray-600 focus:text-gray-600">
+            </a>
+            <a onclick="nextSlide()" id="btn-slide-dis-2"  class="inline-block rounded-lg font-medium leading-none py-3 px-3 focus:outline-none text-gray-400 hover:text-gray-600 focus:text-gray-600">
               <i class="fas fa-utensils"></i>
-            </button>
+            </a>
           </div>
           <div class="hidden sm:flex items-center text-sm md:text-base">
-            <button type="button" id="btn-slide-disx" onclick="previousSlide()"   class="ml-2 inline-block rounded-lg font-medium leading-none py-2 px-3 focus:outline-none text-gray-500 hover:text-indigo-600 focus:text-indigo-600 ">
+            <a id="btn-slide-disx" onclick="previousSlide()"   class="ml-2 inline-block rounded-lg font-medium leading-none py-2 px-3 focus:outline-none text-gray-500 hover:text-indigo-600 focus:text-indigo-600 ">
               Schedule
-            </button>
-            <button type="button" id="btn-slide-dis-2x"  onclick="nextSlide()"  class="ml-2 inline-block rounded-lg font-medium leading-none py-2 px-3 focus:outline-none text-gray-500 hover:text-indigo-600 focus:text-indigo-600" >          
+            </a>
+            <a id="btn-slide-dis-2x"  onclick="nextSlide()"  class="ml-2 inline-block rounded-lg font-medium leading-none py-2 px-3 focus:outline-none text-gray-500 hover:text-indigo-600 focus:text-indigo-600" >          
               Food Menu
-            </button>
+            </a>
 
           </div>
           <div class="hidden sm:flex sm:items-center">
             <div class="pl-4 pr-4 self-stretch">
             <div class="h-full border-l border-gray-200"></div>
             </div>
-            <button type="button" @click="$refs[`${activeSnippet}ClipboardCode`].select(); document.execCommand('copy')" class="ml-3 text-gray-400 hover:text-gray-500" >
+            <a @click="$refs[`${activeSnippet}ClipboardCode`].select(); document.execCommand('copy')" class="ml-3 text-gray-400 hover:text-gray-500" >
             <i class="fas fa-calendar-week"></i>
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -120,7 +120,7 @@
   
         <div class="absolute inset-0 w-full h-full bg-gray-900 text-white flex text-5xl transition-all ease-in-out duration-1000 transform translate-x-full slide p-6" >
 
-          <div class="flex flex-col  ">
+          <div class="flex flex-col w-full">
             <h3 class="flex-shrink min-w-0 font-regular text-2xl leading-snug truncate text-center mb-6 h-15 ">
              Select Your Menu
             </h3>
@@ -154,7 +154,7 @@
             </div>
 
             <div class=" text-xl row-span-1 text-left pointer px-6 pt-6">
-               <button  onclick="previousSlide()" id="btn-slide-disy" class="ml-2 bg-gray-700 px-6 py-2 rounded-lg text-white opacity-75 hover:opacity-100 duration-1000 focus:border-none><i class="fas fa-arrow-left"></i> Back</button>
+               <a  onclick="previousSlide()" id="btn-slide-disy" class="ml-2 bg-gray-700 px-6 py-2 rounded-lg text-white opacity-75 hover:opacity-100 duration-1000 focus:border-none><i class="fas fa-arrow-left"></i> Back</a>
             </div>
 
           </div>

@@ -11,8 +11,6 @@
 		</h2>
 	</x-slot>
 	<!--Modal-->
-	
-
 
 	<div class="p-6 border-b border-gray-200" style="background-color: #0093E9;
 	background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);">
@@ -87,9 +85,7 @@
 	</div>
 
 
-	<div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 ">  
-
-
+	<div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 ">
 		<div class="p-6 mt-6">       
 			<div class="col-span-2 text-2xl text-center mb-6 font-base">          
 				Employees Feed & Review
@@ -291,6 +287,7 @@
 
 </div>
 </div>
+
 <script type="text/javascript">
 	  function pcsh1() {
     var x = document.getElementById("pc1");
