@@ -107,7 +107,23 @@
             <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5 mt-4">                      
                <div id="div1" class=" duration-1000 targetDiv bg-gray-50 justify-content content-center text-center rounded-lg pt-4"> 
                   <h1 id="date-month" class=" text-center"></h1>
-                  <div id="showresults">     
+                  <div id="showresults">
+                    @for($i = 1; $i <= $start_date->daysInMonth; $i++, $start_date->addDay())
+                      @php
+                        $schedule = \App\Models\ScheduleMenu::where('date',$start_date->format('Y-m-d'))->first();
+                      @endphp
+                      <label class='label flex-auto contents duration-1000'>
+                        <input class='label__checkbox duration-1000' type='checkbox' value="{{$start_date->format('Y-m-d')}}" name='dates[]' >
+                        <span class='label__text '>
+                          <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient(@if($schedule == null) 160deg, #0093E9 0%, #80D0C7 100% @else 135deg, #FCCF31 10%, #F55555 100% @endif);'>
+                            <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 p-10 duration-1000' style='font-family: Poppins, sans-serif;'>
+                              <div class='font-semibold text-4xl mb-2 '>{{$start_date->format('d')}}</div>
+                              <div class='text-xs font-base'>{{$start_date->format('l')}}</div>
+                            </i>
+                          </span>
+                        </span>
+                      </label>
+                    @endfor  
                   </div>
               </div>
           </div>

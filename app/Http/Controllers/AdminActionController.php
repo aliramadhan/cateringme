@@ -127,48 +127,21 @@ class AdminActionController extends Controller
         $affected = DB::table('menus')->update(['prize' => $request->prize]);
         return redirect()->back()->with(['message' => 'Menu Prize updated succesfully.']);
 	}
-	public function scheduled_menu(Request $request)
-	{
-		//Validation Request
-		$this->validate($request, [
-            'show' => ['required'],
-        ]);
-
-		//reset show menu
-		$reset = DB::table('menus')->update(array('show' => 0));
-
-        //insert into database
-		DB::beginTransaction();
-		try {
-			if($request->show == null){
-				//do something if null
-			}
-			else{
-				foreach ($request->show as $show) {
-					$menu = Menu::where('menu_code',$show)->first();
-					$menu->show = 1;
-					$menu->save();
-				}
-			}
-		} catch (\Exception $e) {
-		    DB::rollback();
-        	return redirect()->back()->withInputs()->withErrors(['message' => 'Error accuired.']);
-		}
-	    // all good
-	    DB::commit();
-        return redirect()->back()->with(['message' => 'Menu has been scheduled.']);
-	}
 	public function index_schedule()
 	{
 		//declare variable
 		$now = Carbon::now();
-		$start = $now->startOfMonth();
 		$menus = Menu::all();
 		$months = new Collection;
+		
+		//get month
+		$start = Carbon::parse($now->format('Y-m-1'));
 		for ($i=0; $i < 6; $i++, $start->addMonth()) { 
 			$months->push(Carbon::parse($start->format('Y-m')));
 		}
-		return view('Admin.index_schedule',compact('months','menus'));
+
+		$start_date = Carbon::now()->startOfMonth();
+		return view('Admin.index_schedule',compact('months','menus','start_date'));
 	}
 	public function get_month_schedule(Request $request)
 	{
