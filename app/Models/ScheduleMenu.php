@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ScheduleMenu extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'date',
+        'menu_list',
+    ];
 }

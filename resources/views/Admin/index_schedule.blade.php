@@ -2,7 +2,7 @@
     <x-slot name="header">
       <div class="notify z-50 font-semibold absolute left-0"><span id="notifyType" class=""></span></div>
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Manage Schedule Off ') }}
+            {{ __('Manage Schedule Order ') }}
         </h2>
     </x-slot>
    
@@ -130,7 +130,7 @@
               <ul id="myUL" class="contents">   
                 @foreach($menus as $menu) 
                 <li>
-                  <input type="checkbox" id="{{$menu->id}}" name="menu[]" class="schedule-menu hidden" >
+                  <input type="checkbox" id="{{$menu->id}}" name="menus[]" value="{{$menu->id}}" class="schedule-menu hidden" >
                   <label for="{{$menu->id}}">
                     <div class="flex flex-col text-center mb-6 gap-2 border-2 border-gray-700 border-opacity-25 h-auto top-0 w-full mx-auto check-resize bg-gray-700  p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500">
                       <div>

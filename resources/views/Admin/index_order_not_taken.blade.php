@@ -59,9 +59,7 @@
             <tr>
             <th class="w-12">No</th>            
             <th>Employee </th>
-            <th>Menu</th>
-            <th>Order Date</th>
-            <th class="w-44">Status</th>
+            <th>Date</th>
             
         </tr>
 
@@ -71,13 +69,8 @@
         @foreach($employees as $employee)
         <tr>
             <td>{{$loop->iteration}}</td>
-            <td ><div class="flex items-center h-full">
-                <img src="https://images.pexels.com/photos/2405095/pexels-photo-2405095.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="object-cover h-10 w-10 rounded-full mr-2">
-                <a> Star with Clav</a></div>
-            </td>
             <td>{{$employee['employee']->name}}</td>
-            <td>{{$employee['date']->format('H:s, d, M Y')}}</td>
-            <td><p class="m-0 border-red-300 border rounded-2xl bg-red-200 text-red-600 py-2 font-semibold px-4 hover:bg-red-300 hover:text-red-700 transition-500">Not Served</p></td>
+            <td>{{Carbon\Carbon::parse($employee['date'])->format('d, M Y')}}</td>
         </tr>
         @endforeach
     </tbody>

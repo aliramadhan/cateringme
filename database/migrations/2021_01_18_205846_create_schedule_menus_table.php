@@ -15,10 +15,8 @@ class CreateScheduleMenusTable extends Migration
     {
         Schema::create('schedule_menus', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('menu_id')->constrained('menus');
-            $table->string('year','5');
-            $table->string('month','3');
-            $table->string('date_list');
+            $table->date('date');
+            $table->string('menu_list');
             $table->timestamps();
         });
     }

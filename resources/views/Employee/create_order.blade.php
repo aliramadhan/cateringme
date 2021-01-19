@@ -14,17 +14,23 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <form action="{{route('employee.store.order')}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                    <h2>Dates</h2>
-                    @for($i = 1; $i <= $dates; $i++, $month->addDay())
+                    @for($i = 1; $i <= $now->daysInMonth; $i++, $start->addDay())
                         @php
-                            $order = App\Models\Order::where('employee_id',auth()->user()->id)->where('order_date',$month->format('Y-m-d'))->first();
+                            $schedule = App\Models\ScheduleMenu::where('date',$start->format('Y-m-d'))->first();
+                            $order = App\Models\Order::where('order_date',$start->format('Y-m-d'))->first();
                         @endphp
-                        <input type="checkbox" name="dates[]" value="{{$month}}" @if($month < $now) disabled @endif>{{$month->format('Y-m-d')}}<br>
+                        <input type="checkbox" name="dates[]" @if($schedule == null) disabled @endif value="{{$start->format('Y-m-d')}}"> {{$start->format('Y-m-d')}} <br>
+                        @if($schedule != null)
+                            @foreach(explode(",", $schedule->menu_list) as $menu)
+                                @php
+                                    $menu = App\Models\Menu::where('id',$menu)->first();
+                                @endphp
+                                <input type="radio" name="{{$i}}" value="{{$menu->id}}"> {{$menu->name}}
+                            @endforeach
+
+                            <br>
+                        @endif
                     @endfor
-                    <h2>Menu</h2>
-                    @foreach($menus as $menu)
-                        <input type="radio" name="menu" value="{{$menu->menu_code}}">{{$menu->name}}<br>
-                    @endforeach
                     <input type="submit" name="submit">
                 </form>
             </div>

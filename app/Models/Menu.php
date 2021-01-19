@@ -15,7 +15,7 @@ class Menu extends Model
         'menu_code',
         'catering_id',
         'desc',
-        'show',
+        'prize',
     ];
 
     public function photos()

@@ -186,11 +186,12 @@
         $start_date = $now;
         @endphp
         @for($i = 0 ; $i <= $total_days;$i++,$start_date->addDay())
-        @php
-        $order = $user->orders->where('order_date',$start_date->format('Y-m-d'))->first();
-        @endphp
+          @php
+          $order = $user->orders->where('order_date',$start_date->format('Y-m-d'))->first();
+          $schedule = App\Models\ScheduleMenu::where('date',$start_date->format('Y-m-d'))->first();
+          @endphp
         
-          @if(!in_array($start_date->day, $schedule))
+          @if($schedule == null)
           <div class="flex items-center bg-gradient-to-r from-red-400 to-red-200 border-orange-500 gap-2 p-2 rounded border-l-4 mb-2">
           <div class=" text-center w-8 text-xl text-white leading-7 font-bold flex-initial">
             {{$start_date->format('d')}}
@@ -198,20 +199,20 @@
           <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto uppercase font-semibold">
             <a href="#">day off</a>
           </div>
-          @elseif($order == null && in_array($start_date->day, schedule))
+          @elseif($order == null)
           <div class="flex items-center bg-gradient-to-r from-transparent to-gray-200 border-gray-500 gap-2 p-2 rounded border-l-4 mb-2">
           <div class=" text-center w-8 text-xl text-gray-700 leading-7 font-bold flex-initial">
-            {{$i}}
+            {{$start_date->format('d')}}
           </div>
           <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto uppercase font-semibold">
             <a href="#">empty schedule</a>
           </div>
 
           <div class="flex items-center bg-gradient-to-r from-transparent to-blue-200 border-blue-500 gap-2 p-2 rounded border-l-4 mb-2">
-          @elseif($order != null && in_array($start_date->day, schedule))    
+          @elseif($order != null)    
            <div class="flex items-center bg-gradient-to-r from-transparent to-blue-200 border-blue-500 gap-2 p-2 rounded border-l-4 mb-2">
           <div class=" text-center w-8 text-xl text-blue-400 leading-7 font-bold flex-initial">
-            {{$i}}
+            {{$start_date->format('d')}}
           </div>
 
           <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto">
@@ -224,15 +225,15 @@
             <img src="{{ url('public/'.$order->menu->photos->random()->file)}}" class="object-cover h-8 w-8 rounded flex-initial">
           </div>
            <script type="text/javascript">
-            function showimg{{$i}}() {
-              var x{{$i}} = document.getElementById("imagine{{$i}}");
-              if (x{{$i}}.style.display === "none") {
-                x{{$i}}.style.display = "block";
-              } else {
-                x{{$i}}.style.display = "none";
+              function showimg{{$i}}() {
+                var x{{$i}} = document.getElementById("imagine{{$i}}");
+                if (x{{$i}}.style.display === "none") {
+                  x{{$i}}.style.display = "block";
+                } else {
+                  x{{$i}}.style.display = "none";
+                }
               }
-          }
-       </script>
+            </script>
           @endif
         </div>
 

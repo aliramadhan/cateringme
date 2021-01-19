@@ -24,16 +24,8 @@ class EmployeeActionController extends Controller
         $menu_today = $user->orders()->where('order_date',$now->format('Y-m-d'))->first();
         $menu_tomorrow = $user->orders()->where('order_date',$now->addDay()->format('Y-m-d'))->first();
         $reviews = Order::orderBy('reviewed_at','desc')->limit(10)->get();
-        $schedule = ScheduleMenu::where('year',$now->year)->where('month',$now->month)->first();
-        if ($schedule == null) {
-            $schedule = ['0'];
-        }
-        else{
-            $schedule = explode(',', $schedule->date_list);
-        }
-
         $now = Carbon::now();
-        return view('Employee.dashboard',compact('menu_today','menu_tomorrow','now','user','schedule','reviews','stop','total_days'));
+        return view('Employee.dashboard',compact('menu_today','menu_tomorrow','now','user','reviews','stop','total_days'));
     }
     public function get_date(Request $request)
     {
@@ -134,6 +126,10 @@ class EmployeeActionController extends Controller
     }
     public function choose_order()
     {
+        $now = Carbon::now();
+        $start = Carbon::now()->startOfMonth();
+        $stop = Carbon::now()->endOfMonth();
+        return view('Employee.create_order',compact('now','start','stop'));
         //declare variable
         $user = auth()->user();
         $now = Carbon::now();
@@ -172,40 +168,33 @@ class EmployeeActionController extends Controller
         return view('Employee.create_order',compact('dates','month','menus','now'));
     }
     public function store_order(Request $request)
-    {    	
-		//Validation Request
-		$this->validate($request, [
+    {   
+        //Validation Request
+        $this->validate($request, [
             'dates' => ['required'],
-            'menu' => ['required']
         ]);
+
         //declare
-        $cek = 0;
         $now = Carbon::now();
         $user = auth()->user();
-        $menu = Menu::where('menu_code',$request->menu)->first();
 
         //cek if employee can order
         if($user->can_order == 0){
             return redirect()->back()->withErrors(['message' => "Can't submit order, please call admin to activated feature order catering."]);
         }
 
-        foreach($request->dates as $date){
-            //create code number for order
-            $last_id = Order::all()->count();
-            $len = strlen(++$last_id);
-            for($i=$len; $i< 4; ++$i) {
-                $last_id = '0'.$last_id;
-            }
-            $code_number = 'ORD'.$last_id;
+        foreach ($request->dates as $date) {
+            $date = Carbon::parse($date);
+            $code_number = 'ORD'.$date->format('ymd').$user->id;
             //inser into database
             DB::beginTransaction();
             try {
-                $order = Order::where('employee_id',$user->id)->where('order_date',$date)->first();
+                $order = Order::where('employee_id',$user->id)->where('order_date',$date->format('Y-m-d'))->first();
                 if($order == null){
                     $order = Order::create([
                         'employee_id' => $user->id,
                         'order_number' => $code_number,
-                        'menu_id' => $menu->id,
+                        'menu_id' => $request->input($date->day),
                         'order_date' => Carbon::parse($date)->format('Y-m-d'),
                     ]);
                 }
@@ -213,19 +202,18 @@ class EmployeeActionController extends Controller
                     if ($date < $now->format('Y-m-d')) {
                         continue;
                     }
-                    $order->menu_id = $menu->id;
+                    $order->menu_id = $request->input($date->day);
                     $order->save();
                 }
-				if($order != null){
-					DB::commit();
-					$cek++;
-				}
-			} catch (\Exception $e) {
-			    DB::rollback();
-	        	return redirect()->back()->withErrors(['message' => $e->message]);
-			}
+                if($order != null){
+                    DB::commit();
+                }
+            } catch (\Exception $e) {
+                DB::rollback();
+                return redirect()->back()->withErrors(['message' => $e->getMessage()]);
+            }
         }
-		return redirect()->route('employee.choose.order')->with(['message' => $cek.' Order submited successfully.']);
+		return redirect()->route('employee.choose.order')->with(['message' => ' Order submited successfully.']);
     }
     public function store_review(Request $request, $code)
     {
