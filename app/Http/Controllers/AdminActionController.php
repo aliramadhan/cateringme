@@ -118,14 +118,14 @@ class AdminActionController extends Controller
 
 		return view('Admin.index_menu',compact('menus'));
 	}
-	public function update_menu_prize(Request $request)
+	public function update_menu_price(Request $request)
 	{
 		//Validation Request
 		$this->validate($request, [
-            'prize' => ['required','numeric'],
+            'price' => ['required','numeric'],
         ]);
-        $affected = DB::table('menus')->update(['prize' => $request->prize]);
-        return redirect()->back()->with(['message' => 'Menu Prize updated succesfully.']);
+        $affected = DB::table('menus')->update(['price' => $request->price]);
+        return redirect()->back()->with(['message' => 'Menu price updated succesfully.']);
 	}
 	public function index_schedule()
 	{

@@ -48,7 +48,7 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth:sanctum','role:Admin'
     //Manage Menu
     Route::get('/menu', [ AdminActionController::class, 'index_menu'])->name('admin.index.menu');
     Route::post('/menu', [ AdminActionController::class, 'scheduled_menu'])->name('admin.scheduled.menu');
-    Route::post('/update/menu-prize', [ AdminActionController::class, 'update_menu_prize'])->name('admin.update.menu_prize');
+    Route::post('/update/menu-price', [ AdminActionController::class, 'update_menu_price'])->name('admin.update.menu_price');
 
     //Manage Schedule
     Route::get('/schedule', [ AdminActionController::class, 'index_schedule'])->name('admin.index.schedule');

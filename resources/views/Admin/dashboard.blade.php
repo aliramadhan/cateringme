@@ -16,9 +16,9 @@
 =======
 	
 
-	<form action="{{route('admin.update.menu_prize')}}" method="POST">
+	<form action="{{route('admin.update.menu_price')}}" method="POST">
 	@csrf
-	<input type="number" name="prize">
+	<input type="number" name="price">
 	<input type="submit" name="submit">
 	</form>
 >>>>>>> origin/master
