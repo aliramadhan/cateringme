@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Collection;
 use Carbon\Carbon;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 class CateringActionController extends Controller
 {
@@ -197,5 +198,30 @@ class CateringActionController extends Controller
 		}
     	DB::commit();
 		return redirect()->back()->with(['message' => 'Orders Menu updated status successfully.']);
+	}
+	public function send_message()
+	{
+		$now = Carbon::now();
+		$orders = Order::where('order_date',$now->format('Y-m-d'))->get();
+		$menus = Order::where('order_date',$now->format('Y-m-d'))->groupBy('menu_id')->get();
+		$data = new Collection;
+		$i = 1;
+		$text = "Notification Catering Today \n".$now->format('d, M Y')."\n \n";
+		foreach ($menus as $order) {
+			$menu = Menu::findOrFail($order->menu_id);
+			$data->push((object)[
+				'Menu' => $menu->name,
+				'total_order' => $orders->where('menu_id',$menu->id)->count()
+			]);
+			$text .= $i.". ".$menu->name." => ".$orders->where('menu_id',$menu->id)->count()."\n";
+			$i++;
+		}
+		$text .= "\n ============================\n \n Total order = ".$orders->count(). " \n Total fee = ".number_format($orders->sum('fee'));
+	    Telegram::sendMessage([
+	        'chat_id' => env('TELEGRAM_CHANNEL_ID',''),
+	        'parse_mode' => 'HTML',
+	        'text' => $text
+	    ]);
+		return dd($text);
 	}
 }

@@ -6,6 +6,8 @@ use \App\Http\Controllers\CateringActionController;
 use \App\Http\Controllers\EmployeeActionController;
 use \App\Notifications\TeleNotif;
 use Illuminate\Support\Facades\Notification;
+use Telegram\Bot\Laravel\Facades\Telegram;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,12 +22,6 @@ use Illuminate\Support\Facades\Notification;
 Route::get('/', function () {
     return redirect()->route('login');
 });
-Route::get('/tes_notif', function () {
-    $tes = 'tes';
-
-    return Notification::send('tes',new TeleNotif());
-});
-
 Route::middleware(['auth:sanctum'])->get('/dashboard', function () {
     if (auth()->user()->role == 'Employee') {
         return redirect()->route('employee.dashboard');
@@ -52,6 +48,7 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth:sanctum','role:Admin'
     //Manage Menu
     Route::get('/menu', [ AdminActionController::class, 'index_menu'])->name('admin.index.menu');
     Route::post('/menu', [ AdminActionController::class, 'scheduled_menu'])->name('admin.scheduled.menu');
+    Route::post('/update/menu-prize', [ AdminActionController::class, 'update_menu_prize'])->name('admin.update.menu_prize');
 
     //Manage Schedule
     Route::get('/schedule', [ AdminActionController::class, 'index_schedule'])->name('admin.index.schedule');
@@ -69,6 +66,7 @@ Route::group(['prefix' => 'catering',  'middleware' => ['auth:sanctum','role:Cat
     Route::get('/create/menu', [ CateringActionController::class, 'create_menu'])->name('catering.create.menu');
     Route::post('/create/menu', [ CateringActionController::class, 'store_menu'])->name('catering.store.menu');
     Route::post('/served/menu', [ CateringActionController::class, 'served_menu'])->name('catering.served.menu');
+    Route::get('/send/message', [ CateringActionController::class, 'send_message'])->name('catering.send.message');
 
     //Report
     Route::get('/index/review', [ CateringActionController::class, 'index_review'])->name('catering.index.review');

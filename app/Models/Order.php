@@ -16,7 +16,8 @@ class Order extends Model
         'status',
         'review',
         'stars',
-        'reviewed_at'
+        'reviewed_at',
+        'fee'
     ];
     public function menu()
     {
