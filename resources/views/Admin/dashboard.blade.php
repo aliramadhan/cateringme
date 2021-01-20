@@ -133,8 +133,8 @@
 						<div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden">
 							<div class="px-3 pt-8 pb-10 text-center relative z-10">
 								<h4 class="text-sm uppercase text-gray-500 leading-tight">Catering Quota</h4>
-								<h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">8,028</h3>
-								<p class="text-xs text-green-500 leading-tight">▲ 8.2%</p>
+								<h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{\App\Models\User::where('role','Employee')->count()}}</h3>
+								<p class="text-xs text-green-500 leading-tight">-</p>
 							</div>
 							<div class="absolute bottom-0 inset-x-0">
 								<canvas id="chart3" height="70"></canvas>
@@ -147,8 +147,8 @@
 						<div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden">
 							<div class="px-3 pt-8 pb-10 text-center relative z-10">
 								<h4 class="text-sm uppercase text-gray-500 leading-tight">Rate & Review</h4>
-								<h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">8,028</h3>
-								<p class="text-xs text-green-500 leading-tight">▲ 100%</p>
+								<h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{$orders->where('review','!=',null)->count()}}</h3>
+								<p class="text-xs text-green-500 leading-tight">-</p>
 							</div>
 							<div class="absolute bottom-0 inset-x-0">
 								<canvas id="chart4" height="70"></canvas>
@@ -325,11 +325,11 @@
 				<div class="bg-cover bg-top  rounded-xl bg-center h-auto text-white pt-24 pb-10 px-10 object-fill" style="background-image: url({{url('public/'.$menu->photos->first()->file)}})">
 					
 					<div class=" p-4 rounded-lg" style="  background: #3e3e3eba;">
-						<p class="font-bold text-sm uppercase mb-1">@if($loop->iteration == 1) First Menu @else Second Menu @endif</p>
+						<p class="font-bold text-sm uppercase mb-1"></p>
 						<div class="flex items-center mb-6">
 							<p class="text-3xl font-bold  uppercase mr-2">{{$menu->name}}</p>
 							<div class=" text-lg text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl">
-								<i class="fas fa-star"></i> 2
+								<i class="fas fa-star"></i>{{$orders->where('menu_id',$menu->id)->avg('stars')}}
 							</div>   
 						</div>
 						<p class="text-xl mb-4 leading-none overflow-ellipsis overflow-hidden h-20">{{$menu->desc}} </p>
@@ -346,8 +346,8 @@
 
 	<div class="col-span-2 gap-4  font-base rounded-xl py-6 flex items-center md:flex-row flex-col">  
 		<div class="text-center mt-6 font-base bg-catering rounded-xl py-6 px-4 w-full" > 
-			<p class="text-2xl font-normal text-white mb-4 text-left">Total Price <span class="font-semibold">Today</span></p>
-			<h4 class="text-4xl uppercase font-semibold text-white leading-tight">Rp. 50.000,00</h4>
+			<p class="text-2xl font-normal text-white mb-4 text-left">Total Fee Catering <span class="font-semibold">Today</span></p>
+			<h4 class="text-4xl uppercase font-semibold text-white leading-tight">@currency($orders->sum('fee'))</h4>
 		</div>
 
 		<div class="text-center mt-6 font-base bg-price rounded-xl py-6 px-4 w-full" > 
@@ -356,7 +356,7 @@
 				<div id="modal-click" class="modal-open">
 					<i class="fas fa-cog border rounded-full p-2 hover:border-orange-700 font-semibold text-gray-100 hover:text-orange-700 duration-500 cursor-pointer "></i></div>  
 				</div>
-				<h4 class="text-4xl uppercase font-semibold text-white leading-tight">Rp. 50.000,00</h4>
+				<h4 class="text-4xl uppercase font-semibold text-white leading-tight">@currency($menu->price)</h4>
 			</div>
 
 	</div>
@@ -370,7 +370,7 @@
 				<h3 class="font-semibold text-lg mb-1">{{$order->employee->name}}</h3>
 				<p class="leading-tight ">{{$order->menu->name}}</p>
 			</div>
-			@if($now->format('H') >= 9 )
+			@if($order->status)
 			<p>Served</p>
 			@endif
 		</div>

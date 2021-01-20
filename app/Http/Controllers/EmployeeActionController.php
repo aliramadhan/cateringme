@@ -152,6 +152,7 @@ class EmployeeActionController extends Controller
         foreach ($request->dates as $date) {
             $date = Carbon::parse($date);
             $code_number = 'ORD'.$date->format('ymd').$user->id;
+            $menu = Menu::findOrFail($request->input($date->daye));
             //inser into database
             DB::beginTransaction();
             try {
@@ -160,8 +161,9 @@ class EmployeeActionController extends Controller
                     $order = Order::create([
                         'employee_id' => $user->id,
                         'order_number' => $code_number,
-                        'menu_id' => $request->input($date->day),
+                        'menu_id' => $menu->id,
                         'order_date' => Carbon::parse($date)->format('Y-m-d'),
+                        'fee' => $menu->price
                     ]);
                 }
                 else{

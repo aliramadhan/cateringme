@@ -92,7 +92,7 @@
                             <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden">
                                 <div class="px-3 py-3 lg:py-13 text-center relative z-10">
                                     <h3 class="text-5xl text-green-500 font-semibold leading-tight my-2">
-                                        {{$menus->count()}}</h3>
+                                        {{$total_menu_today}}</h3>
                                     <h4 class="text-xl uppercase text-gray-500 leading-tight">total Catering Active</h4>
                                 </div>
                                
