@@ -32,7 +32,7 @@
           document.getElementsByTagName("head")[0].appendChild(scriptTag);
         }          
       </script>
-        <style type="text/css">  .success:before{
+        <style type="text/css">  .failure:before{
           Content:"{{ implode('', $errors->all(':message')) }}";
         }</style>
        

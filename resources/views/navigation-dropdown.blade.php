@@ -83,7 +83,7 @@
                         </x-jet-nav-link>
                         <x-jet-nav-link href="{{ route('catering.index.review') }}" :active="request()->routeIs('catering.index.review')">
                             {{ __('Report Review') }}
-                            Dadekno dropdown jar
+                           
                         </x-jet-nav-link>
                     @else
                         <x-jet-nav-link href="{{ route('employee.dashboard') }}" :active="request()->routeIs('employee.dashboard')">
@@ -195,9 +195,85 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-jet-responsive-nav-link>
+             @if(auth()->user()->role == 'Admin')
+                        <x-jet-responsive-nav-link  href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-jet-responsive-nav-link >
+                        <x-jet-responsive-nav-link  href="{{ route('admin.index.account') }}" :active="request()->routeIs('admin.index.account')">
+                            {{ __('Manage Account') }}
+                        </x-jet-responsive-nav-link >
+                        <x-jet-responsive-nav-link  href="{{ route('admin.index.menu') }}" :active="request()->routeIs('admin.index.menu')">
+                            {{ __('Manage Menu') }}
+                        </x-jet-responsive-nav-link >
+                        <x-jet-responsive-nav-link  href="{{ route('admin.index.schedule') }}" :active="request()->routeIs('admin.index.schedule')">
+                            {{ __('Manage Schedule') }}
+                        </x-jet-responsive-nav-link >
+                       
+                        <div class="hidden sm:flex sm:items-center sm:ml-6 hover:border-gray-300  focus:outline-none focus:text-gray-700 focus:border-gray-300  border-transparent 
+                        transition duration-150 ease-in-out  hover:text-gray-700">
+                            <x-jet-dropdown align="right" width="48">
+                                <x-slot name="trigger">
+
+                                    <button class="inline-flex items-center px-1 pt-1 border-b-2text-sm font-medium leading-5 text-gray-500 focus:outline-none ">
+                                        <div>Report</div>
+
+                                        <div class="ml-1">
+                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </button>
+
+                                </x-slot>
+
+                                <x-slot name="content">
+
+                                    <!-- User Management -->
+                                    <div class="block px-4 py-2 text-base text-gray-700 font-semibold border-b">
+                                        {{ __('Report') }}
+                                    </div>
+
+                                    <x-jet-dropdown-link href="{{ route('admin.index.review') }}">
+                                        {{ __('Review ') }}
+                                    </x-jet-dropdown-link>
+                                      <x-jet-dropdown-link href="{{ route('admin.index.order') }}">
+                                        {{ __('Order Taken ') }}
+                                    </x-jet-dropdown-link>
+                                      <x-jet-dropdown-link href="{{ route('admin.index.order_not_taken') }}">
+                                        {{ __('Order Not Taken  ') }}
+                                    </x-jet-dropdown-link>
+
+                                </x-slot>
+
+                            </x-jet-dropdown>
+                        </div>
+                      
+
+                    @elseif(auth()->user()->role == 'Catering')
+                        <x-jet-responsive-nav-link  href="{{ route('catering.dashboard') }}" :active="request()->routeIs('catering.dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-jet-responsive-nav-link >
+                        <x-jet-responsive-nav-link  href="{{ route('catering.index.menu') }}" :active="request()->routeIs('catering.index.menu')">
+                            {{ __('Manage Menu') }}
+                        </x-jet-responsive-nav-link >
+                        <x-jet-responsive-nav-link  href="{{ route('catering.index.catering') }}" :active="request()->routeIs('catering.index.catering')">
+                            {{ __('Menu Today') }}
+                        </x-jet-responsive-nav-link >
+                        <x-jet-responsive-nav-link  href="{{ route('catering.index.report') }}" :active="request()->routeIs('catering.index.report')">
+                            {{ __('Report Menu') }}
+                        </x-jet-responsive-nav-link >
+                        <x-jet-responsive-nav-link  href="{{ route('catering.index.review') }}" :active="request()->routeIs('catering.index.review')">
+                            {{ __('Report Review') }}
+                          
+                        </x-jet-responsive-nav-link >
+                    @else
+                        <x-jet-responsive-nav-link  href="{{ route('employee.dashboard') }}" :active="request()->routeIs('employee.dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-jet-responsive-nav-link >
+                        <x-jet-responsive-nav-link  href="{{ route('employee.create.order') }}" :active="request()->routeIs('employee.create.order')">
+                            {{ __('Create Order') }}
+                        </x-jet-responsive-nav-link >
+                    @endif
         </div>
 
         <!-- Responsive Settings Options -->

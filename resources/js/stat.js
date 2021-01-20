@@ -31,6 +31,8 @@ const chartOptions = {
     }
 };
 //
+
+
 var ctx = document.getElementById('chart1').getContext('2d');
 var chart = new Chart(ctx, {
     type: "line",
@@ -81,6 +83,7 @@ var chart = new Chart(ctx, {
     },
     options: chartOptions
 });
+
 var ctx = document.getElementById('chart4').getContext('2d');
 var chart = new Chart(ctx, {
     type: "line",

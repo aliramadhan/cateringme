@@ -3,6 +3,7 @@
 	<div id="success" class="invisible absolute"></div>
 	<div id="failure" class="invisible absolute"></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 	@if (session('message'))
 	<script type="text/javascript">
 		function notifu(){
@@ -25,7 +26,7 @@
 			document.getElementsByTagName("head")[0].appendChild(scriptTag);
 		}          
 	</script>
-	<style type="text/css">  .success:before{
+	<style type="text/css">  .failure:before{
 		Content:"{{ implode('', $errors->all(':message')) }}";
 	}</style>
 
@@ -346,7 +347,7 @@
 
 	<div class="col-span-2 gap-4  font-base rounded-xl py-6 flex items-center md:flex-row flex-col">  
 		<div class="text-center mt-6 font-base bg-catering rounded-xl py-6 px-4 w-full" > 
-			<p class="text-2xl font-normal text-white mb-4 text-left">Total Fee Catering <span class="font-semibold">Today</span></p>
+			<p class="text-2xl font-normal text-white mb-4 text-left">Total Fee <span class="font-semibold">Today</span></p>
 			<h4 class="text-4xl uppercase font-semibold text-white leading-tight">@currency($orders->sum('fee'))</h4>
 		</div>
 
@@ -402,7 +403,8 @@
 
 </script>
 <script src="{{asset('resources/js/slider.js')}}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 <script src="{{asset('resources/js/stat.js')}}"></script>
+
+
 
 </x-app-layout>

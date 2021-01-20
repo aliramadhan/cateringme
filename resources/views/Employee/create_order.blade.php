@@ -5,9 +5,23 @@
         </h2>
     </x-slot>
 
+    <div id="success" class="invisible absolute"></div>
+    <div id="failure" class="invisible absolute"></div>
+    
+  
     @if($errors->any())
-    {{ implode('', $errors->all('<div>:message</div>')) }}
+    <script type="text/javascript">
+      function notifu(){
+        document.getElementById('failure').click();
+        var scriptTag = document.createElement("script");        
+        document.getElementsByTagName("head")[0].appendChild(scriptTag);
+      }          
+    </script>
+    <style type="text/css">  .failure:before{
+      Content:"{{ implode('', $errors->all(':message')) }}";
+    }</style>    
     @endif
+
 
     <link rel="stylesheet" href="{{ asset('resources/css/date.css') }}">
     <style type="text/css">
@@ -93,7 +107,7 @@
                 <div class="flex w-full px-4 gap-4">
 
                     <label class='label flex-auto contents duration-1000'>
-                        <input class="label__checkbox duration-1000" type='checkbox' name="dates[]" @if($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" id="chkPassport{{$i}}" >
+                        <input class="label__checkbox duration-1000" type="checkbox" name="dates[]" @if($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" id="chkPassport{{$i}}" >
 
                         <span class='label__text '>
                             <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient(@if($order != null)  135deg, #FCCF31 10%, #F55555 100% @elseif($schedule != null) 160deg, #0093E9 0%, #80D0C7 100%  @elseif($start < $now) 160deg, #bdbdbe 0%, #032a32 100% @else to right, #ff416c, #ff4b2b @endif);'>
@@ -115,7 +129,7 @@
                     {{$order->menu->name}}<br>
                     <span class="text-green-400 contents">Submitted</span> @endif
                 </div>
-                <div id="dvPassport{{$i}}" style="display: none" class="flex flex-col text-lg font-base gap-4 mb-5 items-center bg-white py-2 px-3 rounded-xl border">
+                <div id="dvPassport{{$i}}" style="display: none" class="flex flex-col text-lg font-base gap-4 mb-5 bg-white py-2 px-3 rounded-xl border">
 
                    @if($schedule != null)
 
@@ -125,7 +139,7 @@
                    @endphp
 
 
-                   <div class="flex ">
+                   <div class="flex">
                     <input type="radio" name="{{$i}}" value="{{$menu->id}}" class="flex-auto hidden" id="radio{{$i}}{{$menu->id}}">
 
                     <label for="radio{{$i}}{{$menu->id}}" class="flex cursor-pointer text-base font-semibold items-center">
