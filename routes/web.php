@@ -83,6 +83,7 @@ Route::group(['prefix' => 'employee',  'middleware' => ['auth:sanctum','role:Emp
     Route::get('/create/order', [ EmployeeActionController::class, 'create_order'])->name('employee.create.order');
     Route::post('/create/order/', [ EmployeeActionController::class, 'store_order'])->name('employee.store.order');
     Route::post('/review/{code}/', [ EmployeeActionController::class, 'store_review'])->name('employee.store.review');
+    Route::get('/order/{id}', [ EmployeeActionController::class, 'delete_order'])->name('employee.delete.order');
     Route::get('/history/order', [ EmployeeActionController::class, 'history_order'])->name('employee.history.order');
 
     //Get date

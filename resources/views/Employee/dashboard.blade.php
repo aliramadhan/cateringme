@@ -211,7 +211,7 @@
               </div>
               
               <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto uppercase font-semibold">
-                <a href="#">empty schedule</a>
+                <a href="{{route('employee.create.order')}}">empty schedule</a>
               </div>
 
           
@@ -223,6 +223,9 @@
 
           <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto">
             <a href="#">{{$order->menu->name}}</a>
+            @if($start_date > Carbon\Carbon::now())
+            <a href="{{route('employee.delete.order',$order->id)}}" onclick="return confirm('Cancel order date {{$start_date->format('d, M Y')}}')">Cancel Order</a>
+            @endif
           </div>
         
             <img src="{{ url('public/'.$order->menu->photos->random()->file)}}" class="object-cover h-8 w-8 rounded flex-initial">
@@ -296,7 +299,7 @@
         @endforeach
 
          <span id="pc1" class="contents hidden"> 
-           @foreach($reviews as $review)
+        @foreach($reviews as $review)
         @if($review->review == null)
         @php continue; @endphp
         @endif

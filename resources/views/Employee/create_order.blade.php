@@ -81,10 +81,10 @@
            {{$now->format('F Y')}}
        </h3>  
        <form action="{{route('employee.store.order')}}" method="POST" enctype="multipart/form-data" class="contents">
+        @csrf
           <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5 mt-4">                      
              <div id="div1" class="grid md:grid-cols-2 grid-cols-1 duration-1000 targetDiv bg-gray-100 justify-content content-center text-center rounded-lg pt-4"> 
 
-                @csrf
                 @for($i = 1; $i <= $now->daysInMonth; $i++, $start->addDay())
                 @php
                 $schedule = App\Models\ScheduleMenu::where('date',$start->format('Y-m-d'))->first();
