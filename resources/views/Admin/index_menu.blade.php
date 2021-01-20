@@ -45,7 +45,7 @@
           <div class="px-4 py-2 border-b border-gray-200 flex justify-between items-center bg-white sm:py-4 sm:px-6 sm:items-baseline">
             <div class="flex-shrink min-w-0 flex items-center">
               <h3 class="flex-shrink min-w-0 font-regular text-base md:text-lg leading-snug truncate">
-              Select Food Menu for Catering
+              List Menu
            </h3>
        </div>
        <div class="ml-4 flex flex-shrink-0 items-center">
@@ -64,8 +64,8 @@
 
                   <div>
                   <span>  
-                      <div class=" text-xl font-semibold text-orange-600 mt-3 absolute  px-4 py-1 bg-white rounded-r-lg">{{$menu->name}}                         
-
+                      <div class=" text-xl font-semibold text-orange-600 mt-3 absolute  px-4 py-1 bg-white rounded-r-lg">{{$menu->name}}
+                      @if($menu->orders->avg('stars') != 0){{$menu->orders->avg('stars')}}<i class="fas fa-star"></i>@endif
                           </div>
                       </span>
                       <img src="{{url('public/'.$menu->photos->first()->file)}}" alt="{{ $menu->name }}" class="rounded-xl  object-cover w-full h-44">
@@ -73,6 +73,7 @@
                   </div>
                   <div class=" text-base font-bold text-gray-600 text-left px-3 ">Description</div>
                   <div class=" text-base font-base text-gray-600 text-left px-3  ">{{$menu->desc}}</div>  
+                  <div class=" text-base font-base text-gray-600 text-left px-3  ">Price : @currency($menu->price)</div>  
                   <div class=" text-base font-semibold text-purple-600 text-right px-3">From : {{$menu->catering->name}}</div> 
 
               </div>           

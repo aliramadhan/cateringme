@@ -73,11 +73,11 @@ class AdminActionController extends Controller
 		//Create Employee/Catering Code
 		if($request->role == 'Catering'){	
 			$code_initial = 'CTR';
-			$last_id = User::where('role','Catering')->get()->count();
+			$last_id = User::where('role','Catering')->orderBy('id','desc')->first()->id;
 		}
 		else{
 			$code_initial = 'EMP';
-			$last_id = User::where('role','Employee')->get()->count();
+			$last_id = User::where('role','Employee')->orderBy('id','desc')->first()->id;
 		}
 		$len = strlen(++$last_id);
 		for($i=$len; $i< 4; ++$i) {
@@ -122,10 +122,10 @@ class AdminActionController extends Controller
 	{
 		//Validation Request
 		$this->validate($request, [
-            'prize' => ['required','numeric'],
+            'price' => ['required','numeric'],
         ]);
-        $affected = DB::table('menus')->update(['prize' => $request->prize]);
-        return redirect()->back()->with(['message' => 'Menu Prize updated succesfully.']);
+        $affected = DB::table('menus')->update(['price' => $request->prize]);
+        return redirect()->back()->with(['message' => 'Menu Price updated succesfully.']);
 	}
 	public function index_schedule()
 	{

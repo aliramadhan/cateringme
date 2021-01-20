@@ -81,6 +81,10 @@
                         <x-jet-nav-link href="{{ route('catering.index.report') }}" :active="request()->routeIs('catering.index.report')">
                             {{ __('Report Menu') }}
                         </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('catering.index.review') }}" :active="request()->routeIs('catering.index.review')">
+                            {{ __('Report Review') }}
+                            Dadekno dropdown jar
+                        </x-jet-nav-link>
                     @else
                         <x-jet-nav-link href="{{ route('employee.dashboard') }}" :active="request()->routeIs('employee.dashboard')">
                             {{ __('Dashboard') }}
