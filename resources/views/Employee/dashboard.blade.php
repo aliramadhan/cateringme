@@ -120,7 +120,7 @@
             <p class="text-5xl font-bold leading-none capitalize"> no catering schedule today   </p>        
 
             </div>
-            <p class="text-2xl mb-4 leading-none">Sorry you dont have catering schedule today, Please comeback tommorow  </p>
+            <p class="text-2xl mb-4 leading-none">Sorry you dont have catering schedule today, Please comeback tomorrow  </p>
              
           </div>
          
@@ -155,7 +155,9 @@
 
        <div class="bg-cover bg-top w-full md:w-1/4 bg-gradient-to-t bg-blue-400 to bg-green-400 bg-center text-white  object-fill" style="background-image: url(https://assets.kompasiana.com/items/album/2018/04/16/suasana-kantor-24slides-indonesia-3-5ad4a44bcaf7db40dd0deff2.jpg?t=o&v=760});">
       <div class=" p-4 h-full px-10 grid grid-rows-4" style="background-image: linear-gradient(60deg,#252525,#27272769) !important;">
-        <p class="font-bold text-lg uppercase mb-8 border-b-2 "> Tomorrow Breakfast </p>
+        <div>
+        <p class="font-bold text-lg uppercase mb-8 border-b-2 w-min "> Tomorrow Breakfast </p>
+        </div>
         <p class="text-4xl font-bold row-span-2 capitalize"> no catering schedule for tomorrow </p>
          
       </div>
@@ -182,7 +184,7 @@
         <div class="col-span-2 text-4xl text-left text-gray-600 mb-9 font-base flex item-center">          
           <p class="flex-auto text-left font-semibold ">
             <span class="font-normal text-gray-600"> Schedule </span>{{Carbon\Carbon::now()->format('F Y')}}</p>
-          <a href="{{ route('employee.choose.order') }}" id="btn-slide-dis-2"  class="inline-block rounded-full font-medium leading-none py-2 px-2 focus:outline-none text-gray-400 hover:text-gray-700 focus:text-blue-600 duration-500">
+          <a href="{{ route('employee.create.order') }}" id="btn-slide-dis-2"  class="inline-block rounded-full font-medium leading-none py-2 px-2 focus:outline-none text-gray-400 hover:text-gray-700 focus:text-blue-600 duration-500">
               <i class="fas fa-plus"></i>
             </a>
         </div>
@@ -209,7 +211,7 @@
               <div class=" text-center w-8 text-xl text-gray-700 leading-7 font-bold flex-initial">
                 {{$start_date->format('d')}}
               </div>
-              
+
               <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto uppercase font-semibold">
                 <a href="#">empty schedule</a>
               </div>
