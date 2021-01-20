@@ -122,6 +122,64 @@ class CateringActionController extends Controller
         	return redirect()->back()->withErrors(['message' => 'Error Accuired.']);
 		}
 	}
+<<<<<<< Updated upstream
+=======
+	public function edit_menu($menu_code)
+	{
+		$menu = Menu::where('menu_code',$menu_code)->first();
+
+		return view('Catering.edit_menu',compact('menu'));
+	}
+	public function update_menu(Request $request, $menu_code)
+	{
+		//declare variable
+		$now = Carbon::now();
+		$menu = Menu::where('menu_code',$menu_code)->first();
+		$menu->update([
+			'name' => $request->name,
+			'desc' => $request->desc
+		]);
+		foreach ($menu->photos as $photo) {
+			$file = $request->file($photo->id);
+			if ($file == null) {
+				continue;
+			}
+
+			if(\File::exists(public_path($photo->file))){
+			    \File::delete(public_path($photo->file));
+			}
+
+		    //create name and store photo
+			$imageName = Str::slug($menu->name).'_'.$now->format('Ymdhsi').'.'.$file->extension();
+			$file->move(public_path('images/photo-menu/'.$menu->menu_code), $imageName);
+			$fileName = 'images/photo-menu/'.$menu->menu_code.'/'.$imageName;
+			$photo->update([
+				'file' => $fileName
+			]);
+		}
+		foreach ($request->addPhoto as $new_image) {
+		    //create name and store photo
+			$imageName = Str::slug($menu->name).'_'.$now->format('Ymdhsi').'.'.$new_image->extension();
+			$new_image->move(public_path('images/photo-menu/'.$menu->menu_code), $imageName);
+			$fileName = 'images/photo-menu/'.$menu->menu_code.'/'.$imageName;
+			$photoMenu = PhotoMenu::create([
+				'menu_id' => $menu->id,
+				'file' => $fileName
+			]);
+		}
+
+		return redirect()->back()->with(['message' => 'Menu '.$menu->name.' updated successfully.']);
+	}
+	public function check_photo($id)
+	{
+		$photo = PhotoMenu::find($id);
+		$check = \File::exists(public_path($photo->file));
+		return dd($check);
+		if($check){
+			$delete = \File::exists(public_path($photo->file));
+		}
+	}
+>>>>>>> Stashed changes
 	public function index_catering()
 	{
 		//declare variable
