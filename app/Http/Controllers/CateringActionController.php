@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Collection;
 use Carbon\Carbon;
 use Telegram\Bot\Laravel\Facades\Telegram;
+use Illuminate\Support\Facades\File;
 
 class CateringActionController extends Controller
 {
@@ -115,7 +116,6 @@ class CateringActionController extends Controller
 				}
 			}
 
-
 			if($menu != null){
 		    	DB::commit();
         		return redirect()->route('catering.index.menu')->with(['message' => 'new Menu added successfully.']);
@@ -124,6 +124,42 @@ class CateringActionController extends Controller
 		} catch (\Exception $e) {
 		    DB::rollback();
         	return redirect()->back()->withErrors(['message' => 'Error Accuired.']);
+		}
+	}
+	public function edit_menu($menu_code)
+	{
+		$menu = Menu::where('menu_code',$menu_code)->first();
+
+		return view('Catering.edit_menu',compact('menu'));
+	}
+	public function update_menu(Request $request, $menu_code)
+	{
+		$menu = Menu::where('menu_code',$menu_code)->first();
+		$menu->update([
+			'name' => $request->name,
+			'desc' => $request->desc
+		]);
+		foreach ($menu->photos as $photo) {
+			$file = $request->file($photo->id);
+			if ($file == null) {
+				continue;
+			}
+
+			if(\File::exists(public_path($photo->file))){
+			    \File::delete(public_path($photo->file));
+			}
+			$file->move(public_path($photo->file));
+		}
+
+		return redirect()->back();
+	}
+	public function check_photo($id)
+	{
+		$photo = PhotoMenu::find($id);
+		$check = \File::exists(public_path($photo->file));
+		return dd($check);
+		if($check){
+			$delete = \File::exists(public_path($photo->file));
 		}
 	}
 	public function index_catering()
