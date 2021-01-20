@@ -124,48 +124,15 @@ class EmployeeActionController extends Controller
         $data = ['month' => $month, 'dates' => $dates];
         return $data;
     }
-    public function choose_order()
+    public function create_order()
     {
+        //declare variable
         $now = Carbon::now();
+        $next_month = Carbon::parse($now->format('Y-m'))->addMonth()->startOfMonth();
         $start = Carbon::now()->startOfMonth();
         $stop = Carbon::now()->endOfMonth();
-        return view('Employee.create_order',compact('now','start','stop'));
-        //declare variable
-        $user = auth()->user();
-        $now = Carbon::now();
-        $start = $now->startofMonth();
-        $total_date = $now->daysInMonth;
-        $menus = Menu::where('show',1)->get();
-        //declare off date
-        $off_date = OffDate::where('year',$now->year)->where('month',$now->month)->first();
-        if($off_date == null){
-            $off_date = ['0'];
-        }
-        else{
-            $off_date = explode(',', $off_date->date_list);
-        }
-        foreach ($menus as $menu) {
-            $rate = $menu->orders()->where('order_date','<=',$now->format('Y-m-d'))->avg('stars');
-            $menu->rate = $rate;
-            if($rate == null){
-                $menu->rate = 0;
-            }
-        }
-    	foreach (CarbonPeriod::create(Carbon::parse('01-01-2021'), '1 month', Carbon::today()) as $month) {
 
-            $months[$month->format('m-Y')] = $month;
-        }
-        return view('Employee.choose_order',compact('months','menus','start','total_date','now','user','off_date'));
-    }
-    public function create_order($month)
-    {
-    	//declare variable
-        $now = Carbon::now();
-    	$month =  Carbon::parse($month);
-    	$dates = $month->daysInMonth;
-    	$menus = Menu::where('show',1)->get();
-
-        return view('Employee.create_order',compact('dates','month','menus','now'));
+        return view('Employee.create_order',compact('now','start','stop','next_month'));
     }
     public function store_order(Request $request)
     {   
@@ -173,7 +140,6 @@ class EmployeeActionController extends Controller
         $this->validate($request, [
             'dates' => ['required'],
         ]);
-
         //declare
         $now = Carbon::now();
         $user = auth()->user();
@@ -213,7 +179,7 @@ class EmployeeActionController extends Controller
                 return redirect()->back()->withErrors(['message' => $e->getMessage()]);
             }
         }
-		return redirect()->route('employee.choose.order')->with(['message' => ' Order submited successfully.']);
+		return redirect()->route('employee.create.order')->with(['message' => ' Order submited successfully.']);
     }
     public function store_review(Request $request, $code)
     {

@@ -85,7 +85,7 @@
                         <x-jet-nav-link href="{{ route('employee.dashboard') }}" :active="request()->routeIs('employee.dashboard')">
                             {{ __('Dashboard') }}
                         </x-jet-nav-link>
-                        <x-jet-nav-link href="{{ route('employee.choose.order') }}" :active="request()->routeIs('employee.choose.order')">
+                        <x-jet-nav-link href="{{ route('employee.create.order') }}" :active="request()->routeIs('employee.create.order')">
                             {{ __('Create Order') }}
                         </x-jet-nav-link>
                     @endif
