@@ -55,7 +55,7 @@ class DatabaseSeeder extends Seeder
             'catering_id' => 2,
             'name' => 'Nasi Pecel',
             'desc' => 'Nasi Pecel Mantap',
-            'prize' => 20000,
+            'price' => 20000,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
@@ -64,7 +64,7 @@ class DatabaseSeeder extends Seeder
             'catering_id' => 2,
             'name' => 'Gado-gado',
             'desc' => 'Gado gado Mantap',
-            'prize' => 20000,
+            'price' => 20000,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
