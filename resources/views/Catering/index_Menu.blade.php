@@ -111,7 +111,7 @@
         <ul id="myUL" class="contents">         
           @foreach($menus as $menu)
            <li>
-              <a href="#">
+              <a href="{{route('catering.edit.menu',$menu->menu_code)}}">
                 <div class="flex flex-col text-center mb-6 gap-2 border-2 border-opacity-25 h-auto top-0 w-full mx-auto check-resize bg-white p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500 ">
                    <div >
                     <span>  

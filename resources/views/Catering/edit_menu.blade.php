@@ -16,7 +16,7 @@
         @foreach($menu->photos as $photo)
         <img src="{{url('public/'.$photo->file)}}" width="200px">
         <input type="file" name="{{$photo->id}}" accept="image/x-png,image/gif,image/jpeg">    
-        <a href="{{route('catering.check.photo',$photo->id)}}">Delete {{$photo->id}}
+        <a href="{{route('catering.delete.photo',$photo->id)}}">Delete {{$photo->id}}
         </a>
         @endforeach
         <br>

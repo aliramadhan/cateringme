@@ -122,8 +122,6 @@ class CateringActionController extends Controller
         	return redirect()->back()->withErrors(['message' => 'Error Accuired.']);
 		}
 	}
-<<<<<<< Updated upstream
-=======
 	public function edit_menu($menu_code)
 	{
 		$menu = Menu::where('menu_code',$menu_code)->first();
@@ -170,7 +168,7 @@ class CateringActionController extends Controller
 
 		return redirect()->back()->with(['message' => 'Menu '.$menu->name.' updated successfully.']);
 	}
-	public function check_photo($id)
+	public function delete_photo($id)
 	{
 		$photo = PhotoMenu::find($id);
 		$check = \File::exists(public_path($photo->file));
@@ -179,7 +177,6 @@ class CateringActionController extends Controller
 			$delete = \File::exists(public_path($photo->file));
 		}
 	}
->>>>>>> Stashed changes
 	public function index_catering()
 	{
 		//declare variable

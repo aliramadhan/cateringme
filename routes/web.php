@@ -67,6 +67,9 @@ Route::group(['prefix' => 'catering',  'middleware' => ['auth:sanctum','role:Cat
     Route::post('/create/menu', [ CateringActionController::class, 'store_menu'])->name('catering.store.menu');
     Route::post('/served/menu', [ CateringActionController::class, 'served_menu'])->name('catering.served.menu');
     Route::get('/send/message', [ CateringActionController::class, 'send_message'])->name('catering.send.message');
+    Route::get('/edit/menu/{menu_code}', [ CateringActionController::class, 'edit_menu'])->name('catering.edit.menu');
+    Route::put('/update/menu/{menu_code}', [ CateringActionController::class, 'update_menu'])->name('catering.update.menu');
+    Route::get('/delete/photo/menu/{id}', [ CateringActionController::class, 'delete_photo'])->name('catering.delete.photo');
 
     //Report
     Route::get('/index/review', [ CateringActionController::class, 'index_review'])->name('catering.index.review');
