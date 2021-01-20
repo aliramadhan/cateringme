@@ -152,7 +152,7 @@ class EmployeeActionController extends Controller
         foreach ($request->dates as $date) {
             $date = Carbon::parse($date);
             $code_number = 'ORD'.$date->format('ymd').$user->id;
-            $menu = Menu::findOrFail($request->input($date->daye));
+            $menu = Menu::findOrFail($request->input($date->day));
             //inser into database
             DB::beginTransaction();
             try {
@@ -181,7 +181,16 @@ class EmployeeActionController extends Controller
                 return redirect()->back()->withErrors(['message' => $e->getMessage()]);
             }
         }
-		return redirect()->route('employee.create.order')->with(['message' => ' Order submited successfully.']);
+		return redirect()->back()->with(['message' => ' Order submited successfully.']);
+    }
+    public function delete_order($id)
+    {
+        $order = Order::findOrFail($id);
+        $date = Carbon::parse($order->order_date);
+        $message = "Your order on date ". $date->format('d, M Y'). ' has been canceled successfully.';
+        $order->delete();
+
+        return redirect()->back()->with(['message' => $message]);
     }
     public function store_review(Request $request, $code)
     {
