@@ -154,6 +154,7 @@ class CateringActionController extends Controller
         	$menu->total_served = $order->where('status',1)->count();
         	$menu->stars = $order->avg('stars');
         }
+        
 		return view('Catering.index_report',compact('user','now'));
 	}
 	public function index_review(Request $request)
