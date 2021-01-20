@@ -5,7 +5,7 @@
       setTimeout(function(){
         $(".notify").removeClass("active");
         $("#notifyType").removeClass("success");
-      },113000);
+      },3000);
     });
 
     $("#failure").click(function () {
@@ -15,5 +15,5 @@
       setTimeout(function(){
         $(".notify").removeClass("active");
         $("#notifyType").removeClass("failure");
-      },113000);
+      },3000);
     });
