@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Collection;
 use Carbon\Carbon;
 use Telegram\Bot\Laravel\Facades\Telegram;
-use Illuminate\Support\Facades\File;
 
 class CateringActionController extends Controller
 {
@@ -28,8 +27,6 @@ class CateringActionController extends Controller
 		$stars = 0;
 		$prev_stars = 0;
 		$menu_id = [];
-
-
 		foreach ($menu_today as $item) {
 			$item->total_order = $item->orders->where('order_date',$now->format('Y-m-d'))->count();
 		}
@@ -51,11 +48,9 @@ class CateringActionController extends Controller
 		else{
 			$persen_stars = ($stars / $prev_stars) * 100;
 		}
-
 		$reviews = Order::whereIn('menu_id',$menu_id)->where('review','!=',null)->orderBy('reviewed_at','desc')->get();
-		$total_menu_today = Order::where('order_date',$now->format('Y-m-d'))->whereIn('menu_id',$menu_id)->groupBy('menu_id')->count();
 
-		return view('Catering.dashboard',compact('menu_today','user','menus','total_review','stars','prev_stars','persen_stars','reviews','total_menu_today'));
+		return view('Catering.dashboard',compact('menu_today','user','menus','total_review','stars','prev_stars','persen_stars','reviews'));
 	}
 	public function index_menu()
 	{
@@ -69,11 +64,11 @@ class CateringActionController extends Controller
 			}
 		}
 
-		return view('Catering.index_menu',compact('menus','now'));
+		return view('Catering.index_Menu',compact('menus','now'));
 	}
 	public function create_menu()
 	{
-		return view('Catering.create_menu');
+		return view('Catering.create_Menu');
 	}
 	public function store_menu(Request $request)
 	{
@@ -86,7 +81,7 @@ class CateringActionController extends Controller
         ]);
 
         //create code number for menu
-		$last_id = Menu::orderBy('id','desc')->first()->id;
+		$last_id = Menu::all()->count();
 		$len = strlen(++$last_id);
 		for($i=$len; $i< 4; ++$i) {
 	        $last_id = '0'.$last_id;
@@ -116,6 +111,7 @@ class CateringActionController extends Controller
 				}
 			}
 
+
 			if($menu != null){
 		    	DB::commit();
         		return redirect()->route('catering.index.menu')->with(['message' => 'new Menu added successfully.']);
@@ -134,6 +130,8 @@ class CateringActionController extends Controller
 	}
 	public function update_menu(Request $request, $menu_code)
 	{
+		//declare variable
+		$now = Carbon::now();
 		$menu = Menu::where('menu_code',$menu_code)->first();
 		$menu->update([
 			'name' => $request->name,
@@ -148,12 +146,29 @@ class CateringActionController extends Controller
 			if(\File::exists(public_path($photo->file))){
 			    \File::delete(public_path($photo->file));
 			}
-			$file->move(public_path($photo->file));
+
+		    //create name and store photo
+			$imageName = Str::slug($menu->name).'_'.$now->format('Ymdhsi').'.'.$file->extension();
+			$file->move(public_path('images/photo-menu/'.$menu->menu_code), $imageName);
+			$fileName = 'images/photo-menu/'.$menu->menu_code.'/'.$imageName;
+			$photo->update([
+				'file' => $fileName
+			]);
+		}
+		foreach ($request->addPhoto as $new_image) {
+		    //create name and store photo
+			$imageName = Str::slug($menu->name).'_'.$now->format('Ymdhsi').'.'.$new_image->extension();
+			$new_image->move(public_path('images/photo-menu/'.$menu->menu_code), $imageName);
+			$fileName = 'images/photo-menu/'.$menu->menu_code.'/'.$imageName;
+			$photoMenu = PhotoMenu::create([
+				'menu_id' => $menu->id,
+				'file' => $fileName
+			]);
 		}
 
-		return redirect()->back();
+		return redirect()->back()->with(['message' => 'Menu '.$menu->name.' updated successfully.']);
 	}
-	public function check_photo($id)
+	public function delete_photo($id)
 	{
 		$photo = PhotoMenu::find($id);
 		$check = \File::exists(public_path($photo->file));
@@ -166,7 +181,7 @@ class CateringActionController extends Controller
 	{
 		//declare variable
 		$now = Carbon::now();
-		$orders = Order::where('order_date',$now->format('Y-m-d'))->orderBy('status')->get();
+		$orders = Order::where('order_date',$now->format('Y-m-d'))->get();
 
 		return view('Catering.index_catering',compact('now','orders'));
 	}
@@ -194,6 +209,7 @@ class CateringActionController extends Controller
         	$menu->total_served = $order->where('status',1)->count();
         	$menu->stars = $order->avg('stars');
         }
+        
 		return view('Catering.index_report',compact('user','now'));
 	}
 	public function index_review(Request $request)
@@ -206,7 +222,7 @@ class CateringActionController extends Controller
 		$to = null;
 
 		//get review data
-		$reviews = Order::whereIn('menu_id',$menu_id)->where('review','!=',null)->orderBy('reviewed_at','desc')->get();
+		$reviews = Order::whereIn('menu_id',$menu_id)->where('reviewed_at','<=',$now->format('Y-m-d'))->orderBy('reviewed_at','desc')->get();
 		if ($request->form != null && $request->to != null) {
 			$from = Carbon::parse($request->from);
 			$to = Carbon::parse($request->to);

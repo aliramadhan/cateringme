@@ -25,8 +25,7 @@
      <script src="{{asset('resources/table/bootstrap-table.min.js')}}"></script>
      <script src="{{asset('resources/table/bootstrap-table-locale-all.min.js')}}"></script>
      <script src="{{asset('resources/table/bootstrap-table-export.min.js')}}"></script>
-
- 
+   
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('public/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('resources/css/app.css') }}">
@@ -37,10 +36,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ asset('public/js/app.js') }}" defer></script>
     <link rel="stylesheet" href="{{ asset('resources/css/style.css') }}">
-    <script type="text/javascript">
-      function notifu(){}
-    </script>
-   
+
 </head>
 <body class="antialiased" onload="loader24();notifu();">
     <div id="loader-bk" >
@@ -201,21 +197,21 @@
 
 @livewireScripts
 <script type="text/javascript">
+  
+var myVar;
 
-  var myVar;
-  function loader24() {
-    myVar = setTimeout(showPage, 300);
-  }
+function loader24() {
+  myVar = setTimeout(showPage, 300);
+}
 
-  function showPage() {
-    document.getElementById("loader-bk").style.display = "none";
-    document.getElementById("loader").style.display = "none";  
-    document.getElementById("myDiv").style.display = "block";
-  }
+function showPage() {
+document.getElementById("loader-bk").style.display = "none";
+  document.getElementById("loader").style.display = "none";  
+  document.getElementById("myDiv").style.display = "block";
+}
 
 
 </script>
-
 <script src="{{ asset('resources/js/modal.js') }}"></script>
 <script src="{{ asset('resources/js/notif.js') }}"></script>
 </body>

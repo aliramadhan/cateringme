@@ -22,10 +22,6 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 Route::get('/', function () {
     return redirect()->route('login');
 });
-Route::get('/get_chat_id', function () {
-    $activity = Telegram::getUpdates();
-    dd($activity);
-});
 Route::middleware(['auth:sanctum'])->get('/dashboard', function () {
     if (auth()->user()->role == 'Employee') {
         return redirect()->route('employee.dashboard');
@@ -52,7 +48,7 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth:sanctum','role:Admin'
     //Manage Menu
     Route::get('/menu', [ AdminActionController::class, 'index_menu'])->name('admin.index.menu');
     Route::post('/menu', [ AdminActionController::class, 'scheduled_menu'])->name('admin.scheduled.menu');
-    Route::post('/update/menu-prize', [ AdminActionController::class, 'update_menu_prize'])->name('admin.update.menu_prize');
+    Route::post('/update/menu-price', [ AdminActionController::class, 'update_menu_price'])->name('admin.update.menu_price');
 
     //Manage Schedule
     Route::get('/schedule', [ AdminActionController::class, 'index_schedule'])->name('admin.index.schedule');
@@ -71,9 +67,9 @@ Route::group(['prefix' => 'catering',  'middleware' => ['auth:sanctum','role:Cat
     Route::post('/create/menu', [ CateringActionController::class, 'store_menu'])->name('catering.store.menu');
     Route::post('/served/menu', [ CateringActionController::class, 'served_menu'])->name('catering.served.menu');
     Route::get('/send/message', [ CateringActionController::class, 'send_message'])->name('catering.send.message');
-    Route::get('/menu/{menu_code}', [ CateringActionController::class, 'edit_menu'])->name('catering.edit.menu');
-    Route::put('/menu/update/{menu_code}', [ CateringActionController::class, 'update_menu'])->name('catering.update.menu');
-    Route::get('/photo/{id}', [ CateringActionController::class, 'check_photo'])->name('catering.check.photo');
+    Route::get('/edit/menu/{menu_code}', [ CateringActionController::class, 'edit_menu'])->name('catering.edit.menu');
+    Route::put('/update/menu/{menu_code}', [ CateringActionController::class, 'update_menu'])->name('catering.update.menu');
+    Route::get('/delete/photo/menu/{id}', [ CateringActionController::class, 'delete_photo'])->name('catering.delete.photo');
 
     //Report
     Route::get('/index/review', [ CateringActionController::class, 'index_review'])->name('catering.index.review');
@@ -83,10 +79,10 @@ Route::group(['prefix' => 'catering',  'middleware' => ['auth:sanctum','role:Cat
 //Role Employee
 Route::group(['prefix' => 'employee',  'middleware' => ['auth:sanctum','role:Employee']], function(){
     Route::get('/dashboard', [ EmployeeActionController::class, 'dashboard'])->name('employee.dashboard');
-    Route::get('/create/order', [ EmployeeActionController::class, 'create_order'])->name('employee.create.order');
+    Route::get('/create/order', [ EmployeeActionController::class, 'choose_order'])->name('employee.choose.order');
+    Route::get('/create/order/{month}', [ EmployeeActionController::class, 'create_order'])->name('employee.create.order');
     Route::post('/create/order/', [ EmployeeActionController::class, 'store_order'])->name('employee.store.order');
     Route::post('/review/{code}/', [ EmployeeActionController::class, 'store_review'])->name('employee.store.review');
-    Route::get('/order/{id}', [ EmployeeActionController::class, 'delete_order'])->name('employee.delete.order');
     Route::get('/history/order', [ EmployeeActionController::class, 'history_order'])->name('employee.history.order');
 
     //Get date

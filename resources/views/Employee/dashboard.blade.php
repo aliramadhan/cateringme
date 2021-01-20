@@ -1,35 +1,24 @@
 <x-app-layout>
- <div class="notify z-50 font-semibold absolute left-0"><span id="notifyType" class=""></span></div>
- <div id="success" class="invisible absolute"></div>
- <div id="failure" class="invisible absolute"></div>
-  @if (session('message'))
-  <script type="text/javascript">
-    function notifu(){
-      document.getElementById('success').click();
-      var scriptTag = document.createElement("script");        
-      document.getElementsByTagName("head")[0].appendChild(scriptTag);
-    }          
-  </script>
-  <style type="text/css">  .success:before{
-    Content:" {{ session('message') }}";
-  }</style>
 
-
-  @endif
   @if($errors->any())
-  <script type="text/javascript">
-    function notifu(){
-      document.getElementById('failure').click();
-      var scriptTag = document.createElement("script");        
-      document.getElementsByTagName("head")[0].appendChild(scriptTag);
-    }          
-  </script>
-  <style type="text/css">  .failure:before{
-    Content:"{{ implode('', $errors->all(':message')) }}";
-  }</style>
-
+  {{ implode('', $errors->all('<div>:message</div>')) }}
   @endif
-
+  <style type="text/css">
+    .pagination-info{
+            color: #fff;
+          }
+  </style>
+  @if(session('message'))
+  <div class="max-w-7xl mx-auto lg:px-8 bg-white border-t-4 rounded-b text-teal-darkest px-4 py-3 shadow-md my-2 " role="alert">
+    <div class="flex">
+      <svg class="h-6 w-6 text-teal mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg>
+      <div>
+        <p class="font-bold"> {{ session('message') }}</p>
+        <p class="text-sm">Make sure you know how these changes affect you.</p>
+      </div>
+    </div>
+  </div>  
+  @endif
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
       {{ __('Dashboard') }}
@@ -131,7 +120,7 @@
             <p class="text-5xl font-bold leading-none capitalize"> no catering schedule today   </p>        
 
             </div>
-            <p class="text-2xl mb-4 leading-none">Sorry you dont have catering schedule today, Please comeback tomorrow  </p>
+            <p class="text-2xl mb-4 leading-none">Sorry you dont have catering schedule today, Please comeback tommorow  </p>
              
           </div>
          
@@ -166,9 +155,7 @@
 
        <div class="bg-cover bg-top w-full md:w-1/4 bg-gradient-to-t bg-blue-400 to bg-green-400 bg-center text-white  object-fill" style="background-image: url(https://assets.kompasiana.com/items/album/2018/04/16/suasana-kantor-24slides-indonesia-3-5ad4a44bcaf7db40dd0deff2.jpg?t=o&v=760});">
       <div class=" p-4 h-full px-10 grid grid-rows-4" style="background-image: linear-gradient(60deg,#252525,#27272769) !important;">
-        <div>
-        <p class="font-bold text-lg uppercase mb-8 border-b-2 w-min "> Tomorrow Breakfast </p>
-        </div>
+        <p class="font-bold text-lg uppercase mb-8 border-b-2 "> Tomorrow Breakfast </p>
         <p class="text-4xl font-bold row-span-2 capitalize"> no catering schedule for tomorrow </p>
          
       </div>
@@ -195,7 +182,7 @@
         <div class="col-span-2 text-4xl text-left text-gray-600 mb-9 font-base flex item-center">          
           <p class="flex-auto text-left font-semibold ">
             <span class="font-normal text-gray-600"> Schedule </span>{{Carbon\Carbon::now()->format('F Y')}}</p>
-          <a href="{{ route('employee.create.order') }}" id="btn-slide-dis-2"  class="inline-block rounded-full font-medium leading-none py-2 px-2 focus:outline-none text-gray-400 hover:text-gray-700 focus:text-blue-600 duration-500">
+          <a href="{{ route('employee.choose.order') }}" id="btn-slide-dis-2"  class="inline-block rounded-full font-medium leading-none py-2 px-2 focus:outline-none text-gray-400 hover:text-gray-700 focus:text-blue-600 duration-500">
               <i class="fas fa-plus"></i>
             </a>
         </div>
@@ -210,24 +197,22 @@
         
           @if($schedule == null)
           <div class="flex items-center bg-gradient-to-r from-red-400 to-red-200 border-orange-500 gap-2 p-2 rounded border-l-4 mb-2">
-            <div class=" text-center w-8 text-xl text-white leading-7 font-bold flex-initial">
-              {{$start_date->format('d')}}
-            </div>            
-            <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto uppercase font-semibold">
-              <a href="#">day off</a>
-            </div>
+          <div class=" text-center w-8 text-xl text-white leading-7 font-bold flex-initial">
+            {{$start_date->format('d')}}
+          </div>            
+          <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto uppercase font-semibold">
+            <a href="#">day off</a>
+          </div>
+          @elseif($order == null)
+          <div class="flex items-center bg-gradient-to-r from-transparent to-gray-200 border-gray-500 gap-2 p-2 rounded border-l-4 mb-2">
+          <div class=" text-center w-8 text-xl text-gray-700 leading-7 font-bold flex-initial">
+            {{$start_date->format('d')}}
+          </div>
+          <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto uppercase font-semibold">
+            <a href="#">empty schedule</a>
+          </div>
 
-            @elseif($order == null)
-            <div class="flex items-center bg-gradient-to-r from-transparent to-gray-200 border-gray-500 gap-2 p-2 rounded border-l-4 mb-2 animate transform transition-transform hover:-translate-y-1 duration-1000 cursor-pointer hover:bg-gray-200">
-              <div class=" text-center w-8 text-xl text-gray-700 leading-7 font-bold flex-initial">
-                {{$start_date->format('d')}}
-              </div>
-
-              <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto uppercase font-semibold">
-                <a href="{{route('employee.create.order')}}">empty schedule</a>
-              </div>
-
-          
+          <div class="flex items-center bg-gradient-to-r from-transparent to-blue-200 border-blue-500 gap-2 p-2 rounded border-l-4 mb-2">
           @elseif($order != null)    
            <div class="flex items-center bg-gradient-to-r from-transparent to-blue-200 border-blue-500 gap-2 p-2 rounded border-l-4 mb-2">
           <div class=" text-center w-8 text-xl text-blue-400 leading-7 font-bold flex-initial">
@@ -236,19 +221,10 @@
 
           <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto">
             <a href="#">{{$order->menu->name}}</a>
-          
           </div>
         
-            <img src="{{ url('public/'.$order->menu->photos->random()->file)}}" class="object-cover h-8 w-8 mr-2 rounded flex-initial">
-            @if($start_date > Carbon\Carbon::now())
-            <a href="{{route('employee.delete.order',$order->id)}}" onclick="return confirm('Cancel order date {{$start_date->format('d, M Y')}}')">
-              <div class="close-container shadow-lg">
-                <div class="leftright bg-white "></div>
-                <div class="rightleft bg-white "></div>
-              </div>
-            </a>
-            @endif
-
+            <img src="{{ url('public/'.$order->menu->photos->random()->file)}}" class="object-cover h-8 w-8 rounded flex-initial">
+        
           @endif
         </div>
 
@@ -318,7 +294,7 @@
         @endforeach
 
          <span id="pc1" class="contents hidden"> 
-        @foreach($reviews as $review)
+           @foreach($reviews as $review)
         @if($review->review == null)
         @php continue; @endphp
         @endif
@@ -375,7 +351,7 @@
         @endforeach
          </span>
         <button onclick="pcsh1()" class="contents cursor-pointer" id="pc2">
-            <div class="bg-gray-500 col-start-4 col-end-7 rounded-full my-4 mr-auto shadow-md animate transform transition-transform hover:translate-y-2  duration-1000 hover:bg-gray-700text-center mx-auto cursor-pointer w-4/12 py-3">
+            <div class="bg-gray-500 col-start-4 col-end-7 rounded-full my-4 mr-auto shadow-md animate transform transition-transform hover:translate-y-2 hover:bg-gray-700 duration-1000 text-center mx-auto cursor-pointer w-4/12 py-3">
               <h3 class="font-semibold text-white "><i class="fas fa-chevron-down text-4xl"></i></h3>          
 
             </div>
