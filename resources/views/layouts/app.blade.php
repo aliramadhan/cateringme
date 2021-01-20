@@ -42,7 +42,7 @@
     </script>
    
 </head>
-<body class="antialiased" onload="loader24();notifu()">
+<body class="antialiased" onload="loader24();notifu();">
     <div id="loader-bk" >
     <div id="loader">
       <div class="spinner">
