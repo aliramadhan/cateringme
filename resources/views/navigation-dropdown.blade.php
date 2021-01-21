@@ -21,11 +21,11 @@
                         <x-jet-nav-link href="{{ route('admin.index.account') }}" :active="request()->routeIs('admin.index.account')">
                             {{ __('Manage Account') }}
                         </x-jet-nav-link>
-                        <x-jet-nav-link href="{{ route('admin.index.menu') }}" :active="request()->routeIs('admin.index.menu')">
-                            {{ __('Manage Menu') }}
-                        </x-jet-nav-link>
                         <x-jet-nav-link href="{{ route('admin.index.schedule') }}" :active="request()->routeIs('admin.index.schedule')">
                             {{ __('Manage Schedule') }}
+                        </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('admin.index.menu') }}" :active="request()->routeIs('admin.index.menu')">
+                            {{ __('Index Menu') }}
                         </x-jet-nav-link>
                        
                         <div class="hidden sm:flex sm:items-center sm:ml-6 hover:border-gray-300  focus:outline-none focus:text-gray-700 focus:border-gray-300  border-transparent 

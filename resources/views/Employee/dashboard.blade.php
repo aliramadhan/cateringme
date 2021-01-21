@@ -221,7 +221,15 @@
             <a href="#">{{$order->menu->name}}</a>
           </div>
         
-            <img src="{{ url('public/'.$order->menu->photos->random()->file)}}" class="object-cover h-8 w-8 rounded flex-initial">
+            <img src="{{ url('public/'.$order->menu->photos->random()->file)}}" class="object-cover h-8 w-8 mr-2 rounded flex-initial">
+            @if($start_date > Carbon\Carbon::now())
+            <a href="{{route('employee.delete.order',$order->id)}}" onclick="return confirm('Cancel order date {{$start_date->format('d, M Y')}}')">
+              <div class="close-container shadow-lg">
+                <div class="leftright bg-white "></div>
+                <div class="rightleft bg-white "></div>
+              </div>
+            </a>
+            @endif
         
           @endif
         </div>

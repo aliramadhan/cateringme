@@ -170,15 +170,14 @@ class EmployeeActionController extends Controller
         }
         return view('Employee.choose_order',compact('months','menus','start','total_date','now','user','off_date'));
     }*/
-    public function create_order($month)
+    public function create_order()
     {
-    	//declare variable
+        //declare variable
         $now = Carbon::now();
-    	$month =  Carbon::parse($month);
-    	$dates = $month->daysInMonth;
-    	$menus = Menu::where('show',1)->get();
-
-        return view('Employee.create_order',compact('dates','month','menus','now'));
+        $next_month = Carbon::parse($now->format('Y-m'))->addMonth()->startOfMonth();
+        $start = Carbon::now()->startOfMonth();
+        $stop = Carbon::now()->endOfMonth();
+        return view('Employee.create_order',compact('now','start','stop','next_month'));
     }
     public function store_order(Request $request)
     {   
@@ -186,7 +185,6 @@ class EmployeeActionController extends Controller
         $this->validate($request, [
             'dates' => ['required'],
         ]);
-
         //declare
         $now = Carbon::now();
         $user = auth()->user();
@@ -226,7 +224,16 @@ class EmployeeActionController extends Controller
                 return redirect()->back()->withErrors(['message' => $e->getMessage()]);
             }
         }
-		return redirect()->route('employee.choose.order')->with(['message' => ' Order submited successfully.']);
+		return redirect()->route('employee.create.order')->with(['message' => ' Order submited successfully.']);
+    }
+    public function delete_order($id)
+    {
+        $order = Order::findOrFail($id);
+        $date = Carbon::parse($order->order_date);
+        $message = "Your order on date ". $date->format('d, M Y'). ' has been canceled successfully.';
+        $order->delete();
+
+        return redirect()->back()->with(['message' => $message]);
     }
     public function store_review(Request $request, $code)
     {
