@@ -182,7 +182,7 @@
         <div class="col-span-2 text-4xl text-left text-gray-600 mb-9 font-base flex item-center">          
           <p class="flex-auto text-left font-semibold ">
             <span class="font-normal text-gray-600"> Schedule </span>{{Carbon\Carbon::now()->format('F Y')}}</p>
-          <a href="{{ route('employee.choose.order') }}" id="btn-slide-dis-2"  class="inline-block rounded-full font-medium leading-none py-2 px-2 focus:outline-none text-gray-400 hover:text-gray-700 focus:text-blue-600 duration-500">
+          <a href="{{ route('employee.create.order') }}" id="btn-slide-dis-2"  class="inline-block rounded-full font-medium leading-none py-2 px-2 focus:outline-none text-gray-400 hover:text-gray-700 focus:text-blue-600 duration-500">
               <i class="fas fa-plus"></i>
             </a>
         </div>
