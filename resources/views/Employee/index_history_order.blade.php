@@ -53,62 +53,73 @@
 
       <div class="grid grid-flow-row md:grid-cols-3 grid-cols-1 gap-6 w-full text-center mt-6 h-max"   style="height: fit-content;">      
          <h3 class="col-span-3 min-w-0 font-medium text-5xl leading-snug text-center mb-6 h-15 ">
-           Januari
+           {{$start->format('F Y')}}
        </h3> 
         <ul id="myUL" class="col-span-3 md:contents">    
-        
-         <li>
-          <a href="#">
-            <div class="flex flex-col text-center mb-6 gap-2 border border-opacity-25 h-auto top-0 w-full mx-auto check-resize bg-white p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500 ">
-             <span>  
-              <div class="  text-4xl font-semibold text-white absolute mt-4 px-4 py-1 bg-white rounded-r-lg -ml-3 shadow-md bg-gradient bg-gradient-to-b from-blue-400 to-purple-500">1</div>
-            </span>
-            <div >
+        @for($i = 1; $i <= $now->daysInMonth; $i++, $start->addDay())
+          @php
+            $schedule = App\Models\ScheduleMenu::where('date',$start->format('Y-m-d'))->first();
+            $order = auth()->user()->orders->where('order_date',$start->format('Y-m-d'))->first();
+          @endphp
+          @if($order != null)
+          <li>
+            <a href="#">
+              <div class="flex flex-col text-center mb-6 gap-2 border border-opacity-25 h-auto top-0 w-full mx-auto check-resize bg-white p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500 ">
+               <span>  
+                <div class="  text-4xl font-semibold text-white absolute mt-4 px-4 py-1 bg-white rounded-r-lg -ml-3 shadow-md bg-gradient bg-gradient-to-b from-blue-400 to-purple-500">{{$start->day}}</div>
+              </span>
+              <div >
 
-              <img src="https://ik.imagekit.io/tvlk/cul-asset/C8Kj5-dCnE75BMxGpYYdcJVuEQbV3CnmF8ONfpQKM2n9jzSxIGG5kZNhhHY-p7nw/v2/culinary-tool-asset/guys1L+Yyer9kzI3sp/pb0CG1j2bhflZGFUZOoIf1YMmzMd/HaD8U/YhZI+EvjMM+6RmcSU0aUVNGx3wRqN5pP0keA7RLz7K0qz+rQQ2tkek/C/Qa1+AObSOJfQ+O4xbjP+ZySSLb4psxZDZokrmMTCJkMP1sVwxd7HQVsdCpIyuaMwwbgeWu94ExJkiy1+S?tr=q-40,c-at_max,w-1080,h-1920&_src=imagekit" alt="#" class="h-52 rounded-xl object-cover w-full">
+                <img src="{{url('public/'.$order->menu->photos->first()->file)}}" alt="#" class="h-52 rounded-xl object-cover w-full">
 
+              </div>
+              <div class=" text-base font-bold text-gray-600 text-left px-2">{{$order->menu->name}}</div>
+              <div class=" text-base font-base text-gray-600 text-left px-2">{{$order->menu->desc}}</div>     
+              <div class=" text-base font-base text-orange-500 text-right px-2">@for($k = 1; $k <= $order->menu->orders->avg('stars'); $k++) <i class="fas fa-star"></i>@endfor </div>     
+              </div>
+            </a>
+          </li>
+          @elseif($schedule == null)
+          <li>
+            <a href="#">
+              <div class="flex flex-col text-center mb-6 gap-2 border border-opacity-25 h-auto top-0 w-full mx-auto check-resize bg-white p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500 ">
+               <span>  
+                <div class="  text-4xl font-semibold text-white absolute mt-4 px-4 py-1 bg-white rounded-r-lg -ml-3 shadow-md bg-gradient bg-gradient-to-b from-red-400 to-orange-500">{{$start->day}}</div>
+              </span>
+              <div style="background-image:url(https://assets.kompasiana.com/items/album/2018/04/16/suasana-kantor-24slides-indonesia-3-5ad4a44bcaf7db40dd0deff2.jpg?t=o&v=760);" class="rounded-xl bg-cover w-full">
+               <div class="h-full md:py-20 md:px-8 p-8 text-white" style="background-image: linear-gradient(0deg,#252525,#27272769) !important;">
+                <p class="font-bold text-3xl uppercase mb-2"> Day Off</p>   
+                <p class="text-xl font-semibold leading-1 capitalize"> no catering schedule for <br> {{$start->format('d F Y')}} </p>                       
+              </div>                 
             </div>
-            <div class=" text-base font-bold text-gray-600 text-left px-2">Nasi Padang</div>
-            <div class=" text-base font-base text-gray-600 text-left px-2">Deskripsi</div>     
-            <div class=" text-base font-base text-orange-500 text-right px-2">(120 review) <i class="fas fa-star"></i> </div>     
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="#">
-          <div class="flex flex-col text-center mb-6 gap-2 border border-opacity-25 h-auto top-0 w-full mx-auto check-resize bg-white p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500 ">
-           <span>  
-            <div class="  text-4xl font-semibold text-white absolute mt-4 px-4 py-1 bg-white rounded-r-lg -ml-3 shadow-md bg-gradient bg-gradient-to-b from-red-400 to-orange-500">2</div>
-          </span>
-          <div style="background-image:url(https://assets.kompasiana.com/items/album/2018/04/16/suasana-kantor-24slides-indonesia-3-5ad4a44bcaf7db40dd0deff2.jpg?t=o&v=760);" class="rounded-xl bg-cover w-full">
-           <div class="h-full md:py-20 md:px-8 p-8 text-white" style="background-image: linear-gradient(0deg,#252525,#27272769) !important;">
-            <p class="font-bold text-3xl uppercase mb-2"> Day Off</p>   
-            <p class="text-xl font-semibold leading-1 capitalize"> no catering schedule for <br> 2 Januari 2021 </p>                       
-          </div>                 
-        </div>
 
 
 
-      </div>
-    </a>
-  </li>
+              </div>
+            </a>
+          </li>
+          @else
+          <li>
+            <a href="#">
+              <div class="flex flex-col text-center mb-6 gap-2 border border-opacity-25 h-auto top-0 w-full mx-auto check-resize bg-white p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500 ">
+               <span>  
+                <div class="  text-4xl font-semibold text-white absolute mt-4 px-4 py-1 bg-gray-600 rounded-r-lg -ml-3 shadow-md bg-white">{{$start->day}}</div>
+              </span>
+              <div >
+               <div class="h-full md:py-20 md:px-8 p-8 text-gray-600" >
+                <p class="font-bold text-3xl uppercase mb-2"> Empty Schedule</p>   
+                <p class="text-xl font-semibold leading-1 capitalize">You not take Catering for <br> {{$start->format('d F Y')}} </p>                       
+              </div>                 
+            </div>
+            </div>
+          </a>
+          </li>
+          @endif
+        @endfor
 
-        <li>
-          <a href="#">
-            <div class="flex flex-col text-center mb-6 gap-2 border border-opacity-25 h-auto top-0 w-full mx-auto check-resize bg-white p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500 ">
-             <span>  
-              <div class="  text-4xl font-semibold text-white absolute mt-4 px-4 py-1 bg-gray-600 rounded-r-lg -ml-3 shadow-md bg-white">3</div>
-            </span>
-            <div >
-             <div class="h-full md:py-20 md:px-8 p-8 text-gray-600" >
-              <p class="font-bold text-3xl uppercase mb-2"> Empty Schedule</p>   
-              <p class="text-xl font-semibold leading-1 capitalize">You not take Catering for <br> 3 Januari 2021 </p>                       
-            </div>                 
-          </div>
-        </div>
-      </a>
-      </li>
+      
+
+        
     
 </div>
 
@@ -167,30 +178,4 @@
 </div>
 <script src="{{asset('resources/js/myJs.js')}}"></script>
 <script src="{{asset('resources/js/searching.js')}}"></script>
-    <form>
-    @csrf
-      <input type="month" name="month" min="2020-12" max="{{$now->format('Y-m')}}">
-      <input type="submit" name="submit">
-    </form>
-    <table>
-      <thead>
-          <tr>
-            <th>No.</th>
-            <th>Date</th>
-            <th>Menu</th>
-          </tr>
-      </thead>
-      <tbody>
-        @for($i = 1; $i <= $now->daysInMonth; $i++, $start->addDay())
-          @php
-            $order = auth()->user()->orders->where('order_date',$start->format('Y-m-d'))->first();
-          @endphp
-          <tr>
-            <td>{{$i}}</td>
-            <td>{{$start->format('d, M Y')}}</td>
-            <td>@if($order != null) {{$order->menu->name}} @endif</td>
-          </tr>
-        @endfor
-      </tbody>
-    </table>
 </x-app-layout>
