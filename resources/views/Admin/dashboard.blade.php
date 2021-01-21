@@ -1,9 +1,36 @@
 <x-app-layout>
 
-	@if($errors->any())
-	{{ implode('', $errors->all('<div>:message</div>')) }}
-	@endif
+	  <div class="notify z-50 font-semibold absolute left-0"><span id="notifyType" class=""></span></div>
+	<div id="success" class="invisible absolute"></div>
+	<div id="failure" class="invisible absolute"></div>
 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+	@if (session('message'))
+	<script type="text/javascript">
+		function notifu(){
+			document.getElementById('success').click();
+			var scriptTag = document.createElement("script");        
+			document.getElementsByTagName("head")[0].appendChild(scriptTag);
+		}          
+	</script>
+	<style type="text/css">  .success:before{
+		Content:" {{ session('message') }}";
+	}</style>
+
+
+	@endif
+	@if($errors->any())
+	<script type="text/javascript">
+		function notifu(){
+			document.getElementById('failure').click();
+			var scriptTag = document.createElement("script");        
+			document.getElementsByTagName("head")[0].appendChild(scriptTag);
+		}          
+	</script>
+	<style type="text/css">  .failure:before{
+		Content:"{{ implode('', $errors->all(':message')) }}";
+	}</style>	
+	@endif
 	
 	<x-slot name="header">
 		<h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -11,17 +38,57 @@
 		</h2>
 	</x-slot>
 	<!--Modal-->
-<<<<<<< HEAD
-
-=======
-	
-
 	<form action="{{route('admin.update.menu_price')}}" method="POST">
 	@csrf
-	<input type="number" name="price">
-	<input type="submit" name="submit">
-	</form>
->>>>>>> origin/master
+	 <div class="modal z-50 opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+      <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+
+      <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+
+        <div class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+          <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+            <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+          </svg>
+          <span class="text-sm">(Esc)</span>
+        </div>
+
+        <!-- Add margin if you want to see some of the overlay behind the modal-->
+        <div class="modal-content py-4 text-left px-6">
+          <!--Title-->
+          <div class="flex justify-between items-center pb-3">
+            <p class="text-2xl font-normal text-gray-600">Configuration <font class="text-orange-500">Catering Price</font></p>
+            <div class="modal-close cursor-pointer z-50">
+              <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+              </svg>
+            </div>
+          </div>
+
+          <!--Body-->
+          <div class="my-6">
+          	<label for="price" class="block text-base font-medium text-gray-700">Price</label>
+          	<div class="mt-1 relative rounded-md shadow-sm">
+          		<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          			<span class="text-gray-500 sm:text-sm">
+          				Rp.
+          			</span>
+          		</div>
+          		<input type="text" name="prize" id="price" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full py-2 pl-10 text-base border-gray-300 rounded-md border" placeholder="0.00">
+          		
+          	</div>
+          </div>
+          
+          <!--Footer-->
+          <div class="flex justify-end pt-2">
+
+            <button class=" px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Save</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    </form>
+
 	<div class="p-6 border-b border-gray-200" style="background-color: #0093E9;
 	background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);">
 		<div class="col-span-2 text-2xl text-center mb-6 font-semibold text-white">          
@@ -276,6 +343,23 @@
 			@endforeach
 		</div>
 	
+	</div>
+
+	<div class="col-span-2 gap-4  font-base rounded-xl py-6 flex items-center md:flex-row flex-col">  
+		<div class="text-center mt-6 font-base bg-catering rounded-xl py-6 px-4 w-full" > 
+			<p class="text-2xl font-normal text-white mb-4 text-left">Total Fee <span class="font-semibold">Today</span></p>
+			<h4 class="text-4xl uppercase font-semibold text-white leading-tight">Rp. {{($orders->sum('fee'))}}</h4>
+		</div>
+
+		<div class="text-center mt-6 font-base bg-price rounded-xl py-6 px-4 w-full" > 
+			<div class="flex">
+				<p class="text-2xl font-semibold text-white mb-4 text-left flex-auto">Catering Price</p>
+				<div id="modal-click" class="modal-open">
+					<i class="fas fa-cog border rounded-full p-2 hover:border-orange-700 font-semibold text-gray-100 hover:text-orange-700 duration-500 cursor-pointer "></i></div>  
+				</div>
+				<h4 class="text-4xl uppercase font-semibold text-white leading-tight">Rp. {{($menu->price)}}</h4>
+			</div>
+
 	</div>
 
 	<div class="col-span-2 text-center mt-6 font-base bg-white rounded-xl py-6">       
