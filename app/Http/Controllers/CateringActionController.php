@@ -130,40 +130,54 @@ class CateringActionController extends Controller
 	}
 	public function update_menu(Request $request, $menu_code)
 	{
+
 		//declare variable
 		$now = Carbon::now();
 		$menu = Menu::where('menu_code',$menu_code)->first();
-		$menu->update([
-			'name' => $request->name,
-			'desc' => $request->desc
-		]);
-		foreach ($menu->photos as $photo) {
-			$file = $request->file($photo->id);
-			if ($file == null) {
-				continue;
-			}
 
-			if(\File::exists(public_path($photo->file))){
-			    \File::delete(public_path($photo->file));
-			}
+		//Validation Request
+		if ($request->submit == 'UpdateInfo') {
+			$this->validate($request, [
+	            'name' => ['required'],
+	            'desc' => ['required']
+	        ]);
 
-		    //create name and store photo
-			$imageName = Str::slug($menu->name).'_'.$now->format('Ymdhsi').'.'.$file->extension();
-			$file->move(public_path('images/photo-menu/'.$menu->menu_code), $imageName);
-			$fileName = 'images/photo-menu/'.$menu->menu_code.'/'.$imageName;
-			$photo->update([
-				'file' => $fileName
+			$menu->update([
+				'name' => $request->name,
+				'desc' => $request->desc,
 			]);
 		}
-		foreach ($request->addPhoto as $new_image) {
-		    //create name and store photo
-			$imageName = Str::slug($menu->name).'_'.$now->format('Ymdhsi').'.'.$new_image->extension();
-			$new_image->move(public_path('images/photo-menu/'.$menu->menu_code), $imageName);
-			$fileName = 'images/photo-menu/'.$menu->menu_code.'/'.$imageName;
-			$photoMenu = PhotoMenu::create([
-				'menu_id' => $menu->id,
-				'file' => $fileName
-			]);
+		elseif($request->submit == 'UpdatePhoto'){
+	        foreach ($menu->photos as $photo) {
+				$file = $request->file($photo->id);
+				if ($file == null) {
+					continue;
+				}
+
+				if(\File::exists(public_path($photo->file))){
+				    \File::delete(public_path($photo->file));
+				}
+
+			    //create name and store photo
+				$imageName = Str::slug($menu->name).'_'.$now->format('Ymdhsi').'.'.$file->extension();
+				$file->move(public_path('images/photo-menu/'.$menu->menu_code), $imageName);
+				$fileName = 'images/photo-menu/'.$menu->menu_code.'/'.$imageName;
+				$photo->update([
+					'file' => $fileName
+				]);
+			}
+			if($request->addPhoto != null){
+				foreach ($request->addPhoto as $new_image) {
+				    //create name and store photo
+					$imageName = Str::slug($menu->name).'_'.$now->format('Ymdhsi').'.'.$new_image->extension();
+					$new_image->move(public_path('images/photo-menu/'.$menu->menu_code), $imageName);
+					$fileName = 'images/photo-menu/'.$menu->menu_code.'/'.$imageName;
+					$photoMenu = PhotoMenu::create([
+						'menu_id' => $menu->id,
+						'file' => $fileName
+					]);
+				}
+			}
 		}
 
 		return redirect()->back()->with(['message' => 'Menu '.$menu->name.' updated successfully.']);
@@ -172,10 +186,13 @@ class CateringActionController extends Controller
 	{
 		$photo = PhotoMenu::find($id);
 		$check = \File::exists(public_path($photo->file));
-		return dd($check);
-		if($check){
+		$message = 'Photo '.$photo->menu->name.' deleted successfully.';
+		if($check && $photo != null){
 			$delete = \File::exists(public_path($photo->file));
+			$photo->delete();
 		}
+		return redirect()->back()->with(['message' => $message]);
+
 	}
 	public function index_catering()
 	{
@@ -257,27 +274,6 @@ class CateringActionController extends Controller
 	}
 	public function send_message()
 	{
-		$now = Carbon::now();
-		$orders = Order::where('order_date',$now->format('Y-m-d'))->get();
-		$menus = Order::where('order_date',$now->format('Y-m-d'))->groupBy('menu_id')->get();
-		$data = new Collection;
-		$i = 1;
-		$text = "Notification Catering Today \n".$now->format('d, M Y')."\n \n";
-		foreach ($menus as $order) {
-			$menu = Menu::findOrFail($order->menu_id);
-			$data->push((object)[
-				'Menu' => $menu->name,
-				'total_order' => $orders->where('menu_id',$menu->id)->count()
-			]);
-			$text .= $i.". ".$menu->name." => ".$orders->where('menu_id',$menu->id)->count()."\n";
-			$i++;
-		}
-		$text .= "\n ============================\n \n Total order = ".$orders->count(). " \n Total fee = ".number_format($orders->sum('fee'));
-	    Telegram::sendMessage([
-	        'chat_id' => env('TELEGRAM_CHANNEL_ID',''),
-	        'parse_mode' => 'HTML',
-	        'text' => $text
-	    ]);
-		return dd($text);
+		
 	}
 }

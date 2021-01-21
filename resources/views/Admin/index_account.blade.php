@@ -10,7 +10,7 @@
   <div id="success" class="invisible absolute"></div>
    <div id="failure" class="invisible absolute"></div>
   
-      @if (session('message'))
+      @if(session('message'))
         <script type="text/javascript">
           function notifu(){
           document.getElementById('success').click();
@@ -32,7 +32,7 @@
           document.getElementsByTagName("head")[0].appendChild(scriptTag);
         }          
       </script>
-        <style type="text/css">  .success:before{
+        <style type="text/css">  .failure:before{
           Content:"{{ implode('', $errors->all(':message')) }}";
         }</style>
        

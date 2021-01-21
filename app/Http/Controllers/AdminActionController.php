@@ -108,9 +108,9 @@ class AdminActionController extends Controller
 		    // all good
 		} catch (\Exception $e) {
 		    DB::rollback();
-        	return redirect()->back()->withInputs()->withErrors(['message' => 'new Account added.']);
+        	return redirect()->back()->withInputs()->withErrors(['message' => $e->getMessage()]);
 		}
-        return redirect()->route('admin.index.account')->with(['message' => 'new Account added.']);
+        return redirect()->route('admin.index.account')->with(['message' => 'new '.$request->role.' added succesfully.']);
 	}
 	public function index_menu()
 	{

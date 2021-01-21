@@ -40,7 +40,7 @@
 	<!--Modal-->
 	<form action="{{route('admin.update.menu_price')}}" method="POST">
 	@csrf
-	 <div class="modal z-50 opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+ <div class="modal z-50 opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
       <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
       <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
@@ -88,7 +88,6 @@
       </div>
     </div>
     </form>
-
 	<div class="p-6 border-b border-gray-200" style="background-color: #0093E9;
 	background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);">
 		<div class="col-span-2 text-2xl text-center mb-6 font-semibold text-white">          

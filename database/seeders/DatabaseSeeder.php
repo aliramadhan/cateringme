@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
+        /*
         DB::table('users')->insert([
             'name' => 'Catering 1',
             'email' => 'catering1@cateringme.com',
@@ -91,6 +92,6 @@ class DatabaseSeeder extends Seeder
             'file' => 'images/photo-menu/MNU0002/gado-gado_2.jpg',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
-        ]);
+        ]);*/
     }
 }
