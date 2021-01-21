@@ -34,7 +34,7 @@
               document.getElementsByTagName("head")[0].appendChild(scriptTag);
             }          
           </script>
-            <style type="text/css">  .success:before{
+            <style type="text/css">  .failure:before{
               Content:"  {{ implode('', $errors->all(':message')) }}";
             }</style>
            
@@ -51,22 +51,22 @@
             Selection of schedule for order
           </h3>
         </div>
-        <div class="ml-4 flex flex-shrink-0 items-center">
+        <div class="ml-4 flex flex-shrink-0 items-center cursor-pointer">
           <div class="flex items-center text-sm sm:hidden">
-            <a onclick="previousSlide()" id="btn-slide-dis" class="inline-block rounded-lg font-medium leading-none py-3 px-3 focus:outline-none text-gray-400 hover:text-gray-600 focus:text-gray-600">
+            <button onclick="previousSlide()" id="btn-slide-dis" class="inline-block rounded-lg font-medium leading-none py-3 px-3 focus:outline-none text-gray-400 hover:text-gray-600 focus:text-gray-600">
               <i class="fas fa-calendar-week"></i>
-            </a>
-            <a onclick="nextSlide()" id="btn-slide-dis-2"  class="inline-block rounded-lg font-medium leading-none py-3 px-3 focus:outline-none text-gray-400 hover:text-gray-600 focus:text-gray-600">
+            </button>
+            <button onclick="nextSlide()" id="btn-slide-dis-2"  class="inline-block rounded-lg font-medium leading-none py-3 px-3 focus:outline-none text-gray-400 hover:text-gray-600 focus:text-gray-600">
               <i class="fas fa-utensils"></i>
-            </a>
+            </button>
           </div>
           <div class="hidden sm:flex items-center text-sm md:text-base">
-            <a id="btn-slide-disx" onclick="previousSlide()"   class="ml-2 inline-block rounded-lg font-medium leading-none py-2 px-3 focus:outline-none text-gray-500 hover:text-indigo-600 focus:text-indigo-600 ">
+            <button id="btn-slide-disx" onclick="previousSlide()"   class="ml-2 inline-block rounded-lg font-medium leading-none py-2 px-3 focus:outline-none text-gray-500 hover:text-indigo-600 focus:text-indigo-600 ">
               Schedule
-            </a>
-            <a id="btn-slide-dis-2x"  onclick="nextSlide()"  class="ml-2 inline-block rounded-lg font-medium leading-none py-2 px-3 focus:outline-none text-gray-500 hover:text-indigo-600 focus:text-indigo-600" >          
+            </button>
+            <button id="btn-slide-dis-2x"  onclick="nextSlide()"  class="ml-2 inline-block rounded-lg font-medium leading-none py-2 px-3 focus:outline-none text-gray-500 hover:text-indigo-600 focus:text-indigo-600" >          
               Food Menu
-            </a>
+            </button>
 
           </div>
           <div class="hidden sm:flex sm:items-center">
@@ -134,24 +134,23 @@
           </div>
         </div>
   
-        <div class="absolute inset-0 w-full h-full bg-gray-900 text-white flex text-5xl transition-all ease-in-out duration-1000 transform translate-x-full slide p-6" >
+        <div class="absolute inset-0 w-full h-full bg-gray-900 text-white flex text-5xl transition-all ease-in-out duration-1000 transform translate-x-full slide p-6 overflow-y-auto" >
 
-          <div class="flex flex-col w-full">
-            <h3 class="flex-shrink min-w-0 font-regular text-2xl leading-snug truncate text-center mb-6 h-15 ">
+           <div class="grid grid-flow-row md:grid-cols-3 grid-cols-1 gap-6 w-full text-center mt-6 h-max">  
+           <h3 class="col-span-3 min-w-0 font-medium text-2xl leading-snug text-center mb-6 h-15 ">
              Select Your Menu
             </h3>
+        
 
-            <div class="grid grid-cols-2 md:grid-cols-4 row-span-2 md:row-span-1 w-full overflow-y-auto">
-              
-              <ul id="myUL" class="contents">   
+              <ul id="myUL" class=" md:contents col-span-3 ">   
                 @foreach($menus as $menu) 
                 <li>
                   <input type="checkbox" id="{{$menu->id}}" name="menus[]" value="{{$menu->id}}" class="schedule-menu hidden" >
                   <label for="{{$menu->id}}">
-                    <div class="flex flex-col text-center mb-6 gap-2 border-2 border-gray-700 border-opacity-25 h-auto top-0 w-full mx-auto check-resize bg-gray-700  p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500">
+                    <div class="flex flex-col text-center mb-6 gap-2 border-2 border-gray-700 border-opacity-25 h-auto top-0 w-full mx-auto check-resize bg-gray-700 p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500">
                       <div>
                         <span>  
-                          <div class="  text-xl font-semibold text-white capitalize mt-3 absolute  px-1 py-1 bg-gray-700 rounded-r-lg truncate w-3/4">{{$menu->name}}             
+                          <div class="  text-xl font-semibold text-white capitalize mt-3 absolute px-1 py-1 bg-gray-700 rounded-r-lg truncate w-3/4">{{$menu->name}}    
                           </div>
                         </span>
                         <img src="{{url('public/'.$menu->photos->random()->file)}}" alt="" class="rounded-xl  object-cover w-full h-44">
@@ -163,18 +162,56 @@
                   </label>
                 </li>
                 @endforeach
-                <input type="submit" name="submit">
-            </form>
-          </ul>
-              
-            </div>
+                 @foreach($menus as $menu) 
+                <li>
+                  <input type="checkbox" id="{{$menu->id}}" name="menus[]" value="{{$menu->id}}" class="schedule-menu hidden" >
+                  <label for="{{$menu->id}}">
+                    <div class="flex flex-col text-center mb-6 gap-2 border-2 border-gray-700 border-opacity-25 h-auto top-0 w-full mx-auto check-resize bg-gray-700 p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500">
+                      <div>
+                        <span>  
+                          <div class="  text-xl font-semibold text-white capitalize mt-3 absolute px-1 py-1 bg-gray-700 rounded-r-lg truncate w-3/4">{{$menu->name}}    
+                          </div>
+                        </span>
+                        <img src="{{url('public/'.$menu->photos->random()->file)}}" alt="" class="rounded-xl  object-cover w-full h-44">
+                      </div>
+                      <div class=" text-base font-bold text-gray-400 text-left px-3 ">Description :</div>
+                      <div class=" text-base font-base text-gray-400 text-left px-3  ">{{$menu->desc}}</div>  
+                      <div class=" text-base font-semibold text-purple-400 text-right px-3">From : {{$menu->catering->name}}</div> 
+                    </div>           
+                  </label>
+                </li>
+                @endforeach
+                 @foreach($menus as $menu) 
+                <li>
+                  <input type="checkbox" id="{{$menu->id}}" name="menus[]" value="{{$menu->id}}" class="schedule-menu hidden" >
+                  <label for="{{$menu->id}}">
+                    <div class="flex flex-col text-center mb-6 gap-2 border-2 border-gray-700 border-opacity-25 h-auto top-0 w-full mx-auto check-resize bg-gray-700 p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500">
+                      <div>
+                        <span>  
+                          <div class="  text-xl font-semibold text-white capitalize mt-3 absolute px-1 py-1 bg-gray-700 rounded-r-lg truncate w-3/4">{{$menu->name}}    
+                          </div>
+                        </span>
+                        <img src="{{url('public/'.$menu->photos->random()->file)}}" alt="" class="rounded-xl  object-cover w-full h-44">
+                      </div>
+                      <div class=" text-base font-bold text-gray-400 text-left px-3 ">Description :</div>
+                      <div class=" text-base font-base text-gray-400 text-left px-3  ">{{$menu->desc}}</div>  
+                      <div class=" text-base font-semibold text-purple-400 text-right px-3">From : {{$menu->catering->name}}</div> 
+                    </div>           
+                  </label>
+                </li>
+                @endforeach
+                </ul>
+                <div class="flex text-xl col-span-3 text-left pointer px-3 pb-6">
+                 <button type="button" onclick="previousSlide()" id="btn-slide-disy" class="ml-2 bg-gray-700 px-6 py-2 rounded-lg text-white opacity-75 hover:opacity-100 duration-1000 focus:border-none"><i class="fas fa-arrow-left"></i> Back</button>
 
-            <div class=" text-xl row-span-1 text-left pointer px-6 pt-6">
-               <a  onclick="previousSlide()" id="btn-slide-disy" class="ml-2 bg-gray-700 px-6 py-2 rounded-lg text-white opacity-75 hover:opacity-100 duration-1000 focus:border-none><i class="fas fa-arrow-left"></i> Back</a>
-            </div>
+                 <button type="submit" name="submit" id="btn-slide-disy" class="flex-auto ml-5 bg-blue-500 px-6 py-2 rounded-lg  text-white opacity-75 bottom-6 hover:bg-blue-600 text-xl duration-1000 focus:border-none right-10">Save Schedule</button>
+               </div>
+             </form>
+           
+           </div>
 
-          </div>
 
+        
         </div>
       </div>
     </div>

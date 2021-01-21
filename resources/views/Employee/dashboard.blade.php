@@ -211,8 +211,6 @@
           <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto uppercase font-semibold">
             <a href="#">empty schedule</a>
           </div>
-
-          <div class="flex items-center bg-gradient-to-r from-transparent to-blue-200 border-blue-500 gap-2 p-2 rounded border-l-4 mb-2">
           @elseif($order != null)    
            <div class="flex items-center bg-gradient-to-r from-transparent to-blue-200 border-blue-500 gap-2 p-2 rounded border-l-4 mb-2">
           <div class=" text-center w-8 text-xl text-blue-400 leading-7 font-bold flex-initial">
