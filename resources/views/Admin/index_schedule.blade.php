@@ -97,7 +97,7 @@
                 <select class="form-select w-full month-select text-lg" onchange="get_date()" name="month" >
                   <option>Select Month</option>
                   @foreach($months as $month)
-                    <option value="{{$month->format('Y-m')}}">{{$month->format('F Y')}}</option>
+                    <option value="{{$month->format('Y-m')}}" @if($month->format('Y-m-d') == $start_date->format('Y-m-d')) selected @endif >{{$month->format('F Y')}}</option>
                   @endforeach
                 </select>
             </div>   

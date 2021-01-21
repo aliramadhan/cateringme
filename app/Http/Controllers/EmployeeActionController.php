@@ -27,7 +27,20 @@ class EmployeeActionController extends Controller
         $now = Carbon::now();
         return view('Employee.dashboard',compact('menu_today','menu_tomorrow','now','user','reviews','stop','total_days'));
     }
-    public function get_date(Request $request)
+    public function history_order(Request $request)
+    {
+        //declare variables
+        $now = Carbon::now();
+        $start = Carbon::now()->startOfMonth();
+        $stop = Carbon::now()->endOfMonth();
+        if ($request->month != null) {
+            $start = Carbon::parse($request->month)->startOfMonth();
+            $stop = Carbon::parse($request->month)->endOfMonth();
+        }
+
+        return view('Employee.index_history_order',compact('now','start','stop'));     
+    }
+    /*public function get_date(Request $request)
     {
         //declare variable
         $user = auth()->user();
@@ -156,7 +169,7 @@ class EmployeeActionController extends Controller
             $months[$month->format('m-Y')] = $month;
         }
         return view('Employee.choose_order',compact('months','menus','start','total_date','now','user','off_date'));
-    }
+    }*/
     public function create_order($month)
     {
     	//declare variable

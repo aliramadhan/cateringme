@@ -11,17 +11,11 @@
 		</h2>
 	</x-slot>
 	<!--Modal-->
-<<<<<<< HEAD
-
-=======
-	
-
 	<form action="{{route('admin.update.menu_price')}}" method="POST">
 	@csrf
 	<input type="number" name="price">
 	<input type="submit" name="submit">
 	</form>
->>>>>>> origin/master
 	<div class="p-6 border-b border-gray-200" style="background-color: #0093E9;
 	background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);">
 		<div class="col-span-2 text-2xl text-center mb-6 font-semibold text-white">          

@@ -79,8 +79,7 @@ Route::group(['prefix' => 'catering',  'middleware' => ['auth:sanctum','role:Cat
 //Role Employee
 Route::group(['prefix' => 'employee',  'middleware' => ['auth:sanctum','role:Employee']], function(){
     Route::get('/dashboard', [ EmployeeActionController::class, 'dashboard'])->name('employee.dashboard');
-    Route::get('/create/order', [ EmployeeActionController::class, 'choose_order'])->name('employee.choose.order');
-    Route::get('/create/order/{month}', [ EmployeeActionController::class, 'create_order'])->name('employee.create.order');
+    Route::get('/create/order', [ EmployeeActionController::class, 'create_order'])->name('employee.create.order');
     Route::post('/create/order/', [ EmployeeActionController::class, 'store_order'])->name('employee.store.order');
     Route::post('/review/{code}/', [ EmployeeActionController::class, 'store_review'])->name('employee.store.review');
     Route::get('/history/order', [ EmployeeActionController::class, 'history_order'])->name('employee.history.order');
