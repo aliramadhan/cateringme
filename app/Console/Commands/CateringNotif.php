@@ -47,7 +47,7 @@ class CateringNotif extends Command
         $menus = Order::where('order_date',$now->format('Y-m-d'))->groupBy('menu_id')->get();
         $data = new Collection;
         $i = 1;
-        $text = "Notification Catering Today \n".$now->format('d, M Y')."\n \n";
+        $text = "Notification Catering Today \n".$now->format('d, M Y l')."\n \n";
         foreach ($menus as $order) {
             $menu = Menu::findOrFail($order->menu_id);
             $data->push((object)[
@@ -57,7 +57,7 @@ class CateringNotif extends Command
             $text .= $i.". ".$menu->name." => ".$orders->where('menu_id',$menu->id)->count()."\n";
             $i++;
         }
-        $text .= "\n ============================\n \n Total order = ".$orders->count(). " \n Total fee = ".number_format($orders->sum('fee'));
+        $text .= "\n ============================\n \n Total order = ".$orders->count(). " \n Total fee = Rp. ".number_format($orders->sum('fee'));
         Telegram::sendMessage([
             'chat_id' => env('TELEGRAM_CHANNEL_ID',''),
             'parse_mode' => 'HTML',
