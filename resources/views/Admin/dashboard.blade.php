@@ -360,7 +360,7 @@
 				<div id="modal-click" class="modal-open">
 					<i class="fas fa-cog border rounded-full p-2 hover:border-orange-700 font-semibold text-gray-100 hover:text-orange-700 duration-500 cursor-pointer "></i></div>  
 				</div>
-				<h4 class="text-4xl uppercase font-semibold text-white leading-tight">Rp. {{($menu->price)}}</h4>
+				<h4 class="text-4xl uppercase font-semibold text-white leading-tight">Rp. {{($price)}}</h4>
 			</div>
 
 	</div>

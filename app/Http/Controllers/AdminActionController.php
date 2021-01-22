@@ -26,6 +26,10 @@ class AdminActionController extends Controller
 		$menus = Menu::get();
 		$reviews = Order::orderBy('order_date','desc')->get();
 		$orders = Order::where('order_date',$now->format('Y-m-d'))->get();
+		$price = Menu::pluck('price')->first();
+		if($price == null){
+			$price = 0;
+		}
 
 		//statistik for catering takenss
 		$catering_taken = Order::where('order_date',$now->format('Y-m-d'))->count();
@@ -46,7 +50,7 @@ class AdminActionController extends Controller
 			$persen_not_taken = ($not_taken / $subnot_taken) * 100;
 		}
 
-		return view('Admin.dashboard',compact('menus','catering_taken','subcatering_taken', 'persen_catering_taken', 'not_taken', 'subnot_taken', 'persen_not_taken','reviews','orders','now'));
+		return view('Admin.dashboard',compact('menus','catering_taken','subcatering_taken', 'persen_catering_taken', 'not_taken', 'subnot_taken', 'persen_not_taken','reviews','orders','now','price'));
 	}
 	public function index_account()
 	{
