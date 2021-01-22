@@ -125,6 +125,9 @@
                         <x-jet-nav-link href="{{ route('employee.history.order') }}" :active="request()->routeIs('employee.history.order')">
                             {{ __('History Order') }}
                         </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('employee.history.review') }}" :active="request()->routeIs('employee.history.review')">
+                            {{ __('History Review') }}
+                        </x-jet-nav-link>
                     @endif
                 </div>
             </div>

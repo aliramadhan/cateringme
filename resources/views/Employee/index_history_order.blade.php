@@ -152,17 +152,20 @@
       <th class="w-10">No.</th>
       <th>Date</th>
       <th>Menu</th>
+      <th>Status</th>
  </tr>
 </thead>
 <tbody class="text-center font-semibold tracking-wider">
- @for($i = 1; $i <= $now->daysInMonth; $i++, $start->addDay())
+ @for($i = 1, $start->subMonth(); $i <= $now->daysInMonth; $i++, $start->addDay())
  @php
- $order = auth()->user()->orders->where('order_date',$start->format('Y-m-d'))->first();
+  $schedule = \App\Models\ScheduleMenu::where('date',$start->format('Y-m-d'))->first();
+  $order = auth()->user()->orders->where('order_date',$start->format('Y-m-d'))->first();
  @endphp
  <tr>
   <td>{{$i}}</td>
-  <td>{{$start->format('d, M Y')}}</td>
-  <td>@if($order != null) {{$order->menu->name}} @endif</td>
+  <td>{{$start->format('l, d M Y')}}</td>
+  <td>@if($order != null) {{$order->menu->name}} @else Empty @endif</td>
+  <td>@if($order != null) @if($order->status) Served @else Waiting @endif @elseif($schedule == null) Day Off @else Empy Order @endif</td>
 </tr>
 @endfor
 </tbody>

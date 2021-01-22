@@ -35,17 +35,6 @@
             color: #fff;
           }
   </style>
-  @if(session('message'))
-  <div class="max-w-7xl mx-auto lg:px-8 bg-white border-t-4 rounded-b text-teal-darkest px-4 py-3 shadow-md my-2 " role="alert">
-    <div class="flex">
-      <svg class="h-6 w-6 text-teal mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg>
-      <div>
-        <p class="font-bold"> {{ session('message') }}</p>
-        <p class="text-sm">Make sure you know how these changes affect you.</p>
-      </div>
-    </div>
-  </div>  
-  @endif
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
       {{ __('Dashboard') }}
@@ -84,7 +73,7 @@
           <div class="flex flex-wrap mt-6">
             <div class="relative w-full appearance-none label-floating">
               <textarea required name="review" class="autoexpand tracking-wide py-2 px-4 mb-3 leading-relaxed appearance-none block w-full bg-gray-50 border border-gray-200 rounded focus:outline-none focus:bg-white focus:border-gray-500 h-52"
-              id="message" type="text" placeholder="Message..."></textarea>
+              id="message" type="text" placeholder="Message...">{{$menu_today->review}}</textarea>
               <label for="message" class="absolute tracking-wide py-2 px-4 mb-4 opacity-0 leading-tight block top-0 left-0 cursor-text">Message...
               </label>
             </div>
@@ -92,29 +81,29 @@
           <p class="text-xl font-base text-gray-600 font-bold">Rate</p>
           <div class="rating">
             <label>
-              <input required type="radio" name="stars" value="1" />
+              <input required type="radio" name="stars" @if($menu_today->stars == 1) checked @endif value="1" />
               <span class="icon duration-500 ">★</span>
             </label>
             <label>
-              <input type="radio" name="stars" value="2" />
+              <input type="radio" name="stars" @if($menu_today->stars == 2) checked @endif value="2" />
               <span class="icon duration-500 ">★</span>
               <span class="icon duration-500 ">★</span>
             </label>
             <label>
-              <input type="radio" name="stars" value="3" />
+              <input type="radio" name="stars" @if($menu_today->stars == 3) checked @endif value="3" />
               <span class="icon duration-500 ">★</span>
               <span class="icon duration-500 ">★</span>
               <span class="icon duration-500 ">★</span>   
             </label>
             <label>
-              <input type="radio" name="stars" value="4" />
+              <input type="radio" name="stars" @if($menu_today->stars == 4) checked @endif value="4" />
               <span class="icon duration-500 ">★</span>
               <span class="icon duration-500 ">★</span>
               <span class="icon duration-500 ">★</span>
               <span class="icon duration-500 ">★</span>
             </label>
             <label>
-              <input type="radio" name="stars" value="5" />
+              <input type="radio" name="stars" @if($menu_today->stars == 5) checked @endif value="5" />
               <span class="icon duration-500 ">★</span>
               <span class="icon duration-500 ">★</span>
               <span class="icon duration-500 ">★</span>
@@ -147,7 +136,7 @@
             <p class="text-5xl font-bold leading-none capitalize"> no catering schedule today   </p>        
 
             </div>
-            <p class="text-2xl mb-4 leading-none">Sorry you dont have catering schedule today, Please comeback tommorow  </p>
+            <p class="text-2xl mb-4 leading-none">Sorry you dont have catering schedule today, Please comeback tomorrow  </p>
              
           </div>
          
@@ -168,7 +157,7 @@
             </div>
             <p class="text-2xl mb-4 leading-none">{{$menu_today->menu->desc}}</p>
              <div class="mt-4 ">
-                      <button @if($menu_today->review != null || $menu_today->stars != null) disabled @endif type="button" class="@if($menu_today->review != null || $menu_today->stars != null) cursor-not-allowed @endif bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-white py-3 px-8 rounded-xl opacity-75 hover:opacity-100 duration-200 modal-open text-2xl shadow-2xl mt-6" id="modal-click"><i class="fas fa-feather-alt"></i>@if($menu_today->review != null || $menu_today->stars != null) Review Submited @else Review @endif</button>
+                      <button type="button" class="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-white py-3 px-8 rounded-xl opacity-75 hover:opacity-100 duration-200 modal-open text-2xl shadow-2xl mt-6" id="modal-click"><i class="fas fa-feather-alt"></i>@if($menu_today->review != null || $menu_today->stars != null) Edit Review @else Review @endif</button>
                     
                   </div>
           </div>
@@ -193,12 +182,12 @@
 
       @else
      
-     <div class="bg-cover bg-top w-full md:w-1/4 bg-gradient-to-t bg-blue-400 to bg-green-400 bg-center text-white  object-fill" style="background-image: url(https://assets.kompasiana.com/items/album/2018/04/16/suasana-kantor-24slides-indonesia-3-5ad4a44bcaf7db40dd0deff2.jpg?t=o&v=760});">
+     <div class="bg-cover bg-top w-full md:w-1/4 bg-gradient-to-t bg-blue-400 to bg-green-400 bg-center text-white  object-fill" style="background-image: url({{url('public/'.$menu_tomorrow->menu->photos->first()->file)}});">
       <div class=" p-4 h-full px-10 grid grid-rows-4" style="background-image: linear-gradient(60deg,#252525,#27272769) !important;">
         <div>
         <p class="font-bold text-lg uppercase mb-8 border-b-2 "> Tomorrow Breakfast </p>
        </div>
-        <p class="text-4xl font-bold row-span-2 capitalize"> no catering schedule for tomorrow </p>
+        <p class="text-4xl font-bold row-span-2 capitalize"> {{$menu_tomorrow->menu->name}} </p>
          
       </div>
 
@@ -210,13 +199,12 @@
       <div class="grid grid-cols-1 md:grid-cols-4 px-4 mb-8 -mt-20 w-full">  
        <div class="w-full px-2">
           <div class="rounded-lg shadow-sm mb-4">
-            <a href="{{route('admin.index.order')}}">
+            <a href="#">
             <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
               <div class="px-3 pt-8 pb-10 text-center relative z-10">
-                <h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Catering Taken</h4>
-                <h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">a</h3>
-                <p class="text-base animate-bounce text-green-500 leading-tight">               
-                %</p>
+                <h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Total Review</h4>
+                <h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{$total_review}}</h3>
+                <p class="text-base animate-bounce text-green-500 leading-tight"></p>
               </div>              
               <div class="absolute bottom-0 inset-x-0">
                 <canvas id="chart1" ></canvas>
@@ -227,13 +215,12 @@
         </div>
         <div class="w-full px-2">
           <div class="rounded-lg shadow-sm mb-4">
-            <a href="{{route('admin.index.order')}}">
+            <a href="#">
             <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
               <div class="px-3 pt-8 pb-10 text-center relative z-10">
                 <h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Catering Taken</h4>
-                <h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">a</h3>
-                <p class="text-base animate-bounce text-green-500 leading-tight">               
-                %</p>
+                <h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{$total_catering}}</h3>
+                <p class="text-base animate-bounce text-green-500 leading-tight"></p>
               </div>              
               <div class="absolute bottom-0 inset-x-0">
                 <canvas id="chart1" ></canvas>
@@ -244,13 +231,12 @@
         </div>
         <div class="w-full px-2">
           <div class="rounded-lg shadow-sm mb-4">
-            <a href="{{route('admin.index.order')}}">
+            <a href="#">
             <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
               <div class="px-3 pt-8 pb-10 text-center relative z-10">
-                <h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Catering Taken</h4>
-                <h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">a</h3>
-                <p class="text-base animate-bounce text-green-500 leading-tight">               
-                %</p>
+                <h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Total Schedule Off</h4>
+                <h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{$total_dayoff}}</h3>
+                <p class="text-base animate-bounce text-green-500 leading-tight"></p>
               </div>              
               <div class="absolute bottom-0 inset-x-0">
                 <canvas id="chart1" ></canvas>
@@ -261,13 +247,12 @@
         </div>
         <div class="w-full px-2">
           <div class="rounded-lg shadow-sm mb-4">
-            <a href="{{route('admin.index.order')}}">
+            <a href="#">
             <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
               <div class="px-3 pt-8 pb-10 text-center relative z-10">
-                <h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Catering Taken</h4>
-                <h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">a</h3>
-                <p class="text-base animate-bounce text-green-500 leading-tight">               
-                %</p>
+                <h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Catering not Taken</h4>
+                <h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{$total_empty_order}}</h3>
+                <p class="text-base animate-bounce text-green-500 leading-tight"></p>
               </div>              
               <div class="absolute bottom-0 inset-x-0">
                 <canvas id="chart1" ></canvas>
@@ -310,7 +295,7 @@
             {{$start_date->format('d')}}
           </div>
           <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto uppercase font-semibold">
-            <a href="{{route('employee.create.order')}}">empty schedule</a>
+            <a href="{{route('employee.create.order')}}">empty order</a>
           </div>
           @elseif($order != null)    
            <div class="flex items-center bg-gradient-to-r from-transparent to-blue-200 border-blue-500 gap-2 p-2 rounded border-l-4 mb-2">
@@ -343,68 +328,11 @@
           My Feed & Review
         </div>
         @foreach($reviews as $review)
+
         @if($review->review == null)
-        @php continue; @endphp
+          @php continue; @endphp
         @endif
-        @if($loop->iteration % 2 != 0)
-        <div class=" rounded-lg bg-gradient-to-r from-white to-purple-50 shadow mb-4 flex ">
-          <img src="{{ url('public/'.$review->menu->photos->random()->file)}}" class="object-cover h-10 w-10 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-l-lg">
-          <div class="flex flex-col p-3 flex-auto">
-            <div class="flex items-center">           
-              <div class=" text-lg flex-auto text-gray-600 leading-7 font-semibold"><a href="https://laravel.com/docs">{{$review->menu->name}}</a>
-                <div class=" text-sm font-semibold text-indigo-700 -mt-2">
-                  {{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}
-                </div>
-              </div>
-              <div class=" text-xl text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl">
-                <i class="fas fa-star"></i> {{$review->stars}}
-              </div>
-            </div>        
-            <div >
-              <div class="mt-2 text-sm text-gray-500">
-                {{$review->review}}
-              </div>           
-              <div class="mt-3 flex items-center">
-
-              </div>
-            </div>
-          </div>
-        </div>
-        {{$loop->iteration}}
-        @else
-        <div class=" rounded-lg bg-gradient-to-r from-white to-purple-50 shadow mb-4 flex flex-row-reverse">
-          <img src="{{ url('public/'.$review->menu->photos->random()->file) }}" class="object-cover h-10 w-10 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-r-lg">
-          <div class="flex flex-col p-3 flex-auto">
-            <div class="flex flex-row-reverse items-center">           
-              <div class=" text-lg flex-auto text-right text-gray-600 leading-7 font-semibold">
-                <a href="https://laravel.com/docs">{{$review->menu->name}}</a>
-                <div class=" text-sm font-semibold text-indigo-700 -mt-2">
-                  {{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}
-                </div>
-              </div>
-              <div class=" text-xl text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl mr-2">
-                <i class="fas fa-star"></i> {{$review->stars}}
-              </div>
-            </div>        
-            <div>
-              <div class="mt-2 text-sm text-gray-500 text-right">
-                {{$review->review}}
-              </div>           
-              <div class="mt-3 flex items-center">
-
-              </div>           
-            </div>
-          </div>
-        </div>
-         {{$loop->iteration}}
-        @endif
-        @endforeach
-
-         <span id="pc1" class="contents hidden"> 
-           @foreach($reviews as $review)
-        @if($review->review == null)
-        @php continue; @endphp
-        @endif
+        @if($loop->iteration <= 5)
         @if($loop->iteration % 2 != 0)
         <div class=" rounded-lg bg-gradient-to-r from-white to-purple-50 shadow mb-4 flex ">
           <img src="{{ url('public/'.$review->menu->photos->random()->file)}}" class="object-cover h-10 w-10 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-l-lg">
@@ -455,8 +383,63 @@
           </div>
         </div>
         @endif
-        @endforeach
+        @else
+        <span id="pc1" class="contents hidden"> 
+        @if($loop->iteration % 2 != 0)
+        <div class=" rounded-lg bg-gradient-to-r from-white to-purple-50 shadow mb-4 flex ">
+          <img src="{{ url('public/'.$review->menu->photos->random()->file)}}" class="object-cover h-10 w-10 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-l-lg">
+          <div class="flex flex-col p-3 flex-auto">
+            <div class="flex items-center">           
+              <div class=" text-lg flex-auto text-gray-600 leading-7 font-semibold"><a href="https://laravel.com/docs">{{$review->menu->name}}</a>
+                <div class=" text-sm font-semibold text-indigo-700 -mt-2">
+                  {{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}
+                </div>
+              </div>
+              <div class=" text-xl text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl">
+                <i class="fas fa-star"></i> {{$review->stars}}
+              </div>
+            </div>        
+            <div >
+              <div class="mt-2 text-sm text-gray-500">
+                {{$review->review}}
+              </div>           
+              <div class="mt-3 flex items-center">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        @else
+        <div class=" rounded-lg bg-gradient-to-r from-white to-purple-50 shadow mb-4 flex flex-row-reverse">
+          <img src="{{ url('public/'.$review->menu->photos->random()->file) }}" class="object-cover h-10 w-10 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-r-lg">
+          <div class="flex flex-col p-3 flex-auto">
+            <div class="flex flex-row-reverse items-center">           
+              <div class=" text-lg flex-auto text-right text-gray-600 leading-7 font-semibold">
+                <a href="https://laravel.com/docs">{{$review->menu->name}}</a>
+                <div class=" text-sm font-semibold text-indigo-700 -mt-2">
+                  {{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}
+                </div>
+              </div>
+              <div class=" text-xl text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl mr-2">
+                <i class="fas fa-star"></i> {{$review->stars}}
+              </div>
+            </div>        
+            <div>
+              <div class="mt-2 text-sm text-gray-500 text-right">
+                {{$review->review}}
+              </div>           
+              <div class="mt-3 flex items-center">
+
+              </div>           
+            </div>
+          </div>
+        </div>
+        @endif
          </span>
+        @endif
+        @endforeach
+
+        @if($reviews->count() >= 6)
         <button onclick="pcsh1()" class="contents cursor-pointer" id="pc2">
             <div class="bg-gray-500 col-start-4 col-end-7 rounded-full my-4 mr-auto shadow-md animate transform transition-transform hover:translate-y-2 hover:bg-gray-700 duration-1000 text-center mx-auto cursor-pointer w-4/12 py-3">
               <h3 class="font-semibold text-white "><i class="fas fa-chevron-down text-4xl"></i></h3>          
@@ -471,7 +454,7 @@
 
               </div>
             </button>
-            <a href="{{route('admin.index.review')}}" class="contents cursor-pointer">
+            <a href="{{route('catering.history.review')}}" class="contents cursor-pointer">
               <div class="bg-orange-500 col-start-4 col-end-7 rounded-full my-4 mx-auto shadow-md animate transform transition-transform hover:translate-y-2 hover:bg-orange-700 duration-1000 w-4/12 py-3 text-center cursor-pointer">
 
                 <h3 class="font-semibold text-xl mb-1 text-white">See All</h3> 
@@ -479,7 +462,7 @@
               </div>
             </a>  
           </div>
-
+        @endif
        <!--  <div class="w-full text-center  animate transform transition-transform hover:translate-y-1 duration-1000">
           <a href="#kemanaya" class="bg-gray-700 px-6 py-2 rounded-lg  shadow-lg text-white opacity-75 transform hover:opacity-100  focus:border-gray-200 hover:translate-x-2  "> Show More</a>
         </div> -->

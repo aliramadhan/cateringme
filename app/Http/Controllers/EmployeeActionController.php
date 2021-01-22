@@ -18,14 +18,33 @@ class EmployeeActionController extends Controller
     {
         //declare variable
         $now = Carbon::now();
+        $start = Carbon::parse($now->format('Y-m-1'));
         $stop = Carbon::now()->endOfMonth();
         $total_days = $now->diffInDays($stop);
         $user = auth()->user();
         $menu_today = $user->orders()->where('order_date',$now->format('Y-m-d'))->first();
         $menu_tomorrow = $user->orders()->where('order_date',$now->addDay()->format('Y-m-d'))->first();
         $reviews = Order::orderBy('reviewed_at','desc')->limit(10)->get();
+        //data for statistik
+        $total_review = Order::where('reviewed_at','!=',null)->count();
+        $total_catering = Order::whereBetween('order_date',[$now->format('Y-m-1'),$stop->format('Y-m-d')])->count();
+        $total_dayoff = 0;
+        $total_empty_order = 0;
+        for ($i=1; $i <= $now->daysInMonth; $i++, $start->addDay()) { 
+            $schedule = ScheduleMenu::where('date',$start->format('Y-m-d'))->first();
+            $order = Order::where('order_date',$start->format('Y-m-d'))->first();
+            if ($schedule == null) {
+                $total_dayoff++;
+            }
+            else{
+                if($order == null) {
+                    $total_empty_order++;
+                }
+            }
+        }
+
         $now = Carbon::now();
-        return view('Employee.dashboard',compact('menu_today','menu_tomorrow','now','user','reviews','stop','total_days'));
+        return view('Employee.dashboard',compact('menu_today','menu_tomorrow','now','user','reviews','stop','total_days','total_review','total_catering','total_dayoff','total_empty_order'));
     }
     public function history_order(Request $request)
     {
@@ -39,6 +58,19 @@ class EmployeeActionController extends Controller
         }
 
         return view('Employee.index_history_order',compact('now','start','stop'));     
+    }
+    public function history_review(Request $request)
+    {
+        //declare variables
+        $now = Carbon::now();
+        $start = Carbon::now()->startOfMonth();
+        $stop = Carbon::now()->endOfMonth();
+        if ($request->month != null) {
+            $start = Carbon::parse($request->month)->startOfMonth();
+            $stop = Carbon::parse($request->month)->endOfMonth();
+        }
+
+        return view('Employee.index_history_review',compact('now','start','stop'));   
     }
     /*public function get_date(Request $request)
     {
