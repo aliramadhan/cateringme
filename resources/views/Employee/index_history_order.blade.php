@@ -5,7 +5,11 @@
             {{ __('History Catering Order') }}
         </h2>
     </x-slot>
-
+<style type="text/css">
+  .pagination-info{
+    color: #fff;
+  }
+</style>
 
 <div class="py-12">
 
@@ -49,7 +53,7 @@
 </div>
 
 <div class="relative md:h-screen h-full">
-    <div class="absolute inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide text-base overflow-y-auto" >      
+    <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide text-base overflow-y-auto" >      
 
       <div class="grid grid-flow-row md:grid-cols-3 grid-cols-1 gap-6 w-full text-center mt-6 h-max"   style="height: fit-content;">      
          <h3 class="col-span-3 min-w-0 font-medium text-5xl leading-snug text-center mb-6 h-15 ">
@@ -100,7 +104,7 @@
           </li>
           @else
           <li>
-            <a href="#">
+            <a href="{{ route('employee.history.order') }}">
               <div class="flex flex-col text-center mb-6 gap-2 border border-opacity-25 h-auto top-0 w-full mx-auto check-resize bg-white p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500 ">
                <span>  
                 <div class="  text-4xl font-semibold text-white absolute mt-4 px-4 py-1 bg-gray-600 rounded-r-lg -ml-3 shadow-md bg-white">{{$start->day}}</div>
@@ -116,17 +120,13 @@
           </li>
           @endif
         @endfor
-
-      
-
-        
     
 </div>
 
 
 </div>
 
-<div class=" inset-0 w-full h-full bg-gray-900 text-white flex text-5xl transition-all ease-in-out duration-1000 transform translate-x-full slide p-6" >
+<div class="absolute inset-0 w-full  h-full bg-gray-900 text-white flex text-5xl transition-all ease-in-out duration-1000 transform translate-x-full slide px-6 overflow-y-auto" >
 
  <div class="bootstrapiso w-full bg-transparent ">
   <table class="w-full table min-w-full divide-y divide-gray-200 text-white text-center rounded-lg  table-dark table-borderless" 

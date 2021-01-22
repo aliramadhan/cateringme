@@ -36,9 +36,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ asset('public/js/app.js') }}" defer></script>
     <link rel="stylesheet" href="{{ asset('resources/css/style.css') }}">
-
+    <script type="text/javascript">
+  function notifu() {
+  
+  }
+</script>
 </head>
-<body class="antialiased" onload="loader24();notifu();">
+<body class="antialiased" onload="loader24();notifu()">
     <div id="loader-bk" >
     <div id="loader">
       <div class="spinner">

@@ -26,16 +26,16 @@
              </h3>
            </div>
           
-               <div class="ml-4 flex items-center gap-4 md:w-5/12 w-full">
+           <div class="ml-4 flex items-center gap-4 md:w-5/12 w-full">
               <form class="contents">
-            @csrf
-            <input type="date" class="w-4/12 md:w-full text border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-30" name="from" class="p-4">
+                @csrf
+                <input type="date" class="w-4/12 md:w-full text border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-30" name="from" class="p-4">
 
-             To 
-            <input type="date" class="w-4/12 md:w-full text border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-30" name="to">
-             <button type="submit" name="submit" class="py-2 px-3 rounded-lg transition-500 bg-blue-400 hover:bg-blue-500 focus:outline-none text-white"> <i class="fas fa-search"></i></button>
-         </form>
-         
+                To 
+                <input type="date" class="w-4/12 md:w-full text border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-30" name="to">
+                <button type="submit" name="submit" class="py-2 px-3 rounded-lg transition-500 bg-blue-400 hover:bg-blue-500 focus:outline-none text-white"> <i class="fas fa-search"></i></button>
+            </form>
+            
         </div>
           
 

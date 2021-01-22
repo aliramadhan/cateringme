@@ -3,11 +3,39 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Create Order') }}
         </h2>
-    </x-slot>
+      </x-slot>
 
-    @if($errors->any())
-    {{ implode('', $errors->all('<div>:message</div>')) }}
-    @endif
+      <div class="notify z-50 font-semibold absolute left-0"><span id="notifyType" class=""></span></div>
+      <div id="success" class="invisible absolute"></div>
+      <div id="failure" class="invisible absolute"></div>
+
+
+      @if (session('message'))
+      <script type="text/javascript">
+        function notifu(){
+          document.getElementById('success').click();
+          var scriptTag = document.createElement("script");        
+          document.getElementsByTagName("head")[0].appendChild(scriptTag);
+        }          
+      </script>
+      <style type="text/css">  .success:before{
+        Content:" {{ session('message') }}";
+      }</style>
+
+
+      @endif
+      @if($errors->any())
+      <script type="text/javascript">
+        function notifu(){
+          document.getElementById('failure').click();
+          var scriptTag = document.createElement("script");        
+          document.getElementsByTagName("head")[0].appendChild(scriptTag);
+        }          
+      </script>
+      <style type="text/css">  .failure:before{
+        Content:"{{ implode('', $errors->all(':message')) }}";
+      }</style> 
+  @endif
 
     <link rel="stylesheet" href="{{ asset('resources/css/date.css') }}">
     <style type="text/css">
@@ -45,10 +73,10 @@
     <div class="ml-4 flex flex-shrink-0 items-center cursor-pointer">
       <div class="flex items-center text-sm sm:hidden">
         <button onclick="previousSlide()" id="btn-slide-dis" class="inline-block rounded-lg font-medium leading-none py-3 px-3 focus:outline-none text-gray-400 hover:text-gray-600 focus:text-gray-600">
-          <i class="fas fa-calendar-week"></i>
+          <i class="fas fa-backward"></i>
       </button>
       <button onclick="nextSlide()" id="btn-slide-dis-2"  class="inline-block rounded-lg font-medium leading-none py-3 px-3 focus:outline-none text-gray-400 hover:text-gray-600 focus:text-gray-600">
-          <i class="fas fa-utensils"></i>
+          <i class="fas fa-forward"></i>
       </button>
   </div>
   <div class="hidden sm:flex items-center text-sm md:text-base">
@@ -108,8 +136,15 @@
                 </label>
 
 
-                <div id="AddPassport{{$i}}"  class="flex md:my-8 my-4 text-xl font-semibold">
-                    @if($schedule == null) Date off @elseif($order == null) Empty Order @else {{$order->menu->name}}<br>Submitted @endif
+                <div id="AddPassport{{$i}}" class="text-xl grid font-semibold pb-9 pt-4 items-center text-left">
+                  @if($schedule == null)
+                  <font class="text-3xl text-red-400"> Date off </font>
+                  @elseif($order == null)
+                  <font class="text-3xl"> Empty Order </font>
+                  @else 
+                  <font>{{$order->menu->name}}</font>
+                  <font class="text-green-400">Submitted</font> 
+                  @endif
                 </div>
                 <div id="dvPassport{{$i}}" style="display: none" class="flex flex-col text-lg font-base gap-4 py-4">
 
@@ -160,7 +195,7 @@
 
 
 <div class="text-xl row-span-1 text-right pointer px-6 ">
- <input type="submit" name="submit" value="Submit" class="cursor-pointer bg-gray-700 px-6 py-2 rounded-lg text-white opacity-75 hover:opacity-100 duration-1000 focus:border-gray-200">
+ <input type="submit" name="submit" value="Save Schedule" class="cursor-pointer bg-gray-700 px-6 py-2 rounded-lg text-white opacity-75 hover:opacity-100 duration-1000 focus:border-gray-200">
 </div>
 </div>
 </div>
@@ -170,7 +205,7 @@
 
   <div class="grid grid-rows-7 gap-1 w-full ">  
 
-        <h3 class="flex-shrink min-w-0 font-medium text-4xl leading-snug text-center mb-6 h-15 ">
+        <h3 class="flex-shrink min-w-0 font-medium text-5xl leading-snug text-center mb-6 h-15 ">
          {{$next_month->format('F Y')}}
      </h3>  
      <form action="{{route('employee.store.order')}}" method="POST" enctype="multipart/form-data" class="contents">
@@ -178,32 +213,40 @@
        <div id="div1" class="grid md:grid-cols-2 grid-cols-1 duration-1000 targetDiv  justify-content content-center text-center rounded-lg pt-4"> 
 
         @csrf
-        @for($i2 = 1; $i2 <= $next_month->daysInMonth; $i2++, $start->addDay())
+        @for($i = 1; $i <= $next_month->daysInMonth; $i++, $start->addDay())
         @php
         $schedule = App\Models\ScheduleMenu::where('date',$start->format('Y-m-d'))->first();
         $order = App\Models\Order::where('order_date',$start->format('Y-m-d'))->first();
         @endphp
         <div class="flex w-full px-4 gap-4">
 
-            <label class='label flex-auto contents duration-1000'>
-                <input class='label__checkbox duration-1000 ' type='checkbox' name="dates[]" @if($schedule == null || $start <= $now) disabled @endif value="{{$start->format('Y-m-d')}}" id="chkPassport{{$i}}" >
+              <label class='label flex-auto contents duration-1000'>
+                        <input class='label__checkbox duration-1000 ' type='checkbox' name="dates[]" @if($schedule == null) disabled @endif value="{{$start->format('Y-m-d')}}" id="darkslide{{$i}}" >
 
-                <span class='label__text '>
-                    <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient(@if($order != null)  135deg, #FCCF31 10%, #F55555 100% @elseif($schedule != null) 160deg, #0093E9 0%, #80D0C7 100%  @elseif($start < $now) 160deg, #bdbdbe 0%, #032a32 100% @else to right, #ff416c, #ff4b2b @endif );'>
+                        <span class='label__text '>
+                            <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient( @if($order != null)  135deg, #FCCF31 10%, #F55555 100% @elseif($schedule != null) 160deg, #0093E9 0%, #80D0C7 100%  @elseif($start < $now) 160deg, #bdbdbe 0%, #032a32 100% @else to right, #ff416c, #ff4b2b @endif );'>
+                              <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 p-10 duration-1000' style='font-family: Poppins, sans-serif;'>
 
-                        <div class='font-semibold text-5xl mb-2 '>{{$start->format('d')}}</div>
-                        <div class='text-xs font-base'>{{$start->format('l')}}</div>
+                                <div class='font-semibold text-5xl mb-2 '>{{$start->format('d')}}</div>
+                                <div class='text-xs font-base'>{{$start->format('l')}}</div>
 
-                    </i>
-                </span>
-            </span>
-        </label>
+                            </i>
+                        </span>
+                    </span>
+                </label>
 
 
-        <div id="AddPassport{{$i}}"  class="flex md:my-8 my-4 text-xl font-semibold">
-            @if($schedule == null) Date off @elseif($order == null) Empty Order @else {{$order->menu->name}}<br>Submitted @endif
+        <div id="Adddark{{$i}}" class="text-xl grid font-semibold pb-9 pt-4 items-center text-left">
+         @if($schedule == null)
+         <font class="text-3xl text-red-400"> Date off </font>
+         @elseif($order == null)
+         <font class="text-3xl"> Empty Order </font>
+         @else 
+         <font>{{$order->menu->name}}</font>
+         <font class="text-green-400">Submitted</font> 
+         @endif
         </div>
-        <div id="dvdark{{$i2}}" style="display: none" class="flex flex-col text-lg font-base gap-4 py-4">
+        <div id="dvdark{{$i}}" style="display: none" class="flex flex-col text-lg font-base gap-4 py-4">
 
          @if($schedule != null)
 
@@ -214,7 +257,7 @@
 
 
          <div class="flex ">
-            <input type="radio" name="{{$i2}}" value="{{$menu->id}}" class="flex-auto hidden" id="radio1{{$i}}{{$menu->menu_code}}">
+            <input type="radio" name="{{$i}}" value="{{$menu->id}}" class="flex-auto hidden" id="radio1{{$i}}{{$menu->menu_code}}">
 
             <label for="radio1{{$i}}{{$menu->menu_code}}" class="flex cursor-pointer text-base font-semibold items-center">
                <span class="w-5 h-5 inline-block mr-2 rounded-full border border-grey flex-no-shrink bg-white"></span>
@@ -232,13 +275,13 @@
 
    <script type="text/javascript">
        $(function () {
-        $("#darkslide{{$i2}}").click(function () {
+        $("#darkslide{{$i}}").click(function () {
             if ($(this).is(":checked")) {
-                $("#dvdark{{$i2}}").show();
-                $("#Adddark{{$i2}}").hide();
+                $("#dvdark{{$i}}").show();
+                $("#Adddark{{$i}}").hide();
             } else {
-                $("#dvdark{{$i2}}").hide();
-                $("#Adddark{{$i2}}").show();
+                $("#dvdark{{$i}}").hide();
+                $("#Adddark{{$i}}").show();
             }
         });
     });
@@ -252,7 +295,7 @@
 
 
 <div class="text-xl row-span-1 text-right pointer px-6 ">
-   <input type="submit" name="submit" value="Submit" class="cursor-pointer bg-gray-700 px-6 py-2 rounded-lg text-white opacity-75 hover:opacity-100 duration-1000 focus:border-gray-200">
+   <input type="submit" name="submit" value="Save Schedule" class="cursor-pointer bg-gray-700 px-6 py-2 rounded-lg text-white opacity-75 hover:opacity-100 duration-1000 focus:border-gray-200">
 </div>
 </div>
 </div>

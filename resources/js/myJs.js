@@ -18,7 +18,8 @@
     button3.style.color ="#528CE0";
 
     //add event listener
-    button.addEventListener('click', function(event) {
+
+        button.addEventListener('click', function(event) {
         button.disabled = true;
         button2.disabled = false;
         button2.style.backgroundColor ="";
@@ -90,7 +91,9 @@
 
     });
 
-    button5.addEventListener('click', function(event) {
+    if (button5) {
+
+      button5.addEventListener('click', function(event) {
         button2.disabled = true;
         button.disabled = false;
         button.style.backgroundColor ="";
@@ -105,7 +108,9 @@
         button4.style.backgroundColor ="#EEF2FF";
         button4.style.color ="#528CE0";
 
-    });
+      });
+    }
+      if (button6) {
      button6.addEventListener('click', function(event) {
         button3.disabled = true ;
      button4.disabled = false;
@@ -122,6 +127,7 @@
      button.style.color ="#528CE0";
 
     });
+   }
     jQuery(function() {
 
 

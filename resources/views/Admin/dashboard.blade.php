@@ -1,6 +1,6 @@
 <x-app-layout>
 
-	  <div class="notify z-50 font-semibold absolute left-0"><span id="notifyType" class=""></span></div>
+	<div class="notify z-50 font-semibold absolute left-0"><span id="notifyType" class=""></span></div>
 	<div id="success" class="invisible absolute"></div>
 	<div id="failure" class="invisible absolute"></div>
 
@@ -102,11 +102,13 @@
 							<div class="px-3 pt-8 pb-10 text-center relative z-10">
 								<h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Catering Taken</h4>
 								<h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{$catering_taken}}</h3>
-								<p class="text-xs @if($catering_taken > $subcatering_taken) text-green-500 @else text-red-500 @endif leading-tight">@if($catering_taken > $subcatering_taken) ▲ @else ▼ @endif {{$persen_catering_taken}} %</p>
+								<p class="text-base animate-bounce @if($catering_taken > $subcatering_taken) text-green-500 @else text-red-500 @endif leading-tight">
+								@if($catering_taken > $subcatering_taken) ▲ 
+								@else ▼ @endif {{$persen_catering_taken}} %</p>
 							</div>
 							
 							<div class="absolute bottom-0 inset-x-0">
-								<canvas id="chart1" >woi</canvas>
+								<canvas id="chart1" ></canvas>
 							</div>
 						</div>
 						</a>
@@ -119,7 +121,7 @@
 							<div class="px-3 pt-8 pb-10 text-center relative z-10">
 								<h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Catering not Taken</h4>
 								<h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{$not_taken}}</h3>
-								<p class="text-xs @if($not_taken > $subnot_taken) text-green-500-500  @else text-red-500  @endif  leading-tight">@if($not_taken > $subnot_taken) ▲ @else ▼ @endif {{$persen_not_taken}}%</p>
+								<p class="text-base animate-bounce @if($not_taken > $subnot_taken) text-green-500-500  @else text-red-500  @endif  leading-tight">@if($not_taken > $subnot_taken) ▲ @else ▼ @endif {{$persen_not_taken}}%</p>
 							</div>
 							<div class="absolute bottom-0 inset-x-0">
 								<canvas id="chart2" height="70" style="height:100px !important;"></canvas>
@@ -134,7 +136,7 @@
 							<div class="px-3 pt-8 pb-10 text-center relative z-10">
 						<h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Catering Quota</h4>
 								<h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{\App\Models\User::where('role','Employee')->count()}}</h3>
-								<p class="text-xs text-green-500 leading-tight">-</p>		
+								<p class="text-base animate-bounce text-green-500 leading-tight">-</p>		
 							</div>
 							<div class="absolute bottom-0 inset-x-0">
 								<canvas id="chart3" height="70" style="height:100px !important;"></canvas>
@@ -144,16 +146,18 @@
 				</div>
 				<div class="w-full md:w-1/3 px-2">
 					<div class="rounded-lg shadow-sm mb-4">
+						<a href="{{route('admin.index.review')}}">
 						<div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
 							<div class="px-3 pt-8 pb-10 text-center relative z-10">
-<h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Rate & Review</h4>
+								<h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Rate & Review</h4>
 								<h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{$orders->where('review','!=',null)->count()}}</h3>
-								<p class="text-xs text-green-500 leading-tight">-</p>
+								<p class="text-base animate-bounce text-green-500 leading-tight">-</p>
 							</div>
 							<div class="absolute bottom-0 inset-x-0">
 								<canvas id="chart4" height="70" style="height:100px !important;"></canvas>
 							</div>
 						</div>
+						</a>
 					</div>
 				</div>
 			</div>

@@ -1,8 +1,35 @@
 <x-app-layout>
+ <div class="notify z-50 font-semibold absolute left-0"><span id="notifyType" class=""></span></div>
+  <div id="success" class="invisible absolute"></div>
+  <div id="failure" class="invisible absolute"></div>
 
-  @if($errors->any())
-  {{ implode('', $errors->all('<div>:message</div>')) }}
+  @if (session('message'))
+  <script type="text/javascript">
+    function notifu(){
+      document.getElementById('success').click();
+      var scriptTag = document.createElement("script");        
+      document.getElementsByTagName("head")[0].appendChild(scriptTag);
+    }          
+  </script>
+  <style type="text/css">  .success:before{
+    Content:" {{ session('message') }}";
+  }</style>
+
+
   @endif
+  @if($errors->any())
+  <script type="text/javascript">
+    function notifu(){
+      document.getElementById('failure').click();
+      var scriptTag = document.createElement("script");        
+      document.getElementsByTagName("head")[0].appendChild(scriptTag);
+    }          
+  </script>
+  <style type="text/css">  .failure:before{
+    Content:"{{ implode('', $errors->all(':message')) }}";
+  }</style> 
+  @endif
+  
   <style type="text/css">
     .pagination-info{
             color: #fff;
@@ -108,9 +135,9 @@
   @endif
 
 
-  <div class=" border-gray-200 bg-no-repeat bg-cover  bg-center" style="" >
+  <div class=" border-gray-200 bg-no-repeat bg-cover bg-center pb-20"  >
 
-    <div class="bg-white mb-4 rounded-xl shadow-lg flex md:flex-row flex-col">
+    <div class=" mb-4 rounded-xl shadow-lg flex md:flex-row flex-col">
       @if($menu_today == null)
 
        <div class="bg-cover bg-top text-center bg-gradient-to-t bg-blue-400 to bg-green-400  bg-center text-white  object-fill w-full" style="background-image: url(https://assets.kompasiana.com/items/album/2018/04/16/suasana-kantor-24slides-indonesia-3-5ad4a44bcaf7db40dd0deff2.jpg?t=o&v=760);background-position-y: -70px;">
@@ -155,7 +182,9 @@
 
        <div class="bg-cover bg-top w-full md:w-1/4 bg-gradient-to-t bg-blue-400 to bg-green-400 bg-center text-white  object-fill" style="background-image: url(https://assets.kompasiana.com/items/album/2018/04/16/suasana-kantor-24slides-indonesia-3-5ad4a44bcaf7db40dd0deff2.jpg?t=o&v=760});">
       <div class=" p-4 h-full px-10 grid grid-rows-4" style="background-image: linear-gradient(60deg,#252525,#27272769) !important;">
+        <div>
         <p class="font-bold text-lg uppercase mb-8 border-b-2 "> Tomorrow Breakfast </p>
+        </div>
         <p class="text-4xl font-bold row-span-2 capitalize"> no catering schedule for tomorrow </p>
          
       </div>
@@ -166,7 +195,9 @@
      
      <div class="bg-cover bg-top w-full md:w-1/4 bg-gradient-to-t bg-blue-400 to bg-green-400 bg-center text-white  object-fill" style="background-image: url(https://assets.kompasiana.com/items/album/2018/04/16/suasana-kantor-24slides-indonesia-3-5ad4a44bcaf7db40dd0deff2.jpg?t=o&v=760});">
       <div class=" p-4 h-full px-10 grid grid-rows-4" style="background-image: linear-gradient(60deg,#252525,#27272769) !important;">
+        <div>
         <p class="font-bold text-lg uppercase mb-8 border-b-2 "> Tomorrow Breakfast </p>
+       </div>
         <p class="text-4xl font-bold row-span-2 capitalize"> no catering schedule for tomorrow </p>
          
       </div>
@@ -176,6 +207,76 @@
       </div>
     </div>
 
+      <div class="grid grid-cols-1 md:grid-cols-4 px-4 mb-8 -mt-20 w-full">  
+       <div class="w-full px-2">
+          <div class="rounded-lg shadow-sm mb-4">
+            <a href="{{route('admin.index.order')}}">
+            <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
+              <div class="px-3 pt-8 pb-10 text-center relative z-10">
+                <h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Catering Taken</h4>
+                <h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">a</h3>
+                <p class="text-base animate-bounce text-green-500 leading-tight">               
+                %</p>
+              </div>              
+              <div class="absolute bottom-0 inset-x-0">
+                <canvas id="chart1" ></canvas>
+              </div>
+            </div>
+            </a>
+          </div>
+        </div>
+        <div class="w-full px-2">
+          <div class="rounded-lg shadow-sm mb-4">
+            <a href="{{route('admin.index.order')}}">
+            <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
+              <div class="px-3 pt-8 pb-10 text-center relative z-10">
+                <h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Catering Taken</h4>
+                <h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">a</h3>
+                <p class="text-base animate-bounce text-green-500 leading-tight">               
+                %</p>
+              </div>              
+              <div class="absolute bottom-0 inset-x-0">
+                <canvas id="chart1" ></canvas>
+              </div>
+            </div>
+            </a>
+          </div>
+        </div>
+        <div class="w-full px-2">
+          <div class="rounded-lg shadow-sm mb-4">
+            <a href="{{route('admin.index.order')}}">
+            <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
+              <div class="px-3 pt-8 pb-10 text-center relative z-10">
+                <h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Catering Taken</h4>
+                <h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">a</h3>
+                <p class="text-base animate-bounce text-green-500 leading-tight">               
+                %</p>
+              </div>              
+              <div class="absolute bottom-0 inset-x-0">
+                <canvas id="chart1" ></canvas>
+              </div>
+            </div>
+            </a>
+          </div>
+        </div>
+        <div class="w-full px-2">
+          <div class="rounded-lg shadow-sm mb-4">
+            <a href="{{route('admin.index.order')}}">
+            <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
+              <div class="px-3 pt-8 pb-10 text-center relative z-10">
+                <h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Catering Taken</h4>
+                <h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">a</h3>
+                <p class="text-base animate-bounce text-green-500 leading-tight">               
+                %</p>
+              </div>              
+              <div class="absolute bottom-0 inset-x-0">
+                <canvas id="chart1" ></canvas>
+              </div>
+            </div>
+            </a>
+          </div>
+        </div>
+      </div>
 
     <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 px-4 mb-8">  
       <div class="p-6 px-8 mt-6 bg-white rounded-xl p-4 shadow-lg">       
@@ -209,7 +310,7 @@
             {{$start_date->format('d')}}
           </div>
           <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto uppercase font-semibold">
-            <a href="#">empty schedule</a>
+            <a href="{{route('employee.create.order')}}">empty schedule</a>
           </div>
           @elseif($order != null)    
            <div class="flex items-center bg-gradient-to-r from-transparent to-blue-200 border-blue-500 gap-2 p-2 rounded border-l-4 mb-2">

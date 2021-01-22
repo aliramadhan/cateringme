@@ -191,7 +191,7 @@ class EmployeeActionController extends Controller
 
         //cek if employee can order
         if($user->can_order == 0){
-            return redirect()->back()->withErrors(['message' => "Can't submit order, please call admin to activated feature order catering."]);
+            return redirect()->back()->withErrors(['message' => "Cant submit order, please call admin to activated feature order catering."]);
         }
 
         foreach ($request->dates as $date) {

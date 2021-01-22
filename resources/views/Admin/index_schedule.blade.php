@@ -161,45 +161,7 @@
                     </div>           
                   </label>
                 </li>
-                @endforeach
-                 @foreach($menus as $menu) 
-                <li>
-                  <input type="checkbox" id="{{$menu->id}}" name="menus[]" value="{{$menu->id}}" class="schedule-menu hidden" >
-                  <label for="{{$menu->id}}">
-                    <div class="flex flex-col text-center mb-6 gap-2 border-2 border-gray-700 border-opacity-25 h-auto top-0 w-full mx-auto check-resize bg-gray-700 p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500">
-                      <div>
-                        <span>  
-                          <div class="  text-xl font-semibold text-white capitalize mt-3 absolute px-1 py-1 bg-gray-700 rounded-r-lg truncate w-3/4">{{$menu->name}}    
-                          </div>
-                        </span>
-                        <img src="{{url('public/'.$menu->photos->random()->file)}}" alt="" class="rounded-xl  object-cover w-full h-44">
-                      </div>
-                      <div class=" text-base font-bold text-gray-400 text-left px-3 ">Description :</div>
-                      <div class=" text-base font-base text-gray-400 text-left px-3  ">{{$menu->desc}}</div>  
-                      <div class=" text-base font-semibold text-purple-400 text-right px-3">From : {{$menu->catering->name}}</div> 
-                    </div>           
-                  </label>
-                </li>
-                @endforeach
-                 @foreach($menus as $menu) 
-                <li>
-                  <input type="checkbox" id="{{$menu->id}}" name="menus[]" value="{{$menu->id}}" class="schedule-menu hidden" >
-                  <label for="{{$menu->id}}">
-                    <div class="flex flex-col text-center mb-6 gap-2 border-2 border-gray-700 border-opacity-25 h-auto top-0 w-full mx-auto check-resize bg-gray-700 p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500">
-                      <div>
-                        <span>  
-                          <div class="  text-xl font-semibold text-white capitalize mt-3 absolute px-1 py-1 bg-gray-700 rounded-r-lg truncate w-3/4">{{$menu->name}}    
-                          </div>
-                        </span>
-                        <img src="{{url('public/'.$menu->photos->random()->file)}}" alt="" class="rounded-xl  object-cover w-full h-44">
-                      </div>
-                      <div class=" text-base font-bold text-gray-400 text-left px-3 ">Description :</div>
-                      <div class=" text-base font-base text-gray-400 text-left px-3  ">{{$menu->desc}}</div>  
-                      <div class=" text-base font-semibold text-purple-400 text-right px-3">From : {{$menu->catering->name}}</div> 
-                    </div>           
-                  </label>
-                </li>
-                @endforeach
+                @endforeach                 
                 </ul>
                 <div class="flex text-xl col-span-3 text-left pointer px-3 pb-6">
                  <button type="button" onclick="previousSlide()" id="btn-slide-disy" class="ml-2 bg-gray-700 px-6 py-2 rounded-lg text-white opacity-75 hover:opacity-100 duration-1000 focus:border-none"><i class="fas fa-arrow-left"></i> Back</button>
