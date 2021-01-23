@@ -36,7 +36,7 @@
 
                           </div>
                       </span>
-                      <img src="{{url('public/'.$menu->photos->first()->file)}}" alt="{{ $menu->name }}" class="rounded-xl  object-cover w-full h-44">
+                      <img src="@if($menu->photos->first() != null){{url('public/'.$menu->photos->first()->file)}} @else {{url('public/images/no-image.png')}} @endif" alt="{{ $menu->name }}" class="rounded-xl  object-cover w-full h-44">
 
                   </div>
                   <div class=" text-base font-bold text-gray-600 text-left px-3 ">Description</div>

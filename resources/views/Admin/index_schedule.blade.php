@@ -153,7 +153,7 @@
                           <div class="  text-xl font-semibold text-white capitalize mt-3 absolute px-1 py-1 bg-gray-700 rounded-r-lg truncate w-3/4">{{$menu->name}}    
                           </div>
                         </span>
-                        <img src="{{url('public/'.$menu->photos->random()->file)}}" alt="" class="rounded-xl  object-cover w-full h-44">
+                        <img src="@if($menu->photos->first() != null){{url('public/'.$menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" alt="" class="rounded-xl  object-cover w-full h-44">
                       </div>
                       <div class=" text-base font-bold text-gray-400 text-left px-3 ">Description :</div>
                       <div class=" text-base font-base text-gray-400 text-left px-3  ">{{$menu->desc}}</div>  
