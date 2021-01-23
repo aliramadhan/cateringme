@@ -81,7 +81,7 @@ class CateringActionController extends Controller
         ]);
 
         //create code number for menu
-		$last_id = Menu::all()->count();
+		$last_id = Menu::orderBy('id','desc')->pluck('id')->first();
 		$len = strlen(++$last_id);
 		for($i=$len; $i< 4; ++$i) {
 	        $last_id = '0'.$last_id;
