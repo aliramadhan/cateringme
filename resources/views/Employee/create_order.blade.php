@@ -121,10 +121,10 @@
                 <div class="flex w-full px-4 gap-4">
 
                     <label class='label flex-auto contents duration-1000'>
-                        <input class='label__checkbox duration-1000 ' type='checkbox' name="dates[]" @if($schedule == null) disabled @endif value="{{$start->format('Y-m-d')}}" id="chkPassport{{$i}}" >
+                        <input class='label__checkbox duration-1000 ' type='checkbox' name="dates[]" @if($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" id="chkPassport{{$i}}" >
 
                         <span class='label__text '>
-                            <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient( @if($order != null)  135deg, #FCCF31 10%, #F55555 100% @elseif($schedule != null) 160deg, #0093E9 0%, #80D0C7 100%  @elseif($start < $now) 160deg, #bdbdbe 0%, #032a32 100% @else to right, #ff416c, #ff4b2b @endif );'>
+                            <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient( @if($order != null)  135deg, #FCCF31 10%, #F55555 100% @elseif($start < $now) 160deg, #bdbdbe 0%, #032a32 100% @elseif($schedule != null) 160deg, #0093E9 0%, #80D0C7 100%   @else to right, #ff416c, #ff4b2b @endif );'>
                               <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 p-10 duration-1000' style='font-family: Poppins, sans-serif;'>
 
                                 <div class='font-semibold text-5xl mb-2 '>{{$start->format('d')}}</div>

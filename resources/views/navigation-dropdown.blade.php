@@ -269,7 +269,7 @@
                             {{ __('Menu Today') }}
                         </x-jet-responsive-nav-link>
                         <x-jet-responsive-nav-link href="{{ route('catering.index.report') }}" :active="request()->routeIs('catering.index.report')">
-                            {{ __('Report Caterting Menu') }}
+                            {{ __('Report Catering Menu') }}
                         </x-jet-responsive-nav-link>
                         <x-jet-responsive-nav-link href="{{ route('catering.index.review') }}" :active="request()->routeIs('catering.index.review')">
                             {{ __('Report Review & Feed') }}
@@ -283,6 +283,9 @@
                         </x-jet-responsive-nav-link>
                         <x-jet-responsive-nav-link href="{{ route('employee.history.order') }}" :active="request()->routeIs('employee.history.order')">
                             {{ __('History Order') }}
+                        </x-jet-responsive-nav-link>
+                        <x-jet-responsive-nav-link href="{{ route('employee.history.review') }}" :active="request()->routeIs('employee.history.review')">
+                            {{ __('History Review') }}
                         </x-jet-responsive-nav-link>
                     @endif
         </div>

@@ -142,7 +142,7 @@
       </div> 
 
       @else
-      <div class="bg-cover bg-top text-center bg-gradient-to-t bg-blue-400 to bg-green-400  bg-center text-white  object-fill w-full" style="background-image: url({{ url('public/'.$menu_today->menu->photos->random()->file)}});background-position-y: -70px;">
+      <div class="bg-cover bg-top text-center bg-gradient-to-t bg-blue-400 to bg-green-400  bg-center text-white  object-fill w-full" style="background-image: url(@if($menu_today->menu->photos->first() != null){{ url('public/'.$menu_today->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif);background-position-y: -70px;">
         <div class="h-full md:px-20 p-8 md:pb-40 md:pt-20" style="background-image: linear-gradient(0deg,#252525,#27272769) !important;">
           <p class="font-bold text-2xl uppercase"> Today Breakfast </p>
           <div class="flex md:flex-row flex-col justify-center mb-8">
@@ -180,7 +180,7 @@
 
       @else
      
-     <div class="bg-cover bg-top w-full md:w-1/4 bg-gradient-to-t bg-blue-400 to bg-green-400 bg-center text-white  object-fill" style="background-image: url({{url('public/'.$menu_tomorrow->menu->photos->first()->file)}});">
+     <div class="bg-cover bg-top w-full md:w-1/4 bg-gradient-to-t bg-blue-400 to bg-green-400 bg-center text-white  object-fill" style="background-image: url(@if($menu_tomorrow->menu->photos->first() != null ){{url('public/'.$menu_tomorrow->menu->photos->first()->file)}} @else {{url('public/images/no-image.png')}} @endif);">
       <div class=" p-4 h-full px-10 grid grid-rows-4" style="background-image: linear-gradient(60deg,#252525,#27272769) !important;">
         <div>
         <p class="font-bold text-lg uppercase mb-8 border-b-2 "> Tomorrow Breakfast </p>
@@ -304,7 +304,7 @@
             <a href="#">{{$order->menu->name}}</a>
           </div>
         
-            <img src="{{ url('public/'.$order->menu->photos->random()->file)}}" class="object-cover h-8 w-8 mr-2 rounded flex-initial">
+            <img src="@if($order->menu->photos->first() != null){{ url('public/'.$order->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-8 w-8 mr-2 rounded flex-initial">
             @if($start_date > Carbon\Carbon::now())
             <a href="{{route('employee.delete.order',$order->id)}}" onclick="return confirm('Cancel order date {{$start_date->format('d, M Y')}}')">
               <div class="close-container shadow-lg">
@@ -329,114 +329,114 @@
         @if($review->review == null)
           @php continue; @endphp
         @endif
-        @if($loop->iteration <= 5)
-        @if($loop->iteration % 2 != 0)
-        <div class=" rounded-lg bg-gradient-to-r from-white to-purple-50 shadow mb-4 flex ">
-          <img src="{{ url('public/'.$review->menu->photos->random()->file)}}" class="object-cover h-10 w-10 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-l-lg">
-          <div class="flex flex-col p-3 flex-auto">
-            <div class="flex items-center">           
-              <div class=" text-lg flex-auto text-gray-600 leading-7 font-semibold"><a href="https://laravel.com/docs">{{$review->menu->name}}</a>
-                <div class=" text-sm font-semibold text-indigo-700 -mt-2">
-                  {{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}
+        @if($loop->iteration < 5)
+          @if($loop->iteration % 2 != 0)
+          <div class=" rounded-lg bg-gradient-to-r from-white to-purple-50 shadow mb-4 flex ">
+            <img src="@if($review->menu->photos->first() != null){{ url('public/'.$review->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-10 w-10 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-l-lg">
+            <div class="flex flex-col p-3 flex-auto">
+              <div class="flex items-center">           
+                <div class=" text-lg flex-auto text-gray-600 leading-7 font-semibold"><a href="https://laravel.com/docs">{{$review->menu->name}}</a>
+                  <div class=" text-sm font-semibold text-indigo-700 -mt-2">
+                    {{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}
+                  </div>
                 </div>
-              </div>
-              <div class=" text-xl text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl">
-                <i class="fas fa-star"></i> {{$review->stars}}
-              </div>
-            </div>        
-            <div >
-              <div class="mt-2 text-sm text-gray-500">
-                {{$review->review}}
-              </div>           
-              <div class="mt-3 flex items-center">
+                <div class=" text-xl text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl">
+                  <i class="fas fa-star"></i> {{$review->stars}}
+                </div>
+              </div>        
+              <div >
+                <div class="mt-2 text-sm text-gray-500">
+                  {{$review->review}}
+                </div>           
+                <div class="mt-3 flex items-center">
 
+                </div>
               </div>
             </div>
           </div>
-        </div>
+          @else
+          <div class=" rounded-lg bg-gradient-to-r from-white to-purple-50 shadow mb-4 flex flex-row-reverse">
+            <img src="@if($review->menu->photos->first() != null){{ url('public/'.$review->menu->photos->random()->file) }} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-10 w-10 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-r-lg">
+            <div class="flex flex-col p-3 flex-auto">
+              <div class="flex flex-row-reverse items-center">           
+                <div class=" text-lg flex-auto text-right text-gray-600 leading-7 font-semibold">
+                  <a href="https://laravel.com/docs">{{$review->menu->name}}</a>
+                  <div class=" text-sm font-semibold text-indigo-700 -mt-2">
+                    {{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}
+                  </div>
+                </div>
+                <div class=" text-xl text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl mr-2">
+                  <i class="fas fa-star"></i> {{$review->stars}}
+                </div>
+              </div>        
+              <div>
+                <div class="mt-2 text-sm text-gray-500 text-right">
+                  {{$review->review}}
+                </div>           
+                <div class="mt-3 flex items-center">
+
+                </div>           
+              </div>
+            </div>
+          </div>
+          @endif
         @else
-        <div class=" rounded-lg bg-gradient-to-r from-white to-purple-50 shadow mb-4 flex flex-row-reverse">
-          <img src="{{ url('public/'.$review->menu->photos->random()->file) }}" class="object-cover h-10 w-10 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-r-lg">
-          <div class="flex flex-col p-3 flex-auto">
-            <div class="flex flex-row-reverse items-center">           
-              <div class=" text-lg flex-auto text-right text-gray-600 leading-7 font-semibold">
-                <a href="https://laravel.com/docs">{{$review->menu->name}}</a>
-                <div class=" text-sm font-semibold text-indigo-700 -mt-2">
-                  {{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}
+          <span id="pc1" class="contents hidden"> 
+          @if($loop->iteration % 2 != 0)
+          <div class=" rounded-lg bg-gradient-to-r from-white to-purple-50 shadow mb-4 flex ">
+            <img src="@if($review->menu->photos->first() != null){{ url('public/'.$review->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-10 w-10 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-l-lg">
+            <div class="flex flex-col p-3 flex-auto">
+              <div class="flex items-center">           
+                <div class=" text-lg flex-auto text-gray-600 leading-7 font-semibold"><a href="https://laravel.com/docs">{{$review->menu->name}}</a>
+                  <div class=" text-sm font-semibold text-indigo-700 -mt-2">
+                    {{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}
+                  </div>
                 </div>
-              </div>
-              <div class=" text-xl text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl mr-2">
-                <i class="fas fa-star"></i> {{$review->stars}}
-              </div>
-            </div>        
-            <div>
-              <div class="mt-2 text-sm text-gray-500 text-right">
-                {{$review->review}}
-              </div>           
-              <div class="mt-3 flex items-center">
-
-              </div>           
-            </div>
-          </div>
-        </div>
-        @endif
-        @else
-        <span id="pc1" class="contents hidden"> 
-        @if($loop->iteration % 2 != 0)
-        <div class=" rounded-lg bg-gradient-to-r from-white to-purple-50 shadow mb-4 flex ">
-          <img src="{{ url('public/'.$review->menu->photos->random()->file)}}" class="object-cover h-10 w-10 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-l-lg">
-          <div class="flex flex-col p-3 flex-auto">
-            <div class="flex items-center">           
-              <div class=" text-lg flex-auto text-gray-600 leading-7 font-semibold"><a href="https://laravel.com/docs">{{$review->menu->name}}</a>
-                <div class=" text-sm font-semibold text-indigo-700 -mt-2">
-                  {{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}
+                <div class=" text-xl text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl">
+                  <i class="fas fa-star"></i> {{$review->stars}}
                 </div>
-              </div>
-              <div class=" text-xl text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl">
-                <i class="fas fa-star"></i> {{$review->stars}}
-              </div>
-            </div>        
-            <div >
-              <div class="mt-2 text-sm text-gray-500">
-                {{$review->review}}
-              </div>           
-              <div class="mt-3 flex items-center">
+              </div>        
+              <div >
+                <div class="mt-2 text-sm text-gray-500">
+                  {{$review->review}}
+                </div>           
+                <div class="mt-3 flex items-center">
 
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        @else
-        <div class=" rounded-lg bg-gradient-to-r from-white to-purple-50 shadow mb-4 flex flex-row-reverse">
-          <img src="{{ url('public/'.$review->menu->photos->random()->file) }}" class="object-cover h-10 w-10 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-r-lg">
-          <div class="flex flex-col p-3 flex-auto">
-            <div class="flex flex-row-reverse items-center">           
-              <div class=" text-lg flex-auto text-right text-gray-600 leading-7 font-semibold">
-                <a href="https://laravel.com/docs">{{$review->menu->name}}</a>
-                <div class=" text-sm font-semibold text-indigo-700 -mt-2">
-                  {{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}
+          @else
+          <div class=" rounded-lg bg-gradient-to-r from-white to-purple-50 shadow mb-4 flex flex-row-reverse">
+            <img src="@if($review->menu->photos->first() != null){{ url('public/'.$review->menu->photos->random()->file) }} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-10 w-10 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-r-lg">
+            <div class="flex flex-col p-3 flex-auto">
+              <div class="flex flex-row-reverse items-center">           
+                <div class=" text-lg flex-auto text-right text-gray-600 leading-7 font-semibold">
+                  <a href="https://laravel.com/docs">{{$review->menu->name}}</a>
+                  <div class=" text-sm font-semibold text-indigo-700 -mt-2">
+                    {{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}
+                  </div>
                 </div>
-              </div>
-              <div class=" text-xl text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl mr-2">
-                <i class="fas fa-star"></i> {{$review->stars}}
-              </div>
-            </div>        
-            <div>
-              <div class="mt-2 text-sm text-gray-500 text-right">
-                {{$review->review}}
-              </div>           
-              <div class="mt-3 flex items-center">
+                <div class=" text-xl text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl mr-2">
+                  <i class="fas fa-star"></i> {{$review->stars}}
+                </div>
+              </div>        
+              <div>
+                <div class="mt-2 text-sm text-gray-500 text-right">
+                  {{$review->review}}
+                </div>           
+                <div class="mt-3 flex items-center">
 
-              </div>           
+                </div>           
+              </div>
             </div>
           </div>
-        </div>
-        @endif
-         </span>
+          @endif
+           </span>
         @endif
         @endforeach
 
-        @if($reviews->count() >= 6)
+        @if($reviews->count() >= 5)
         <button onclick="pcsh1()" class="contents cursor-pointer" id="pc2">
             <div class="bg-gray-500 col-start-4 col-end-7 rounded-full my-4 mr-auto shadow-md animate transform transition-transform hover:translate-y-2 hover:bg-gray-700 duration-1000 text-center mx-auto cursor-pointer w-4/12 py-3">
               <h3 class="font-semibold text-white "><i class="fas fa-chevron-down text-4xl"></i></h3>          
