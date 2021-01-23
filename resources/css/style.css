@@ -284,3 +284,12 @@ background-size: contain;
   height:120px !important;
 }
 
+.bootstrapiso .carousel-caption{
+  top: 63px;
+  bottom: auto;
+  right :6%;
+  left: 6%;
+}
+.bootstrapiso h2{
+  font-weight: 600;
+}
