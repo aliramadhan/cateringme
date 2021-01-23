@@ -295,8 +295,13 @@
             <a href="{{route('employee.create.order')}}">empty order</a>
           </div>
           @elseif($order != null)    
-           <div class="flex items-center bg-gradient-to-r from-transparent to-blue-200 border-blue-500 gap-2 p-2 rounded border-l-4 mb-2">
-          <div class=" text-center w-8 text-xl text-blue-400 leading-7 font-bold flex-initial">
+            @if($start_date < Carbon\Carbon::now())
+            <div class="flex items-center bg-gradient-to-r from-transparent to-orange-200 border-blue-500 gap-2 p-2 rounded border-l-4 mb-2">
+            <div class=" text-center w-8 text-xl text-orange-400 leading-7 font-bold flex-initial">
+            @else
+            <div class="flex items-center bg-gradient-to-r from-transparent to-blue-200 border-blue-500 gap-2 p-2 rounded border-l-4 mb-2">
+            <div class=" text-center w-8 text-xl text-blue-400 leading-7 font-bold flex-initial">
+            @endif
             {{$start_date->format('d')}}
           </div>
 
