@@ -1,8 +1,37 @@
 <x-app-layout>
 
-    @if($errors->any())
-    {{ implode('', $errors->all('<div>:message</div>')) }}
-    @endif
+    <div class="notify z-50 font-semibold absolute left-0"><span id="notifyType" class=""></span></div>
+      <div id="success" class="invisible absolute"></div>
+      <div id="failure" class="invisible absolute"></div>
+
+
+      @if (session('message'))
+      <script type="text/javascript">
+        function notifu(){
+          document.getElementById('success').click();
+          var scriptTag = document.createElement("script");        
+          document.getElementsByTagName("head")[0].appendChild(scriptTag);
+        }          
+      </script>
+      <style type="text/css">  .success:before{
+        Content:" {{ session('message') }}";
+      }</style>
+
+
+      @endif
+      @if($errors->any())
+      <script type="text/javascript">
+        function notifu(){
+          document.getElementById('failure').click();
+          var scriptTag = document.createElement("script");        
+          document.getElementsByTagName("head")[0].appendChild(scriptTag);
+        }          
+      </script>
+      <style type="text/css">  .failure:before{
+        Content:"{{ implode('', $errors->all(':message')) }}";
+      }</style> 
+  @endif
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
            Editing {{$menu->name}}
@@ -125,6 +154,7 @@
       </div>
     </div>
   </div>
+  <!--
   <div  class="md:grid md:grid-cols-3 md:gap-6">
            <div class="md:col-span-1">
             <div class="px-4 sm:px-0">
@@ -142,7 +172,7 @@
             @csrf
             @method('DELETE')
             <div class="flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6">
-              <button type="submit" class="bg-red-400 opacity-75 hover:opacity-100 items-center px-4 py-2  border-transparent rounded-md font-semibold text-lg uppercase tracking-widest  active:bg-gray-900 active:text-white focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150" name="submit" value="UpdatePhoto">
+              <button type="submit" class="bg-red-400 opacity-75 hover:opacity-100 items-center px-4 py-2  border-transparent rounded-md font-semibold text-lg uppercase tracking-widest  active:bg-gray-900 active:text-white focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150" name="submit" onclick="return confirm('Delete {{$menu->name}} forever?')">
                 Delete Menu
               </button>
             </div>
@@ -150,6 +180,7 @@
         </form>
       </div>
     </div>
+  -->
 </div>
 </x-app-layout>
 <script type="text/javascript">

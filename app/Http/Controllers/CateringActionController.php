@@ -185,13 +185,15 @@ class CateringActionController extends Controller
 	public function delete_menu(Request $request, $menu_code)
 	{
 		$menu = Menu::where('menu_code',$menu_code)->first();
-		foreach ($menu->photos as $photo) {
-			$check = \File::exists(public_path($photo->file));
-			if($photo != null){
-				if ($check) {
-					$delete = \File::delete(public_path($photo->file));
+		if($menu->photos->first() != null){
+			foreach ($menu->photos as $photo) {
+				$check = \File::exists(public_path($photo->file));
+				if($photo != null){
+					if ($check) {
+						$delete = \File::delete(public_path($photo->file));
+					}
+					$photo->delete();
 				}
-				$photo->delete();
 			}
 		}
 		$message = 'Menu '.$menu->name.' deleted successfully.';
