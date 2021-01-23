@@ -124,28 +124,26 @@
   @endif
 
 
-  <div class=" border-gray-200 bg-no-repeat bg-cover bg-center pb-20"  >
+  <div class=" border-gray-200 bg-no-repeat bg-cover bg-center "  >
 
     <div class=" mb-4 rounded-xl shadow-lg flex md:flex-row flex-col">
       @if($menu_today == null)
 
-       <div class="bg-cover bg-top text-center bg-gradient-to-t bg-blue-400 to bg-green-400  bg-center text-white  object-fill w-full" style="background-image: url(https://assets.kompasiana.com/items/album/2018/04/16/suasana-kantor-24slides-indonesia-3-5ad4a44bcaf7db40dd0deff2.jpg?t=o&v=760);background-position-y: -70px;">
-        <div class="h-full md:p-20 p-8" style="background-image: linear-gradient(0deg,#252525,#27272769) !important;">
+      <div class="bg-cover bg-top text-center bg-gradient-to-t bg-blue-400 to bg-green-400  bg-center text-white  object-fill w-full" style="background-image: url(https://assets.kompasiana.com/items/album/2018/04/16/suasana-kantor-24slides-indonesia-3-5ad4a44bcaf7db40dd0deff2.jpg?t=o&v=760);background-position-y: -70px;">
+        <div class="h-full md:px-20 p-8 md:pb-40 md:pt-20" style="background-image: linear-gradient(0deg,#252525,#27272769) !important;">
           <p class="font-bold text-2xl uppercase"> Today Breakfast </p>
           <div class="flex md:flex-row flex-col justify-center mb-8 ">
             <p class="text-5xl font-bold leading-none capitalize"> no catering schedule today   </p>        
 
-            </div>
-            <p class="text-2xl mb-4 leading-none">Sorry you dont have catering schedule today, Please comeback tomorrow  </p>
-             
           </div>
-         
+          <p class="text-2xl mb-4 leading-none">Sorry you dont have catering schedule today, Please comeback tomorrow  </p>
 
+        </div>       
       </div> 
 
       @else
       <div class="bg-cover bg-top text-center bg-gradient-to-t bg-blue-400 to bg-green-400  bg-center text-white  object-fill w-full" style="background-image: url({{ url('public/'.$menu_today->menu->photos->random()->file)}});background-position-y: -70px;">
-        <div class="h-full md:p-20 p-8" style="background-image: linear-gradient(0deg,#252525,#27272769) !important;">
+        <div class="h-full md:px-20 p-8 md:pb-40 md:pt-20" style="background-image: linear-gradient(0deg,#252525,#27272769) !important;">
           <p class="font-bold text-2xl uppercase"> Today Breakfast </p>
           <div class="flex md:flex-row flex-col justify-center mb-8">
             <p class="text-5xl font-bold leading-none "> {{$menu_today->menu->name}}   </p>         
@@ -196,20 +194,36 @@
       </div>
     </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 px-4 mb-8 -mt-20 w-full">  
-       <div class="w-full px-2">
+      <div class="grid grid-cols-1 md:grid-cols-4 px-9 mb-8 mt-8 md:-mt-24 gap-4 w-full">        
+        <div class="w-full px-2">
           <div class="rounded-lg shadow-sm mb-4">
             <a href="#">
             <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
-              <div class="px-3 pt-8 pb-10 text-center relative z-10">
-                <h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Total Review</h4>
-                <h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{$total_review}}</h3>
-                <p class="text-base animate-bounce text-green-500 leading-tight"></p>
+              <div class="p-6 text-center relative z-10">
+                <div class="flex items-center gap-4 mb-4">
+                  <i class="fas fa-calendar-plus rounded-full bg-green-200 text-green-500 p-4"></i>
+                <h4 class="text-xl font-semibold uppercase text-left text-gray-500 leading-tight">catering is taken</h4>
+                </div>
+                <h3 class="text-5xl text-green-500 font-semibold leading-tight">{{$total_catering}}</h3>
+                
               </div>              
-              <div class="absolute bottom-0 inset-x-0">
-                <canvas id="chart1" ></canvas>
               </div>
-            </div>
+            </a>
+          </div>
+        </div>
+        <div class="w-full px-2">
+          <div class="rounded-lg shadow-sm mb-4">
+            <a href="#">
+            <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl animate transform transition-transform hover:-translate-y-2 duration-1000">
+              <div class="p-6 text-center relative z-10">
+                <div class="flex items-center gap-4 mb-4">
+                  <i class="fas fa-calendar-times rounded-full bg-red-200 text-red-500 p-4"></i>
+                <h4 class="text-2xl font-semibold uppercase text-left text-gray-500 leading-tight">Day Off </h4>
+                </div>
+                <h3 class="text-5xl text-red-500 font-semibold leading-tight">{{$total_dayoff}}</h3>
+                
+              </div>              
+              </div>
             </a>
           </div>
         </div>
@@ -217,59 +231,42 @@
           <div class="rounded-lg shadow-sm mb-4">
             <a href="#">
             <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
-              <div class="px-3 pt-8 pb-10 text-center relative z-10">
-                <h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Catering Taken</h4>
-                <h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{$total_catering}}</h3>
-                <p class="text-base animate-bounce text-green-500 leading-tight"></p>
+              <div class="p-6 text-center relative z-10">
+                <div class="flex items-center gap-4 mb-4">
+                  <i class="fas fa-calendar rounded-full bg-indigo-200 text-indigo-500 p-4"></i>
+                <h4 class="text-xl font-semibold uppercase text-left text-gray-500 leading-tight text-left">Catering not Taken</h4>
+                </div>
+                <h3 class="text-5xl text-indigo-500 font-semibold leading-tight">{{$total_empty_order}}</h3>
+                
               </div>              
-              <div class="absolute bottom-0 inset-x-0">
-                <canvas id="chart1" ></canvas>
               </div>
-            </div>
             </a>
           </div>
         </div>
-        <div class="w-full px-2">
+         <div class="w-full px-2">
           <div class="rounded-lg shadow-sm mb-4">
             <a href="#">
             <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
-              <div class="px-3 pt-8 pb-10 text-center relative z-10">
-                <h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Total Schedule Off</h4>
-                <h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{$total_dayoff}}</h3>
-                <p class="text-base animate-bounce text-green-500 leading-tight"></p>
+              <div class="p-6 text-center relative z-10">
+                <div class="flex items-center gap-4 mb-4">
+                  <i class="fas fa-feather-alt rounded-full bg-blue-200 text-blue-500 p-4"></i>
+                  <h4 class="text-xl font-semibold uppercase text-gray-500 leading-tight text-left">Total Review & Feeds</h4>
+                </div>                
+                <h3 class="text-5xl text-blue-500 font-semibold leading-tight">{{$total_review}}</h3>               
               </div>              
-              <div class="absolute bottom-0 inset-x-0">
-                <canvas id="chart1" ></canvas>
               </div>
-            </div>
-            </a>
-          </div>
-        </div>
-        <div class="w-full px-2">
-          <div class="rounded-lg shadow-sm mb-4">
-            <a href="#">
-            <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
-              <div class="px-3 pt-8 pb-10 text-center relative z-10">
-                <h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Catering not Taken</h4>
-                <h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{$total_empty_order}}</h3>
-                <p class="text-base animate-bounce text-green-500 leading-tight"></p>
-              </div>              
-              <div class="absolute bottom-0 inset-x-0">
-                <canvas id="chart1" ></canvas>
-              </div>
-            </div>
             </a>
           </div>
         </div>
       </div>
 
-    <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 px-4 mb-8">  
-      <div class="p-6 px-8 mt-6 bg-white rounded-xl p-4 shadow-lg">       
+    <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 px-6 mb-8">  
+      <div class="p-6 px-6 mx-6 mt-6 bg-white rounded-xl p-4 shadow-lg">       
         <div class="col-span-2 text-4xl text-left text-gray-600 mb-9 font-base flex item-center">          
           <p class="flex-auto text-left font-semibold ">
             <span class="font-normal text-gray-600"> Schedule </span>{{Carbon\Carbon::now()->format('F Y')}}</p>
-          <a href="{{ route('employee.create.order') }}" id="btn-slide-dis-2"  class="inline-block rounded-full font-medium leading-none py-2 px-2 focus:outline-none text-gray-400 hover:text-gray-700 focus:text-blue-600 duration-500">
-              <i class="fas fa-plus"></i>
+          <a href="{{ route('employee.create.order') }}" id="btn-slide-dis-2"  class="inline-block rounded-full leading-none focus:outline-none text-gray-400 hover:text-gray-700 focus:text-blue-600 duration-500">
+              <i class="fas fa-plus p-2 border rounded-full text-lg hover:border-blue-400"></i>
             </a>
         </div>
         @php
@@ -290,7 +287,7 @@
             <a href="#">day off</a>
           </div>
           @elseif($order == null)
-          <div class="flex items-center bg-gradient-to-r from-transparent to-gray-200 border-gray-500 gap-2 p-2 rounded border-l-4 mb-2">
+          <div class="flex items-center bg-gradient-to-r from-transparent to-gray-200 border-gray-500 gap-2 p-2 rounded border-l-4 mb-2  animate transform transition-transform hover:translate-x-2 duration-500 hover:bg-gray-200">
           <div class=" text-center w-8 text-xl text-gray-700 leading-7 font-bold flex-initial">
             {{$start_date->format('d')}}
           </div>
@@ -454,7 +451,7 @@
 
               </div>
             </button>
-            <a href="{{route('catering.history.review')}}" class="contents cursor-pointer">
+            <a href="{{route('catering.index.review')}}" class="contents cursor-pointer">
               <div class="bg-orange-500 col-start-4 col-end-7 rounded-full my-4 mx-auto shadow-md animate transform transition-transform hover:translate-y-2 hover:bg-orange-700 duration-1000 w-4/12 py-3 text-center cursor-pointer">
 
                 <h3 class="font-semibold text-xl mb-1 text-white">See All</h3> 
