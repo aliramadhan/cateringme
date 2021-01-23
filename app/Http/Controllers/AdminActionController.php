@@ -77,11 +77,11 @@ class AdminActionController extends Controller
 		//Create Employee/Catering Code
 		if($request->role == 'Catering'){	
 			$code_initial = 'CTR';
-			$last_id = User::where('role','Catering')->get()->count();
+			$last_id = User::where('role','Catering')->orderBy('id','desc')->pluck('id');
 		}
 		else{
 			$code_initial = 'EMP';
-			$last_id = User::where('role','Employee')->get()->count();
+			$last_id = User::where('role','Employee')->orderBy('id','desc')->pluck('id');
 		}
 		$len = strlen(++$last_id);
 		for($i=$len; $i< 4; ++$i) {

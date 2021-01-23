@@ -117,7 +117,7 @@
                     <span>  
                         <div class=" text-xl font-semibold text-orange-600 mt-3 absolute  px-4 py-1 bg-white rounded-r-lg">{{$menu->name}}</div>
                     </span>
-                    <img src="{{url('public/'.$menu->photos->first()->file)}}" alt="{{ $menu->name }}" class="h-52 rounded-xl object-cover w-full">
+                    <img src="@if($menu->photos->first() != null) {{url('public/'.$menu->photos->first()->file)}} @else {{url('public/images/no-image.png')}} @endif" alt="{{ $menu->name }}" class="h-52 rounded-xl object-cover w-full">
 
                   </div>
                   <div class=" text-base font-bold text-gray-600 text-left px-2">Description</div>
@@ -167,7 +167,7 @@
     @foreach($menus as $menu)
     <tr>
         <td>{{$loop->iteration}}</td>
-        <td><img class="object-none h-48 w-full" src="{{url('public/'.$menu->photos->first()->file)}}"></td>
+        <td><img class="object-none h-48 w-full" src="@if($menu->photos->first() != null) {{url('public/'.$menu->photos->first()->file)}} @else {{url('public/images/no-image.png')}} @endif"></td>
         <td>{{$menu->name}}</td>
         <td>{{$menu->desc}}</td>
     </tr>

@@ -78,7 +78,7 @@
                           <h4 class="font-semibold text-xl text-white ">{{$order->menu->name}}</h4>
                       </div>
                       <div class="absolute bottom-0 inset-x-0">
-                         <img src="{{url('public/'.$order->menu->photos->random()->file)}}" class="object-cover h-full">
+                         <img src="@if($order->menu->photos->first() != null){{url('public/'.$order->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-full">
                       </div>
                       <div class="flex flex-col md:flex-row text-base bg-white py-2 z-10 bottom-0 absolute rounded-br-xl text-gray-600 px-1 md:px-4 hover:bg-gray-900 hover:text-white duration-500 cursor-pointer flex items-center w-full">
                         <img src="{{ $order->employee->profile_photo_url }}" class="object-cover h-10 w-10 rounded-full">

@@ -19,7 +19,7 @@ class CreateMenusTable extends Migration
             $table->foreignId('catering_id')->constrained('users')->onDelete('cascade');
             $table->string('name');
             $table->string('desc');
-            $table->float('price')->defaul(0);
+            $table->float('price')->default(0);
             $table->timestamps();
         });
     }

@@ -151,11 +151,11 @@
               <div class="flex flex-row text-base absolute bg-gray-600 absolute rounded-tl-xl rounded-br-xl text-white px-4 hover:bg-gray-700 duration-500 cursor-pointer">
                   <div class="px-2 py-1 font-semibold ">{{$review->menu->name}}</div>                 
                 </div>
-          <img src="{{url('public/'.$review->menu->photos->first()->file)}}" class="object-cover flex-none bg-cover h-48 lg:h-auto lg:w-52 w-20 overflow-hidden rounded-l-lg">
+          <img src="@if($review->menu->photos->first() != null ){{url('public/'.$review->menu->photos->first()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover flex-none bg-cover h-48 lg:h-auto lg:w-52 w-20 overflow-hidden rounded-l-lg">
           <div class="flex flex-col lg:py-3 pt-9 px-6 flex-auto ">
             <div class="flex items-center">           
               <div class=" text-lg flex-auto text-gray-600 leading-7 font-semibold flex items-center">
-                 <img src="{{url('public/'.$review->menu->photos->first()->file)}}" class="object-cover h-10 w-10 rounded-full">
+                 <img src="@if($review->menu->photos->first() != null ) {{url('public/'.$review->menu->photos->first()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-10 w-10 rounded-full">
                  <div class="ml-2">
                     <a href="#">{{$review->employee->name}}</a>
                     <div class=" text-sm font-semibold text-indigo-700 -mt-2">
