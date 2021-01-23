@@ -182,13 +182,31 @@ class CateringActionController extends Controller
 
 		return redirect()->back()->with(['message' => 'Menu '.$menu->name.' updated successfully.']);
 	}
+	public function delete_menu(Request $request, $menu_code)
+	{
+		$menu = Menu::where('menu_code',$menu_code)->first();
+		foreach ($menu->photos as $photo) {
+			$check = \File::exists(public_path($photo->file));
+			if($photo != null){
+				if ($check) {
+					$delete = \File::delete(public_path($photo->file));
+				}
+				$photo->delete();
+			}
+		}
+		$message = 'Menu '.$menu->name.' deleted successfully.';
+		$menu->delete();
+		return redirect()->route('catering.index.menu')->with(['message' => $message]);
+	}
 	public function delete_photo($id)
 	{
 		$photo = PhotoMenu::find($id);
 		$check = \File::exists(public_path($photo->file));
 		$message = 'Photo '.$photo->menu->name.' deleted successfully.';
-		if($check && $photo != null){
-			$delete = \File::exists(public_path($photo->file));
+		if($photo != null){
+			if ($check) {
+				$delete = \File::delete(public_path($photo->file));
+			}
 			$photo->delete();
 		}
 		return redirect()->back()->with(['message' => $message]);
