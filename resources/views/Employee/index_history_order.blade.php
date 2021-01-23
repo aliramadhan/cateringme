@@ -74,7 +74,7 @@
               </span>
               <div >
 
-                <img src="{{url('public/'.$order->menu->photos->first()->file)}}" alt="#" class="h-52 rounded-xl object-cover w-full">
+                <img src="@if($order->menu->photos->first() != null){{url('public/'.$order->menu->photos->first()->file)}} @else {{url('public/images/no-image.png')}} @endif" alt="#" class="h-52 rounded-xl object-cover w-full">
 
               </div>
               <div class=" text-base font-bold text-gray-600 text-left px-2">{{$order->menu->name}}</div>

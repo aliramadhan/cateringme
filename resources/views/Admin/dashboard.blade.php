@@ -76,7 +76,7 @@
           				Rp.
           			</span>
           		</div>
-          		<input type="text" name="prize" id="price" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full py-2 pl-10 text-base border-gray-300 rounded-md border" placeholder="0.00">
+          		<input type="text" name="price" id="price" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full py-2 pl-10 text-base border-gray-300 rounded-md border" placeholder="0.00">
           		
           	</div>
           </div>
@@ -177,14 +177,15 @@
 
 			<div class="grid grid-cols-9 mx-auto p-2 text-blue-50">
 				@foreach($reviews as $review)
-				@if($review->review == null)
-					@php continue; @endphp
-				@endif
-				@if($loop->iteration % 2 == 0)
+				@if($loop->iteration < 5)
+					@if($review->review == null)
+						@php continue; @endphp
+					@endif
+					@if($loop->iteration % 2 == 0)
 					<!-- left -->
 					<div class="contents">
 						<div class="bg-blue-500 col-start-1 col-end-5 p-4 rounded-xl my-4 ml-auto shadow-md animate transform transition-transform hover:-translate-x-2 cursor-default duration-1000">
-							<img src="{{ asset('/resources/image/burger.jpg')}}" class="object-cover h-10 w-10 rounded-full mx-auto">
+							<img src="@if($review->menu->photos->first() != null){{ url('public/'.$review->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-10 w-10 rounded-full mx-auto">
 							<h3 class="font-semibold text-lg mb-1 text-center">{{$review->employee->name}}</h3>
 							<p class="leading-tight text-justify">{{$review->review}}</p>
 						</div>
@@ -197,18 +198,18 @@
 						<div class="col-start-6 col-end-10 text-left relative text-black my-auto animate transform transition-transform hover:translate-x-2 
 						duration-1000">
 							<h3 class="font-semibold text-lg mb-1">{{$review->menu->name}}</h3>
-							<p class="leading-tight text-justify">{{Carbon\Carbon::parse($review->reviewed_at)->format('H:s, d, M Y')}}</p>     
+							<p class="leading-tight text-justify">{{Carbon\Carbon::parse($review->reviewed_at)->format('H:s, d, M Y')}}<br>{{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}</p>     
 						</div>
 
 
 					</div>
-				@else
+					@else
 					<!-- right -->
 					<div class="contents">
 							<div class="col-start-1 col-end-5 text-right relative text-black my-auto animate transform transition-transform hover:-translate-x-2 
 							duration-1000">
 							<h3 class="font-semibold text-lg mb-1">{{$review->menu->name}}</h3>
-							<p class="leading-tight ">{{Carbon\Carbon::parse($review->reviewed_at)->format('H:s, d, M Y')}}</p>     
+							<p class="leading-tight ">{{Carbon\Carbon::parse($review->reviewed_at)->format('H:s, d, M Y')}}<br>{{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}</p>     
 						</div>
 						<div class="col-start-5 col-end-6 mx-auto relative">
 							<div class="h-full w-6 flex items-center justify-center">
@@ -217,27 +218,25 @@
 							<div class="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-500 shadow"></div>
 						</div>
 						<div class="bg-blue-500 col-start-6 col-end-10 p-4 rounded-xl my-4 mr-auto shadow-md animate transform transition-transform hover:translate-x-2 cursor-default md:flex flex-row duration-1000">
-							<img src="{{ asset('/resources/image/burger.jpg')}}" class="object-cover h-10 w-10 rounded-full md:mr-3 mx-auto my-auto">
+							<img src="@if($review->menu->photos->first() != null){{ url('public/'.$review->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-10 w-10 rounded-full md:mr-3 mx-auto my-auto">
 							<div>
 								<h3 class="font-semibold text-lg mb-1">{{$review->employee->name}}</h3>
 								<p class="leading-tight text-justify">{{$review->review}}</p>
 							</div>
 						</div>
 					</div>
-				@endif
-				@endforeach
-
+					@endif
+				@else
 				 <span id="pc1" class="contents hidden"> 	<!-- dibagi 5:5 li -->
-
-				 	@foreach($reviews as $review)
-				@if($review->review == null)
-					@php continue; @endphp
-				@endif
-				@if($loop->iteration % 2 == 0)
+			 	
+					@if($review->review == null)
+						@php continue; @endphp
+					@endif
+					@if($loop->iteration % 2 == 0)
 				
 					<div class="contents">
 						<div class="bg-blue-500 col-start-1 col-end-5 p-4 rounded-xl my-4 ml-auto shadow-md animate transform transition-transform hover:-translate-x-2 cursor-default duration-1000">
-							<img src="{{ asset('/resources/image/burger.jpg')}}" class="object-cover h-10 w-10 rounded-full mx-auto">
+							<img src="@if($review->menu->photos->first() != null){{ url('public/'.$review->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-10 w-10 rounded-full mx-auto">
 							<h3 class="font-semibold text-lg mb-1 text-center">{{$review->employee->name}}</h3>
 							<p class="leading-tight text-justify">{{$review->review}}</p>
 						</div>
@@ -250,18 +249,18 @@
 						<div class="col-start-6 col-end-10 text-left relative text-black my-auto animate transform transition-transform hover:translate-x-2 
 						duration-1000">
 							<h3 class="font-semibold text-lg mb-1">{{$review->menu->name}}</h3>
-							<p class="leading-tight text-justify">{{Carbon\Carbon::parse($review->reviewed_at)->format('H:s, d, M Y')}}</p>     
+							<p class="leading-tight text-justify">{{Carbon\Carbon::parse($review->reviewed_at)->format('H:s, d, M Y')}}<br>{{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}</p>     
 						</div>
 
 
 					</div>
-				@else
+					@else
 					<!-- right -->
 					<div class="contents">
 							<div class="col-start-1 col-end-5 text-right relative text-black my-auto animate transform transition-transform hover:-translate-x-2 
 							duration-1000">
 							<h3 class="font-semibold text-lg mb-1">{{$review->menu->name}}</h3>
-							<p class="leading-tight ">{{Carbon\Carbon::parse($review->reviewed_at)->format('H:s, d, M Y')}}</p>     
+							<p class="leading-tight ">{{Carbon\Carbon::parse($review->reviewed_at)->format('H:s, d, M Y')}}<br>{{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}</p>     
 						</div>
 						<div class="col-start-5 col-end-6 mx-auto relative">
 							<div class="h-full w-6 flex items-center justify-center">
@@ -270,13 +269,14 @@
 							<div class="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-500 shadow"></div>
 						</div>
 						<div class="bg-blue-500 col-start-6 col-end-10 p-4 rounded-xl my-4 mr-auto shadow-md animate transform transition-transform hover:translate-x-2 cursor-default md:flex flex-row duration-1000">
-							<img src="{{ asset('/resources/image/burger.jpg')}}" class="object-cover h-10 w-10 rounded-full md:mr-3 mx-auto my-auto">
+							<img src="@if($review->menu->photos->first() != null){{ url('public/'.$review->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-10 w-10 rounded-full md:mr-3 mx-auto my-auto">
 							<div>
 								<h3 class="font-semibold text-lg mb-1">{{$review->employee->name}}</h3>
 								<p class="leading-tight text-justify">{{$review->review}}</p>
 							</div>
 						</div>
 					</div>
+					@endif
 				@endif
 				@endforeach
 				 </span>
