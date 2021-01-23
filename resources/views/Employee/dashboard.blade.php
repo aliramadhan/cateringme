@@ -260,7 +260,7 @@
         </div>
       </div>
 
-    <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 px-6 mb-8">  
+    <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 md:px-6 mb-8 px-0">  
       <div class="p-6 px-6 mx-6 mt-6 bg-white rounded-xl p-4 shadow-lg">       
         <div class="col-span-2 text-4xl text-left text-gray-600 mb-9 font-base flex item-center">          
           <p class="flex-auto text-left font-semibold ">

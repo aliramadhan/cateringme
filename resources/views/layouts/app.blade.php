@@ -194,7 +194,9 @@
 
     </div>
   </div>
-    <footer class="text-gray-600 body-font">
+    
+</div>
+<footer class="text-gray-600 body-font">
       <div class="container px-5 py-8 mx-auto flex items-center flex-col md:flex-row">
         <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
          <img class="mb-1 logo-login h-10" src="{{ asset('resources/image/logo2.png')}}" alt="" height="38px">
@@ -217,7 +219,6 @@
         </span>
       </div>
     </footer>
-</div>
 </div>
 
 

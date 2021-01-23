@@ -31,6 +31,9 @@
 		Content:"{{ implode('', $errors->all(':message')) }}";
 	}</style>	
 	@endif
+	<script type="text/javascript">
+		chart.data.datasets[0].data[2] = 50;
+	</script>
 	
 	<x-slot name="header">
 		<h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -288,7 +291,7 @@
 					</div>
 
 					<button onclick="pcsh1()" class="contents cursor-pointer" id="pc2">
-						<div class="bg-gray-500 col-start-4 col-end-7 px-14 py-2 rounded-3xl my-4 mr-auto shadow-md animate transform transition-transform hover:translate-y-2 hover:bg-gray-700 duration-1000 text-center mx-auto cursor-pointer">
+						<div class="bg-gray-500 col-start-3 col-end-8 px-14 py-2 rounded-3xl my-4 mr-auto shadow-md animate transform transition-transform hover:-translate-y-2 hover:bg-gray-700 duration-1000 mx-auto text-center cursor-pointer">
 
 							<h3 class="font-semibold "><i class="fas fa-chevron-down text-4xl"></i></h3>					
 
