@@ -77,7 +77,7 @@
                 <td>{{$review->review}}</td>
                 <td><i class="fas fa-star"></i>{{$review->stars}}</td>
                 <td>{{Carbon\Carbon::parse($review->order_date)->format('H:s, d, M Y')}}</td>
-                <td>{{$review->reviewed_at->format('H:s, d, M Y')}}</td>
+                <td>{{Carbon\Carbon::parse($review->reviewed_at)->format('H:s, d, M Y')}}</td>
             </tr>
             @endforeach
     </tbody>

@@ -360,53 +360,22 @@
 				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 			</ol>
 			<div class="carousel-inner h-52 md:h-80">
-				
+				@foreach($menus as $menu)
 				<div class="carousel-item active h-100">
-					<img class="d-block w-100 h-100 rounded-xl" src="https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2020/06/11/3650390209.jpg" alt="First slide">
+					<img class="d-block w-100 h-100 rounded-xl" src="{{url('public/'.$menu->photos->random()->first()->file)}}" alt="First slide">
 					<div class="carousel-caption text-left p-4 rounded" style="  background: #3e3e3eba;">						
-						<p class="font-bold text-sm uppercase mb-1">First Menu </p>						
+						<p class="font-bold text-sm uppercase mb-1">Menu</p>						
 						<div class="flex mb-6">
-						<h2 class="text-xl font-bold uppercase my-auto">Pizza</h2>
+						<h2 class="text-xl font-bold uppercase my-auto">{{$menu->name}}</h2>
 						<div class="ml-2 text-lg text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border  p-1 px-2 rounded-xl" style="border-color: #FF5A1F !important">
-								<i class="fas fa-star"></i> 2
+								<i class="fas fa-star"></i> {{$menu->orders->avg('stars')}}
 							</div>   
 						</div>
-						<h5 class="fw-normal d-none d-md-block">Deskripsi</h5>
+						<h5 class="fw-normal d-none d-md-block">{{$menu->desc}}</h5>
 
 					</div>
 				</div>
-
-				<div class="carousel-item h-100">
-					<img class="d-block w-100 rounded-xl h-100" src="https://www.masakapahariini.com/wp-content/uploads/2019/11/shutterstock_1469046305-780x440.jpg" alt="Second slide">
-					<div class="carousel-caption text-left p-4 rounded" style="  background: #3e3e3eba;">						
-						<p class="font-bold text-sm uppercase mb-1">2nd Menu </p>						
-						<div class="flex mb-6">
-						<h2 class="text-xl font-bold uppercase my-auto">Pizza</h2>
-						<div class="ml-2 text-lg text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border  p-1 px-2 rounded-xl" style="border-color: #FF5A1F !important">
-								<i class="fas fa-star"></i> 2
-							</div>   
-						</div>
-						<h5 class="fw-normal d-none d-md-block">Deskripsi</h5>
-
-					</div>
-				
-				</div>
-				<div class="carousel-item h-100">
-					<img class="d-block w-100 rounded-xl h-100" src="https://cdn-2.tstatic.net/tribunnews/foto/bank/images/resep-ayam-goreng-kuning-tabur-serundeng.jpg" alt="Third slide">
-					<div class="carousel-caption text-left p-4 rounded" style="  background: #3e3e3eba;">						
-						<p class="font-bold text-sm uppercase mb-1">3nd Menu </p>						
-						<div class="flex mb-6">
-						<h2 class="text-xl font-bold uppercase my-auto">Pizza</h2>
-						<div class="ml-2 text-lg text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border  p-1 px-2 rounded-xl" style="border-color: #FF5A1F !important">
-								<i class="fas fa-star"></i> 2
-							</div>   
-						</div>
-						<h5 class="fw-normal d-none d-md-block">Deskripsi</h5>
-
-					</div>
-					
-				</div>
-
+				@endforeach
 			</div>
 			<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
