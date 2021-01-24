@@ -43,7 +43,7 @@
 </script>
 </head>
 <body class="antialiased" onload="loader24();notifu()">
-    <div id="loader-bk" >
+    <div id="loader-bk" class="z-40" >
     <div id="loader">
       <div class="spinner">
         <svg version="1.1" id="L3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -196,7 +196,7 @@
   </div>
     
 </div>
-<footer class="text-gray-600 body-font">
+<footer class="text-gray-600 body-font z-0">
       <div class="container px-5 py-8 mx-auto flex items-center flex-col md:flex-row">
         <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
          <img class="mb-1 logo-login h-10" src="{{ asset('resources/image/logo2.png')}}" alt="" height="38px">
@@ -205,18 +205,10 @@
         <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2021 24Slides —
           <a href="#" class="text-gray-600 ml-1" rel="ADN Dev" target="_blank">ADN</a>
         </p>
-        <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
-          <div class="flex md:flex-nowrap flex-wrap justify-center items-end md:justify-start">
-            <div class="relative sm:w-64 w-40 sm:mr-4 mr-2">
-              <label for="footer-field" class="leading-7 text-sm text-gray-600 font-semibold">Help Contact</label>
-              <input type="text" id="footer-field" name="footer-field" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:ring-2 focus:bg-transparent focus:ring-indigo-200 focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" placeholder="admin@24slides.com">
-            </div>
-            <button class="inline-flex text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded-full">Send</button>
-            <p class="text-gray-500 text-sm md:ml-6 md:mt-0 mt-2 sm:text-left text-center">We can help you if you have problems 
-              <br class="lg:block hidden">or provide feedback
-            </p>
-          </div>
-        </span>
+         <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+          You have problem or suggestion about app ? 
+          <a href="mailto:someone@yoursite.com?cc=someoneelse@theirsite.com, another@thatsite.com, me@mysite.com&bcc=lastperson@theirsite.com&subject=Big%20News&body=Body-goes-here" class="ml-2 font-semibold hover:text-blue-400"> Email Us</a>
+         </span> 
       </div>
     </footer>
 </div>

@@ -82,33 +82,33 @@
           <div class="rating">
             <label>
               <input required type="radio" name="stars" @if($menu_today->stars == 1) checked @endif value="1" />
-              <span class="icon duration-500 ">★</span>
+              <span class="icon duration-500 text-2xl mx-1"><i class="fas fa-star"></i></span>
             </label>
             <label>
               <input type="radio" name="stars" @if($menu_today->stars == 2) checked @endif value="2" />
-              <span class="icon duration-500 ">★</span>
-              <span class="icon duration-500 ">★</span>
+              <span class="icon duration-500 text-2xl mx-1"><i class="fas fa-star"></i></span>
+              <span class="icon duration-500 text-2xl mx-1"><i class="fas fa-star"></i></span>
             </label>
             <label>
               <input type="radio" name="stars" @if($menu_today->stars == 3) checked @endif value="3" />
-              <span class="icon duration-500 ">★</span>
-              <span class="icon duration-500 ">★</span>
-              <span class="icon duration-500 ">★</span>   
+              <span class="icon duration-500 text-2xl mx-1"><i class="fas fa-star"></i></span>
+              <span class="icon duration-500 text-2xl mx-1"><i class="fas fa-star"></i></span>
+              <span class="icon duration-500 text-2xl mx-1"><i class="fas fa-star"></i></span>   
             </label>
             <label>
               <input type="radio" name="stars" @if($menu_today->stars == 4) checked @endif value="4" />
-              <span class="icon duration-500 ">★</span>
-              <span class="icon duration-500 ">★</span>
-              <span class="icon duration-500 ">★</span>
-              <span class="icon duration-500 ">★</span>
+              <span class="icon duration-500 text-2xl mx-1"><i class="fas fa-star"></i></span>
+              <span class="icon duration-500 text-2xl mx-1"><i class="fas fa-star"></i></span>
+              <span class="icon duration-500 text-2xl mx-1"><i class="fas fa-star"></i></span>
+              <span class="icon duration-500 text-2xl mx-1"><i class="fas fa-star"></i></span>
             </label>
             <label>
               <input type="radio" name="stars" @if($menu_today->stars == 5) checked @endif value="5" />
-              <span class="icon duration-500 ">★</span>
-              <span class="icon duration-500 ">★</span>
-              <span class="icon duration-500 ">★</span>
-              <span class="icon duration-500 ">★</span>
-              <span class="icon duration-500 ">★</span>
+              <span class="icon duration-500 text-2xl mx-1"><i class="fas fa-star"></i></span>
+              <span class="icon duration-500 text-2xl mx-1"><i class="fas fa-star"></i></span>
+              <span class="icon duration-500 text-2xl mx-1"><i class="fas fa-star"></i></span>
+              <span class="icon duration-500 text-2xl mx-1"><i class="fas fa-star"></i></span>
+              <span class="icon duration-500 text-2xl mx-1"><i class="fas fa-star"></i></span>
             </label>
           </div>
           <!--Footer-->
@@ -148,8 +148,11 @@
           <div class="flex md:flex-row flex-col justify-center mb-8">
             <p class="text-5xl font-bold leading-none "> {{$menu_today->menu->name}}   </p>         
 
-              <p class=" text-xl text-orange-500 leading-7 font-bold border border-orange-300 p-1 px-2 rounded-xl bg-white h-full ml-2  md:mt-0 mt-5">
+              <p class=" text-xl text-orange-500 leading-7 font-bold border border-orange-300 p-1 px-2 rounded-xl bg-white h-full ml-2  md:mt-0 mt-5 hidden md:block">
                 <i class="fas fa-star"></i> @if($menu_today->stars != null) {{$menu_today->stars}} Star  @endif
+              </p>
+               <p class=" text-xl text-orange-500 leading-7 font-bold border border-orange-300 p-1 px-2 rounded-xl bg-white h-full ml-2  md:mt-0 mt-5  md:hidden block">
+                @for($i = 1; $i <= $menu_today->stars; $i++) <i class="fas fa-star mx-2"></i> @endfor
               </p>
            
             </div>
@@ -162,6 +165,7 @@
          
 
       </div> 
+
       @endif
 
    
@@ -194,18 +198,20 @@
       </div>
     </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 px-9 mb-8 mt-8 md:-mt-24 gap-4 w-full">        
+      <div class="grid grid-cols-1 md:grid-cols-4 px-9 mb-8 mt-8 md:-mt-20 gap-4 w-full">        
         <div class="w-full px-2">
           <div class="rounded-lg shadow-sm mb-4">
-            <a href="#">
+            <a href="{{ route('employee.create.order') }}">
             <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
               <div class="p-6 text-center relative z-10">
-                <div class="flex items-center gap-4 mb-4">
-                  <i class="fas fa-calendar-plus rounded-full bg-green-200 text-green-500 p-4"></i>
-                <h4 class="text-xl font-semibold uppercase text-left text-gray-500 leading-tight">catering is taken</h4>
+                <div class="flex items-center gap-4 ">
+                  <i class="fas fa-calendar-plus rounded-full bg-green-200 text-green-500 p-5 text-4xl"></i>
+                  <div class="flex flex-col">
+                  <h3 class="text-5xl text-green-500 font-semibold leading-tight">{{$total_catering}}</h3>
+                  <h4 class="text-base font-semibold uppercase text-left text-gray-500 leading-tight">catering is taken</h4>
+                  </div>
                 </div>
-                <h3 class="text-5xl text-green-500 font-semibold leading-tight">{{$total_catering}}</h3>
-                
+                               
               </div>              
               </div>
             </a>
@@ -213,47 +219,57 @@
         </div>
         <div class="w-full px-2">
           <div class="rounded-lg shadow-sm mb-4">
-            <a href="#">
-            <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl animate transform transition-transform hover:-translate-y-2 duration-1000">
-              <div class="p-6 text-center relative z-10">
-                <div class="flex items-center gap-4 mb-4">
-                  <i class="fas fa-calendar-times rounded-full bg-red-200 text-red-500 p-4"></i>
-                <h4 class="text-2xl font-semibold uppercase text-left text-gray-500 leading-tight">Day Off </h4>
-                </div>
-                <h3 class="text-5xl text-red-500 font-semibold leading-tight">{{$total_dayoff}}</h3>
-                
-              </div>              
+            <a href="{{ route('employee.create.order') }}">
+              <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl animate transform transition-transform hover:-translate-y-2 duration-1000">
+                <div class="p-6 text-center relative z-10">
+                  <div class="flex items-center gap-4 ">
+                    <i class="fas fa-calendar-times rounded-full bg-red-200 text-red-500 p-5 text-4xl"></i>
+                    <div class="flex flex-col">
+                      <h3 class="text-5xl text-red-500 font-semibold leading-tight">{{$total_dayoff}}</h3>  
+                      <h4 class="text-base font-semibold uppercase text-left text-gray-500 leading-tight">Day Off or  leave</h4>
+
+                    </div>
+                  </div>
+
+                </div>              
               </div>
             </a>
           </div>
         </div>
         <div class="w-full px-2">
           <div class="rounded-lg shadow-sm mb-4">
-            <a href="#">
-            <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
-              <div class="p-6 text-center relative z-10">
-                <div class="flex items-center gap-4 mb-4">
-                  <i class="fas fa-calendar rounded-full bg-indigo-200 text-indigo-500 p-4"></i>
-                <h4 class="text-xl font-semibold uppercase text-left text-gray-500 leading-tight text-left">Catering not Taken</h4>
-                </div>
-                <h3 class="text-5xl text-indigo-500 font-semibold leading-tight">{{$total_empty_order}}</h3>
-                
-              </div>              
+            <a href="{{ route('employee.create.order') }}">
+              <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
+                <div class="p-6 text-center relative z-10">
+                  <div class="flex items-center gap-4 ">
+                    <i class="fas fa-calendar rounded-full bg-indigo-200 text-indigo-500 p-5 text-4xl"></i>
+                    <div class="flex flex-col">
+                      <h3 class="text-5xl text-indigo-500 font-semibold leading-tight">{{$total_empty_order}}</h3>
+                      <h4 class="text-base font-semibold uppercase text-left text-gray-500 leading-tight text-left">empty schedule</h4>
+
+                    </div>
+                  </div>               
+
+                </div>              
               </div>
             </a>
           </div>
         </div>
-         <div class="w-full px-2">
+        <div class="w-full px-2">
           <div class="rounded-lg shadow-sm mb-4">
-            <a href="#">
-            <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
-              <div class="p-6 text-center relative z-10">
-                <div class="flex items-center gap-4 mb-4">
-                  <i class="fas fa-feather-alt rounded-full bg-blue-200 text-blue-500 p-4"></i>
-                  <h4 class="text-xl font-semibold uppercase text-gray-500 leading-tight text-left">Total Review & Feeds</h4>
-                </div>                
-                <h3 class="text-5xl text-blue-500 font-semibold leading-tight">{{$total_review}}</h3>               
-              </div>              
+            <a href="{{ route('employee.history.review') }}">
+              <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
+                <div class="p-6 text-center relative z-10">
+                  <div class="flex items-center gap-4 ">
+                    <i class="fas fa-feather-alt rounded-full bg-blue-200 text-blue-500 p-5 text-4xl"></i>
+                    <div class="flex flex-col">
+                      <h3 class="text-5xl text-blue-500 font-semibold leading-tight">{{$total_review}}</h3>
+                      <h4 class="text-base font-semibold uppercase text-gray-500 leading-tight text-left">Review & Feeds</h4>
+
+                    </div>
+                  </div>                
+
+                </div>              
               </div>
             </a>
           </div>
@@ -271,6 +287,7 @@
         </div>
         @php
         $start_date = $now;
+        $img_modal=1;
         @endphp
         @for($i = 0 ; $i <= $total_days;$i++,$start_date->addDay())
           @php
@@ -287,29 +304,79 @@
             <a href="#">day off</a>
           </div>
           @elseif($order == null)
+          
           <div class="flex items-center bg-gradient-to-r from-transparent to-gray-200 border-gray-500 gap-2 p-2 rounded border-l-4 mb-2  animate transform transition-transform hover:translate-x-2 duration-500 hover:bg-gray-200">
+          
           <div class=" text-center w-8 text-xl text-gray-700 leading-7 font-bold flex-initial">
             {{$start_date->format('d')}}
           </div>
+          
           <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto uppercase font-semibold">
             <a href="{{route('employee.create.order')}}">empty order</a>
           </div>
           @elseif($order != null)    
             @if($start_date < Carbon\Carbon::now())
-            <div class="flex items-center bg-gradient-to-r from-transparent to-orange-200 border-blue-500 gap-2 p-2 rounded border-l-4 mb-2">
+
+            <div class="flex items-center bg-gradient-to-r from-transparent to-orange-200 border-orange-500 gap-2 p-2 rounded border-l-4 mb-2">
             <div class=" text-center w-8 text-xl text-orange-400 leading-7 font-bold flex-initial">
+               
             @else
             <div class="flex items-center bg-gradient-to-r from-transparent to-blue-200 border-blue-500 gap-2 p-2 rounded border-l-4 mb-2">
             <div class=" text-center w-8 text-xl text-blue-400 leading-7 font-bold flex-initial">
             @endif
             {{$start_date->format('d')}}
+
           </div>
 
           <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto">
             <a href="#">{{$order->menu->name}}</a>
           </div>
-        
-            <img src="@if($order->menu->photos->first() != null){{ url('public/'.$order->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-8 w-8 mr-2 rounded flex-initial">
+
+          <div class="bootstrapiso z-50">
+              <div class="modal fade" id="CateringImage{{$img_modal}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Pizza PHD{{$img_modal}}</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close" class="right-4">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body p-0">
+                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                      <div class="carousel-inner">
+                        <div class="carousel-item active h-100">
+                          <img class="d-block w-100 h-96 bg-cover" src="https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/216054.jpg" alt="First slide">
+                        </div>
+                        <div class="carousel-item h-100">
+                          <img class="d-block w-100 h-96 bg-cover" src="https://www.qsrmagazine.com/sites/default/files/styles/story_page/public/2020-03/PizzaHutDelivery.jpg?itok=zx4HB4fD" alt="Second slide">
+                        </div>
+                        <div class="carousel-item  h-100">
+                          <img class="d-block w-100 h-96 bg-cover" src="https://ik.imagekit.io/tvlk/cul-asset/guys1L+Yyer9kzI3sp-pb0CG1j2bhflZGFUZOoIf1YOBAm37kEUOKR41ieUZm7ZJ/tvlk-prod-cul-assets/culinary/asset/REST_b.j-720x720-FIT_AND_TRIM-95a28e79196be412133c46ada4ce4e3f.jpeg?tr=q-40,c-at_max,w-1080,h-1920&_src=imagekit" alt="Third slide">
+                        </div>
+                      </div>
+                      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                         <i class="fas fa-backward  text-xl bg-gray-700 p-2 rounded-full"></i>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                         <i class="fas fa-forward  text-xl bg-gray-700 p-2 rounded-full"></i>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>  
+
+          <button data-toggle="modal" data-target="#CateringImage{{$img_modal++}}" class="bootstrapiso contents">
+            <img src="@if($order->menu->photos->first() != null){{ url('public/'.$order->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-8 w-8 mr-2 rounded flex-initial transform hover:scale-125 duration-500 ease-in-out hover:shadow=lg">
+          </button>
             @if($start_date > Carbon\Carbon::now())
             <a href="{{route('employee.delete.order',$order->id)}}" onclick="return confirm('Cancel order date {{$start_date->format('d, M Y')}}')">
               <div class="close-container shadow-lg">
@@ -320,6 +387,7 @@
             @endif
         
           @endif
+
         </div>
 
         @endfor
@@ -337,15 +405,15 @@
         @if($loop->iteration < 5)
           @if($loop->iteration % 2 != 0)
           <div class=" rounded-lg bg-gradient-to-r from-white to-purple-50 shadow mb-4 flex ">
-            <img src="@if($review->menu->photos->first() != null){{ url('public/'.$review->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-10 w-10 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-l-lg">
+            <img src="@if($review->menu->photos->first() != null){{ url('public/'.$review->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-10 md:w-10 w-20 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-l-lg">
             <div class="flex flex-col p-3 flex-auto">
               <div class="flex items-center">           
-                <div class=" text-lg flex-auto text-gray-600 leading-7 font-semibold"><a href="https://laravel.com/docs">{{$review->menu->name}}</a>
+                <div class="text-lg flex-auto text-gray-600 leading-7 font-semibold w-40 mr-1"><a href="#">{{$review->menu->name}}</a>
                   <div class=" text-sm font-semibold text-indigo-700 -mt-2">
                     {{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}
                   </div>
                 </div>
-                <div class=" text-xl text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl">
+                <div class=" text-xl text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl md:w-autoo w-24">
                   <i class="fas fa-star"></i> {{$review->stars}}
                 </div>
               </div>        

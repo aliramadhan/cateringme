@@ -146,7 +146,7 @@
                   <font class="text-green-400">Submitted</font> 
                   @endif
                 </div>
-                <div id="dvPassport{{$i}}" style="display: none" class="flex flex-col text-lg font-base gap-4 py-4">
+                <div id="dvPassport{{$i}}" style="display: none" class="flex flex-col text-lg font-base gap-4 py-4 text-left">
 
                    @if($schedule != null)
 

@@ -322,36 +322,6 @@
 	<div class="col-span-2 text-2xl text-center mb-6 font-base">          
 		Catering Menu
 	</div>
-		<!-- 
-		<div class="bg-white mb-4 rounded-xl shadow-lg">
-		<div class="sliderAx h-auto   ">
-			@foreach($menus as $menu)
-			<div id="slider-{{$loop->iteration}}" class="container mx-auto ">
-				
-                  <div class="px-6 py-2 font-semibold absolute bg-gray-600 rounded-tl-xl rounded-br-xl text-white hover:bg-gray-700 duration-500 cursor-pointer text-2xl"><i class="fas fa-cog"></i></div>                
-                
-				<div class="bg-cover bg-top  rounded-xl bg-center h-auto text-white pt-24 pb-10 px-10 object-fill" style="background-image: url(@if($menu->photos->first() != null){{url('public/'.$menu->photos->first()->file)}} @else {{url('public/images/no-image.png')}} @endif)">
-					
-					<div class=" p-4 rounded-lg" style="  background: #3e3e3eba;">
-						<p class="font-bold text-sm uppercase mb-1">@if($loop->iteration == 1) First Menu @else Second Menu @endif</p>
-						<div class="flex items-center mb-6">
-							<p class="text-3xl font-bold  uppercase mr-2">{{$menu->name}}</p>
-							<div class=" text-lg text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl">
-								<i class="fas fa-star"></i> 2
-							</div>   
-						</div>
-						<p class="text-xl mb-4 leading-none overflow-ellipsis overflow-hidden h-20">{{$menu->desc}} </p>
-						
-					</div>
-					
-				</div> 
-
-			</div>
-			@endforeach
-		</div>
-	
-	</div> -->
-
 		<div class="bootstrapiso mb-4 rounded-xl shadow-lg">
 		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 			<ol class="carousel-indicators">
@@ -362,7 +332,7 @@
 			<div class="carousel-inner h-52 md:h-80">
 				@foreach($menus as $menu)
 				<div class="carousel-item active h-100">
-					<img class="d-block w-100 h-100 rounded-xl" src="{{url('public/'.$menu->photos->random()->first()->file)}}" alt="First slide">
+					<img class="d-block w-100 h-96 rounded-xl" src="{{url('public/'.$menu->photos->random()->first()->file)}}" alt="First slide">
 					<div class="carousel-caption text-left p-4 rounded" style="  background: #3e3e3eba;">						
 						<p class="font-bold text-sm uppercase mb-1">Menu</p>						
 						<div class="flex mb-6">
@@ -375,6 +345,7 @@
 
 					</div>
 				</div>
+
 				@endforeach
 			</div>
 			<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

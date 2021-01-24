@@ -26,7 +26,7 @@
    </style>
 
 
-    <div id="success" class="invisible absolute"></div>
+     <div id="success" class="invisible absolute"></div>
      <div id="failure" class="invisible absolute"></div>
     
         @if (session('message'))

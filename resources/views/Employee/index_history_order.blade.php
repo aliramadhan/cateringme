@@ -161,11 +161,26 @@
   $schedule = \App\Models\ScheduleMenu::where('date',$start->format('Y-m-d'))->first();
   $order = auth()->user()->orders->where('order_date',$start->format('Y-m-d'))->first();
  @endphp
- <tr>
+ <tr >
   <td>{{$i}}</td>
   <td>{{$start->format('l, d M Y')}}</td>
   <td>@if($order != null) {{$order->menu->name}} @else Empty @endif</td>
-  <td>@if($order != null) @if($order->status) Served @else Waiting @endif @elseif($schedule == null) Day Off @else Empy Order @endif</td>
+  <td>@if($order != null) @if($order->status) 
+     <p class="m-0 text-green-400">     
+    Served 
+    </p>
+    @else 
+    <p class="m-0 text-orange-400">     
+      Waiting
+    </p>
+    @endif @elseif($schedule == null) 
+    <p class="m-0 text-red-500">  
+      Day Off 
+    </p>
+  @else 
+  Empty Order 
+  @endif
+</td>
 </tr>
 @endfor
 </tbody>
