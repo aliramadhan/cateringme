@@ -70,9 +70,9 @@
 
                     </div>
 
-                  <!-- Email -->
+                  <!-- Description -->
                   <div class="col-span-6 sm:col-span-4">
-                   <label class="block font-medium text-sm text-gray-700" for="email"> 
+                   <label class="block font-medium text-sm text-gray-700" for="desc"> 
                     Description
                   </label>
                   <textarea name="desc" class="form-input rounded-md shadow-sm mt-1 block w-full">{{$menu->desc}}</textarea>
@@ -108,7 +108,6 @@
 
 
           <div class="mt-5 md:mt-0 md:col-span-2">
-            <form wire:submit.prevent="updateProfileInformation">
               <div class="shadow overflow-hidden sm:rounded-md">
                 <div class="px-4 py-5 bg-white sm:p-6">
                   <div class="grid grid-cols-6 gap-6">
@@ -131,14 +130,14 @@
                
                  <div class="input-group hdtuto control-group lst increment" >
                   <div class="input-group-btn"> 
-                    <button class="btn btn-success bg-green-400 text-white py-2 px-4 rounded-lg hover:bg-green-500 transition-500" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>Add</button>
+                    <p class="mt-1 text-sm text-gray-600">
+                      Add new photos (choose multiple pictures).
+                    </p>
                   </div>
                 </div>
                 <div class="clone hide">
                   <div class="hdtuto control-group lst input-group" style="margin-top:10px">
-                    <input type="file" name="addPhoto[]" class="myfrm inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mt-2 mr-2 mb-8">
-                    
-                      <button class="btn btn-danger bg-red-400 text-white py-2 px-4 rounded-lg hover:bg-red-500 transition-500" type="button"><i class="fldemo glyphicon glyphicon-remove"></i> Remove</button>
+                    <input type="file" name="addPhoto[]" class="myfrm inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mt-2 mr-2 mb-8" multiple>
                   </div>
                 </div>
               </div>
@@ -183,17 +182,3 @@
   -->
 </div>
 </x-app-layout>
-<script type="text/javascript">
-  $(document).ready(function() {
-
-    $(".btn-success").click(function(){ 
-        var html = $(".clone").html();
-        $(".increment").after(html);
-    });
-
-    $("body").on("click",".btn-danger",function(){ 
-        $(this).parents(".control-group").remove();
-    });
-
-  });
-</script>

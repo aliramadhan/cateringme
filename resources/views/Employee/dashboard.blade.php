@@ -333,11 +333,11 @@
           </div>
 
           <div class="bootstrapiso z-50">
-              <div class="modal fade" id="CateringImage{{$img_modal}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal fade" id="CateringImage{{$img_modal}}" tabindex="-1" role="dialog" aria-labelledby="MenuPhotosModal" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Pizza PHD{{$img_modal}}</h5>
+                      <h5 class="modal-title" id="MenuPhotosModal"></h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close" class="right-4">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -345,7 +345,7 @@
                     <div class="modal-body p-0">
                      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                       <div class="carousel-inner photos-menu">
-                        
+                        <!-- Data photo -->
                       </div>
                       <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                          <i class="fas fa-backward  text-xl bg-gray-700 p-2 rounded-full"></i>
@@ -571,14 +571,17 @@
               data: {menu_id : id},
               success: function(data) {
                   if (data == null) {
-                      alert('Error get date.');
+                      alert('Error get Menu.');
                   }
                   else{
                       var input = "";
-                      $.each(data, function(d, v){
+                      var menu = "";
+                      $.each(data.data, function(d, v){
                         input = input + v;
                       });
                       $(".photos-menu").html(input);
+                      console.log(data.menu.name);
+                      $("#MenuPhotosModal").html(data.menu.name);
                   }
               }
           });

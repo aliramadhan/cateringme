@@ -148,6 +148,7 @@ class CateringActionController extends Controller
 			]);
 		}
 		elseif($request->submit == 'UpdatePhoto'){
+			$i = 1;
 	        foreach ($menu->photos as $photo) {
 				$file = $request->file($photo->id);
 				if ($file == null) {
@@ -156,26 +157,28 @@ class CateringActionController extends Controller
 
 				if(\File::exists(public_path($photo->file))){
 				    \File::delete(public_path($photo->file));
+					
 				}
-
 			    //create name and store photo
-				$imageName = Str::slug($menu->name).'_'.$now->format('Ymdhsi').'.'.$file->extension();
+				$imageName = Str::slug($menu->name).'_'.$now->format('Ymdhsi').'_'.$i.'.'.$file->extension();
 				$file->move(public_path('images/photo-menu/'.$menu->menu_code), $imageName);
 				$fileName = 'images/photo-menu/'.$menu->menu_code.'/'.$imageName;
 				$photo->update([
 					'file' => $fileName
 				]);
+				$i++;
 			}
 			if($request->addPhoto != null){
 				foreach ($request->addPhoto as $new_image) {
 				    //create name and store photo
-					$imageName = Str::slug($menu->name).'_'.$now->format('Ymdhsi').'.'.$new_image->extension();
+					$imageName = Str::slug($menu->name).'_'.$now->format('Ymdhsi').'_'.$i.'.'.$new_image->extension();
 					$new_image->move(public_path('images/photo-menu/'.$menu->menu_code), $imageName);
 					$fileName = 'images/photo-menu/'.$menu->menu_code.'/'.$imageName;
 					$photoMenu = PhotoMenu::create([
 						'menu_id' => $menu->id,
 						'file' => $fileName
 					]);
+					$i++;
 				}
 			}
 		}

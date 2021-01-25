@@ -18,11 +18,11 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         DB::table('users')->insert([
-            'name' => 'Super Admin',
-            'email' => 'superadmin@cateringme.com',
+            'name' => 'Admin',
+            'email' => 'admin@catering.pahlawandesignstudio.com',
             'password' => Hash::make('qweqweqwe'),
             'role' => 'Admin',
-            'number_phone' => '089630310313',
+            'number_phone' => '0822',
             'code_number' => 'ADM0001',
             'address' => 'Null',
             'created_at' => Carbon::now(),

@@ -77,29 +77,33 @@ class EmployeeActionController extends Controller
         //declare variable
         $menu = Menu::findOrFail($request->menu_id);
         $photos = [];
+        $data_photo = new Collection;
         $i = 1;
         //Set item photos
         if($menu->photos->count() < 1){
-            $photos [] = ["<div class='carousel-item active h-100'>
+            $data = "<div class='carousel-item h-100 active'>
                       <img class='d-block w-100 h-96 bg-cover' src='".url('public/images/no-image.png')."' alt='First slide'>
-                    </div>"];
+                    </div>";
+            $data_photo->push($input);
         }
         else{
             foreach ($menu->photos as $photo) {
                 if ($i == 1) {
-                    $photos [] = ["<div class='carousel-item active h-100'>
+                    $data = "<div class='carousel-item h-100 active'>
                               <img class='d-block w-100 h-96 bg-cover' src='".url('public/'.$photo->file)."' alt='First slide'>
-                            </div>"];
+                            </div>";
                 }
                 else{
-                    $photos [] = ["<div class='carousel-item h-100'>
+                    $data = "<div class='carousel-item h-100'>
                           <img class='d-block w-100 h-96 bg-cover' src='".url('public/'.$photo->file)."' alt='".$menu->name.'-'.$i."'>
-                        </div>"];
+                        </div>";
                 }
+                $data_photo->push($data);
                 $i++;
             }
 
         }
+        $photos = ['menu' => $menu, 'data' => $data_photo];
         return $photos;
     }
     /*public function get_date(Request $request)
