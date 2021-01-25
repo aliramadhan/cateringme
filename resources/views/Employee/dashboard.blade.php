@@ -344,16 +344,8 @@
                     </div>
                     <div class="modal-body p-0">
                      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                      <div class="carousel-inner">
-                        <div class="carousel-item active h-100">
-                          <img class="d-block w-100 h-96 bg-cover" src="https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/216054.jpg" alt="First slide">
-                        </div>
-                        <div class="carousel-item h-100">
-                          <img class="d-block w-100 h-96 bg-cover" src="https://www.qsrmagazine.com/sites/default/files/styles/story_page/public/2020-03/PizzaHutDelivery.jpg?itok=zx4HB4fD" alt="Second slide">
-                        </div>
-                        <div class="carousel-item  h-100">
-                          <img class="d-block w-100 h-96 bg-cover" src="https://ik.imagekit.io/tvlk/cul-asset/guys1L+Yyer9kzI3sp-pb0CG1j2bhflZGFUZOoIf1YOBAm37kEUOKR41ieUZm7ZJ/tvlk-prod-cul-assets/culinary/asset/REST_b.j-720x720-FIT_AND_TRIM-95a28e79196be412133c46ada4ce4e3f.jpeg?tr=q-40,c-at_max,w-1080,h-1920&_src=imagekit" alt="Third slide">
-                        </div>
+                      <div class="carousel-inner photos-menu">
+                        
                       </div>
                       <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                          <i class="fas fa-backward  text-xl bg-gray-700 p-2 rounded-full"></i>
@@ -375,7 +367,7 @@
             </div>  
 
           <button data-toggle="modal" data-target="#CateringImage{{$img_modal++}}" class="bootstrapiso contents">
-            <img src="@if($order->menu->photos->first() != null){{ url('public/'.$order->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-8 w-8 mr-2 rounded flex-initial transform hover:scale-125 duration-500 ease-in-out hover:shadow=lg">
+            <img src="@if($order->menu->photos->first() != null){{ url('public/'.$order->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-8 w-8 mr-2 rounded flex-initial transform hover:scale-125 duration-500 ease-in-out hover:shadow=lg" onclick="get_photos({{$order->menu->id}})">
           </button>
             @if($start_date > Carbon\Carbon::now())
             <a href="{{route('employee.delete.order',$order->id)}}" onclick="return confirm('Cancel order date {{$start_date->format('d, M Y')}}')">
@@ -565,4 +557,32 @@
       $(':radio').change(function() {
       });
     </script>
+
+  <script type="text/javascript">
+    function get_photos(id){
+      $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+          });
+          $.ajax({
+              url: "{{ route('employee.get_photos') }}",
+              type: "POST",
+              data: {menu_id : id},
+              success: function(data) {
+                  if (data == null) {
+                      alert('Error get date.');
+                  }
+                  else{
+                      var input = "";
+                      $.each(data, function(d, v){
+                        input = input + v;
+                      });
+                      $(".photos-menu").html(input);
+                  }
+              }
+          });
+    }
+  </script>
+
   </x-app-layout>

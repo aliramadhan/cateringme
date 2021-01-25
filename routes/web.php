@@ -89,5 +89,5 @@ Route::group(['prefix' => 'employee',  'middleware' => ['auth:sanctum','role:Emp
     Route::get('/history/review', [ EmployeeActionController::class, 'history_review'])->name('employee.history.review');
 
     //Get date
-    Route::post('/get_date', [ EmployeeActionController::class, 'get_date'])->name('employee.get_date');
+    Route::post('/get_photos', [ EmployeeActionController::class, 'get_photos'])->name('employee.get_photos');
 });
