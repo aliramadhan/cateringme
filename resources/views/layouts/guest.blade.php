@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" style="background-image: linear-gradient(60deg,#575fcf,#4bcffa) !important;">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" >
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Catering App') }}</title>
-
+        <link rel="shortcut icon" href="{{ asset('resources/image/logo.png') }}">
         <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
         <!-- Styles -->
@@ -16,6 +17,11 @@
         <link rel="stylesheet" href="{{ asset('resources/css/style.css') }}">
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>
+        <script type="text/javascript">
+          function modalfu() {
+
+          }
+        </script>
     </head>
     <body onload="loader24();modalfu()">
         <div id="loader-bk" >

@@ -31,9 +31,7 @@
 		Content:"{{ implode('', $errors->all(':message')) }}";
 	}</style>	
 	@endif
-	<script type="text/javascript">
-		chart.data.datasets[0].data[2] = 50;
-	</script>
+	
 	
 	<x-slot name="header">
 		<h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -329,15 +327,17 @@
 				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 			</ol>
-			<div class="carousel-inner h-52 md:h-80">
+			<div class="carousel-inner h-52 md:h-96">
+				<?php $a=1;?>
 				@foreach($menus as $menu)
 				<div class="carousel-item @if($loop->iteration == 1) active @endif h-100">
-					<img class="d-block w-100 h-96 rounded-xl" src="@if($menu->photos->first() != null ){{url('public/'.$menu->photos->random()->first()->file)}}  @else {{url('public/images/no-image.png')}} @endif" alt="First slide">
+					<img class="d-block w-100 h-96 rounded-xl object-cover " src="@if($menu->photos->first() != null ){{url('public/'.$menu->photos->random()->first()->file)}}  @else {{url('public/images/no-image.png')}} @endif" alt="First slide">
 					<div class="carousel-caption text-left p-4 rounded" style="  background: #3e3e3eba;">						
-						<p class="font-bold text-sm uppercase mb-1">Menu</p>						
+						<p class="font-bold text-sm uppercase mb-1">Menu {{$a++}}</p>						
 						<div class="flex mb-6">
-						<h2 class="text-xl font-bold uppercase my-auto">{{$menu->name}}</h2>
-						<div class="ml-2 text-lg text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border  p-1 px-2 rounded-xl" style="border-color: #FF5A1F !important">
+						<h2 class="font-bold uppercase my-auto md:block hidden">{{$menu->name}}</h2>
+						<h5 class="font-bold uppercase my-auto block md:hidden">{{$menu->name}}</h5>
+						<div class="ml-2 text-lg text-orange-500 leading-7 font-bold flex-initial bg-white border  p-1 px-2 rounded-xl w-16 h-auto" style="border-color: #FF5A1F !important">
 								<i class="fas fa-star"></i> {{$menu->orders->avg('stars')}}
 							</div>   
 						</div>

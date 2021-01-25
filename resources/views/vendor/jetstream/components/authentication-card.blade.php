@@ -1,9 +1,8 @@
-<div class="min-h-screen  flex flex-col sm:justify-center items-center pt-0 md:pt-6  " style="background-image: linear-gradient(60deg,#575fcf,#4bcffa) !important;">
-    <div>
-        {{ $logo }}
-    </div>
+<div class="min-h-screen flex flex-col sm:justify-center items-center  bg-auto bg-no-repeat bg-center overflow-hidden" style="background-image:url(https://images.pexels.com/photos/2291367/pexels-photo-2291367.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
+	<div style="background-image: linear-gradient( 90deg,#000000a1,#000000a1) ">
 
-    <div class="w-full sm:w-4/5 h-screen sm:h-4/5 px-6 py-6 bg-white shadow-md overflow-hidden sm:rounded-lg  shadow ">
-        {{ $slot }}
-    </div>
+		<div class="w-screen h-screen p-0 md:p-6 overflow-hidden sm:rounded-lg ">
+			{{ $slot }}
+		</div>
+	</div>
 </div>

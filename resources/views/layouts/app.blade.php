@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <link rel="shortcut icon" href="{{ asset('resources/image/logo.png') }}">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" />
@@ -37,10 +37,10 @@
     <script src="{{ asset('public/js/app.js') }}" defer></script>
     <link rel="stylesheet" href="{{ asset('resources/css/style.css') }}">
     <script type="text/javascript">
-  function notifu() {
-  
-  }
-</script>
+      function notifu() {
+        
+      }
+    </script>
 </head>
 <body class="antialiased" onload="loader24();notifu()">
     <div id="loader-bk" class="z-40" >

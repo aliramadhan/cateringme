@@ -19,18 +19,21 @@
         {{ session('status') }}
     </div>
     @endif
-    <div class="grid md:grid-cols-6 sm:grid-cols-1 gap-4 h-4/5 bg-white md:bg-gradient-to-r from-purple-100 to-transparent rounded-xl">
+    <div class="grid md:grid-cols-7 sm:grid-cols-1 md:mt-5">
 
      <button class="modal-open visible absolute" id="modal-click"></button>
 
 
-     <div class="md:col-span-4 sm:col-span-0 hidden md:block ">
-      <div class="flex items-center absolute p-4"><h1 class="text-3xl font-bold text-gray-600 tracking-tight ">Welcome Back to<br> <span class="font-normal"><font class="text-red-600">24</font>Slides Catering App</span></h1>
+     <div class="md:col-span-5 sm:col-span-0 hidden md:block ">
+      <div class="flex flex-col px-4 text-left">
+        <h1 class="text-5xl font-bold text-white tracking-tight ">Welcome Back to<br> 
+        <span class="font-normal"><font class="text-red-600">24</font>Slides Catering App</span></h1><br>
+       
       </div>
-      <img src="{{ asset('/resources/image/undraw_eating_together_tjhx.svg')}}" class="img-fluid p-5 relative " >
+   
   </div>
 
-  <div class="md:col-span-2 sm:col-span-6 ">
+  <div class="md:col-span-2 col-span-7 bg-white py-12 px-8 md:rounded-3xl shadow-xl h-screen md:h-auto">
 
     <form method="POST" action="{{ route('login') }}">
         <img src="{{ asset('/resources/image/logo.png')}}" class="img-fluid mx-auto" width="138px" height="138px">
@@ -57,13 +60,13 @@
         <div class="block mt-4">
             <label for="remember_me" class="flex items-center">
                 <input id="remember_me" type="checkbox" class="form-checkbox h-5 w-5" name="remember">
-                <span class="ml-2 text-sm text-gray-600 font-semibold text-lg">{{ __('Remember me') }}</span>
+                <span class="ml-2 text-sm text-gray-600 font-semibold text-lg">{{ __('remember me') }}</span>
             </label>
         </div>
 
         <div class="flex md:flex-row flex-col-reverse justify-end md:mt-4 mt-12 gap-4 md:gap-0">
             @if (Route::has('password.request'))
-            <a class="underline  text-gray-600 hover:text-gray-900 text-lg md:py-2 py-0 content-center text-right text-purple-500 font-semibold no-underline hover:text-purple-700" href="{{ route('password.request') }}">
+            <a class="underline  text-gray-600 hover:text-gray-900 text-base md:py-2 py-0 content-center text-right text-purple-500 font-semibold no-underline hover:text-purple-700" href="{{ route('password.request') }}">
                 {{ __('Forgot your password?') }}
             </a>
             @endif
