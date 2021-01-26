@@ -13,11 +13,13 @@ class Order extends Model
         'menu_id',
         'order_number',
         'order_date',
+        'serving',
         'status',
         'review',
         'stars',
         'reviewed_at',
-        'fee'
+        'fee',
+        'note',
     ];
     public function menu()
     {

@@ -217,6 +217,106 @@ class CateringActionController extends Controller
 		return redirect()->back()->with(['message' => $message]);
 
 	}
+	public function index_schedule()
+	{
+		//declare variable
+		$now = Carbon::now();
+		$menus = Menu::all();
+		$months = new Collection;
+		
+		//get month
+		$start = Carbon::parse($now->format('Y-m-1'));
+		for ($i=0; $i < 6; $i++, $start->addMonth()) { 
+			$months->push(Carbon::parse($start->format('Y-m')));
+		}
+
+		$start_date = Carbon::now()->startOfMonth();
+		return view('Catering.index_schedule',compact('months','menus','start_date'));
+	}
+	public function get_month_schedule(Request $request)
+	{
+		//declare variable
+		$date = Carbon::parse($request->month);
+		$start = $date->startOfMonth();
+		$total_days = $date->daysInMonth;
+		$days = new Collection;
+		for ($i=1; $i <= $total_days ; $i++, $start->addDay()) { 
+			$schedule = ScheduleMenu::where('date',$start->format('Y-m-d'))->first();
+			if($schedule == null){
+				$input = "<label class='label flex-auto contents duration-1000'>
+		                <input class='label__checkbox duration-1000' type='checkbox' value='".$start->format('Y-m-d')."' name='dates[]' >
+		                <span class='label__text '>
+		                    <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);'>
+		                      <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 p-10 duration-1000' style='font-family: Poppins, sans-serif;'>
+		                   
+		                      	<div class='font-semibold text-4xl mb-2 '>".$start->format('d')."</div>
+		                      	<div class='text-xs font-base'>".$start->format('l')."</div>
+		                      	
+		                      	</i>
+		                    </span>
+		                </span>
+		            </label>";
+			}
+			else{
+				$input = "<label class='label flex-auto contents duration-1000'>
+		                <input class='label__checkbox duration-1000' type='checkbox' value='".$start->format('Y-m-d')."' name='dates[]' >
+		                <span class='label__text '>
+		                    <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient(135deg, #FCCF31 10%, #F55555 100%);'>
+		                      <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 p-10 duration-1000' style='font-family: Poppins, sans-serif;'>
+		                   
+		                      	<div class='font-semibold text-4xl mb-2 '>".$start->format('d')."</div>
+		                      	<div class='text-xs font-base'>".$start->format('l')."</div>
+		                      	
+		                      	</i>
+		                    </span>
+		                </span>
+		            </label>";
+			}
+			$days->push($input);
+		}
+		return $days;
+	}
+	public function store_schedule(Request $request)
+	{
+		//Validation Request
+		$this->validate($request, [
+            'month' => ['required'],
+            'dates' => ['required'],
+            'menus' => ['required'],
+        ]);
+        //declare variable
+        $menu_list = [];
+        foreach ($request->menus as $menu) {
+        	$menu_list [] = $menu;
+        }
+        $now = Carbon::parse($request->month);
+
+        //insert into database
+		DB::beginTransaction();
+		try {
+			foreach ($request->dates as $date) {
+				$date = Carbon::parse($date);
+				$schedule = ScheduleMenu::where('date',$date->format('Y-m-d'))->first();
+				if($schedule == null){
+					$input_schedule = ScheduleMenu::create([
+						'date' => $date->format('Y-m-d'),
+						'menu_list' => implode(',', $menu_list)
+					]);
+				}
+				else{
+					$schedule->update([
+						'menu_list' => implode(',', $menu_list)
+					]);
+				}
+			}
+		} catch (\Exception $e) {
+		    DB::rollback();
+        	return redirect()->back()->withInputs()->withErrors(['message' => $e->message]);
+		}
+	    // all good
+	    DB::commit();
+        return redirect()->back()->with(['message' => 'Order has been scheduled.']);
+	}
 	public function index_catering()
 	{
 		//declare variable

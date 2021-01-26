@@ -50,28 +50,32 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth:sanctum','role:Admin'
     Route::post('/menu', [ AdminActionController::class, 'scheduled_menu'])->name('admin.scheduled.menu');
     Route::post('/update/menu-price', [ AdminActionController::class, 'update_menu_price'])->name('admin.update.menu_price');
 
-    //Manage Schedule
-    Route::get('/schedule', [ AdminActionController::class, 'index_schedule'])->name('admin.index.schedule');
-    Route::post('/schedule', [ AdminActionController::class, 'store_schedule'])->name('admin.store.schedule');
-    Route::post('/get-month-schedule', [ AdminActionController::class, 'get_month_schedule'])->name('admin.get_month_schedule');
-
     //Report
     Route::get('/order/today', [ AdminActionController::class, 'index_order'])->name('admin.index.order');
     Route::get('/order/not-taken', [ AdminActionController::class, 'index_order_not_taken'])->name('admin.index.order_not_taken');
 });
 //Role Catering
 Route::group(['prefix' => 'catering',  'middleware' => ['auth:sanctum','role:Catering']], function(){
+    //Dashboard
     Route::get('/dashboard', [ CateringActionController::class, 'dashboard'])->name('catering.dashboard');
+
+    //Manage Menu
     Route::get('/index/menu', [ CateringActionController::class, 'index_menu'])->name('catering.index.menu');
     Route::get('/create/menu', [ CateringActionController::class, 'create_menu'])->name('catering.create.menu');
     Route::post('/create/menu', [ CateringActionController::class, 'store_menu'])->name('catering.store.menu');
-    Route::post('/served/menu', [ CateringActionController::class, 'served_menu'])->name('catering.served.menu');
     Route::get('/send/message', [ CateringActionController::class, 'send_message'])->name('catering.send.message');
     Route::get('/edit/menu/{menu_code}', [ CateringActionController::class, 'edit_menu'])->name('catering.edit.menu');
     Route::put('/update/menu/{menu_code}', [ CateringActionController::class, 'update_menu'])->name('catering.update.menu');
-    Route::put('/update/menu/{menu_code}', [ CateringActionController::class, 'update_menu'])->name('catering.update.menu');
     Route::delete('/delete/menu/{menu_code}', [ CateringActionController::class, 'delete_menu'])->name('catering.delete.menu');
     Route::get('/delete/photo/menu/{id}', [ CateringActionController::class, 'delete_photo'])->name('catering.delete.photo');
+
+    //served menu
+    Route::post('/served/menu', [ CateringActionController::class, 'served_menu'])->name('catering.served.menu');
+
+    //Manage Schedule
+    Route::get('/schedule', [ AdminActionController::class, 'index_schedule'])->name('catering.index.schedule');
+    Route::post('/schedule', [ AdminActionController::class, 'store_schedule'])->name('catering.store.schedule');
+    Route::post('/get-month-schedule', [ AdminActionController::class, 'get_month_schedule'])->name('catering.get_month_schedule');
 
     //Report
     Route::get('/index/review', [ CateringActionController::class, 'index_review'])->name('catering.index.review');

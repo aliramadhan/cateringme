@@ -18,12 +18,14 @@ class CreateOrdersTable extends Migration
             $table->foreignId('employee_id')->constrained('users');
             $table->foreignId('menu_id')->constrained('menus');
             $table->string('order_number')->unique();
+            $table->string('serving',3)->default('M');
             $table->date('order_date');
             $table->boolean('status')->default(false);
             $table->text('review')->nullable();
             $table->string('stars', 5)->nullable();
             $table->timestamp('reviewed_at')->nullable()->default(null);
             $table->float('fee')->default(0);
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

@@ -131,6 +131,7 @@ class AdminActionController extends Controller
         $affected = DB::table('menus')->update(['price' => $request->price]);
         return redirect()->back()->with(['message' => 'Menu price updated succesfully.']);
 	}
+	/*
 	public function index_schedule()
 	{
 		//declare variable
@@ -230,7 +231,7 @@ class AdminActionController extends Controller
 	    // all good
 	    DB::commit();
         return redirect()->back()->with(['message' => 'Order has been scheduled.']);
-	}
+	}*/
 	public function can_order($code)
 	{
 		//declare variable

@@ -72,6 +72,7 @@
           <!--Body-->
           <div class="flex flex-wrap mt-6">
             <div class="relative w-full appearance-none label-floating">
+              <p class="text-xl font-base text-gray-600 font-bold">Review</p>
               <textarea required name="review" class="autoexpand tracking-wide py-2 px-4 mb-3 leading-relaxed appearance-none block w-full bg-gray-50 border border-gray-200 rounded focus:outline-none focus:bg-white focus:border-gray-500 h-52"
               id="message" type="text" placeholder="Message...">{{$menu_today->review}}</textarea>
               <label for="message" class="absolute tracking-wide py-2 px-4 mb-4 opacity-0 leading-tight block top-0 left-0 cursor-text">Message...
@@ -110,6 +111,15 @@
               <span class="icon duration-500 text-2xl mx-1"><i class="fas fa-star"></i></span>
               <span class="icon duration-500 text-2xl mx-1"><i class="fas fa-star"></i></span>
             </label>
+          </div>
+          <div class="flex flex-wrap mt-6">
+            <div class="relative w-full appearance-none label-floating">
+              <p class="text-xl font-base text-gray-600 font-bold">Note</p>
+              <textarea required name="note" class="autoexpand tracking-wide py-2 px-4 mb-3 leading-relaxed appearance-none block w-full bg-gray-50 border border-gray-200 rounded focus:outline-none focus:bg-white focus:border-gray-500 h-52"
+              id="message" type="text" placeholder="Message...">{{$menu_today->note}}</textarea>
+              <label for="message" class="absolute tracking-wide py-2 px-4 mb-4 opacity-0 leading-tight block top-0 left-0 cursor-text">Message...
+              </label>
+            </div>
           </div>
           <!--Footer-->
           <div class="flex justify-end pt-2">

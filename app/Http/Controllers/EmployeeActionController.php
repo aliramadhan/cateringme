@@ -322,6 +322,7 @@ class EmployeeActionController extends Controller
             $order->update([
                 'review' => $request->review,
                 'stars' => $request->stars,
+                'note' => $request->note,
                 'reviewed_at' => $now
             ]);
         } catch (\Exception $e) {

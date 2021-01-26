@@ -21,9 +21,6 @@
                         <x-jet-nav-link href="{{ route('admin.index.account') }}" :active="request()->routeIs('admin.index.account')">
                             {{ __('Manage Account') }}
                         </x-jet-nav-link>
-                        <x-jet-nav-link href="{{ route('admin.index.schedule') }}" :active="request()->routeIs('admin.index.schedule')">
-                            {{ __('Manage Schedule') }}
-                        </x-jet-nav-link>
                         <x-jet-nav-link href="{{ route('admin.index.menu') }}" :active="request()->routeIs('admin.index.menu')">
                             {{ __('Index Menu') }}
                         </x-jet-nav-link>
@@ -74,6 +71,9 @@
                         </x-jet-nav-link>
                         <x-jet-nav-link href="{{ route('catering.index.menu') }}" :active="request()->routeIs('catering.index.menu')">
                             {{ __('Manage Menu') }}
+                        </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('admin.index.schedule') }}" :active="request()->routeIs('admin.index.schedule')">
+                            {{ __('Manage Schedule') }}
                         </x-jet-nav-link>
                         <x-jet-nav-link href="{{ route('catering.index.catering') }}" :active="request()->routeIs('catering.index.catering')">
                             {{ __('Menu Today') }}
@@ -239,9 +239,6 @@
                         <x-jet-responsive-nav-link href="{{ route('admin.index.account') }}" :active="request()->routeIs('admin.index.account')">
                             {{ __('Manage Account') }}
                         </x-jet-responsive-nav-link>
-                        <x-jet-responsive-nav-link href="{{ route('admin.index.schedule') }}" :active="request()->routeIs('admin.index.schedule')">
-                            {{ __('Manage Schedule') }}
-                        </x-jet-responsive-nav-link>
                         <x-jet-responsive-nav-link href="{{ route('admin.index.menu') }}" :active="request()->routeIs('admin.index.menu')">
                             {{ __('Index Menu') }}
                         </x-jet-responsive-nav-link>                       
@@ -264,6 +261,9 @@
                         </x-jet-responsive-nav-link>
                         <x-jet-responsive-nav-link href="{{ route('catering.index.menu') }}" :active="request()->routeIs('catering.index.menu')">
                             {{ __('Manage Menu') }}
+                        </x-jet-responsive-nav-link>
+                        <x-jet-responsive-nav-link href="{{ route('admin.index.schedule') }}" :active="request()->routeIs('admin.index.schedule')">
+                            {{ __('Manage Schedule') }}
                         </x-jet-responsive-nav-link>
                         <x-jet-responsive-nav-link href="{{ route('catering.index.catering') }}" :active="request()->routeIs('catering.index.catering')">
                             {{ __('Menu Today') }}
