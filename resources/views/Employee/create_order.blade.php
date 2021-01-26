@@ -4,7 +4,8 @@
             {{ __('Create Order') }}
         </h2>
       </x-slot>
-
+       <link rel="stylesheet" href="{{asset('resources/css/Foodcheckbox.css')}}" />
+      
       <div class="notify z-50 font-semibold absolute left-0"><span id="notifyType" class=""></span></div>
       <div id="success" class="invisible absolute"></div>
       <div id="failure" class="invisible absolute"></div>
@@ -58,7 +59,15 @@
       input[type="radio"]:checked + label{
          color: #3490DC; //text-blue
      }
-
+      input[type="radio"]:checked + label:before{
+          display: none;
+     }
+     :checked + .not-menu label:before{
+      display: none
+     }
+      label:before{
+         line-height: 160px;
+       }
 
  </style>
  <div class="py-12">
@@ -99,6 +108,100 @@
 </div>
 </div>
 
+<?php for ($modal=1; $modal < 30; $modal++) { 
+  # code...
+  ?>
+  <div class="bootstrapiso z-50 contents">
+    <div class="modal fade" id="ScheduleModal{{$modal}}" tabindex="-1" role="dialog" aria-labelledby="MenuPhotosModal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="MenuPhotosModal">Create Schedule {{$modal}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" class="right-4">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body p-0">
+         <div id="carouselExampleControls{{$modal}}" class="carousel slide" data-interval="false">
+          <div class="carousel-inner h-100">
+            <div class="carousel-item active h-100">
+              <div class="grid grid-cols-2 ">
+               <input type="checkbox" id="menu1{{$modal}}"  value="menu1{{$modal}}" class="schedule-menu hidden" >
+               <label for="menu1{{$modal}}" >
+                <img class="d-block w-100" src="https://images.pexels.com/photos/708587/pexels-photo-708587.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="First slide">
+
+              </label>
+              <input type="checkbox" id="menu2{{$modal}}"  value="menu2{{$modal}}" class="schedule-menu hidden" >
+              <label for="menu2{{$modal}}" >
+               <img class="d-block w-100" src="https://images.pexels.com/photos/708587/pexels-photo-708587.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="First slide">
+             </label>
+           </div>
+
+            </div>
+
+            <div class="carousel-item h-100">
+              <div class="flex " id="d-menu">
+                <input type="radio" name="{{$modal}}" value="L" class="flex-auto hidden" id="nasiL{{$modal}}">
+
+                <label for="nasiL{{$modal}}" class="flex cursor-pointer text-base font-semibold items-center not-menu">
+                 
+                 Nasi L
+               </label>
+             </div>
+             <div class="flex " id="d-menu">
+              <input type="radio" name="{{$modal}}" value="M" class="flex-auto hidden" id="nasiM{{$modal}}">
+
+              <label for="nasiM{{$modal}}" class="flex cursor-pointer text-base font-semibold items-center not-menu">
+               
+               Nasi M
+             </label>
+           </div>
+           <label class="inline-flex items-center mt-3">
+                <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" checked><span class="ml-2 text-gray-700">Sambal</span>
+            </label>
+            </div>
+
+            <div class="carousel-item h-100">
+               <div class="flex " id="d-menu">
+                <input type="radio" name="{{$modal}}" value="A" class="flex-auto hidden" id="shiftA{{$modal}}">
+
+                <label for="shiftA{{$modal}}" class="flex cursor-pointer text-base font-semibold items-center not-menu">
+                 
+                 Shift A
+               </label>
+             </div>
+             <div class="flex " id="d-menu">
+              <input type="radio" name="{{$modal}}" value="B" class="flex-auto hidden" id="shiftB{{$modal}}">
+
+              <label for="shiftB{{$modal}}" class="flex cursor-pointer text-base font-semibold items-center not-menu">
+               
+              Shift B
+             </label>
+           </div>
+            </div>
+          </div>
+         
+        </div>
+       </div>
+       <div class="modal-footer">
+         <a  href="#carouselExampleControls{{$modal}}" role="button" data-slide="prev">
+          <button type="button" class="btn btn-warning">Back</button>
+        </a>
+         <a  href="#carouselExampleControls{{$modal}}" role="button" data-slide="next">
+          <button type="button" class="btn btn-primary">Next</button>
+        </a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>  
+<?php
+} 
+$modal=1;
+?>
+
 <div class="relative h-full  overflow-y-hidden overflow-x-hidden ">
 
    <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide" >
@@ -110,18 +213,20 @@
        </h3>  
        <form action="{{route('employee.store.order')}}" method="POST" enctype="multipart/form-data" class="contents">
           <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5 mt-4">                      
-             <div id="div1" class="grid md:grid-cols-2 grid-cols-1 duration-1000 targetDiv bg-gray-100 justify-content content-center text-center rounded-lg pt-4"> 
+             <div id="div1" class="duration-1000 targetDiv bg-gray-100 justify-content content-center text-center rounded-lg pt-4"> 
 
                 @csrf
+
                 @for($i = 1; $i <= $now->daysInMonth; $i++, $start->addDay())
                 @php
+               
                 $schedule = App\Models\ScheduleMenu::where('date',$start->format('Y-m-d'))->first();
                 $order = App\Models\Order::where('order_date',$start->format('Y-m-d'))->first();
                 @endphp
-                <div class="flex w-full px-4 gap-4">
-
+                    
+            
                     <label class='label flex-auto contents duration-1000'>
-                        <input class='label__checkbox duration-1000 ' type='checkbox' name="dates[]" @if($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" id="chkPassport{{$i}}" >
+                        <input class='label__checkbox duration-1000 ' type='checkbox'  data-toggle="modal" data-target="#ScheduleModal{{$modal++}}"  @if($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}">
 
                         <span class='label__text '>
                             <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient( @if($order != null)  135deg, #FCCF31 10%, #F55555 100% @elseif($start < $now) 160deg, #bdbdbe 0%, #032a32 100% @elseif($schedule != null) 160deg, #0093E9 0%, #80D0C7 100%   @else to right, #ff416c, #ff4b2b @endif );'>
@@ -134,61 +239,8 @@
                         </span>
                     </span>
                 </label>
-
-
-                <div id="AddPassport{{$i}}" class="text-xl grid font-semibold pb-9 pt-4 items-center text-left">
-                  @if($schedule == null)
-                  <font class="text-3xl text-red-400"> Date off </font>
-                  @elseif($order == null)
-                  <font class="text-3xl"> Empty Order </font>
-                  @else 
-                  <font>{{$order->menu->name}}</font>
-                  <font class="text-green-400">Submitted</font> 
-                  @endif
-                </div>
-                <div id="dvPassport{{$i}}" style="display: none" class="flex flex-col text-lg font-base gap-4 py-4 text-left">
-
-                   @if($schedule != null)
-
-                   @foreach(explode(",", $schedule->menu_list) as $menu)
-                   @php
-                   $menu = App\Models\Menu::where('id',$menu)->first();
-                   @endphp
-
-
-                   <div class="flex ">
-                    <input type="radio" name="{{$i}}" value="{{$menu->id}}" class="flex-auto hidden" id="radio{{$i}}{{$menu->menu_code}}">
-
-                    <label for="radio{{$i}}{{$menu->menu_code}}" class="flex cursor-pointer text-base font-semibold items-center">
-                     <span class="w-5 h-5 inline-block mr-2 rounded-full border border-grey flex-no-shrink bg-white"></span>
-                     {{$menu->name}}</label>
-                 </div>
-
-
-                 @endforeach
-                 @endif
-             </div>
-
-         </div>
-
-
-
-         <script type="text/javascript">
-             $(function () {
-                $("#chkPassport{{$i}}").click(function () {
-                    if ($(this).is(":checked")) {
-                        $("#dvPassport{{$i}}").show();
-                        $("#AddPassport{{$i}}").hide();
-                    } else {
-                        $("#dvPassport{{$i}}").hide();
-                        $("#AddPassport{{$i}}").show();
-                    }
-                });
-            });
-        </script>
+         
         @endfor
-
-
 
     </div></div>
 
@@ -210,7 +262,7 @@
      </h3>  
      <form action="{{route('employee.store.order')}}" method="POST" enctype="multipart/form-data" class="contents">
       <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5 mt-4">                      
-       <div id="div1" class="grid md:grid-cols-2 grid-cols-1 duration-1000 targetDiv  justify-content content-center text-center rounded-lg pt-4"> 
+       <div id="div1" class="duration-1000 targetDiv  justify-content content-center text-center rounded-lg pt-4"> 
 
         @csrf
         @for($i = 1; $i <= $next_month->daysInMonth; $i++, $start->addDay())

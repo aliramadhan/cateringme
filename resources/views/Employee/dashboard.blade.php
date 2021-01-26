@@ -75,7 +75,7 @@
               <p class="text-xl font-base text-gray-600 font-bold">Review</p>
               <textarea required name="review" class="autoexpand tracking-wide py-2 px-4 mb-3 leading-relaxed appearance-none block w-full bg-gray-50 border border-gray-200 rounded focus:outline-none focus:bg-white focus:border-gray-500 h-52"
               id="message" type="text" placeholder="Message...">{{$menu_today->review}}</textarea>
-              <label for="message" class="absolute tracking-wide py-2 px-4 mb-4 opacity-0 leading-tight block top-0 left-0 cursor-text">Message...
+              <label for="message" class="absolute tracking-wide py-2 px-4 mb-4 opacity-0 leading-tight block top-0 left-0 cursor-text">Write your Review ...
               </label>
             </div>
           </div>
@@ -208,7 +208,7 @@
       </div>
     </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 px-9 mb-8 mt-8 md:-mt-20 gap-4 w-full">        
+      <div class="grid grid-cols-1 md:grid-cols-4 pr-9 mb-8 mt-8 md:-mt-20 gap-4 w-full pl-6">        
         <div class="w-full px-2">
           <div class="rounded-lg shadow-sm mb-4">
             <a href="{{ route('employee.create.order') }}">
@@ -415,7 +415,7 @@
                     {{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}
                   </div>
                 </div>
-                <div class=" text-xl text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl md:w-autoo w-24">
+                <div class="md:text-xl text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 md:py-1 px-2 rounded-xl md:w-auto w-12 text-sm">
                   <i class="fas fa-star"></i> {{$review->stars}}
                 </div>
               </div>        
@@ -440,7 +440,7 @@
                     {{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}
                   </div>
                 </div>
-                <div class=" text-xl text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl mr-2">
+                <div class="md:text-xl text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 md:py-1 px-2 rounded-xl md:w-auto w-12 text-sm mr-2">
                   <i class="fas fa-star"></i> {{$review->stars}}
                 </div>
               </div>        
