@@ -154,7 +154,7 @@
 
               <label for="nasiL{{$i}}" class="flex cursor-pointer text-base font-semibold items-center not-menu">
                
-               Nasi L
+               Porsi L
              </label>
            </div>
            <div class="flex " id="d-menu">
@@ -162,7 +162,7 @@
 
             <label for="nasiM{{$i}}" class="flex cursor-pointer text-base font-semibold items-center not-menu">
              
-             Nasi M
+             Porsi M
            </label>
          </div>
             <div class="flex " id="d-menu">
@@ -170,7 +170,7 @@
 
               <label for="nasiS{{$i}}" class="flex cursor-pointer text-base font-semibold items-center not-menu">
                
-               Nasi S
+               Porsi S
              </label>
            </div>
          <label class="inline-flex items-center mt-3">
