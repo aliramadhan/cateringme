@@ -8,6 +8,10 @@
     var button5 = document.getElementById("btn-slide-dis-2y");
     var buttonSch = document.getElementById("searching");
 
+     // create order page
+    var buttonBack = document.getElementById("back-step");
+    var buttonNext = document.getElementById("next-step");
+
     // Disable the button on initial page load
     button.disabled = true;
     button.style.backgroundColor ="#EEF2FF";
@@ -17,9 +21,28 @@
     button3.style.backgroundColor ="#EEF2FF";
     button3.style.color ="#528CE0";
 
+    buttonBack.disabled = true;
     //add event listener
 
-        button.addEventListener('click', function(event) {
+     buttonBack.addEventListener('click', function(event) {
+        button.disabled = true;
+        button2.disabled = false;
+        button2.style.backgroundColor ="";
+        button2.style.color ="#9FA6B2";
+        button.style.backgroundColor ="#EEF2FF";
+        button.style.color ="#528CE0";
+
+        button3.disabled = true ;
+        button4.disabled = false;
+        button3.style.backgroundColor ="#EEF2FF";
+        button3.style.color ="#528CE0";
+        button4.style.backgroundColor ="";
+        button4.style.color ="#9FA6B2";
+        buttonSch.style.display = "block";
+
+    });
+     
+    button.addEventListener('click', function(event) {
         button.disabled = true;
         button2.disabled = false;
         button2.style.backgroundColor ="";

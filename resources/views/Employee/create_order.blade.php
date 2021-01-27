@@ -140,7 +140,7 @@
                 @endphp
                 <input type="checkbox" id="menu{{$i}}{{$menu->id}}" name="{{$i}}" value="{{$menu->id}}" class="schedule-menu hidden" >
                 <label for="menu{{$i}}{{$menu->id}}" >
-                <img class="d-block w-100" src="@if($menu->photos->first() != null) {{url('public/'.$menu->photos->random->first()->file)}} @else {{url('public/images/no-image.png')}} @endif" alt="{{$menu->name}}">
+                <img class="d-block w-100" src="@if($menu->photos->first() != null) {{url('public/'.$menu->photos->random()->first()->file)}} @else {{url('public/images/no-image.png')}} @endif" alt="{{$menu->name}}">
                 </label>
               @endforeach
               @endif
@@ -201,13 +201,14 @@
       </div>
      </div>
      <div class="modal-footer">
-       <a  href="#carouselExampleControls{{$i}}" role="button" data-slide="prev">
+       <a  href="#carouselExampleControls{{$i}}" role="button" data-slide="prev" id="back-step">
         <button type="button" class="btn btn-warning">Back</button>
       </a>
-       <a  href="#carouselExampleControls{{$i}}" role="button" data-slide="next">
+       <a  href="#carouselExampleControls{{$i}}" role="button" data-slide="next" id="next-step">
         <button type="button" class="btn btn-primary">Next</button>
       </a>
-      <button type="button" class="btn btn-secondary" onclick="document.getElementById('tanggal{{$i}}').checked = true; alert('tanggal{{$i}}')">Simpan</button>
+    
+      <button type="button" class="btn btn-secondary" onclick="document.getElementById('tanggal{{$i}}').checked = true; alert('tanggal{{$i}}')" data-dismiss="modal">Simpan</button>
 
     </div>
   </div>
@@ -237,7 +238,7 @@
                     
             
                     <label class='label flex-auto contents duration-1000'>
-                        <input class='label__checkbox duration-1000 ' type='checkbox' id="tanggal{{$i}}" data-toggle="modal" data-target="#ScheduleModal{{$i}}"  @if($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}">
+                        <input class='label__checkbox duration-1000 ' name="dates[]" type='checkbox' id="tanggal{{$i}}" data-toggle="modal" data-target="#ScheduleModal{{$i}}"  @if($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" onclick="document.getElementById('tanggal{{$i}}').checked = false;">
 
                         <span class='label__text '>
                             <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient( @if($order != null)  135deg, #FCCF31 10%, #F55555 100% @elseif($start < $now) 160deg, #bdbdbe 0%, #032a32 100% @elseif($schedule != null) 160deg, #0093E9 0%, #80D0C7 100%   @else to right, #ff416c, #ff4b2b @endif );'>
@@ -250,7 +251,7 @@
                         </span>
                     </span>
                 </label>
-         
+
         @endfor
 
     </div></div>
