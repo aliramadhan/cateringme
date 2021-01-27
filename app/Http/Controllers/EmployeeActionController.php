@@ -251,7 +251,6 @@ class EmployeeActionController extends Controller
         $this->validate($request, [
             'dates' => ['required'],
         ]);
-        return dd($request->all());
         //declare
         $now = Carbon::now();
         $user = auth()->user();
@@ -260,7 +259,6 @@ class EmployeeActionController extends Controller
         if($user->can_order == 0){
             return redirect()->back()->withErrors(['message' => "Cant submit order, please call admin to activated feature order catering."]);
         }
-
         foreach ($request->dates as $date) {
             $date = Carbon::parse($date);
             $code_number = 'ORD'.$date->format('ymd').$user->id;
@@ -268,18 +266,25 @@ class EmployeeActionController extends Controller
             DB::beginTransaction();
             try {
                 $order = Order::where('employee_id',$user->id)->where('order_date',$date->format('Y-m-d'))->first();
+                return dd($request->all()); 
                 if($order == null){
                     $order = Order::create([
                         'employee_id' => $user->id,
                         'order_number' => $code_number,
                         'menu_id' => $request->input($date->day),
                         'order_date' => Carbon::parse($date)->format('Y-m-d'),
+                        'serving' => $request->input('porsi'.$date->day),
+                        'is_sauce' => $request->input('sambal'.$date->day),
+                        'shift' => $request->input('shift'.$date->day)
                     ]);
                 }
                 else{
                     if ($date < $now->format('Y-m-d')) {
                         continue;
                     }
+                    $order->update([
+                        
+                    ]);
                     $order->menu_id = $request->input($date->day);
                     $order->save();
                 }

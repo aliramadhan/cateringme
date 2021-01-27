@@ -18,8 +18,10 @@ class CreateOrdersTable extends Migration
             $table->foreignId('employee_id')->constrained('users');
             $table->foreignId('menu_id')->constrained('menus');
             $table->string('order_number')->unique();
-            $table->string('serving',3)->default('M');
             $table->date('order_date');
+            $table->enum('serving',['S','M','L','XL'])->default('M');
+            $table->boolean('is_sauce')->default(0);
+            $table->enum('shift',['Pagi','Siang','Sore','Malam'])->default('Pagi');
             $table->boolean('status')->default(false);
             $table->text('review')->nullable();
             $table->string('stars', 5)->nullable();

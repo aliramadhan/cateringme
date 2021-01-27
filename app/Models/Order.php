@@ -14,6 +14,8 @@ class Order extends Model
         'order_number',
         'order_date',
         'serving',
+        'is_sauce',
+        'shift',
         'status',
         'review',
         'stars',
