@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use \App\Models\Menu;
 use \App\Models\Order;
 use \App\Models\PhotoMenu;
+use \App\Models\ScheduleMenu;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Collection;
@@ -282,7 +283,7 @@ class CateringActionController extends Controller
 		$this->validate($request, [
             'month' => ['required'],
             'dates' => ['required'],
-            'menus' => ['required'],
+            'menus' => ['required','min:2'],
         ]);
         //declare variable
         $menu_list = [];

@@ -80,7 +80,7 @@
         </div>
       </div>
  
-      <form action="{{route('admin.store.schedule')}}" method="POST" enctype="multipart/form-data" class=" row-span-4">
+      <form action="{{route('catering.store.schedule')}}" method="POST" enctype="multipart/form-data" class=" row-span-4">
       @csrf
 
       <div class="relative h-full  overflow-y-hidden overflow-x-hidden ">
@@ -200,7 +200,7 @@
         });
 
         $.ajax({
-            url: "{{ route('admin.get_month_schedule') }}",
+            url: "{{ route('catering.get_month_schedule') }}",
             type: "POST",
             data: {month : date},
             success: function(data) {

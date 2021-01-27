@@ -73,9 +73,9 @@ Route::group(['prefix' => 'catering',  'middleware' => ['auth:sanctum','role:Cat
     Route::post('/served/menu', [ CateringActionController::class, 'served_menu'])->name('catering.served.menu');
 
     //Manage Schedule
-    Route::get('/schedule', [ AdminActionController::class, 'index_schedule'])->name('catering.index.schedule');
-    Route::post('/schedule', [ AdminActionController::class, 'store_schedule'])->name('catering.store.schedule');
-    Route::post('/get-month-schedule', [ AdminActionController::class, 'get_month_schedule'])->name('catering.get_month_schedule');
+    Route::get('/schedule', [ CateringActionController::class, 'index_schedule'])->name('catering.index.schedule');
+    Route::post('/schedule', [ CateringActionController::class, 'store_schedule'])->name('catering.store.schedule');
+    Route::post('/get-month-schedule', [ CateringActionController::class, 'get_month_schedule'])->name('catering.get_month_schedule');
 
     //Report
     Route::get('/index/review', [ CateringActionController::class, 'index_review'])->name('catering.index.review');

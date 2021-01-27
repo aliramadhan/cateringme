@@ -254,7 +254,6 @@ class EmployeeActionController extends Controller
         //declare
         $now = Carbon::now();
         $user = auth()->user();
-
         //cek if employee can order
         if($user->can_order == 0){
             return redirect()->back()->withErrors(['message' => "Cant submit order, please call admin to activated feature order catering."]);
@@ -262,20 +261,28 @@ class EmployeeActionController extends Controller
         foreach ($request->dates as $date) {
             $date = Carbon::parse($date);
             $code_number = 'ORD'.$date->format('ymd').$user->id;
+            $menu = Menu::find($request->input('menu'.$date->day));
             //inser into database
             DB::beginTransaction();
             try {
                 $order = Order::where('employee_id',$user->id)->where('order_date',$date->format('Y-m-d'))->first();
-                return dd($request->all()); 
+                //check if sambal added
+                if ($request->input('sambal'.$date->day) == null) {
+                    $sambal = 0;
+                }
+                else{
+                    $sambal = 1;
+                }
                 if($order == null){
                     $order = Order::create([
                         'employee_id' => $user->id,
                         'order_number' => $code_number,
-                        'menu_id' => $request->input($date->day),
+                        'menu_id' => $menu->id,
                         'order_date' => Carbon::parse($date)->format('Y-m-d'),
                         'serving' => $request->input('porsi'.$date->day),
-                        'is_sauce' => $request->input('sambal'.$date->day),
-                        'shift' => $request->input('shift'.$date->day)
+                        'is_sauce' => $sambal,
+                        'shift' => $request->input('shift'.$date->day),
+                        'fee' => $menu->price
                     ]);
                 }
                 else{
@@ -283,7 +290,11 @@ class EmployeeActionController extends Controller
                         continue;
                     }
                     $order->update([
-                        
+                        'menu_id' => $menu->id,
+                        'serving' => $request->input('porsi'.$date->day),
+                        'is_sauce' => $sambal,
+                        'shift' => $request->input('shift'.$date->day),
+                        'fee' => $menu->price
                     ]);
                     $order->menu_id = $request->input($date->day);
                     $order->save();

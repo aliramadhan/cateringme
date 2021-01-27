@@ -27,8 +27,7 @@ class DatabaseSeeder extends Seeder
             'address' => 'Null',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
-        ]);
-        /*
+        ]);/*
         DB::table('users')->insert([
             'name' => 'Catering 1',
             'email' => 'catering1@cateringme.com',
@@ -68,7 +67,7 @@ class DatabaseSeeder extends Seeder
             'price' => 20000,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
-        ]);
+        ]);/*
         DB::table('photo_menus')->insert([
             'menu_id' => 1,
             'file' => 'images/photo-menu/MNU0001/nasi-pecel_1.jpg',

@@ -138,7 +138,7 @@
                 @php
                 $menu = App\Models\Menu::where('id',$menu)->first();
                 @endphp
-                <input type="checkbox" id="menu{{$i}}{{$menu->id}}" name="{{$i}}" value="{{$menu->id}}" class="schedule-menu hidden" >
+                <input type="radio" id="menu{{$i}}{{$menu->id}}" name="menu{{$i}}" value="{{$menu->id}}" class="schedule-menu hidden" >
                 <label for="menu{{$i}}{{$menu->id}}" >
                 <img class="d-block w-100" src="@if($menu->photos->first() != null) {{url('public/'.$menu->photos->random()->first()->file)}} @else {{url('public/images/no-image.png')}} @endif" alt="{{$menu->name}}">
                 </label>
@@ -180,19 +180,35 @@
 
           <div class="carousel-item h-100">
              <div class="flex " id="d-menu">
-              <input type="radio" name="shift{{$i}}" value="A" class="flex-auto hidden" id="shiftA{{$i}}">
+              <input type="radio" name="shift{{$i}}" value="Pagi" class="flex-auto hidden" id="shiftA{{$i}}">
 
               <label for="shiftA{{$i}}" class="flex cursor-pointer text-base font-semibold items-center not-menu">
                
-               Shift A
+               Shift Pagi
              </label>
            </div>
            <div class="flex " id="d-menu">
-            <input type="radio" name="shift{{$i}}" value="B" class="flex-auto hidden" id="shiftB{{$i}}">
+            <input type="radio" name="shift{{$i}}" value="Siang" class="flex-auto hidden" id="shiftB{{$i}}">
 
             <label for="shiftB{{$i}}" class="flex cursor-pointer text-base font-semibold items-center not-menu">
              
-            Shift B
+            Shift Siang
+           </label>
+         </div>
+           <div class="flex " id="d-menu">
+            <input type="radio" name="shift{{$i}}" value="Sore" class="flex-auto hidden" id="shiftB{{$i}}">
+
+            <label for="shiftB{{$i}}" class="flex cursor-pointer text-base font-semibold items-center not-menu">
+             
+            Shift Sore
+           </label>
+         </div>
+           <div class="flex " id="d-menu">
+            <input type="radio" name="shift{{$i}}" value="Malam" class="flex-auto hidden" id="shiftB{{$i}}">
+
+            <label for="shiftB{{$i}}" class="flex cursor-pointer text-base font-semibold items-center not-menu">
+             
+            Shift Malam
            </label>
          </div>
           </div>
@@ -208,7 +224,7 @@
         <button type="button" class="btn btn-primary">Next</button>
       </a>
     
-      <button type="button" class="btn btn-secondary" onclick="document.getElementById('tanggal{{$i}}').checked = true; alert('tanggal{{$i}}')" data-dismiss="modal">Simpan</button>
+      <button type="button" class="btn btn-secondary" onclick="document.getElementById('tanggal{{$i}}').checked = true;" data-dismiss="modal">Simpan</button>
 
     </div>
   </div>
