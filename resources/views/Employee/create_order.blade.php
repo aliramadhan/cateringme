@@ -107,101 +107,115 @@
 </div>
 </div>
 </div>
+<form action="{{route('employee.store.order')}}" method="POST" enctype="multipart/form-data" class="contents">
+  @csrf
 
-<?php for ($modal=1; $modal < 30; $modal++) { 
-  # code...
-  ?>
-  <div class="bootstrapiso z-50 contents">
-    <div class="modal fade" id="ScheduleModal{{$modal}}" tabindex="-1" role="dialog" aria-labelledby="MenuPhotosModal" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="MenuPhotosModal">Create Schedule {{$modal}}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close" class="right-4">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body p-0">
-         <div id="carouselExampleControls{{$modal}}" class="carousel slide" data-interval="false">
-          <div class="carousel-inner h-100">
-            <div class="carousel-item active h-100">
-              <div class="grid grid-cols-2 ">
-               <input type="checkbox" id="menu1{{$modal}}"  value="menu1{{$modal}}" class="schedule-menu hidden" >
-               <label for="menu1{{$modal}}" >
-                <img class="d-block w-100" src="https://images.pexels.com/photos/708587/pexels-photo-708587.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="First slide">
-
-              </label>
-              <input type="checkbox" id="menu2{{$modal}}"  value="menu2{{$modal}}" class="schedule-menu hidden" >
-              <label for="menu2{{$modal}}" >
-               <img class="d-block w-100" src="https://images.pexels.com/photos/708587/pexels-photo-708587.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="First slide">
-             </label>
-           </div>
-
-            </div>
-
-            <div class="carousel-item h-100">
-              <div class="flex " id="d-menu">
-                <input type="radio" name="{{$modal}}" value="L" class="flex-auto hidden" id="nasiL{{$modal}}">
-
-                <label for="nasiL{{$modal}}" class="flex cursor-pointer text-base font-semibold items-center not-menu">
-                 
-                 Nasi L
-               </label>
-             </div>
-             <div class="flex " id="d-menu">
-              <input type="radio" name="{{$modal}}" value="M" class="flex-auto hidden" id="nasiM{{$modal}}">
-
-              <label for="nasiM{{$modal}}" class="flex cursor-pointer text-base font-semibold items-center not-menu">
-               
-               Nasi M
-             </label>
-           </div>
-           <label class="inline-flex items-center mt-3">
-                <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" checked><span class="ml-2 text-gray-700">Sambal</span>
-            </label>
-            </div>
-
-            <div class="carousel-item h-100">
-               <div class="flex " id="d-menu">
-                <input type="radio" name="{{$modal}}" value="A" class="flex-auto hidden" id="shiftA{{$modal}}">
-
-                <label for="shiftA{{$modal}}" class="flex cursor-pointer text-base font-semibold items-center not-menu">
-                 
-                 Shift A
-               </label>
-             </div>
-             <div class="flex " id="d-menu">
-              <input type="radio" name="{{$modal}}" value="B" class="flex-auto hidden" id="shiftB{{$modal}}">
-
-              <label for="shiftB{{$modal}}" class="flex cursor-pointer text-base font-semibold items-center not-menu">
-               
-              Shift B
-             </label>
-           </div>
-            </div>
-          </div>
-         
+  @for($i = 1; $i <= $now->daysInMonth; $i++, $start->addDay())
+  @php
+ 
+  $schedule = App\Models\ScheduleMenu::where('date',$start->format('Y-m-d'))->first();
+  $order = App\Models\Order::where('order_date',$start->format('Y-m-d'))->first();
+  @endphp
+<!-- Create Modal -->
+<div class="bootstrapiso z-50 contents">
+  <div class="modal fade" id="ScheduleModal{{$i}}" tabindex="-1" role="dialog" aria-labelledby="MenuPhotosModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="MenuPhotosModal">Create Schedule {{$start->format('l, m Y')}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" class="right-4">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-       </div>
-       <div class="modal-footer">
-         <a  href="#carouselExampleControls{{$modal}}" role="button" data-slide="prev">
-          <button type="button" class="btn btn-warning">Back</button>
-        </a>
-         <a  href="#carouselExampleControls{{$modal}}" role="button" data-slide="next">
-          <button type="button" class="btn btn-primary">Next</button>
-        </a>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <div class="modal-body p-0">
+       <div id="carouselExampleControls{{$i}}" class="carousel slide" data-interval="false">
+        <div class="carousel-inner h-100">
+          <div class="carousel-item active h-100">
+            <div class="grid grid-cols-2 ">
 
+              @if($schedule != null)
+              @foreach(explode(",", $schedule->menu_list) as $menu)
+                @php
+                $menu = App\Models\Menu::where('id',$menu)->first();
+                @endphp
+                <input type="checkbox" id="menu{{$i}}{{$menu->id}}" name="{{$i}}" value="{{$menu->id}}" class="schedule-menu hidden" >
+                <label for="menu{{$i}}{{$menu->id}}" >
+                <img class="d-block w-100" src="@if($menu->photos->first() != null) {{url('public/'.$menu->photos->random->first()->file)}} @else {{url('public/images/no-image.png')}} @endif" alt="{{$menu->name}}">
+                </label>
+              @endforeach
+              @endif
+         </div>
+
+          </div>
+
+          <div class="carousel-item h-100">
+            <div class="flex " id="d-menu">
+              <input type="radio" name="porsi{{$i}}" value="L" class="flex-auto hidden" id="nasiL{{$i}}">
+
+              <label for="nasiL{{$i}}" class="flex cursor-pointer text-base font-semibold items-center not-menu">
+               
+               Nasi L
+             </label>
+           </div>
+           <div class="flex " id="d-menu">
+            <input type="radio" name="porsi{{$i}}" value="M" class="flex-auto hidden" id="nasiM{{$i}}">
+
+            <label for="nasiM{{$i}}" class="flex cursor-pointer text-base font-semibold items-center not-menu">
+             
+             Nasi M
+           </label>
+         </div>
+            <div class="flex " id="d-menu">
+              <input type="radio" name="porsi{{$i}}" value="S" class="flex-auto hidden" id="nasiS{{$i}}">
+
+              <label for="nasiS{{$i}}" class="flex cursor-pointer text-base font-semibold items-center not-menu">
+               
+               Nasi S
+             </label>
+           </div>
+         <label class="inline-flex items-center mt-3">
+              <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" name="sambal{{$i}}" value="yes"><span class="ml-2 text-gray-700">Sambal</span>
+          </label>
+          </div>
+
+          <div class="carousel-item h-100">
+             <div class="flex " id="d-menu">
+              <input type="radio" name="shift{{$i}}" value="A" class="flex-auto hidden" id="shiftA{{$i}}">
+
+              <label for="shiftA{{$i}}" class="flex cursor-pointer text-base font-semibold items-center not-menu">
+               
+               Shift A
+             </label>
+           </div>
+           <div class="flex " id="d-menu">
+            <input type="radio" name="shift{{$i}}" value="B" class="flex-auto hidden" id="shiftB{{$i}}">
+
+            <label for="shiftB{{$i}}" class="flex cursor-pointer text-base font-semibold items-center not-menu">
+             
+            Shift B
+           </label>
+         </div>
+          </div>
+        </div>
+       
       </div>
+     </div>
+     <div class="modal-footer">
+       <a  href="#carouselExampleControls{{$i}}" role="button" data-slide="prev">
+        <button type="button" class="btn btn-warning">Back</button>
+      </a>
+       <a  href="#carouselExampleControls{{$i}}" role="button" data-slide="next">
+        <button type="button" class="btn btn-primary">Next</button>
+      </a>
+      <button type="button" class="btn btn-secondary" onclick="document.getElementById('tanggal{{$i}}').checked = true; alert('tanggal{{$i}}')">Simpan</button>
+
     </div>
   </div>
 </div>
-</div>  
-<?php
-} 
-$modal=1;
-?>
-
+</div>
+</div>
+<!-- End Modal -->
+@endfor
 <div class="relative h-full  overflow-y-hidden overflow-x-hidden ">
 
    <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide" >
@@ -211,12 +225,9 @@ $modal=1;
         <h3 class="flex-shrink min-w-0 font-medium text-5xl leading-snug text-center mb-6 h-15 ">
            {{$now->format('F Y')}}
        </h3>  
-       <form action="{{route('employee.store.order')}}" method="POST" enctype="multipart/form-data" class="contents">
           <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5 mt-4">                      
              <div id="div1" class="duration-1000 targetDiv bg-gray-100 justify-content content-center text-center rounded-lg pt-4"> 
-
-                @csrf
-
+                @php $start->subMonth(); @endphp
                 @for($i = 1; $i <= $now->daysInMonth; $i++, $start->addDay())
                 @php
                
@@ -226,7 +237,7 @@ $modal=1;
                     
             
                     <label class='label flex-auto contents duration-1000'>
-                        <input class='label__checkbox duration-1000 ' type='checkbox'  data-toggle="modal" data-target="#ScheduleModal{{$modal++}}"  @if($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}">
+                        <input class='label__checkbox duration-1000 ' type='checkbox' id="tanggal{{$i}}" data-toggle="modal" data-target="#ScheduleModal{{$i}}"  @if($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}">
 
                         <span class='label__text '>
                             <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient( @if($order != null)  135deg, #FCCF31 10%, #F55555 100% @elseif($start < $now) 160deg, #bdbdbe 0%, #032a32 100% @elseif($schedule != null) 160deg, #0093E9 0%, #80D0C7 100%   @else to right, #ff416c, #ff4b2b @endif );'>

@@ -251,6 +251,7 @@ class EmployeeActionController extends Controller
         $this->validate($request, [
             'dates' => ['required'],
         ]);
+        return dd($request->all());
         //declare
         $now = Carbon::now();
         $user = auth()->user();
