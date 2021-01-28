@@ -311,6 +311,40 @@ class AdminActionController extends Controller
 
 		return view('Admin.index_review',compact('reviews','from','to'));
 	}
+	public function index_order_catering(Request $request)
+	{	
+		//declare variable
+		$now = Carbon::now();
+		$start_date = Carbon::parse('2021-01-01');
+		$total_days = $start_date->diffInDays($now);
+		$from = null;
+		$to = null;
+		$employees = User::where('role','Employee')->get();
+
+		//get total order & total order not taken
+		foreach ($employees as $employee) {
+			$start = Carbon::parse('2021-01-01');
+			$not_taken = 0;
+			$employee->total_order = $employee->orders->count();
+			if ($request->from != null && $request->to != null) {
+				$from = Carbon::parse($request->from);
+				$to = Carbon::parse($request->to);
+				$start = Carbon::parse($request->from);
+				$stop = Carbon::parse($request->to);
+				$total_days = $start->diffInDays($stop);
+				$employee->total_order = $employee->orders->whereBetween('order_date',[$start->format('Y-m-d'),$stop->format('Y-m-d')])->count();
+			}
+			for ($i=0; $i <= $total_days; $i++,$start->addDay()) { 
+				$order = $employee->orders()->where('order_date',$start->format('Y-m-d'))->first();
+				$schedule = ScheduleMenu::where('date',$start->format('Y-m-d'))->first();
+				if ($order == null && $schedule != null) {
+					$employee->total_not_order = $not_taken++;
+				}
+			}
+		}
+
+		return view('Admin.index_order_catering',compact('employees','now','from','to'));
+	}
 	public function index_order(Request $request)
 	{
 		//declare variable

@@ -19,7 +19,7 @@
              </h3>
            </div>
            <div class="ml-4 flex items-center gap-4 md:w-5/12 w-full">
-              <form action="{{route('admin.index.order')}}" method="GET" class="contents">
+              <form action="{{route('admin.index.order_catering')}}" method="GET" class="contents">
             @csrf
             <input type="date" class="w-4/12 md:w-full text border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-30" @if($from != null) value="{{$from->format('Y-m-d')}}" @endif name="from" class="p-4">
              To 
@@ -59,27 +59,23 @@
             <tr>
             <th class="w-12">No</th>            
             <th>Employee </th>
-            <th>Menu</th>
-            <th>Order Date</th>
-            <th>Note</th>
-            <th class="w-15">Status</th>
+            <th>Order Taken</th>
+            <th>Order not Taken</th>
             
         </tr>
 
     </thead>
     <tbody class="text-center bg-white py-4" >       
 
-        @foreach($orders as $order)
+        @foreach($employees as $employee)
         <tr>
             <td>{{$loop->iteration}}</td>
             <td> <div class="flex items-center h-full">
-                <img src="{{$order->employee->profile_photo_url}}">
-                <a> {{$order->employee->name}}</a></div>
+                <img src="{{$employee->profile_photo_url}}">
+                <a> {{$employee->name}}</a></div>
             </td>
-            <td>{{$order->menu->name}}</td>
-            <td>{{Carbon\Carbon::parse($order->order_date)->format('l, d M Y')}}</td>
-            <td>{{$order->note}}</td>
-            <td><p class="m-0 border-green-300 border rounded-2xl bg-green-200 text-green-600 py-2 font-semibold px-4 hover:bg-green-300 hover:text-green-700 transition-500">Served</p></td>
+            <td>{{$employee->total_order}}</td>
+            <td>{{$employee->total_not_order}}</td>
         </tr>
         @endforeach
     </tbody>

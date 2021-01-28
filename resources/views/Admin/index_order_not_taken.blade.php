@@ -5,7 +5,7 @@
     @endif
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Report Catering') }} <span class="font-normal text-lg">{{ __('/ Order Not Taken ') }}</span>
+            {{ __('Report Admin') }} <span class="font-normal text-lg">{{ __('/ Order Not Taken ') }}</span>
         </h2>
     </x-slot>
       

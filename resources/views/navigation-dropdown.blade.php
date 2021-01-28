@@ -52,6 +52,9 @@
                                     <x-jet-dropdown-link href="{{ route('admin.index.review') }}">
                                         {{ __('Review ') }}
                                     </x-jet-dropdown-link>
+                                      <x-jet-dropdown-link href="{{ route('admin.index.order_catering') }}">
+                                        {{ __('Summary Employees ') }}
+                                    </x-jet-dropdown-link>
                                       <x-jet-dropdown-link href="{{ route('admin.index.order') }}">
                                         {{ __('Order Taken ') }}
                                     </x-jet-dropdown-link>
@@ -245,6 +248,9 @@
                        
                         <x-jet-responsive-nav-link  href="{{ route('admin.index.review') }}" :active="request()->routeIs('admin.index.review')">
                             {{ __('Report Review ') }}
+                        </x-jet-responsive-nav-link >
+                        <x-jet-responsive-nav-link  href="{{ route('admin.index.order_catering') }}" :active="request()->routeIs('admin.index.order_catering')">
+                            {{ __('Summary Employees ') }}
                         </x-jet-responsive-nav-link >
                         <x-jet-responsive-nav-link  href="{{ route('admin.index.order') }}" :active="request()->routeIs('admin.index.order')">
                             {{ __('Report Catering Taken ') }}

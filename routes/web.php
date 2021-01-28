@@ -54,6 +54,7 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth:sanctum','role:Admin'
     Route::post('/update/menu-price', [ AdminActionController::class, 'update_menu_price'])->name('admin.update.menu_price');
 
     //Report
+    Route::get('/order', [ AdminActionController::class, 'index_order_catering'])->name('admin.index.order_catering');
     Route::get('/order/today', [ AdminActionController::class, 'index_order'])->name('admin.index.order');
     Route::get('/order/not-taken', [ AdminActionController::class, 'index_order_not_taken'])->name('admin.index.order_not_taken');
 });
