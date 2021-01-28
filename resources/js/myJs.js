@@ -21,26 +21,10 @@
     button3.style.backgroundColor ="#EEF2FF";
     button3.style.color ="#528CE0";
 
-    buttonBack.disabled = true;
+  
     //add event listener
 
-     buttonBack.addEventListener('click', function(event) {
-        button.disabled = true;
-        button2.disabled = false;
-        button2.style.backgroundColor ="";
-        button2.style.color ="#9FA6B2";
-        button.style.backgroundColor ="#EEF2FF";
-        button.style.color ="#528CE0";
-
-        button3.disabled = true ;
-        button4.disabled = false;
-        button3.style.backgroundColor ="#EEF2FF";
-        button3.style.color ="#528CE0";
-        button4.style.backgroundColor ="";
-        button4.style.color ="#9FA6B2";
-        buttonSch.style.display = "block";
-
-    });
+    
      
     button.addEventListener('click', function(event) {
         button.disabled = true;

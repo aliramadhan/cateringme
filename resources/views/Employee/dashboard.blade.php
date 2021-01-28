@@ -45,7 +45,7 @@
   <!--Modal-->
   <form action="{{route('employee.store.review',$menu_today->order_number)}}" method="POST">
     @csrf
-    <div class="modal z-10 opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+    <div class="modal z-10 opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center" id="reviewModal">
       <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
       <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
@@ -60,7 +60,7 @@
         <!-- Add margin if you want to see some of the overlay behind the modal-->
         <div class="modal-content py-4 text-left px-6">
           <!--Title-->
-          <div class="flex justify-between items-center pb-3">
+          <div class="flex justify-between items-center border-b pb-3">
             <p class="text-2xl font-bold text-gray-600">Review <font class="text-orange-500">{{$menu_today->menu->name}}</font></p>
             <div class="modal-close cursor-pointer z-50">
               <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
@@ -114,9 +114,7 @@
           </div>
           <div class="flex flex-wrap mt-6">
             <div class="relative w-full appearance-none label-floating">
-              <p class="text-xl font-base text-gray-600 font-bold">Note</p>
-              <textarea required name="note" class="autoexpand tracking-wide py-2 px-4 mb-3 leading-relaxed appearance-none block w-full bg-gray-50 border border-gray-200 rounded focus:outline-none focus:bg-white focus:border-gray-500 h-52"
-              id="message" type="text" placeholder="Message...">{{$menu_today->note}}</textarea>
+              
               <label for="message" class="absolute tracking-wide py-2 px-4 mb-4 opacity-0 leading-tight block top-0 left-0 cursor-text">Message...
               </label>
             </div>
@@ -131,6 +129,51 @@
       </div>
     </div>
   </form>
+
+
+   <div class="modal z-10 opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center" id="noteModal">
+      <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+      <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+        <div class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+          <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+            <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+          </svg>
+          <span class="text-sm">(Esc)</span>
+        </div>
+
+        <!-- Add margin if you want to see some of the overlay behind the modal-->
+        <div class="modal-content py-4 text-left px-6">
+          <!--Title-->
+          <div class="flex justify-between items-center border-b pb-3">
+            <p class="text-2xl font-bold text-gray-600">Notes <font class="text-blue-500">{{$menu_today->menu->name}}</font></p>
+            <div class="modal-close cursor-pointer z-50">
+              <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+              </svg>
+            </div>
+          </div>
+
+          <!--Body-->
+          <div class="flex flex-wrap mt-6">
+            <div class="relative w-full appearance-none label-floating">
+              <p class="text-xl font-base text-gray-600 font-bold">Note</p>
+              <textarea required name="review" class="autoexpand tracking-wide py-2 px-4 mb-3 leading-relaxed appearance-none block w-full bg-gray-50 border border-gray-200 rounded focus:outline-none focus:bg-white focus:border-gray-500 h-52"
+              id="message" type="text" placeholder="Message...">.. your notes</textarea>
+              <label for="message" class="absolute tracking-wide py-2 px-4 mb-4 opacity-0 leading-tight block top-0 left-0 cursor-text">Write your Notes ...
+              </label>
+            </div>
+          </div>
+          
+          <!--Footer-->
+          <div class="flex justify-end pt-2">
+
+            <button class=" px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Save</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
   @endif
 
 
@@ -168,8 +211,9 @@
             </div>
             <p class="text-2xl mb-4 leading-none">{{$menu_today->menu->desc}}</p>
              <div class="mt-4 ">
-                      <button type="button" class="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-white py-3 px-8 rounded-xl opacity-75 hover:opacity-100 duration-200 modal-open text-2xl shadow-2xl mt-6" id="modal-click"><i class="fas fa-feather-alt"></i>@if($menu_today->review != null || $menu_today->stars != null) Edit Review @else Review @endif</button>
-                    
+                      <button type="button" class="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-white py-3 px-8 rounded-xl opacity-75 hover:opacity-100 duration-200 modal-open text-2xl shadow-2xl mt-6 w-full md:w-auto" data-toggle="modal" data-target="reviewModal"><i class="fas fa-feather-alt"></i>@if($menu_today->review != null || $menu_today->stars != null) Edit Review @else Review @endif</button>
+
+                       <button type="button" class="bg-gradient-to-r from-blue-400 via-blue-500 to-indigo-500 text-white py-3 px-8 rounded-xl opacity-75 hover:opacity-100 duration-200 modal-open text-2xl shadow-2xl mt-6 md:ml-6 w-full md:w-auto" data-toggle="modal" data-target="noteModal"><i class="far fa-clipboard"></i>@if($menu_today->review != null || $menu_today->stars != null) Edit Note @else Note @endif</button>
                   </div>
           </div>
          
@@ -210,33 +254,33 @@
 
       <div class="grid grid-cols-1 md:grid-cols-4 pr-9 mb-8 mt-8 md:-mt-20 gap-4 w-full pl-6">        
         <div class="w-full px-2">
-          <div class="rounded-lg shadow-sm mb-4">
+         
             <a href="{{ route('employee.create.order') }}">
-            <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
-              <div class="p-6 text-center relative z-10">
+            <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000 h-full">
+              <div class="p-6 text-center relative z-10 mt-1">
                 <div class="flex items-center gap-4 ">
                   <i class="fas fa-calendar-plus rounded-full bg-green-200 text-green-500 p-5 text-4xl"></i>
-                  <div class="flex flex-col">
+                  <div class="flex flex-col flex-auto">
                   <h3 class="text-5xl text-green-500 font-semibold leading-tight">{{$total_catering}}</h3>
-                  <h4 class="text-base font-semibold uppercase text-left text-gray-500 leading-tight">catering is taken</h4>
+                  <h4 class="text-base font-semibold uppercase flex-auto text-center text-gray-500 leading-tight">catering is taken</h4>
                   </div>
                 </div>
                                
               </div>              
               </div>
             </a>
-          </div>
+          
         </div>
         <div class="w-full px-2">
-          <div class="rounded-lg shadow-sm mb-4">
+         
             <a href="{{ route('employee.create.order') }}">
-              <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl animate transform transition-transform hover:-translate-y-2 duration-1000">
-                <div class="p-6 text-center relative z-10">
+              <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl animate transform transition-transform hover:-translate-y-2 duration-1000 h-full">
+                <div class="p-6 text-center relative z-10 mt-1">
                   <div class="flex items-center gap-4 ">
                     <i class="fas fa-calendar-times rounded-full bg-red-200 text-red-500 p-5 text-4xl"></i>
-                    <div class="flex flex-col">
+                    <div class="flex flex-col flex-auto">
                       <h3 class="text-5xl text-red-500 font-semibold leading-tight">{{$total_dayoff}}</h3>  
-                      <h4 class="text-base font-semibold uppercase text-left text-gray-500 leading-tight">Day Off or  leave</h4>
+                      <h4 class="text-base font-semibold uppercase flex-auto text-center text-gray-500 leading-tight">Day Off or  leave</h4>
 
                     </div>
                   </div>
@@ -244,18 +288,18 @@
                 </div>              
               </div>
             </a>
-          </div>
+         
         </div>
         <div class="w-full px-2">
-          <div class="rounded-lg shadow-sm mb-4">
+          
             <a href="{{ route('employee.create.order') }}">
-              <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
-                <div class="p-6 text-center relative z-10">
+              <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000 h-full">
+                <div class="p-6 text-center relative z-10 mt-1">
                   <div class="flex items-center gap-4 ">
                     <i class="fas fa-calendar rounded-full bg-indigo-200 text-indigo-500 p-5 text-4xl"></i>
-                    <div class="flex flex-col">
+                    <div class="flex flex-col flex-auto">
                       <h3 class="text-5xl text-indigo-500 font-semibold leading-tight">{{$total_empty_order}}</h3>
-                      <h4 class="text-base font-semibold uppercase text-left text-gray-500 leading-tight text-left">empty schedule</h4>
+                      <h4 class="text-base font-semibold uppercase flex-auto text-center text-gray-500 leading-tight flex-auto ">empty schedule</h4>
 
                     </div>
                   </div>               
@@ -263,18 +307,18 @@
                 </div>              
               </div>
             </a>
-          </div>
+         
         </div>
         <div class="w-full px-2">
-          <div class="rounded-lg shadow-sm mb-4">
+         
             <a href="{{ route('employee.history.review') }}">
-              <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
-                <div class="p-6 text-center relative z-10">
+              <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000 h-full">
+                <div class="p-6 text-center relative z-10 mt-1">
                   <div class="flex items-center gap-4 ">
                     <i class="fas fa-feather-alt rounded-full bg-blue-200 text-blue-500 p-5 text-4xl"></i>
-                    <div class="flex flex-col">
+                    <div class="flex flex-col flex-auto">
                       <h3 class="text-5xl text-blue-500 font-semibold leading-tight">{{$total_review}}</h3>
-                      <h4 class="text-base font-semibold uppercase text-gray-500 leading-tight text-left">Review & Feeds</h4>
+                      <h4 class="text-base font-semibold uppercase text-gray-500 leading-tight flex-auto text-center">Review & Feeds</h4>
 
                     </div>
                   </div>                
@@ -282,7 +326,7 @@
                 </div>              
               </div>
             </a>
-          </div>
+          
         </div>
       </div>
 

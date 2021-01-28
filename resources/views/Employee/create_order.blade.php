@@ -138,7 +138,7 @@
                 @php
                 $menu = App\Models\Menu::where('id',$menu)->first();
                 @endphp
-                <input type="radio" id="menu{{$i}}{{$menu->id}}" name="menu{{$i}}" value="{{$menu->id}}" class="schedule-menu hidden" >
+                <input type="checkbox" id="menu{{$i}}{{$menu->id}}" name="menu{{$i}}" value="{{$menu->id}}" class="schedule-menu hidden" >
                 <label for="menu{{$i}}{{$menu->id}}" >
                 <img class="d-block w-100" src="@if($menu->photos->first() != null) {{url('public/'.$menu->photos->random()->first()->file)}} @else {{url('public/images/no-image.png')}} @endif" alt="{{$menu->name}}">
                 </label>
@@ -216,16 +216,52 @@
        
       </div>
      </div>
+   
      <div class="modal-footer">
-       <a  href="#carouselExampleControls{{$i}}" role="button" data-slide="prev" id="back-step">
-        <button type="button" class="btn btn-warning">Back</button>
+       <a  href="#carouselExampleControls{{$i}}" role="button" data-slide="prev" style="display: none;" id="back-step{{$i}}">
+        <button type="button" class="btn btn-warning" >Back</button>
       </a>
-       <a  href="#carouselExampleControls{{$i}}" role="button" data-slide="next" id="next-step">
-        <button type="button" class="btn btn-primary">Next</button>
+      <a  href="#carouselExampleControls{{$i}}" role="button" data-slide="prev" style="display: none;" id="back-step2{{$i}}">
+        <button type="button" class="btn btn-warning" >Back to Porsi</button>
+      </a>
+       <a href="#carouselExampleControls{{$i}}" role="button" data-slide="next" id="next-step{{$i}}">
+        <button type="button" class="btn btn-primary" >Next</button>
+      </a>
+       <a href="#carouselExampleControls{{$i}}" role="button" data-slide="next" id="last-step{{$i}}" style="display: none;">
+        <button type="button" class="btn btn-primary" >Last Step</button>
       </a>
     
       <button type="button" class="btn btn-secondary" onclick="document.getElementById('tanggal{{$i}}').checked = true;" data-dismiss="modal">Simpan</button>
+      <script type="text/javascript">
+        var buttonBack{{$i}} = document.getElementById("back-step{{$i}}");
+        var buttonBack2{{$i}} = document.getElementById("back-step2{{$i}}");
+        var buttonNext{{$i}} = document.getElementById("next-step{{$i}}");
+        var buttonLast{{$i}} = document.getElementById("last-step{{$i}}");
+       
+        buttonLast{{$i}}.addEventListener('click', function(event) {
+        buttonNext{{$i}}.style.display = "none";   
+        buttonLast{{$i}}.style.display = "none";  
+        buttonBack2{{$i}}.style.display = "block";   
+        buttonBack{{$i}}.style.display = "none";
+        });
+        buttonNext{{$i}}.addEventListener('click', function(event) {
+        buttonBack{{$i}}.style.display = "block";
+        buttonLast{{$i}}.style.display = "block";   
+        buttonNext{{$i}}.style.display = "none";        
+        });
+        buttonBack{{$i}}.addEventListener('click', function(event) {       
+        buttonBack{{$i}}.style.display = "none";
+        buttonNext{{$i}}.style.display = "block"; 
+         buttonLast{{$i}}.style.display = "none";    
+        });
+        buttonBack2{{$i}}.addEventListener('click', function(event) {    
+        buttonBack2{{$i}}.style.display = "none";   
+        buttonBack{{$i}}.style.display = "block";
+        buttonLast{{$i}}.style.display = "block";     
+        });
 
+        
+      </script>
     </div>
   </div>
 </div>
@@ -388,6 +424,25 @@
 </div>
 </div>
 
+<script type="text/javascript">
+  // the selector will match all input controls of type :checkbox
+// and attach a click event handler 
+$("input:checkbox").on('click', function() {
+  // in the handler, 'this' refers to the box clicked on
+  var $box = $(this);
+  if ($box.is(":checked")) {
+    // the name of the box is retrieved using the .attr() method
+    // as it is assumed and expected to be immutable
+    var group = "input:checkbox[name='" + $box.attr("name") + "']";
+    // the checked state of the group/box on the other hand will change
+    // and the current value is retrieved using .prop() method
+    $(group).prop("checked", false);
+    $box.prop("checked", true);
+  } else {
+    $box.prop("checked", false);
+  }
+});
+</script>
 <script src="{{asset('resources/js/myJs.js')}}"></script>
 
 
