@@ -32,6 +32,9 @@ Route::middleware(['auth:sanctum'])->get('/dashboard', function () {
     return redirect()->route('admin.dashboard');
 })->name('dashboard');
 //Role Admin
+
+Route::get('/cek_pesan', [ AdminActionController::class, 'cek_pesan'])->name('admin.cek_pesan');
+
 Route::group(['prefix' => 'admin',  'middleware' => ['auth:sanctum','role:Admin']], function(){
     //Dashboard
     Route::get('/dashboard', [ AdminActionController::class, 'dashboard'])->name('admin.dashboard');

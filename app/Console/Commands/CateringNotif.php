@@ -44,20 +44,35 @@ class CateringNotif extends Command
     {
         $now = Carbon::now();
         $orders = Order::where('order_date',$now->format('Y-m-d'))->get();
-        $menus = Order::where('order_date',$now->format('Y-m-d'))->groupBy('menu_id')->get();
-        $data = new Collection;
-        $i = 1;
+        $shifts = $orders->sortBy('shift')->groupBy('shift');
+        $servings = $orders->sortBy('menu_id')->groupBy(['menu_id','serving']);
         $text = "Notification Catering Today \n".$now->format('d, M Y l')."\n \n";
-        foreach ($menus as $order) {
-            $menu = Menu::findOrFail($order->menu_id);
-            $data->push((object)[
-                'Menu' => $menu->name,
-                'total_order' => $orders->where('menu_id',$menu->id)->count()
-            ]);
-            $text .= $i.". ".$menu->name." => ".$orders->where('menu_id',$menu->id)->count()."\n";
-            $i++;
+        //shift
+        foreach ($shifts as $shift) {
+            $i = 1;
+            $text .= "Shift ".$shift->first()->shift." ========================\n \n";
+            foreach ($shift as $data) {
+                //cek sambal
+                $sambal = "";
+                if ($data->is_sauce == 1) {
+                    $sambal = " ( tambah sambal )";
+                }
+                $text .= $i.". ".$data->employee->name." - ".$data->menu->name." porsi ".$data->serving.$sambal."\n";
+                $i++;
+            }
+            $text .= "\n";
         }
-        $text .= "\n ============================\n \n Total order = ".$orders->count(). " \n Total fee = Rp. ".number_format($orders->sum('fee'));
+        $text .= "================================\n \n";
+        //summary
+        $i = 1;
+        foreach ($servings as $serving) {
+            foreach ($serving as $item) {
+                $menu = $item->first()->menu;
+                $text .= $i. " ".$menu->name. " - porsi ".$item->first()->serving. " => ".$item->count()."\n";
+                $i++;
+            }
+        }
+        $text .= "\n ============================\n \n Total order = ".$orders->count(). " Menu\n Total fee = Rp. ".number_format($orders->sum('fee'));
         Telegram::sendMessage([
             'chat_id' => env('TELEGRAM_CHANNEL_ID',''),
             'parse_mode' => 'HTML',
