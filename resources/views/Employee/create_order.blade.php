@@ -195,22 +195,6 @@
             Shift Siang
            </label>
          </div>
-           <div class="flex " id="d-menu">
-            <input type="radio" name="shift{{$i}}" value="Sore" class="flex-auto hidden" id="shiftB{{$i}}">
-
-            <label for="shiftB{{$i}}" class="flex cursor-pointer text-base font-semibold items-center not-menu">
-             
-            Shift Sore
-           </label>
-         </div>
-           <div class="flex " id="d-menu">
-            <input type="radio" name="shift{{$i}}" value="Malam" class="flex-auto hidden" id="shiftB{{$i}}">
-
-            <label for="shiftB{{$i}}" class="flex cursor-pointer text-base font-semibold items-center not-menu">
-             
-            Shift Malam
-           </label>
-         </div>
           </div>
         </div>
        
