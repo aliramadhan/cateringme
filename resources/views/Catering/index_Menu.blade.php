@@ -3,8 +3,41 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Manage Catering Menu') }}
         </h2>
-    </x-slot>  
+    </x-slot>
+    <div id="success" class="invisible absolute"></div>
+       <div id="failure" class="invisible absolute"></div>
+      
+          @if (session('message'))
+            <script type="text/javascript">
+              function notifu(){
+              document.getElementById('success').click();
+              var scriptTag = document.createElement("script");        
+              document.getElementsByTagName("head")[0].appendChild(scriptTag);
+            }          
+          </script>
+          <style type="text/css">  .success:before{
+            Content:" {{ session('message') }}";
+          }</style>
+           
+                
+            @endif
+            @if($errors->any())
+            <script type="text/javascript">
+              function notifu(){
+              document.getElementById('failure').click();
+              var scriptTag = document.createElement("script");        
+              document.getElementsByTagName("head")[0].appendChild(scriptTag);
+            }          
+          </script>
+            <style type="text/css">  .failure:before{
+              Content:"  {{ implode('', $errors->all(':message')) }}";
+            }</style>
+           
+            @endif  
 
+    @if($errors->any())
+        {{ implode('', $errors->all('<div>:message</div>')) }}
+    @endif
     <!--Modal-->
     <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50">
       <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
