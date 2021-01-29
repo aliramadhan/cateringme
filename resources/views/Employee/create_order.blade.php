@@ -166,7 +166,7 @@
                        $menu = App\Models\Menu::where('id',$menu)->first();
                        @endphp
                       
-                        <input type="checkbox" id="menu{{$i}}{{$menu->id}}" name="menu{{$i}}" value="{{$menu->id}}" class="schedule-menu hidden" >
+                        <input type="checkbox" id="menu{{$i}}{{$menu->id}}" @if($loop->iteration == 1) checked @endif name="menu{{$i}}" value="{{$menu->id}}" class="schedule-menu hidden" >
                         <label for="menu{{$i}}{{$menu->id}}" class="m-0 p-0 h-60 col-span-2 md:col-span-1" >
                           <div class="grayscale-effect">            
                             <img  class="object-cover w-100 h-60 inline-block rounded-bl-3xl rounded-tr-3xl hover:shadow-xl bg-white" src="
@@ -198,7 +198,7 @@
                            </label>
                          
                           
-                            <input type="radio" name="porsi{{$i}}" value="M" class="flex-auto hidden" id="nasiM{{$i}}">
+                            <input type="radio" name="porsi{{$i}}" checked value="M" class="flex-auto hidden" id="nasiM{{$i}}">
                             <label for="nasiM{{$i}}"  class="flex cursor-pointer text-base font-semibold items-center not-menu px-4 bg-white rounded-xl border hover:shadow-md duration-500">
                              Porsi M
                            </label>
@@ -219,7 +219,7 @@
                 <div class="text-center">
                   <h5 class="font-semibold">Catering Delivery</h5>
                   
-                    <input type="radio" name="shift{{$i}}" value="Pagi" class="flex-auto hidden" id="shiftA{{$i}}">
+                    <input type="radio" name="shift{{$i}}" checked value="Pagi" class="flex-auto hidden" id="shiftA{{$i}}">
                     <label for="shiftA{{$i}}" class="flex cursor-pointer text-base font-semibold items-center not-menu px-4 bg-white rounded-xl border hover:shadow-md duration-500">
                      <i class="fas fa-cloud-sun text-blue-400 mr-2"> </i>Shift Pagi
                    </label>
@@ -282,6 +282,137 @@
 </div>
 <!-- End Modal -->
 @endfor
+<!-- Create Modal -->
+
+        <div class="bootstrapiso z-50 contents">
+          <div class="modal fade" id="ScheduleModal" tabindex="-1" role="dialog" aria-labelledby="MenuPhotosModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="MenuPhotosModal">Create Schedule for {{$start->format('l, M ')}}</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" class="right-4">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body p-0">
+                 <div id="carouselExampleControls" class="carousel slide" data-interval="false">
+                  <div class="carousel-inner h-100">
+                    <div class="carousel-item active h-100">
+                      <div class="grid grid-cols-2 p-4 gap-8 bg-gray-50">
+                        <span class="block col-span-2 -mt-2">
+                        <h5 class="text-center border-b relative"><span class="relative top-3 px-4 bg-gray-50">Select Your Menu </span></h5>
+                        </span>
+                        <input type="checkbox" id="menu" name="menu" value="" class="schedule-menu hidden" >
+                        <label for="menu" class="m-0 p-0 h-60 col-span-2 md:col-span-1" >
+                          <div class="grayscale-effect">            
+                            <img  class="object-cover w-100 h-60 inline-block rounded-bl-3xl rounded-tr-3xl hover:shadow-xl bg-white" src="" alt="">
+                           </div> 
+                          <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">{{$menu->name}}</div>
+
+                          <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
+                            <i class="fas fa-star"></i> 4
+                          </div>
+                          
+                         
+                      </label>
+                    </div>
+
+                  </div>
+
+                  <div class="carousel-item h-100">
+                    <div class="grid grid-cols-2 p-4 gap-4 bg-gray-50">
+                      <div class="text-center">
+                          <h5 class="font-semibold">Additional Catering</h5>
+                         
+                          <input type="radio" name="porsi" value="L" class="flex-auto hidden" id="nasiL">
+                          <label for="nasiL" class="flex cursor-pointer text-base font-semibold items-center not-menu px-4 bg-white rounded-xl border hover:shadow-md duration-500">
+                           Porsi L
+                           </label>
+                         
+                          
+                            <input type="radio" name="porsi" checked value="M" class="flex-auto hidden" id="nasiM">
+                            <label for="nasiM"  class="flex cursor-pointer text-base font-semibold items-center not-menu px-4 bg-white rounded-xl border hover:shadow-md duration-500">
+                             Porsi M
+                           </label>
+                         
+                         
+                          <input type="radio" name="porsi" value="S" class="flex-auto hidden" id="nasiS">
+                          <label for="nasiS"  class="flex cursor-pointer text-base font-semibold items-center not-menu px-4 bg-white rounded-xl border hover:shadow-md duration-500">
+
+                           Porsi S
+                         </label>
+                     
+                         <label class="inline-flex items-center mt-3 bg-white px-3 rounded-xl border">
+                          <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" name="sambal" value="1"><span class="ml-2 text-gray-700 font-semibold">Sambal</span>
+                        </label>
+                        
+                </div>
+
+                <div class="text-center">
+                  <h5 class="font-semibold">Catering Delivery</h5>
+                  
+                    <input type="radio" name="shift" checked value="Pagi" class="flex-auto hidden" id="shiftA">
+                    <label for="shiftA" class="flex cursor-pointer text-base font-semibold items-center not-menu px-4 bg-white rounded-xl border hover:shadow-md duration-500">
+                     <i class="fas fa-cloud-sun text-blue-400 mr-2"> </i>Shift Pagi
+                   </label>
+                
+                
+                  <input type="radio" name="shift" value="Siang" class="flex-auto hidden" id="shiftB">
+                  <label for="shiftB" class="flex cursor-pointer text-base font-semibold items-center not-menu px-4 bg-white rounded-xl border hover:shadow-md duration-500">
+                    <i class="fas fa-sun text-yellow-400 mr-2"> </i>Shift Siang
+                  </label>
+               
+              </div>
+
+            </div>
+
+
+
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="modal-footer">
+     <a  href="#carouselExampleControls" role="button" data-slide="prev" style="display: none;" id="back-step">
+      <button type="button" class="btn btn-warning" >Back</button>
+    </a>
+
+    <a href="#carouselExampleControls" role="button" data-slide="next" id="next-step">
+      <button type="button" class="btn btn-success" >Next</button>
+    </a>
+
+    
+    <button type="button" class="btn btn-primary" onclick="document.getElementById('tanggal').checked = true;" data-dismiss="modal" id="save-step" style="display: none;">Save </button>
+    <script type="text/javascript">
+      var buttonBack = document.getElementById("back-step");        
+      var buttonNext = document.getElementById("next-step");       
+      var buttonSave = document.getElementById("save-step");
+
+
+      buttonNext{{$i}}.addEventListener('click', function(event) {
+        buttonBack.style.display = "block";
+        buttonSave.style.display = "block";
+        buttonNext.style.display = "none";        
+      });
+      buttonBack.addEventListener('click', function(event) {       
+        buttonBack.style.display = "none";
+        buttonNext.style.display = "block"; 
+        buttonSave.style.display = "none";
+      });
+
+
+
+    </script>
+  </div>
+</div>
+</div>
+</div>
+</div>
+<!-- End Modal -->
 <div class="relative h-full  overflow-y-hidden overflow-x-hidden ">
 
  <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide" >
@@ -303,7 +434,7 @@
 
 
       <label class='label flex-auto contents duration-1000'>
-        <input class='label__checkbox duration-1000 ' name="dates[]" type='checkbox' id="tanggal{{$i}}" data-toggle="modal" data-target="#ScheduleModal{{$i}}"  @if($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" onclick="document.getElementById('tanggal{{$i}}').checked = false;">
+        <input class='label__checkbox duration-1000 ' name="dates[]" type='checkbox' id="tanggal{{$i}}"  @if($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" onclick="document.getElementById('tanggal{{$i}}').checked = false;">
 
         <span class='label__text '>
           <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient( @if($order != null)  135deg, #FCCF31 10%, #F55555 100% @elseif($start < $now) 160deg, #bdbdbe 0%, #032a32 100% @elseif($schedule != null) 160deg, #0093E9 0%, #80D0C7 100%   @else to right, #ff416c, #ff4b2b @endif );'>
@@ -349,7 +480,7 @@
 
 
       <label class='label flex-auto contents duration-1000'>
-        <input class='label__checkbox duration-1000 ' name="dates[]" type='checkbox' id="tanggal{{$i}}" data-toggle="modal" data-target="#ScheduleModal{{$i}}"  @if($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" onclick="document.getElementById('tanggal{{$i}}').checked = false;">
+        <input class='label__checkbox duration-1000 ' name="dates[]" type='checkbox' id="tanggal{{$i}}"  @if($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" onclick="document.getElementById('tanggal{{$i}}').checked = false;">
 
         <span class='label__text '>
           <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient( @if($order != null)  135deg, #FCCF31 10%, #F55555 100% @elseif($start < $now) 160deg, #bdbdbe 0%, #032a32 100% @elseif($schedule != null) 160deg, #0093E9 0%, #80D0C7 100%   @else to right, #ff416c, #ff4b2b @endif );'>
@@ -401,6 +532,34 @@ $("input:checkbox").on('click', function() {
     $box.prop("checked", false);
   }
 });
+</script>
+<script type="text/javascript">
+  $('.label__checkbox').click(function() {
+        var date = $(this).val();
+        console.log(date);
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            url: "{{ route('employee.get_schedule') }}",
+            type: "GET",
+            data: {date : date},
+            success: function(data) {
+                if (data == null) {
+                    alert('Error get date.');
+                }
+                else{
+                    console.log(data);
+                    //$.each(data.menu, function(d, v){
+                    //    console.log(data)
+                    //});
+                }
+            }
+        });
+    });
 </script>
 <script src="{{asset('resources/js/myJs.js')}}"></script>
 

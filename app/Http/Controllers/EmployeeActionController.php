@@ -106,6 +106,31 @@ class EmployeeActionController extends Controller
         $photos = ['menu' => $menu, 'data' => $data_photo];
         return $photos;
     }
+    public function get_schedule(Request $request)
+    {
+        //declare variable
+        $data = [];
+        $user = auth()->user();
+        $date = Carbon::parse($request->date);
+        $schedule = ScheduleMenu::where('date',$date->format('Y-m-d'))->first();
+        $order = Order::where('employee_id',$user->id)->where('order_date',$date->format('Y-m-d'))->first();
+        $i = 1;
+        foreach (explode(",",$schedule->menu_list) as $menu_id) {
+            $menu = Menu::find($menu_id);
+            if($i == 1){
+                $schedule->menu1 = $menu;
+            }
+            else{
+                $schedule->menu2 = $menu;
+            }
+            $i++;
+        }
+        //cek if order is exist
+        if ($order != null) {
+           $schedule->order = $order;
+        }
+        return json_encode($schedule);
+    }
     /*public function get_date(Request $request)
     {
         //declare variable
