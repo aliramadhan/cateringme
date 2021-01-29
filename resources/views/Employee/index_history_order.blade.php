@@ -72,7 +72,7 @@
                <span>  
                 <div class="  text-4xl font-semibold text-white absolute mt-4 px-4 py-1 bg-white rounded-r-lg -ml-3 shadow-md bg-gradient bg-gradient-to-b from-blue-400 to-purple-500">{{$start->day}}</div>
               </span>
-              <div >
+              <div>
 
                 <img src="@if($order->menu->photos->first() != null){{url('public/'.$order->menu->photos->first()->file)}} @else {{url('public/images/no-image.png')}} @endif" alt="#" class="h-52 rounded-xl object-cover w-full">
 

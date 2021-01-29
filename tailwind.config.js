@@ -15,9 +15,16 @@ module.exports = {
         },
     },
 
-    variants: {
-        opacity: ['responsive', 'hover', 'focus', 'disabled'],
-    },
+    variants: {             
+        extend: {        
+            zIndex: ['hover', 'active'],
+            opacity: ['responsive', 'hover', 'focus', 'disabled'], 
+        },
+
+   
+},
+
+    
 
     plugins: [require('@tailwindcss/ui')],
 };

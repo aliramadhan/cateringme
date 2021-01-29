@@ -9,8 +9,7 @@
     var buttonSch = document.getElementById("searching");
 
      // create order page
-    var buttonBack = document.getElementById("back-step");
-    var buttonNext = document.getElementById("next-step");
+   
 
     // Disable the button on initial page load
     button.disabled = true;
