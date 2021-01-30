@@ -117,11 +117,19 @@ class EmployeeActionController extends Controller
         $i = 1;
         foreach (explode(",",$schedule->menu_list) as $menu_id) {
             $menu = Menu::find($menu_id);
+            if ($menu->photos->count() < 1) {
+                $photo = url('public/images/no-image.png');
+            }
+            else{
+                $photo = url('public/'.$menu->photos->first()->file);
+            }
             if($i == 1){
                 $schedule->menu1 = $menu;
+                $schedule->menu1->photo = $photo;
             }
             else{
                 $schedule->menu2 = $menu;
+                $schedule->menu2->photo = $photo;
             }
             $i++;
         }
@@ -129,7 +137,7 @@ class EmployeeActionController extends Controller
         if ($order != null) {
            $schedule->order = $order;
         }
-        return json_encode($schedule);
+        return $schedule;
     }
     /*public function get_date(Request $request)
     {
@@ -274,7 +282,10 @@ class EmployeeActionController extends Controller
     {   
         //Validation Request
         $this->validate($request, [
-            'dates' => ['required'],
+            'date' => ['required'],
+            'menu' => ['required'],
+            'porsi' => ['required'],
+            'shift' => ['required'],
         ]);
         //declare
         $now = Carbon::now();
@@ -283,56 +294,53 @@ class EmployeeActionController extends Controller
         if($user->can_order == 0){
             return redirect()->back()->withErrors(['message' => "Cant submit order, please call admin to activated feature order catering."]);
         }
-        foreach ($request->dates as $date) {
-            $date = Carbon::parse($date);
-            $code_number = 'ORD'.$date->format('ymd').$user->id;
-            $menu = Menu::find($request->input('menu'.$date->day));
-            //inser into database
-            DB::beginTransaction();
-            try {
-                $order = Order::where('employee_id',$user->id)->where('order_date',$date->format('Y-m-d'))->first();
-                //check if sambal added
-                if ($request->input('sambal'.$date->day) == null) {
-                    $sambal = 0;
-                }
-                else{
-                    $sambal = 1;
-                }
-                if($order == null){
-                    $order = Order::create([
-                        'employee_id' => $user->id,
-                        'order_number' => $code_number,
-                        'menu_id' => $menu->id,
-                        'order_date' => Carbon::parse($date)->format('Y-m-d'),
-                        'serving' => $request->input('porsi'.$date->day),
-                        'is_sauce' => $sambal,
-                        'shift' => $request->input('shift'.$date->day),
-                        'fee' => $menu->price
-                    ]);
-                }
-                else{
-                    if ($date < $now->format('Y-m-d')) {
-                        continue;
-                    }
-                    $order->update([
-                        'menu_id' => $menu->id,
-                        'serving' => $request->input('porsi'.$date->day),
-                        'is_sauce' => $sambal,
-                        'shift' => $request->input('shift'.$date->day),
-                        'fee' => $menu->price
-                    ]);
-                    $order->menu_id = $request->input($date->day);
-                    $order->save();
-                }
-                if($order != null){
-                    DB::commit();
-                }
-            } catch (\Exception $e) {
-                DB::rollback();
-                return redirect()->back()->withErrors(['message' => $e->getMessage()]);
+        //input to database
+        $date = Carbon::parse($request->date);
+        $code_number = 'ORD'.$date->format('ymd').$user->id;
+        $menu = Menu::find($request->menu);
+        //inser into database
+        DB::beginTransaction();
+        try {
+            $order = Order::where('employee_id',$user->id)->where('order_date',$date->format('Y-m-d'))->first();
+            //check if sambal added
+            if ($request->input('sambal') == null) {
+                $sambal = 0;
             }
+            else{
+                $sambal = 1;
+            }
+            if($order == null){
+                $order = Order::create([
+                    'employee_id' => $user->id,
+                    'order_number' => $code_number,
+                    'menu_id' => $menu->id,
+                    'order_date' => $date->format('Y-m-d'),
+                    'serving' => $request->porsi,
+                    'is_sauce' => $sambal,
+                    'shift' => $request->shift,
+                    'fee' => $menu->price
+                ]);
+            }
+            else{
+                $order->update([
+                    'menu_id' => $menu->id,
+                    'serving' => $request->porsi,
+                    'is_sauce' => $sambal,
+                    'shift' => $request->shift,
+                    'fee' => $menu->price
+                ]);
+            }
+            if($order != null){
+                DB::commit();
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            $message = $e->getMessage();
+            return $message;
         }
-		return redirect()->route('employee.create.order')->with(['message' => ' Order submited successfully.']);
+
+        $message = 'Order submited successfully.';
+		return $message;
     }
     public function delete_order($id)
     {

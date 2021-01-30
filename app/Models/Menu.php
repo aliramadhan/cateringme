@@ -24,6 +24,10 @@ class Menu extends Model
     {
         return $this->hasMany(PhotoMenu::class,'menu_id');
     }
+    public function photo()
+    {
+        return $this->hasOne(PhotoMenu::class,'menu_id');
+    }
     public function orders()
     {
         return $this->hasMany(Order::class,'menu_id');
