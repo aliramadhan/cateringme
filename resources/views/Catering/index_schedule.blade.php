@@ -9,36 +9,36 @@
     <link rel="stylesheet" href="{{ asset('resources/css/date.css') }}">
     <link rel="stylesheet" href="{{asset('resources/css/Foodcheckbox.css')}}" />
 
-      <div id="success" class="invisible absolute"></div>
-       <div id="failure" class="invisible absolute"></div>
-      
-          @if (session('message'))
-            <script type="text/javascript">
-              function notifu(){
-              document.getElementById('success').click();
-              var scriptTag = document.createElement("script");        
-              document.getElementsByTagName("head")[0].appendChild(scriptTag);
-            }          
-          </script>
-          <style type="text/css">  .success:before{
-            Content:" {{ session('message') }}";
-          }</style>
-           
-                
-            @endif
-            @if($errors->any())
-            <script type="text/javascript">
-              function notifu(){
-              document.getElementById('failure').click();
-              var scriptTag = document.createElement("script");        
-              document.getElementsByTagName("head")[0].appendChild(scriptTag);
-            }          
-          </script>
-            <style type="text/css">  .failure:before{
-              Content:"  {{ implode('', $errors->all(':message')) }}";
-            }</style>
-           
-            @endif
+    <div id="success" class="invisible absolute"></div>
+    <div id="failure" class="invisible absolute"></div>
+
+    @if (session('message'))
+    <script type="text/javascript">
+      function notifu(){
+        document.getElementById('success').click();
+        var scriptTag = document.createElement("script");        
+        document.getElementsByTagName("head")[0].appendChild(scriptTag);
+      }          
+    </script>
+    <style type="text/css">  .success:before{
+      Content:" {{ session('message') }}";
+    }</style>
+
+
+    @endif
+    @if($errors->any())
+    <script type="text/javascript">
+      function notifu(){
+        document.getElementById('failure').click();
+        var scriptTag = document.createElement("script");        
+        document.getElementsByTagName("head")[0].appendChild(scriptTag);
+      }          
+    </script>
+    <style type="text/css">  .failure:before{
+      Content:"  {{ implode('', $errors->all(':message')) }}";
+    }</style>
+
+    @endif
     
 
 
@@ -147,7 +147,7 @@
                 <li>
                   <input type="checkbox" id="{{$menu->id}}" name="menus[]" value="{{$menu->id}}" class="schedule-menu hidden" >
                   <label for="{{$menu->id}}">
-                    <div class="flex flex-col text-center mb-6 gap-2 border-2 border-gray-700 border-opacity-25 h-auto top-0 w-full mx-auto check-resize bg-gray-700 p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500">
+                    <div class="flex flex-col text-center mb-6 gap-2 border-2 border-gray-700 border-opacity-25 h-auto top-0 w-full mx-auto check-resize bg-gray-700 p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500" style="background-image: url('@if($menu->photos->first() != null){{url(`public/`.$menu->photos->random()->file)}} @else {{url(`public/images/no-image.png`)}} @endif');">
                       <div>
                         <span>  
                           <div class="  text-xl font-semibold text-white capitalize mt-3 absolute px-1 py-1 bg-gray-700 rounded-r-lg truncate w-3/4">{{$menu->name}}    
@@ -155,9 +155,11 @@
                         </span>
                         <img src="@if($menu->photos->first() != null){{url('public/'.$menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" alt="" class="rounded-xl  object-cover w-full h-44">
                       </div>
-                      <div class=" text-base font-bold text-gray-400 text-left px-3 ">Description :</div>
+                      <div class=" text-base font-bold text-gray-400 text-left px-3 ">Description</div>
                       <div class=" text-base font-base text-gray-400 text-left px-3  ">{{$menu->desc}}</div>  
-                      <div class=" text-base font-semibold text-purple-400 text-right px-3">From : {{$menu->catering->name}}</div> 
+                     
+                       <div class=" text-base font-base text-orange-500 text-right px-2">@for($k = 1; $k <= $menu->orders->avg('stars'); $k++) <i class="fas fa-star"></i>@endfor </div>     
+                      <!-- <div class=" text-base font-semibold text-purple-400 text-right px-3">From : {{$menu->catering->name}}</div>  -->
                     </div>           
                   </label>
                 </li>

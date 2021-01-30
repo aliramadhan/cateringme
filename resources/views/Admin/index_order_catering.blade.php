@@ -70,8 +70,8 @@
         @foreach($employees as $employee)
         <tr>
             <td>{{$loop->iteration}}</td>
-            <td> <div class="flex items-center h-full">
-                <img src="{{$employee->profile_photo_url}}">
+            <td> <div class="flex items-center h-ful">
+                <img src="{{$employee->profile_photo_url}}" class="rounded-full mr-2">
                 <a> {{$employee->name}}</a></div>
             </td>
             <td>{{$employee->total_order}}</td>

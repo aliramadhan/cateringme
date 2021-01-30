@@ -72,8 +72,8 @@
         @foreach($orders as $order)
         <tr>
             <td>{{$loop->iteration}}</td>
-            <td> <div class="flex items-center h-full">
-                <img src="{{$order->employee->profile_photo_url}}">
+            <td> <div class="flex items-center h-full mr-2">
+                <img src="{{$order->employee->profile_photo_url}}" class="rounded-full">
                 <a> {{$order->employee->name}}</a></div>
             </td>
             <td>{{$order->menu->name}}</td>

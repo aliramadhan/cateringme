@@ -8,9 +8,6 @@
     var button5 = document.getElementById("btn-slide-dis-2y");
     var buttonSch = document.getElementById("searching");
 
-     // create order page
-   
-
     // Disable the button on initial page load
     button.disabled = true;
     button.style.backgroundColor ="#EEF2FF";
