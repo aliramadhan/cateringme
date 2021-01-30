@@ -92,7 +92,6 @@
 
 </style>
 <div class="py-12">
-
   <div class="max-w-7xl mx-auto lg:px-8">
     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg Static h-full">
       <div class="px-4 py-2 border-b border-gray-200 flex justify-between items-center bg-white sm:py-4 sm:px-6 sm:items-baseline">
@@ -146,10 +145,7 @@
                  <div id="carouselExampleControls" class="carousel slide" data-interval="false">
                   <div class="carousel-inner h-100">
                     <div class="carousel-item active h-100">
-                      <div class="grid grid-cols-2 p-4 gap-8 bg-gray-50">
-                        <span class="block col-span-2 -mt-2 after-select">
-                        <h5 class="text-center border-b relative"><span class="relative top-3 px-4 bg-gray-50">Select Your Menu </span></h5>
-                        </span>
+                      <div class="grid grid-cols-2 p-4 gap-8 bg-gray-50 after-select">
                         <!-- select menu -->
                     </div>
 
@@ -349,7 +345,25 @@
 </div>
 </div>
 
-
+<script type="text/javascript">
+  // the selector will match all input controls of type :checkbox
+// and attach a click event handler 
+$("input:checkbox[name='menu']").on('click', function() {
+  // in the handler, 'this' refers to the box clicked on
+  var $box = $(this);
+  if ($box.is(":checked")) {
+    // the name of the box is retrieved using the .attr() method
+    // as it is assumed and expected to be immutable
+    var group = "input:checkbox[name='menu']";
+    // the checked state of the group/box on the other hand will change
+    // and the current value is retrieved using .prop() method
+    $(group).prop("checked", false);
+    $box.prop("checked", true);
+  } else {
+    $box.prop("checked", false);
+  }
+});
+</script>
 
 <script type="text/javascript">
   $('.label__checkbox').click(function() {
@@ -372,8 +386,11 @@
         else{
           $('#dateOrder').val(data.date);
           $('#MenuPhotosModal1').text("Create Schedule for " + data.date );
-          $('.after-select').after(`
-          <input type="checkbox" id="menuradio1" name="menu" value="`+data.menu1.id+`" class="schedule-menu hidden radio" >
+          $('.after-select').html(`
+          <span class="block col-span-2 -mt-2">
+          <h5 class="text-center border-b relative"><span class="relative top-3 px-4 bg-gray-50">Select Your Menu </span></h5>
+          </span>
+          <input type="checkbox" id="menuradio1" name="menu" value="`+data.menu1.id+`" class="schedule-menu hidden" >
           <label for="menuradio1" class="m-0 p-0 h-60 col-span-2 md:col-span-1" >
             <div class="grayscale-effect">            
               <img  class="object-cover w-100 h-60 inline-block rounded-bl-3xl rounded-tr-3xl hover:shadow-xl bg-white" src="`+data.menu1.photo+`" alt="">
@@ -385,7 +402,7 @@
             </div>
           </label>`);
           if (data.menu2 != null) {
-            $('.after-select').after(`
+            $('.after-select').append(`
             <input type="checkbox" id="menuradio2" name="menu" value="`+data.menu2.id+`" class="schedule-menu hidden" >
             <label for="menuradio2" class="m-0 p-0 h-60 col-span-2 md:col-span-1" >
               <div class="grayscale-effect">            
@@ -396,10 +413,8 @@
               <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
                 <i class="fas fa-star"></i> 4
               </div>
-            </label>
-
-
-            `);
+            </label>`);
+            
             $("input:checkbox").on('click', function() {
             // in the handler, 'this' refers to the box clicked on
             var $box = $(this);
@@ -420,21 +435,6 @@
       }
     });
   });
-    $("input:checkbox").on('click', function() {
-  // in the handler, 'this' refers to the box clicked on
-  var $box = $(this);
-  if ($box.is(":checked")) {
-    // the name of the box is retrieved using the .attr() method
-    // as it is assumed and expected to be immutable
-    var group = "input:checkbox[name='" + $box.attr("name") + "']";
-    // the checked state of the group/box on the other hand will change
-    // and the current value is retrieved using .prop() method
-    $(group).prop("checked", false);
-    $box.prop("checked", true);
-  } else {
-    $box.prop("checked", false);
-  }
-});
   $('#save-step').click(function() {
     var date = $('#dateOrder').val();
     var menu = $("input[name='menu']").val();
@@ -457,7 +457,6 @@
     });
   });
 </script>
-
 <script src="{{asset('resources/js/myJs.js')}}"></script>
 
 
