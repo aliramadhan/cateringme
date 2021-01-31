@@ -41,7 +41,7 @@
 	<!--Modal-->
 	<form action="{{route('admin.update.menu_price')}}" method="POST">
 	@csrf
- <div class="modal z-50 opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+ <div class="modal z-50 opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center" id="priceModal">
       <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
       <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
@@ -327,7 +327,7 @@
 				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 			</ol>
-			<div class="carousel-inner h-52 md:h-96">
+			<div class="carousel-inner h-52 md:h-96 h-auto">
 				<?php $a=1;?>
 				@foreach($menus as $menu)
 				<div class="carousel-item @if($loop->iteration == 1) active @endif h-100">
@@ -337,11 +337,14 @@
 						<div class="flex mb-6">
 						<h2 class="font-bold uppercase my-auto md:block hidden">{{$menu->name}}</h2>
 						<h5 class="font-bold uppercase my-auto block md:hidden">{{$menu->name}}</h5>
-						<div class="ml-2 text-lg text-orange-500 leading-7 font-bold flex-initial bg-white border  p-1 px-2 rounded-xl w-16 h-auto" style="border-color: #FF5A1F !important">
+						<div class="md:block hidden ml-2 text-lg text-orange-500 leading-7 font-bold flex-initial bg-white border  p-1 px-2 rounded-xl w-16 h-auto" style="border-color: #FF5A1F !important">
 								<i class="fas fa-star"></i> {{$menu->orders->avg('stars')}}
 							</div>   
 						</div>
 						<h5 class="fw-normal d-none d-md-block">{{$menu->desc}}</h5>
+						<div class="block md:hidden ml-2 text-lg text-orange-500 leading-7 font-bold flex-initial bg-white border  p-1 px-2 rounded-xl w-16 h-auto" style="border-color: #FF5A1F !important">
+								<i class="fas fa-star"></i> {{$menu->orders->avg('stars')}}
+							</div>  
 
 					</div>
 				</div>
@@ -370,8 +373,8 @@
 		<div class="text-center mt-6 font-base bg-price rounded-xl py-6 px-4 w-full" > 
 			<div class="flex">
 				<p class="text-2xl font-semibold text-white mb-4 text-left flex-auto">Catering Price</p>
-				<div id="modal-click" class="modal-open">
-					<i class="fas fa-cog border rounded-full p-2 hover:border-orange-700 font-semibold text-gray-100 hover:text-orange-700 duration-500 cursor-pointer "></i></div>  
+				<div id="priceModal" >
+					<i data-toggle="modal" data-target="priceModal"  class="fas fa-cog border rounded-full p-2 hover:border-orange-700 font-semibold text-gray-100 hover:text-orange-700 duration-500 cursor-pointer modal-open"></i></div>  
 				</div>
 				<h4 class="text-4xl uppercase font-semibold text-white leading-tight">Rp. {{($price)}}</h4>
 			</div>
