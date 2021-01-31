@@ -80,7 +80,7 @@
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$menu->name}}</td>
-                <td>({{ $menu->stars}}) @for($i = 1; $i <= $menu->stars; $i++) <i class="fas fa-star text-orange-500"></i> @endfor</td>
+                <td>{{ $menu->stars}} <i class="fas fa-star text-orange-500"></i> ( {{$menu->orders()->where('review','!=',null)->count()}} )</td>
                 <td>{{$menu->total_order}}</td>
                 <td>{{$menu->total_served}}</td>
             </tr>

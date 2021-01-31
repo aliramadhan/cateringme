@@ -51,23 +51,23 @@
             {{ $slot }}
           </div>
         </div>
-    </body>
-        <script type="text/javascript">
-  
-var myVar;
-function loader24() {
-  myVar = setTimeout(showPage, 300);
-}
+      </body>
+      <script type="text/javascript">
+        
+        var myVar;
+        function loader24() {
+          myVar = setTimeout(showPage, 300);
+        }
 
-function showPage() {
-document.getElementById("loader-bk").style.display = "none";
-  document.getElementById("loader").style.display = "none";
-  
-  document.getElementById("myDiv").style.display = "block";
-}
+        function showPage() {
+          document.getElementById("loader-bk").style.display = "none";
+          document.getElementById("loader").style.display = "none";
+          
+          document.getElementById("myDiv").style.display = "block";
+        }
 
 
-</script>
+      </script>
         <script src="{{ asset('resources/js/modal.js') }}"" defer></script>
 </html>
 

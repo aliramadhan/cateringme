@@ -15,18 +15,16 @@
             <div class="-mx-2 md:flex">
                 <div class="w-full md:w-full px-2">
 
-                    <div class="flex gap-4 block lg:hidden overflow-x-auto">
+                    <div class="flex gap-4 block lg:hidden hide-scroll">
                           <div class="w-full md:w-1/2 ">
                           <div class="rounded-lg shadow-sm mb-4 opacity-75 hover:opacity-100 duration-500 hover:shadow-xl cursor-pointer">
                             <a href="{{ route('catering.index.menu') }}" class="contents">
                               <div class="rounded-lg shadow-lg md:shadow-xl relative overflow-hidden">
-                                <div class="px-3 py-3 lg:py-13 text-center relative z-10" style="background-color: #8BC6EC;
-                                background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
-                                ">
+                                <div class="bg-white text-gray-700 px-8 py-5 lg:py-13 text-center relative z-10 hover:bg-orange-500 hover:text-white" >
 
-                                <h3 class="text-5xl text-blue-500 font-semibold leading-tight my-2">
-                                  <i class="fas fa-plus text-blue-400 py-6 px-7 rounded-full bg-gray-600" aria-hidden="true"></i></h3>
-                                <h4 class="text-xl uppercase text-gray-700 leading-tight font-semibold ">Menu</h4>
+                                <h3 class="text-3xl  font-semibold leading-tight mt-2 mb-5">
+                                   <i class="fas fa-plus py-6 px-7 rounded-full bg-indigo-100 text-gray-700" aria-hidden="true"></i></h3>
+                                <h4 class="text-xl uppercase  leading-tight font-semibold ">Menu</h4>
                               </div>                                
                             </div>
                           </a>
@@ -36,10 +34,10 @@
                           <div class="rounded-lg shadow-sm mb-4 opacity-75 hover:opacity-100 duration-500 hover:shadow-xl cursor-pointer">
                             <a href="{{ route('catering.index.catering') }}" class="contents">
                             <div class="rounded-lg shadow-lg md:shadow-xl relative overflow-hidden">
-                              <div class="px-3 py-3 lg:py-13 text-center relative z-10" style="background-color: #FBAB7E;background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);">
-                              <h3 class="text-5xl text-green-500 font-semibold leading-tight my-2">
-                               <i class="fa fa-utensils text-orange-300 py-6 px-7 rounded-full bg-gray-600" aria-hidden="true"></i></h3>
-                              <h4 class="text-xl uppercase text-gray-700 leading-tight font-semibold ">Catering</h4>
+                              <div class="bg-white text-gray-700 px-6 py-5 lg:py-13 text-center relative z-10 hover:bg-orange-500 hover:text-white" >
+                              <h3 class="text-3xl  font-semibold leading-tight mt-2 mb-5">
+                                <i class="fa fa-utensils  py-6 px-7 rounded-full bg-indigo-100 text-gray-700" aria-hidden="true"></i></h3>
+                              <h4 class="text-xl uppercase  leading-tight font-semibold ">Catering</h4>
                             </div>
                           </div>
                         </a>
@@ -49,16 +47,41 @@
                         <div class="rounded-lg shadow-sm mb-4 opacity-75 hover:opacity-100 duration-500 hover:shadow-xl cursor-pointer">
                           <a href="{{ route('catering.index.report') }}" class="contents">
                           <div class="rounded-lg shadow-lg md:shadow-xl relative overflow-hidden">
-                            <div class="px-3 py-3 lg:py-13 text-center relative z-10" style="background-color: #85FFBD;
-                            background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);">
-                            <h3 class="text-5xl text-gray-700 font-semibold leading-tight my-2">
-                             <i class="fas fa-book text-green-200 py-6 px-7 rounded-full bg-gray-600" aria-hidden="true"></i></h3>
-                            <h4 class="text-xl uppercase text-gray-700 leading-tight font-semibold "> Report</h4>
+                            <div class="bg-white text-gray-700 px-6 py-5 lg:py-13 text-center relative z-10 hover:bg-orange-500 hover:text-white">
+                            <h3 class="text-3xl  font-semibold leading-tight mt-2 mb-5">
+                              <i class="fas fa-book  py-6 px-7 rounded-full bg-indigo-100 text-gray-700" aria-hidden="true"></i></h3>
+                            <h4 class="text-xl uppercase  leading-tight font-semibold "> Report</h4>
                           </div>
                         </div>
                       </a>
                       </div>                    
                     </div> 
+                    <div class="w-full md:w-1/2 ">
+                          <div class="rounded-lg shadow-sm mb-4 opacity-75 hover:opacity-100 duration-500 hover:shadow-xl cursor-pointer">
+                            <a href="{{ route('catering.index.schedule') }}" class="contents">
+                            <div class="rounded-lg shadow-lg md:shadow-xl relative overflow-hidden">
+                              <div class="bg-white text-gray-700 px-6 py-5 lg:py-13 text-center relative z-10 hover:bg-orange-500 hover:text-white" >
+                              <h3 class="text-3xl  font-semibold leading-tight mt-2 mb-5">
+                                <i class="fa fa-calendar-plus  py-6 px-7 rounded-full bg-indigo-100 text-gray-700" aria-hidden="true"></i></h3>
+                              <h4 class="text-xl uppercase leading-tight font-semibold ">Schedule</h4>
+                            </div>
+                          </div>
+                        </a>
+                        </div>                    
+                      </div> 
+                      <div class="w-full md:w-1/2 ">
+                          <div class="rounded-lg shadow-sm mb-4 opacity-75 hover:opacity-100 duration-500 hover:shadow-xl cursor-pointer">
+                            <a href="{{ route('catering.index.catering') }}" class="contents">
+                            <div class="rounded-lg shadow-lg md:shadow-xl relative overflow-hidden">
+                              <div class="bg-white text-gray-700 px-8 py-5 lg:py-13 text-center relative z-10 hover:bg-orange-500 hover:text-white" >
+                              <h3 class="text-3xl  font-semibold leading-tight mt-2 mb-5">
+                                <i class="fa fa-star  py-6 px-6 rounded-full bg-indigo-100 text-gray-700" aria-hidden="true"></i></h3>
+                              <h4 class="text-xl uppercase  leading-tight font-semibold ">Review</h4>
+                            </div>
+                          </div>
+                        </a>
+                        </div>                    
+                      </div> 
                   </div>
 
                     <div class="rounded-lg shadow-sm mb-4">
@@ -74,7 +97,7 @@
                             </div>
                         </div>
                     </div> 
-                    <div class="flex gap-4 overflow-x-auto">
+                    <div class="flex gap-4  hide-scroll">
                         <div class="w-full md:w-1/2 ">
                         <div class="rounded-lg shadow-sm mb-4">
                             <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden">
@@ -127,9 +150,10 @@
                                 <div class="flex font-semibold text-lg mb-2 items-center px-3 ">
                                   <div class="w-10">{{$loop->iteration}}</div>                                    
                                   <div class="flex-auto text-left">{{$menu->name}}</div>      
-                                  <div class=" text-base font-base mr-1">({{$menu->orders()->where('review','!=',null)->count()}} Review)</div> 
+                                  <div class=" text-base font-base mr-1"></div> 
                                   <div class=" text-lg text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl">
                                     <i class="fas fa-star"></i> {{round($menu->orders->avg('stars'))}}
+                                    <span class="text-gray-600 text-sm font-bold">/ {{$menu->orders()->where('review','!=',null)->count()}}</span>
                                   </div>                             
                                 </div> 
                               @endforeach
@@ -151,19 +175,19 @@
               <div class="flex flex-row text-base absolute bg-gray-600 absolute rounded-tl-xl rounded-br-xl text-white px-4 hover:bg-gray-700 duration-500 cursor-pointer">
                   <div class="px-2 py-1 font-semibold ">{{$review->menu->name}}</div>                 
                 </div>
-          <img src="@if($review->menu->photos->first() != null ){{url('public/'.$review->menu->photos->first()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover flex-none bg-cover h-48 lg:h-auto lg:w-52 w-20 overflow-hidden rounded-l-lg">
-          <div class="flex flex-col lg:py-3 pt-9 px-6 flex-auto ">
-            <div class="flex items-center">           
+          <img src="@if($review->menu->photos->first() != null ){{url('public/'.$review->menu->photos->first()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover flex-none bg-cover md:h-48 h-auto lg:h-auto lg:w-52 w-20 overflow-hidden rounded-l-lg">
+          <div class="flex flex-col lg:py-3 pb-4 pt-9 px-3 md:px-6 flex-auto ">
+            <div class="flex md:flex-row flex-col items-center">           
               <div class=" text-lg flex-auto text-gray-600 leading-7 font-semibold flex items-center">
                  <img src="{{ $review->employee->profile_photo_url }}" class="object-cover h-10 w-10 rounded-full">
                  <div class="ml-2">
-                    <a href="#">{{$review->employee->name}}</a>
+                    <a href="#" class="leading-1">{{$review->employee->name}}</a>
                     <div class=" text-sm font-semibold text-indigo-700 -mt-2">
                       {{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}
                   </div>
                 </div>
               </div>
-              <div class=" text-xl text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl">
+              <div class="hidden md:block text-xl text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl ">
                 <i class="fas fa-star"></i> {{$review->stars}}
               </div>
             </div>        
@@ -175,6 +199,9 @@
 
               </div>
             </div>
+             <div class="block md:hidden text-xl text-orange-500 leading-7 font-bold bg-blue flex-initial bg-white border border-orange-300 p-1 px-2 rounded-xl text-center">
+               @for($k = 1; $k <= $menu->orders->avg('stars'); $k++) <i class="fas fa-star"></i>@endfor
+              </div>
           </div>
         </div>
         @endforeach

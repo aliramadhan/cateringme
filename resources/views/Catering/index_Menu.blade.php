@@ -39,7 +39,7 @@
         {{ implode('', $errors->all('<div>:message</div>')) }}
     @endif
     <!--Modal-->
-    <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50">
+    <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50" id="modalAdd">
       <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
       
       <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
@@ -129,9 +129,11 @@
     <div class="pl-4 pr-4 self-stretch">
       <div class="h-full border-l border-gray-200"></div>
   </div>
-  <button type="button" class="ml-1 text-gray-400 hover:text-gray-500 text-blue-400 font-medium text-2xl modal-open" id="modal-click focus:border-none" >
-      <i class="fas fa-plus-square transition-1000"></i> 
-  </button>
+
+
+  <button type="button" class="ml-1 px-2 rounded-lg opacity-75 hover:opacity-100  bg-gradient-to-r from-blue-400 via-blue-500 duration-500  to-indigo-500 text-white font-medium text-2xl modal-open focus:border-none" data-toggle="modal" data-target="modalAdd">
+     +</button> 
+  
 </div>
 </div>
 </div>
@@ -139,7 +141,7 @@
 <div class="relative md:h-screen h-full">
     <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide text-base overflow-y-auto" >      
 
-      <div class="grid grid-flow-row md:grid-cols-3 grid-cols-2 gap-6 w-full text-center mt-6 h-max"   style="height: fit-content;">      
+      <div class="grid grid-flow-row md:grid-cols-3 grid-cols-1 gap-6 w-full text-center mt-6 h-max"   style="height: fit-content;">      
 
         <ul id="myUL" class="contents">         
           @foreach($menus as $menu)

@@ -147,19 +147,18 @@
                 <li>
                   <input type="checkbox" id="{{$menu->id}}" name="menus[]" value="{{$menu->id}}" class="schedule-menu hidden" >
                   <label for="{{$menu->id}}">
-                    <div class="flex flex-col text-center mb-6 gap-2 border-2 border-gray-700 border-opacity-25 h-auto top-0 w-full mx-auto check-resize bg-gray-700 p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500" style="background-image: url('@if($menu->photos->first() != null){{url(`public/`.$menu->photos->random()->file)}} @else {{url(`public/images/no-image.png`)}} @endif');">
-                      <div>
-                        <span>  
-                          <div class="  text-xl font-semibold text-white capitalize mt-3 absolute px-1 py-1 bg-gray-700 rounded-r-lg truncate w-3/4">{{$menu->name}}    
-                          </div>
-                        </span>
+                    <div class="flex flex-col text-center mb-6 gap-2 border-2 border-gray-700 h-auto top-0 w-full mx-auto check-resize bg-gray-700 p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500"
+                    style="background: linear-gradient( rgb(0 0 0 / 45%), rgb(60 68 80) ),url(@if($menu->photos->first() != null){{url('public/'.$menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif);background-size:cover;">
+                      <div class=" text-center">
+                   
                         <img src="@if($menu->photos->first() != null){{url('public/'.$menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" alt="" class="rounded-xl  object-cover w-full h-44">
                       </div>
-                      <div class=" text-base font-bold text-gray-400 text-left px-3 ">Description</div>
-                      <div class=" text-base font-base text-gray-400 text-left px-3  ">{{$menu->desc}}</div>  
+                      <div class=" text-base capitalize text-white  px-3 font-semibold">{{$menu->name}}</div>
+                      <div class=" text-base font-base text-orange-500 px-2">@for($k = 1; $k <= $menu->orders->avg('stars'); $k++) <i class="fas fa-star"></i>@endfor </div>     
+                      <div class=" text-base font-base text-gray-400 px-3 italic ">{{$menu->desc}}</div>  
                      
-                       <div class=" text-base font-base text-orange-500 text-right px-2">@for($k = 1; $k <= $menu->orders->avg('stars'); $k++) <i class="fas fa-star"></i>@endfor </div>     
-                      <!-- <div class=" text-base font-semibold text-purple-400 text-right px-3">From : {{$menu->catering->name}}</div>  -->
+                       
+                    
                     </div>           
                   </label>
                 </li>
