@@ -39,7 +39,7 @@
         @endif
 
   <!--Modal-->
-  <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50">
+  <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50" id="addModal">
     <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
     
     <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
@@ -117,7 +117,7 @@
            </div>
            <div class="ml-4 flex flex-shrink-0 items-center">
 
-            <input type="text" name="searching" class="focus:ring-red-100 focus:border-red-100 flex-1 block w-full bg-gray-100 rounded-l rounded-r-md sm:text-sm border-gray-100 py-2 px-4 mr-2 hover:border-blue-200 " placeholder="Search" id="searching" onkeyup="searchingEmployee()" >
+            <input type="text" name="searching" class="focus:ring-red-100 focus:border-red-100 flex-1 block bg-gray-100 rounded-l rounded-r-md sm:text-sm border-gray-100 py-2 px-4 mr-2 hover:border-blue-200 w-28" placeholder="Search" id="searching" onkeyup="searchingEmployee()" >
 
             <div class="flex items-center text-sm sm:hidden">
               <button type="button" onclick="previousSlide()" id="btn-slide-dis" class="inline-block rounded-lg font-medium leading-none py-3 px-3 focus:outline-none text-gray-400 hover:text-gray-600 focus:text-gray-600">
@@ -141,8 +141,8 @@
             <div class="pl-4 pr-4 self-stretch">
               <div class="h-full border-l border-gray-200"></div>
             </div>
-            <button type="button" class="ml-1 text-gray-400 hover:text-gray-500 text-blue-400 font-medium text-2xl modal-open" id="modal-click" >
-              <i class="fas fa-plus-square"></i> 
+            <button type="button" class="ml-1 text-gray-400 hover:text-gray-500 text-blue-400 font-medium text-2xl  focus:outline-none" id="modal-click" >
+              <i class="fas fa-plus-square modal-open" data-target="addModal" data-toggle="modal"></i> 
             </button>
           </div>
         </div>
