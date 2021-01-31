@@ -27,7 +27,7 @@
 
         <div class="py-8 border-b">
           <p>
-            Hey Jakub !<br><br>
+            Hey {{$data['name']}} !<br><br>
             Congratulations , your account has been successfully created<br>        
             Now you can use this catering application by entering the following email and password<br><br>
             This your password  <b>{{$data['password']}}</b> <br><br> 

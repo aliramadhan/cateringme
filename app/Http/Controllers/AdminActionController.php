@@ -132,6 +132,7 @@ class AdminActionController extends Controller
 
 		//Fill detail for email
 		$data = [
+			'name' => $request->name,
 			'email' => $request->email,
 			'password' => $password
 		];
