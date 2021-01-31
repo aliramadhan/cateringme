@@ -207,7 +207,7 @@
         </p>
          <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
           You have problem or suggestion about app ? 
-          <a href="mailto:someone@yoursite.com?cc=someoneelse@theirsite.com, another@thatsite.com, me@mysite.com&bcc=lastperson@theirsite.com&subject=Big%20News&body=Body-goes-here" class="ml-2 font-semibold hover:text-blue-400"> Email Us</a>
+          <a href="mailto:sigit@24slides.com?&cc=fajarfaz@gmail.com&subject=My%20Ask&body=your subject" class="ml-2 font-semibold hover:text-blue-400"> Email Us</a>
          </span> 
       </div>
     </footer>

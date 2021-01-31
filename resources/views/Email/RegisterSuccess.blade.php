@@ -57,7 +57,7 @@
 
         <div class="">
           <p class="leading-loose">
-            Questions or concerns? <a href="#" class="text-grey-darkest">help@24slides.com</a>
+            Questions or concerns? <a href="mailto:sigit@24slides.com?&cc=fajarfaz@gmail.com&subject=My%20Ask&body=your subject" class="ml-2 font-semibold hover:text-blue-400" class="text-grey-darkest">Email Us</a>
 
             
           </p>
