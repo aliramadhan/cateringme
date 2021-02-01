@@ -251,7 +251,7 @@
 
   <div class="grid grid-rows-7 gap-1 w-full ">  
 
-    <h3 class="flex-shrink min-w-0 font-medium text-5xl leading-snug text-center mb-6 h-15 ">
+    <h3 class="flex-shrink min-w-0 font-medium text-5xl leading-snug text-center mb-6 h-28 md:h-15 ">
      {{$now->format('F Y')}}
    </h3>  
    <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5 mt-4">                      
@@ -295,7 +295,7 @@
 
   <div class="grid grid-rows-7 gap-1 w-full ">  
 
-    <h3 class="flex-shrink min-w-0 font-medium text-5xl leading-snug text-center mb-6 h-15 ">
+    <h3 class="flex-shrink min-w-0 font-medium text-5xl leading-snug text-center mb-6 h-28 md:h-15 ">
      {{$next_month->format('F Y')}}
    </h3>  
     <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5 mt-4">                      

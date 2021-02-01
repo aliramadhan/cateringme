@@ -252,7 +252,7 @@
       </div>
     </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 pr-9 mb-8 mt-8 md:-mt-20 gap-4 w-full pl-6">        
+      <div class="flex hide-scroll md:grid md:grid-cols-4 pr-9 mb-8 mt-8 md:-mt-20 gap-4 w-full pl-6">        
         <div class="w-full px-2">
          
             <a href="{{ route('employee.create.order') }}">
@@ -335,8 +335,8 @@
         <div class="col-span-2 text-4xl text-left text-gray-600 mb-9 font-base flex item-center">          
           <p class="flex-auto text-left font-semibold ">
             <span class="font-normal text-gray-600"> Schedule </span>{{Carbon\Carbon::now()->format('F Y')}}</p>
-          <a href="{{ route('employee.create.order') }}" id="btn-slide-dis-2"  class="inline-block rounded-full leading-none focus:outline-none text-gray-400 hover:text-gray-700 focus:text-blue-600 duration-500">
-              <i class="fas fa-plus p-2 border rounded-full text-lg hover:border-blue-400"></i>
+          <a href="{{ route('employee.create.order') }}" id="btn-slide-dis-2"  class="inline-block rounded-full leading-none focus:outline-none text-gray-400 hover:text-gray-700  focus:outline-none duration-500">
+              <i class="fas fa-plus p-2 border rounded-full text-lg hover:border-blue-400  focus:outline-none"></i>
             </a>
         </div>
         @php

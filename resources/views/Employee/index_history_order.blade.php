@@ -56,7 +56,7 @@
     <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide text-base overflow-y-auto" >      
 
       <div class="grid grid-flow-row md:grid-cols-3 grid-cols-1 gap-6 w-full text-center mt-6 h-max"   style="height: fit-content;">      
-         <h3 class="col-span-3 min-w-0 font-medium text-5xl leading-snug text-center mb-6 h-15 ">
+         <h3 class="col-span-3 min-w-0 font-medium text-5xl leading-snug text-center mb-6 md:h-15 h-28">
            {{$start->format('F Y')}}
        </h3> 
         <ul id="myUL" class="col-span-3 md:contents">    

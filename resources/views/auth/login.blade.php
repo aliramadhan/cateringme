@@ -24,7 +24,7 @@
      <button class="modal-open visible absolute" id="modal-click" data-toggle="modal" data-target="login-danger"></button>
 
 
-     <div class="md:col-span-5 sm:col-span-0 hidden md:block ">
+     <div class="xl:col-span-5 lg:col-span-4 md:col-span-3 sm:col-span-0 hidden md:block  ">
       <div class="flex flex-col px-4 text-left">
         <h1 class="text-5xl font-bold text-white tracking-tight ">Welcome Back to<br> 
         <span class="font-normal"><font class="text-red-600">24</font>Slides Catering App</span></h1><br>
@@ -33,7 +33,7 @@
    
   </div>
 
-  <div class="md:col-span-2 col-span-7 bg-white py-12 px-8 md:rounded-3xl shadow-xl h-screen md:h-auto">
+  <div class="xl:col-span-2 lg:col-span-3 md:col-span-4 col-span-7 bg-white py-12 px-8 md:rounded-3xl shadow-xl h-screen md:h-auto">
 
     <form method="POST" action="{{ route('login') }}">
         <img src="{{ asset('/resources/image/logo.png')}}" class="img-fluid mx-auto" width="138px" height="138px">
