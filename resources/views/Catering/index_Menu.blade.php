@@ -7,7 +7,7 @@
     <div id="success" class="invisible absolute"></div>
        <div id="failure" class="invisible absolute"></div>
       
-          @if (session('message'))
+          @if(session('message'))
             <script type="text/javascript">
               function notifu(){
               document.getElementById('success').click();
@@ -20,8 +20,8 @@
           }</style>
            
                 
-            @endif
-            @if($errors->any())
+          @endif
+          @if($errors->any())
             <script type="text/javascript">
               function notifu(){
               document.getElementById('failure').click();
@@ -33,7 +33,7 @@
               Content:"  {{ implode('', $errors->all(':message')) }}";
             }</style>
            
-            @endif  
+          @endif  
 
     @if($errors->any())
         {{ implode('', $errors->all('<div>:message</div>')) }}

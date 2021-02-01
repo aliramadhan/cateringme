@@ -40,9 +40,15 @@ class CateringActionController extends Controller
 			$stars += ( (1*$menu->orders->where('stars',1)->count()) + (2 * $menu->orders->where('stars',2)->count()) + (3 * $menu->orders->where('stars',3)->count()) + (4 * $menu->orders->where('stars', 4)->count()) + (5 * $menu->orders->where('stars',5)->count()) ) / ($menu->orders->count()); 
 			$prev_stars += $menu->orders->whereBetween('reviewed_at',[$prev_month->startOfMonth()->format('Y-m-d'),$prev_month->endOfMonth()->format('Y-m-d')])->sum('stars');
 		}
-		//calculation		
-		$stars = round($stars/$menus->count());
-		$prev_stars = $prev_stars/$menus->count();
+		//calculation	
+		if ($menus->count() < 1) {
+			$stars = 0;
+			$prev_stars = 0;
+		}
+		else{
+			$stars = round($stars/$menus->count());
+			$prev_stars = $prev_stars/$menus->count();
+		}
 		if($prev_stars == 0){
 			$persen_stars = 100;
 		}

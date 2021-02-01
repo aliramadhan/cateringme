@@ -280,7 +280,7 @@
                     <i class="fas fa-calendar-times rounded-full bg-red-200 text-red-500 p-5 text-4xl"></i>
                     <div class="flex flex-col flex-auto">
                       <h3 class="text-5xl text-red-500 font-semibold leading-tight">{{$total_dayoff}}</h3>  
-                      <h4 class="text-base font-semibold uppercase flex-auto text-center text-gray-500 leading-tight">Day Off or  leave</h4>
+                      <h4 class="text-base font-semibold uppercase flex-auto text-center text-gray-500 leading-tight">Catering Day Off</h4>
 
                     </div>
                   </div>
