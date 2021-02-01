@@ -331,7 +331,7 @@
 				<?php $a=1;?>
 				@foreach($menus as $menu)
 				<div class="carousel-item @if($loop->iteration == 1) active @endif h-100">
-					<img class="d-block w-100 h-96 rounded-xl object-cover " src="@if($menu->photos->first() != null ){{url('public/'.$menu->photos->random()->first()->file)}}  @else {{url('public/images/no-image.png')}} @endif" alt="First slide">
+					<img class="d-block w-100 h-96 rounded-xl object-cover " src="@if($menu->photos->first() != null ){{url('public/'.$menu->photos->first()->file)}}  @else {{url('public/images/no-image.png')}} @endif" alt="First slide">
 					<div class="carousel-caption text-left p-4 rounded" style="  background: #3e3e3eba;">						
 						<p class="font-bold text-sm uppercase mb-1">Menu {{$a++}}</p>						
 						<div class="flex mb-6">

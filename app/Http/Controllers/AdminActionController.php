@@ -90,6 +90,15 @@ class AdminActionController extends Controller
 		else{
 			$persen_not_taken = ($not_taken / $subnot_taken) * 100;
 		}
+		//menu for Catering menu slider
+		foreach ($menus as $menu) {
+			$stars = $menu->orders()->avg('stars');
+			if($stars == null){
+				$stars = 0;
+			}
+			$menu->stars = $stars;
+		}
+		$menus = $menus->sortByDesc('stars')->take(5);
 
 		return view('Admin.dashboard',compact('menus','catering_taken','subcatering_taken', 'persen_catering_taken', 'not_taken', 'subnot_taken', 'persen_not_taken','reviews','orders','now','price'));
 	}
