@@ -364,7 +364,7 @@
 	
 	
 
-	<div class="col-span-2 gap-4  font-base rounded-xl py-6 flex items-center md:flex-row flex-col">  
+	<div class="col-span-2 gap-4  font-base rounded-xl py-6 flex items-center lg:flex-row flex-col">  
 		<div class="text-center mt-6 font-base bg-catering rounded-xl py-6 px-6 w-full" > 
 			<p class="text-2xl font-normal text-white mb-4 text-left">Total Fee <span class="font-semibold">Today</span></p>
 			<h4 class="text-3xl text-left uppercase font-semibold text-white leading-tight">Rp. {{($orders->sum('fee'))}}</h4>

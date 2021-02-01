@@ -52,6 +52,7 @@
           </h3>
         </div>
         <div class="ml-4 flex flex-shrink-0 items-center cursor-pointer">
+           <input type="text" name="searching" class="focus:ring-red-100 focus:border-red-100 flex-1 block bg-gray-100 rounded-l rounded-r-md sm:text-sm border-gray-100 py-2 px-4 mr-2 hover:border-blue-200 w-28 " placeholder="Search" id="searching2" onkeyup="searchingEmployee()" style="display: none;" >
           <div class="flex items-center text-sm sm:hidden">
             <button onclick="previousSlide()" id="btn-slide-dis" class="inline-block rounded-lg font-medium leading-none py-3 px-3 focus:outline-none text-gray-400 hover:text-gray-600 focus:text-gray-600">
               <i class="fas fa-calendar-week"></i>
@@ -134,19 +135,21 @@
           </div>
         </div>
   
-        <div class="absolute inset-0 w-full h-full bg-gray-900 text-white flex text-5xl transition-all ease-in-out duration-1000 transform translate-x-full slide p-6 overflow-y-auto" >
+        <div class="absolute inset-0 w-full h-screen bg-gray-900 text-white flex text-5xl transition-all ease-in-out duration-1000 transform translate-x-full slide p-6 " >
 
-           <div class="grid grid-flow-row md:grid-cols-3 grid-cols-1 gap-6 w-full text-center mt-6 h-max">  
+           <div class="flex flex-col gap-6 w-full text-center mt-6 h-max">  
            <h3 class="col-span-3 min-w-0 font-medium text-2xl leading-snug text-center mb-6 h-15 ">
-             Select Your Menu
+             Select Catering Menu
             </h3>
         
 
-              <ul id="myUL" class=" md:contents col-span-3 ">   
+              <ul id="myUL" class="md:grid md:grid-cols-3 grid-cols-1 hide-scroll overflow-y-auto">   
+               
                 @foreach($menus as $menu) 
-                <li>
+                <li class="flex-auto">
+                  <a href="#">
                   <input type="checkbox" id="{{$menu->id}}" name="menus[]" value="{{$menu->id}}" class="schedule-menu hidden" >
-                  <label for="{{$menu->id}}">
+                  <label for="{{$menu->id}}" class="md:p-3 p-0 " >
                     <div class="flex flex-col text-center mb-6 gap-2 border-2 border-gray-700 h-auto top-0 w-full mx-auto check-resize bg-gray-700 p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500"
                     style="background: linear-gradient( rgb(0 0 0 / 45%), rgb(60 68 80) ),url(@if($menu->photos->first() != null){{url('public/'.$menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif);background-size:cover;">
                       <div class=" text-center">
@@ -161,26 +164,30 @@
                     
                     </div>           
                   </label>
+                  </a>
                 </li>
-                @endforeach                 
+                @endforeach      
+                       
                 </ul>
-                <div class="flex text-xl col-span-3 text-left pointer px-3 pb-6">
+                  <div class="flex text-xl col-span-3 text-left pointer md:px-3 pb-6 justify-between">
                  <button type="button" onclick="previousSlide()" id="btn-slide-disy" class="ml-2 bg-gray-700 px-6 py-2 rounded-lg text-white opacity-75 hover:opacity-100 duration-1000 focus:border-none"><i class="fas fa-arrow-left"></i> Back</button>
 
-                 <button type="submit" name="submit" id="btn-slide-disy" class="flex-auto ml-5 bg-blue-500 px-6 py-2 rounded-lg  text-white opacity-75 bottom-6 hover:bg-blue-600 text-xl duration-1000 focus:border-none right-10">Save Schedule</button>
+                 <button type="submit" name="submit" id="btn-slide-disy" class="ml-5 bg-blue-500 px-6 py-2 rounded-lg  text-white opacity-75 bottom-6 hover:bg-blue-600 text-xl duration-1000 focus:border-none right-10">Save Schedule</button>
                </div>
-             </form>
+             
            
            </div>
 
 
         
         </div>
+
       </div>
+      </form>
     </div>
   </div>
 </div>
-
+<script src="{{asset('resources/js/searching.js')}}"></script>
 <script src="{{asset('resources/js/myJs.js')}}"></script>
 </x-app-layout>
 

@@ -7,6 +7,7 @@
     </x-slot>
       
 
+
     <div class="py-12">
 
       <div class="max-w-7xl mx-auto  lg:px-8">
@@ -17,17 +18,22 @@
               Select Food Menu for Catering
            </h3>
        </div>
+
+
        <div class="ml-4 flex flex-shrink-0 items-center">
-        <input type="text" name="searching" class="focus:ring-red-100 focus:border-red-100 flex-1 block w-full bg-gray-100 rounded-l rounded-r-md sm:text-sm border-gray-100 py-2 px-4 mr-2 hover:border-blue-200 " placeholder="Search" id="searching2" onkeyup="searchingEmployee2('sas')">
+       
+
+        <input type="text" id="searching2" onkeyup="searchingTwo()"  class="focus:ring-red-100 focus:border-red-100 flex-1 block  bg-gray-100 rounded-l rounded-r-md sm:text-sm border-gray-100 py-2 px-4 mr-2 hover:border-blue-200 w-36 md:w-full " placeholder="Search"> 
     </div>
 </div>
 
 <div class="relative md:h-screen h-full">
   <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide text-base overflow-y-auto  bg-gray-100" >      
     <div class="grid grid-flow-row md:grid-cols-3 grid-cols-2 gap-4 w-full text-center mt-6 h-max"  style="height: fit-content;">      
-      <ul id="myUL2" class="contents">         
+      <ul id="myUL" class="contents">         
         @foreach($menus as $menu)
         <li>
+          <a href="#">
               <div class="flex flex-col text-center mb-6 gap-2 border-2 border-opacity-25 h-auto top-0 w-full mx-auto check-resize bg-white p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500">
 
                   <div>
@@ -36,7 +42,7 @@
 
                           </div>
                       </span>
-                      <img src="@if($menu->photos->first() != null){{url('public/'.$menu->photos->first()->file)}} @else {{url('public/images/no-image.png')}} @endif" alt="{{ $menu->name }}" class="rounded-xl  object-cover w-full h-44">
+                      <img src="@if($menu->photos->first() != null){{url('public/'.$menu->photos->first()->file)}} @else {{url('public/images/no-image.png')}} @endif" alt="{{ $menu->name }}" class="rounded-xl  object-cover w-full h-44"/>
 
                   </div>
                   <div class=" text-base font-bold text-gray-600 text-left px-3 ">Description</div>
@@ -44,7 +50,7 @@
                   <div class=" text-base font-semibold text-purple-600 text-right px-3">From : {{$menu->catering->name}}</div> 
 
               </div>           
-          
+            </a>
         </li>
         @endforeach
       </ul>
@@ -57,29 +63,8 @@
 </div>
 
 
-
+<script src="{{asset('resources/js/searching.js')}}"></script>
 </div>
 
-<script type="text/javascript">
-     function searchingEmployee2() {
-        // Declare variables
-        var input, filter, ul, li, a, i, txtValue;
-        input = document.getElementById('searching2');
-        filter = input.value.toUpperCase();
-        ul = document.getElementById("myUL2");
-        li = ul.getElementsByTagName('li');
 
-        // Loop through all list items, and hide those who don't match the search query
-        for (i = 0; i < li.length; i++) {
-          a = li[i].getElementsByTagName("a")[0];
-          txtValue = a.text || a.innerText;
-          if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-          } else {
-            li[i].style.display = "none";
-          }
-        }
-      }
-      
-</script>
 </x-app-layout>

@@ -19,12 +19,12 @@
                 please select the reporting time you want
              </h3>
            </div>
-           <div class="ml-4 flex items-center gap-4 md:w-5/12 w-full">
+           <div class="md:ml-4 flex items-center gap-4 lg:w-7/12  md:w-8/12 w-full">
               <form action="{{route('admin.index.order_not_taken')}}" method="GET" class="contents">
             @csrf
-            <input type="date" class="w-4/12 md:w-full text border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-30" @if($from != null) value="{{$from->format('Y-m-d')}}" @endif name="from" class="p-4">
+            <input type="date" class="md:w-full w-4/12 text border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-30" @if($from != null) value="{{$from->format('Y-m-d')}}" @endif name="from" class="p-4">
              To 
-            <input type="date" class="w-4/12 md:w-full text border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-30" @if($to != null) value="{{$to->format('Y-m-d')}}" @endif name="to">
+            <input type="date" class="md:w-full w-4/12 text border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-30" @if($to != null) value="{{$to->format('Y-m-d')}}" @endif name="to">
              <button type="submit" name="submit" class="py-2 px-3 rounded-lg transition-500 bg-blue-400 hover:bg-blue-500 focus:outline-none text-white"> <i class="fas fa-search"></i></button>
          </form>
          

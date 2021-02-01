@@ -1,6 +1,8 @@
 <x-guest-layout>
-    <div class="min-h-screen  flex flex-col sm:justify-center items-center pt-0 md:pt-6  " style="background-image: linear-gradient(60deg,#575fcf,#4bcffa) !important;">
-    <div class="w-full md:w-2/6 h-screen sm:h-4/5 px-6 py-6 bg-white shadow-md overflow-hidden sm:rounded-lg  shadow ">
+    <div class="min-h-screen  flex flex-col sm:justify-center items-center pt-0 md:pt-6  " style="background: linear-gradient( 90deg,#000000a1,#000000a1 ),url(https://images.pexels.com/photos/2291367/pexels-photo-2291367.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
+    
+    <div class="w-full lg:w-2/6 md:w-3/6 h-screen sm:h-4/5 px-6 py-6 bg-white shadow-md overflow-hidden sm:rounded-lg  shadow ">
+
         <x-slot name="logo">
         
         </x-slot>
@@ -16,9 +18,9 @@
         <x-jet-validation-errors class="mb-4" />
 
         <form method="POST" action="{{ route('password.email') }}" class="flex flex-col">
-              <a href="javascript:history.back()" class="px-5 py-2 font-semibold absolute bg-gray-500 rounded-full text-white hover:bg-gray-700 duration-500 cursor-pointer text-2xl"><i class="fas fa-chevron-left"></i></a>                
+              <a href="javascript:history.back()" class="px-5 py-2 font-semibold absolute bg-gray-500 rounded-full text-white hover:bg-gray-700 duration-500 cursor-pointer text-2xl mb-4 opacity-75 hover:opacity-100"><i class="fas fa-chevron-left"></i></a>               
             @csrf
-            <img src="{{ asset('/resources/image/logo.png')}}" class="img-fluid mx-auto md:mb-5 mb-10" width="138px" height="138px">
+            <img src="{{ asset('/resources/image/logo.png')}}" class="img-fluid mx-auto md:mb-5 mb-10 mt-10" width="138px" height="138px">
             <div class="mb-4 text-base text-gray-600 ">             
               <b>Forgot your password?</b> No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.
            </div>
@@ -36,5 +38,6 @@
             </div>
         </form>
     </div>
+
 </div>
 </x-guest-layout>

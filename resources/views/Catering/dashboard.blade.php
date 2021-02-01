@@ -12,7 +12,7 @@
      <div class="p-6 border-b border-gray-200">
        
         <div class="w-full lg:px-8">
-            <div class="-mx-2 md:flex">
+            <div class="-mx-2 lg:flex">
                 <div class="w-full md:w-full px-2">
 
                     <div class="flex gap-4 block lg:hidden hide-scroll">
@@ -213,5 +213,54 @@
 
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-<script src="{{asset('resources/js/stat.js')}}"></script>
+  <script type="text/javascript">
+    const chartOptions = {
+    maintainAspectRatio: false,
+    legend: {
+        display: false,
+    },
+    tooltips: {
+        enabled: false,
+    },
+    elements: {
+        point: {
+            radius: 0
+        },
+    },
+    scales: {
+        xAxes: [{
+            gridLines: false,
+            scaleLabel: false,
+            ticks: {
+                display: false
+            }
+        }],
+        yAxes: [{
+            gridLines: false,
+            scaleLabel: false,
+            ticks: {
+                display: false,
+                suggestedMin: 0,
+                suggestedMax: 10
+            }
+        }]
+    }
+};
+    var ctx = document.getElementById('chart1').getContext('2d');
+    var chart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: [1, 2, 1, 3, 5, 4, 7],
+        datasets: [
+        {
+          backgroundColor: "rgba(101, 116, 205, 0.1)",
+          borderColor: "rgba(101, 116, 205, 0.8)",
+          borderWidth: 2,
+          data: [1, 2, 1, 3, 5, 4, 7],
+        },
+        ],
+      },
+      options: chartOptions
+    });
+  </script>
 </x-app-layout>
