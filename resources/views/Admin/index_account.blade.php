@@ -153,7 +153,7 @@
 
 
 
-          <div class="grid grid-flow-row md:grid-cols-3 grid-cols-1 gap-8  items-center text-center mt-6 h-max mx-auto"   style="height: fit-content;">      
+          <div class="grid grid-flow-row md:grid-cols-3 grid-cols-1 lg:grid-cols-4 gap-8  items-center text-center mt-6 h-max mx-auto"   style="height: fit-content;">      
 
             <ul id="myUL" class="contents">         
              @foreach($users as $user)
@@ -181,7 +181,7 @@
                     <div class="text-center text-gray-400 text-sm font-semibold">
                         <p>{{$user->role}}</p>
                     </div>
-                    <div class="flex flex-col text-sm">
+                    <div class="flex flex-col text-sm hide-scroll">
                         
                           <div class="flex flex-row mt-2">
                             <div class="px-2 py-1 text-gray-500 font-semibold w-20 text-left">Address</div>

@@ -58,7 +58,7 @@
            
             <tr>
             <th class="w-12">No</th>            
-            <th>Employee </th>
+            <th >Employee </th>
             <th>Order Taken</th>
             <th>Order not Taken</th>
             
@@ -70,7 +70,7 @@
         @foreach($employees as $employee)
         <tr>
             <td>{{$loop->iteration}}</td>
-            <td> <div class="flex items-center h-ful">
+            <td > <div class="flex items-center h-full">
                 <img src="{{$employee->profile_photo_url}}" class="rounded-full mr-2">
                 <a> {{$employee->name}}</a></div>
             </td>

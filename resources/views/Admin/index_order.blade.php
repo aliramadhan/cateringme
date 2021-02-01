@@ -58,7 +58,7 @@
            
             <tr>
             <th class="w-12">No</th>            
-            <th>Employee </th>
+            <th class="w-full">Employee </th>
             <th>Menu</th>
             <th>Order Date</th>
             <th>Note</th>

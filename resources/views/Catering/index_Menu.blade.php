@@ -197,8 +197,7 @@
        <th class="overflow-hidden">Deskripsi</th>
    </tr>
 </thead>
-<tbody class="text-center font-semibold tracking-wider">
-    <?php $a=1;?>
+<tbody class="text-center font-semibold tracking-wider">  
     @foreach($menus as $menu)
     <tr>
         <td>{{$loop->iteration}}</td>

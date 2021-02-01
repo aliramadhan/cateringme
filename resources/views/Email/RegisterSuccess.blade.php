@@ -1,74 +1,141 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>24Slides Catering App</title>
-     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
-    <link rel="stylesheet" href="{{ asset('public/css/app.css') }}">
-    <style type="text/css">
-      body,html{
-        font-family: 'Poppins', sans-serif;
-        background-color: transparent;
-      }
-    </style>
+  <title>24Slides Catering App</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
+  
+  <style type="text/css">
+    body,html{
+      font-family: 'Poppins', sans-serif;
+      background-color: transparent;
+    }
+  </style>
 </head>
 <body>
-  <div class="app min-w-screen min-h-screen bg-grey-lighter py-8 px-4">
+  <div style="padding: 2em 1em 2em 1em;
+  min-height: 100vh;
+  background: #f1f1f1;">
 
-    <div class="max-w-md mx-auto">
+  <div style="    max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;">
 
-      <div class="bg-white p-8 shadow-md">
-
-        <div class="h-28 flex flex-col items-center justify-center text-center tracking-wide leading-normal bg-black -mx-8 -mt-8" style="background: linear-gradient( rgb(0 0 0 / 45%), rgb(60 68 80) ),url('https://assets.kompasiana.com/items/album/2018/04/16/suasana-kantor-24slides-indonesia-3-5ad4a44bcaf7db40dd0deff2.jpg?t=o&v=760');background-size:cover;">
-          
-          <p class="text-white text-2xl">New Account Registered !</p>
-        </div>
-
-        <div class="py-8 border-b">
-          <p>
-            Hey {{$data['name']}} !<br><br>
-            Congratulations , your account has been successfully created<br>        
-            Now you can use this catering application by entering the following email and password<br><br>
-            This your password  <b>{{$data['password']}}</b> <br><br> 
-            You can also change it on the profile view on the web page  
-          </p>
-          <button class="text-white text-sm tracking-wide bg-blue-500 rounded w-full my-8 p-4 font-semibold">ACTIVED YOUR ACCOUNT</button>
-          <p class="text-sm">
-            Best Regard !<br>
-            Your The App team
-          </p>
-        </div>
-
-        <div class="mt-8 text-center text-gray-600">
-          <h3 class="text-base sm:text-lg mb-4">Thanks for using Catering App!</h3>
-          <img class="h-10 mx-auto" src="{{ asset('resources/image/logo2.png')}}" alt="24Slides Logo" >
-        </div>
-
-      </div>
-
-      <div class="text-center text-sm text-grey-darker mt-8">
-
-        <div class="meta__social flex justify-center my-4">
-          <a href="#" class="flex items-center justify-center mr-4 bg-red-500 text-white rounded-full w-8 h-8 no-underline"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" class="flex items-center justify-center mr-4 bg-red-500 text-white rounded-full w-8 h-8 no-underline"><i class="fab fa-instagram"></i></a>
-          <a href="#" class="flex items-center justify-center bg-red-500 text-white rounded-full w-8 h-8 no-underline"><i class="fab fa-twitter"></i></a>
-        </div>
-
-        <div class="">
-          <p class="leading-loose">
-            Questions or concerns? <a href="mailto:sigit@24slides.com?&cc=fajarfaz@gmail.com&subject=My%20Ask&body=your subject" class="ml-2 font-semibold hover:text-blue-400" class="text-grey-darkest">Email Us</a>
-
-            
-          </p>
-        </div>
-
-      </div>
-
-
-    </div>
-
+  <div style="background: #fff;box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);padding: 2em">
+    <div style="background-color:#F05252;   
+    letter-spacing: 0.025em;
+    text-align: center;
+    margin-top: -2rem;
+    margin-left: -2rem;
+    margin-right: -2rem;
+    height: 7rem;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    display: flex;">
+    
+    <p style="    color: #ffffff;
+    font-size: 1.5rem;">New Account Registered !</p>
   </div>
+
+  <div style="    padding-top: 2rem;
+  padding-bottom: 2rem;border-bottom-width: 1px;">
+  <p>
+    Hey {{$data['name']}} !<br><br>
+    Congratulations , your account has been successfully created<br>        
+    Now you can use this catering application by entering the following email and password<br><br>
+    This your password  <b>{{$data['password']}}</b> <br><br> 
+    You can also change it on the profile view on the web page  
+  </p>
+  <button style="letter-spacing: 0.025em;
+  width: 100%;
+  color: #ffffff;
+  padding: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  background-color: #3f83f8;
+  border: none;">ACTIVED YOUR ACCOUNT</button>
+  <p style="    font-size: 0.875rem;">
+    Best Regard !<br>
+    Your The App team
+  </p>
+</div>
+
+<div style="color: #4b5563;
+text-align: center;
+margin-top: 2rem;">
+<h3 style="    font-size: 1.125rem;
+margin-bottom: 1rem;">Thanks for using Catering App!</h3>
+<img style="    margin-left: auto;
+margin-right: auto;
+height: 2.5rem;" src="{{ asset('resources/image/logo2.png')}}" alt="24Slides Logo" >
+</div>
+
+</div>
+
+<div style="text-align: center;
+margin-top: 2rem;
+font-size: 0.875rem;">
+
+<div style="    margin-top: 1rem;
+margin-bottom: 1rem;
+justify-content: center;
+display: flex;">
+<a href="#" style="color: #ffffff;
+margin-right: 1rem;
+height: 2rem;
+width: 2rem;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 9999px;
+background-color: #f05252;
+text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
+<a href="#" style="color: #ffffff;
+margin-right: 1rem;
+height: 2rem;
+width: 2rem;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 9999px;
+background-color: #f05252;
+text-decoration: none;"><i class="fab fa-instagram"></i></a>
+<a href="#" style="color: #ffffff;
+margin-right: 1rem;
+height: 2rem;
+width: 2rem;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 9999px;
+background-color: #f05252;
+text-decoration: none;"><i class="fab fa-twitter"></i></a>
+</div>
+
+<div >
+  <p style="    line-height: 2;">
+    Questions or concerns? <a href="mailto:sigit@24slides.com?&cc=fajarfaz@gmail.com&subject=My%20Ask&body=your subject" style="    margin-left: 0.5rem;
+    font-weight: 600;
+    color: #071121;
+    text-decoration: none;">Email Us</a>
+
+    
+  </p>
+</div>
+
+</div>
+
+
+</div>
+
+</div>
 
 </body>
 </html>

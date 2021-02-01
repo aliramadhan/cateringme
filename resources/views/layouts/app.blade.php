@@ -64,7 +64,7 @@
 
     </div>
   </div>
-   <div style="display:none;" id="myDiv" class="animate-bottom contents">
+   <div style="display:none;" id="showBody" class="animate-bottom contents">
     <div class="min-h-screen bg-gray-100" >
         <div class="grid grid-cols-10 gap-1 ">
            <!--  <div class="col-span-0 md:col-span-2 hidden md:block ">
@@ -197,7 +197,7 @@
     
 </div>
 <footer class="text-gray-600 body-font z-0">
-      <div class="container px-5 py-8 mx-auto flex items-center flex-col md:flex-row">
+      <div class="container lg:px-5 md:px-4 px-2 py-8 mx-auto flex items-center flex-col md:flex-row">
         <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
          <img class="mb-1 logo-login h-10" src="{{ asset('resources/image/logo2.png')}}" alt="" height="38px">
           <span class="ml-3 text-xl">Malang</span>
@@ -220,18 +220,14 @@
 <script type="text/javascript">
   
 var myVar;
-
 function loader24() {
   myVar = setTimeout(showPage, 300);
 }
-
 function showPage() {
 document.getElementById("loader-bk").style.display = "none";
   document.getElementById("loader").style.display = "none";  
-  document.getElementById("myDiv").style.display = "block";
+  document.getElementById("showBody").style.display = "block";
 }
-
-
 </script>
 <script src="{{ asset('resources/js/modal.js') }}"></script>
 <script src="{{ asset('resources/js/notif.js') }}"></script>

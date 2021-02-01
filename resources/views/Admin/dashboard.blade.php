@@ -95,11 +95,11 @@
 			Statistic Today
 		</div>
 		<div class="w-full ">
-			<div class="-mx-2 md:flex">
+			<div class="-mx-2 md:flex grid grid-cols-2">
 				<div class="w-full md:w-1/3 px-2">
-					<div class="rounded-lg shadow-sm mb-4">
+					<div class="rounded-lg shadow-sm mb-4 h-44">
 						<a href="{{route('admin.index.order')}}">
-						<div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
+						<div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000 h-full">
 							<div class="px-3 pt-8 pb-10 text-center relative z-10">
 								<h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Catering Taken</h4>
 								<h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{$catering_taken}}</h3>
@@ -116,9 +116,9 @@
 					</div>
 				</div>
 				<div class="w-full md:w-1/3 px-2">
-					<div class="rounded-lg shadow-sm mb-4">
+					<div class="rounded-lg shadow-sm mb-4 h-44">
 						<a href="{{route('admin.index.order_not_taken')}}">
-						<div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
+						<div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000 h-full">
 							<div class="px-3 pt-8 pb-10 text-center relative z-10">
 								<h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Catering not Taken</h4>
 								<h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{$not_taken}}</h3>
@@ -132,8 +132,8 @@
 					</div>
 				</div>
 				<div class="w-full md:w-1/3 px-2">
-					<div class="rounded-lg shadow-sm mb-4">
-						<div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
+					<div class="rounded-lg shadow-sm mb-4 h-44">
+						<div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000 h-full">
 							<div class="px-3 pt-8 pb-10 text-center relative z-10">
 						<h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Catering Quota</h4>
 								<h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{\App\Models\User::where('role','Employee')->count()}}</h3>
@@ -146,9 +146,9 @@
 					</div>
 				</div>
 				<div class="w-full md:w-1/3 px-2">
-					<div class="rounded-lg shadow-sm mb-4">
+					<div class="rounded-lg shadow-sm mb-4 h-44">
 						<a href="{{route('admin.index.review')}}">
-						<div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000">
+						<div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000 h-full">
 							<div class="px-3 pt-8 pb-10 text-center relative z-10">
 								<h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Rate & Review</h4>
 								<h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{$orders->where('review','!=',null)->count()}}</h3>
@@ -169,8 +169,8 @@
 
 	<div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 ">
 		<div class="p-6 mt-6">       
-			<div class="col-span-2 text-2xl text-center mb-6 font-base">          
-				Employees Feed & Review
+			<div class="col-span-2 text-2xl text-center mb-6 font-semibold text-gray-700">          
+				Employee Feed & Review
 			</div>
 
 			<div class="grid grid-cols-9 mx-auto p-2 text-blue-50">
@@ -317,7 +317,7 @@
 		</div>
 
 <div class="p-6 mt-6">       
-	<div class="col-span-2 text-2xl text-center mb-6 font-base">          
+	<div class="col-span-2 text-2xl text-center mb-6 font-semibold text-gray-700">          
 		Catering Menu
 	</div>
 		<div class="bootstrapiso mb-4 rounded-xl shadow-lg">
@@ -365,18 +365,18 @@
 	
 
 	<div class="col-span-2 gap-4  font-base rounded-xl py-6 flex items-center md:flex-row flex-col">  
-		<div class="text-center mt-6 font-base bg-catering rounded-xl py-6 px-4 w-full" > 
+		<div class="text-center mt-6 font-base bg-catering rounded-xl py-6 px-6 w-full" > 
 			<p class="text-2xl font-normal text-white mb-4 text-left">Total Fee <span class="font-semibold">Today</span></p>
-			<h4 class="text-4xl uppercase font-semibold text-white leading-tight">Rp. {{($orders->sum('fee'))}}</h4>
+			<h4 class="text-3xl text-left uppercase font-semibold text-white leading-tight">Rp. {{($orders->sum('fee'))}}</h4>
 		</div>
 
-		<div class="text-center mt-6 font-base bg-price rounded-xl py-6 px-4 w-full" > 
+		<div class="text-center mt-6 font-base bg-price rounded-xl py-6 px-6 w-full" > 
 			<div class="flex">
 				<p class="text-2xl font-semibold text-white mb-4 text-left flex-auto">Catering Price</p>
 				<div id="priceModal" >
 					<i data-toggle="modal" data-target="priceModal"  class="fas fa-cog border rounded-full p-2 hover:border-orange-700 font-semibold text-gray-100 hover:text-orange-700 duration-500 cursor-pointer modal-open"></i></div>  
 				</div>
-				<h4 class="text-4xl uppercase font-semibold text-white leading-tight">Rp. {{($price)}}</h4>
+				<h4 class="text-3xl text-left uppercase font-semibold text-white leading-tight">Rp. {{($price)}}</h4>
 			</div>
 
 	</div>
