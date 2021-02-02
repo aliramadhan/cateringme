@@ -128,7 +128,7 @@
                   </div>
               </div>
           </div>
-
+            <input type="submit" name="submit" value="cancelSchedule">
             <div class="text-xl row-span-1 text-right pointer px-6 ">
                <a onclick="nextSlide()" id="btn-slide-dis-2y" class="cursor-pointer bg-gray-700 px-6 py-2 rounded-lg text-white opacity-75 hover:opacity-100 duration-1000 focus:border-gray-200"> Next  <i class="fas fa-arrow-right ml-2"></i></a>
             </div>

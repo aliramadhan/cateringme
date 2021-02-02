@@ -285,6 +285,35 @@ class CateringActionController extends Controller
 	}
 	public function store_schedule(Request $request)
 	{
+		if ($request->submit == "cancelSchedule") {
+			//Validation Request
+			$this->validate($request, [
+	            'month' => ['required'],
+	            'dates' => ['required'],
+	        ]);
+        	//declare variable
+        	$now = Carbon::parse($request->month);
+			$message = "Schedule at ";
+			//cancel schedule
+			DB::beginTransaction();
+			try {
+				foreach ($request->dates as $date) {
+					$date = Carbon::parse($date);
+					$schedule = ScheduleMenu::where('date',$date->format('Y-m-d'))->first();
+					if($schedule != null){
+						$message .= $schedule->date.",";
+						$schedule->delete();
+					}
+				}
+			} catch (\Exception $e) {
+			    DB::rollback();
+	        	return redirect()->back()->withInputs()->withErrors(['message' => $e->message]);
+			}
+
+		    // all good
+		    DB::commit();
+	        return redirect()->back()->with(['message' => $message. ' deleted successfully.']);
+		}
 		//Validation Request
 		$this->validate($request, [
             'month' => ['required'],
