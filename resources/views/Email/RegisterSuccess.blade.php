@@ -60,7 +60,7 @@
   border-radius: 0.5rem;
   cursor: pointer;
   background-color: #3f83f8;
-  border: none;">ACTIVED YOUR ACCOUNT</button>
+  border: none;" onclick="window.location.href='https://catering.pahlawandesignstudio.com/'">ACTIVED YOUR ACCOUNT</button>
   <p style="    font-size: 0.875rem;">
     Best Regard !<br>
     Your The App team

@@ -68,28 +68,7 @@
     label:before{
          line-height: 262px;
    }
-     .grayscale-effect img {
-      transition: all 0.2s;
-      -webkit-transition: all 0.2s;
-      -moz-transition: all 0.2s;
-    }
-    .grayscale-effect img {
-
-
-      filter: grayscale(100%);
-      -webkit-filter: grayscale(100%);
-      -moz-filter: grayscale(100%);
-    }
-    .grayscale-effect img:hover {
-      filter: grayscale(0%);
-      -webkit-filter: grayscale(0%);
-      -moz-filter: grayscale(0%);
-     /* transform: scale(1.1);
-      -webkit-transform: scale(1.1);
-      -moz-transform: scale(1.1);*/
-
-    }
-
+   
 </style>
 <div class="py-12">
   <div class="max-w-7xl mx-auto lg:px-8">
@@ -152,9 +131,10 @@
                   </div>
                     
                   <div class="carousel-item h-100">
-                    <div class="grid grid-cols-2 p-4 gap-4 bg-gray-50">
-                      <div class="text-center">
-                          <h5 class="font-semibold">Additional Catering</h5>
+                    <div class="grid grid-cols-1 md:grid-cols-2 p-4 gap-4 bg-gray-50">
+                      <div class="w-full ">
+                      <h5 class="font-semibold text-center">Additional Catering</h5>
+                      <div class="text-center md:grid md:gridrows-2 flex hide-scroll">                         
                          
                           <input type="radio" name="porsi" value="L" class="flex-auto hidden" id="nasiL">
                           <label for="nasiL" class="flex cursor-pointer text-base font-semibold items-center not-menu px-4 bg-white rounded-xl border hover:shadow-md duration-500">
@@ -178,6 +158,7 @@
                           <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" name="sambal" value="1"><span class="ml-2 text-gray-700 font-semibold">Sambal</span>
                         </label>
                         
+                </div>
                 </div>
 
                 <div class="text-center">
@@ -216,7 +197,7 @@
     <a href="#carouselExampleControls" role="button" data-slide="next" id="next-step">
       <button type="button" class="btn btn-success" >Next</button>
     </a>
-    <button type="button" class="btn btn-primary" id="save-step" style="display: none;">Save </button>
+    <button type="button" class="btn btn-primary" id="save-step" style="display: none;" data-dismiss="modal" >Save </button>
     <script type="text/javascript">
       var buttonBack = document.getElementById("back-step");        
       var buttonNext = document.getElementById("next-step");       
@@ -265,7 +246,7 @@
 
 
       <label class='label flex-auto contents duration-1000'>
-        <input class='label__checkbox duration-1000 ' name="dates[]" type='checkbox' id="tanggal{{$start->format('Y-m-d')}}"  @if($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" onclick="document.getElementById('tanggal{{$i}}').checked = false;" data-toggle="modal" data-target="#ScheduleModal">
+        <input class='label__checkbox duration-1000 ' name="dates[]" type='checkbox' id="tanggal{{$start->format('Y-m-d')}}"  @if($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" onclick="document.getElementById('tanggal{!! $start->format("Y-m-d") !!}').checked = false;" data-toggle="modal" data-target="#ScheduleModal">
 
         <span class='label__text '>
           <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient( @if($order != null)  135deg, #FCCF31 10%, #F55555 100% @elseif($start < $now) 160deg, #bdbdbe 0%, #032a32 100% @elseif($schedule != null) 160deg, #0093E9 0%, #80D0C7 100%   @else to right, #ff416c, #ff4b2b @endif );'>
