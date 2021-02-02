@@ -281,8 +281,7 @@
    </h3>  
     <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5 mt-4">                      
      <div id="div1" class="duration-1000 targetDiv  justify-content content-center text-center rounded-lg pt-4"> 
-      @php $start->subMonth(); @endphp
-      @for($i = 1; $i <= $now->daysInMonth; $i++, $start->addDay())
+      @for($i = 1; $i <= $next_month->daysInMonth; $i++, $start->addDay())
       @php
 
       $schedule = App\Models\ScheduleMenu::where('date',$start->format('Y-m-d'))->first();
