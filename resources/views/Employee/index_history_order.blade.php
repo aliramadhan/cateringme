@@ -60,7 +60,7 @@
            {{$start->format('F Y')}}
        </h3> 
         <ul id="myUL" class="col-span-3 md:contents">    
-        @for($i = 1; $i <= $now->daysInMonth; $i++, $start->addDay())
+        @for($i = 1; $i <= $total_days; $i++, $start->addDay())
           @php
             $schedule = App\Models\ScheduleMenu::where('date',$start->format('Y-m-d'))->first();
             $order = auth()->user()->orders->where('order_date',$start->format('Y-m-d'))->first();
