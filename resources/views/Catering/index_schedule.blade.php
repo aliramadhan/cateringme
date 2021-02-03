@@ -140,13 +140,13 @@
   
         <div class="absolute inset-0 w-full h-screen bg-gray-900 text-white flex text-5xl transition-all ease-in-out duration-1000 transform translate-x-full slide p-6 " >
 
-           <div class="flex flex-col gap-6 w-full text-center mt-6 h-max">  
-           <h3 class="col-span-3 min-w-0 font-medium text-2xl leading-snug text-center mb-6 h-15 ">
+           <div class="flex flex-col gap-6 w-full text-center h-max">  
+           <h3 class="col-span-3 min-w-0 font-medium text-2xl leading-snug text-center ">
              Select Catering Menu
             </h3>
         
 
-              <ul id="myUL" class="md:grid md:grid-cols-3 grid-cols-1 hide-scroll overflow-y-auto">   
+              <ul id="myUL" class="md:grid md:grid-cols-3 grid-cols-1 hide-scroll overflow-y-auto lg:h-6/12 md:h-7/12 h-6/12">   
                
                 @foreach($menus as $menu) 
                 <li class="flex-auto">

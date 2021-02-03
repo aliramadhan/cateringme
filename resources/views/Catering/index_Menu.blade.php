@@ -142,7 +142,7 @@
 <div class="relative md:h-screen h-full">
     <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide text-base overflow-y-auto" >      
 
-      <div class="grid grid-flow-row md:grid-cols-3 grid-cols-1 gap-6 w-full text-center mt-6 h-max"   style="height: fit-content;">      
+      <div class="grid grid-flow-row lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-4 w-full text-center mt-6 h-max"   >      
 
         <ul id="myUL" class="contents">         
           @foreach($menus as $menu)

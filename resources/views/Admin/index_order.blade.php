@@ -30,7 +30,7 @@
         </div>
       </div>
          <div class="relative h-full">
-              <div class=" inset-0 w-full h-full text-gray-600 flex text-5xl p-3 md:p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide text-base overflow-y-auto bg-gray-100" >      
+              <div class=" inset-0 w-full h-full text-gray-600 flex text-5xl p-3 md:p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide text-base overflow-y-auto bg-customize-1" >      
 
             <div class="bootstrapiso w-full bg-transparent text-base ">
                 <div class="md:absolute text-2xl font-semibold top-9 md:text-left text-center"><span class="text-gray-500">Period : </span> @if($from == null) {{$now->format('d F Y')}} @else {{$from->format('d F Y')}} - {{$to->format('d F Y')}} @endif </div>
