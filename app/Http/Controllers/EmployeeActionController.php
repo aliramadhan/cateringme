@@ -52,11 +52,12 @@ class EmployeeActionController extends Controller
         $now = Carbon::now();
         $start = Carbon::now()->startOfMonth();
         $stop = Carbon::now()->endOfMonth();
-        $total_days = $start->daysInMonth;
         if ($request->month != null) {
             $start = Carbon::parse($request->month)->startOfMonth();
             $stop = Carbon::parse($request->month)->endOfMonth();
         }
+        $total_days = $start->daysInMonth;
+        
         return view('Employee.index_history_order',compact('now','start','stop','total_days'));     
     }
     public function history_review(Request $request)
