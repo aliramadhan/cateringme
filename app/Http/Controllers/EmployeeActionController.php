@@ -53,10 +53,10 @@ class EmployeeActionController extends Controller
         $start = Carbon::now()->startOfMonth();
         $stop = Carbon::now()->endOfMonth();
         if ($request->month != null) {
+            $now = Carbon::parse($request->month);
             $start = Carbon::parse($request->month)->startOfMonth();
             $stop = Carbon::parse($request->month)->endOfMonth();
         }
-
         return view('Employee.index_history_order',compact('now','start','stop'));     
     }
     public function history_review(Request $request)
