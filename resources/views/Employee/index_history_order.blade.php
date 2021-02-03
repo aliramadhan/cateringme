@@ -20,7 +20,7 @@
 
         <form class="contents">
         @csrf
-        <input type="month" name="month" min="2020-12" max="{{$now->format('Y-m')}}" class="w-5/6 md:w-full text border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-30 mr-2">
+        <input type="month" name="month" min="2020-12" max="{{$now->format('Y-m')}}" class="w-5/6 md:w-full text border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-30 mr-2" value="{{$start->format('Y-m')}}">
         <button type="submit" name="submit" class="py-2 px-3 rounded-lg transition-500 bg-blue-400 hover:bg-blue-500 focus:outline-none text-white"> <i class="fas fa-search"></i></button>
           
         </form>
