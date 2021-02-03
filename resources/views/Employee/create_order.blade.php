@@ -398,6 +398,9 @@
   $('#save-step').click(function() {
     var date = $('#dateOrder').val();
     var menu = $("input[name='menu']").val();
+    $('input[name="menu"]:checked').each(function() {
+       menu = this.value; 
+    });
     var porsi = $("input[name='porsi']:checked").val();
     var shift = $("input[name='shift']:checked").val();
 
