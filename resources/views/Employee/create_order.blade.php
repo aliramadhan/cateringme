@@ -239,9 +239,9 @@
      <div id="div1" class="duration-1000 targetDiv bg-gray-100 justify-content content-center text-center rounded-lg pt-4"> 
       @for($i = 1; $i <= $now->daysInMonth; $i++, $start->addDay())
       @php
-
+      $user = auth()->user();
       $schedule = App\Models\ScheduleMenu::where('date',$start->format('Y-m-d'))->first();
-      $order = App\Models\Order::where('order_date',$start->format('Y-m-d'))->first();
+      $order = App\Models\Order::where('employee_id',$user->id)->where('order_date',$start->format('Y-m-d'))->first();
       @endphp
 
 
@@ -283,9 +283,9 @@
      <div id="div1" class="duration-1000 targetDiv  justify-content content-center text-center rounded-lg pt-4"> 
       @for($i = 1; $i <= $next_month->daysInMonth; $i++, $start->addDay())
       @php
-
+      $user = auth()->user();
       $schedule = App\Models\ScheduleMenu::where('date',$start->format('Y-m-d'))->first();
-      $order = App\Models\Order::where('order_date',$start->format('Y-m-d'))->first();
+      $order = App\Models\Order::where('employee_id',$user->id)->where('order_date',$start->format('Y-m-d'))->first();
       @endphp
 
 
