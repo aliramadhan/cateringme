@@ -109,7 +109,7 @@
                <div id="div1" class=" duration-1000 targetDiv bg-gray-50 justify-content content-center text-center rounded-lg pt-4"> 
                   <h1 id="date-month" class=" text-center"></h1>
                   <div id="showresults">
-                    @for($i = 1; $i <= $start_date->daysInMonth; $i++, $start_date->addDay())
+                    @for($i = 1; $i <= $total_days; $i++, $start_date->addDay())
                       @php
                         $schedule = \App\Models\ScheduleMenu::where('date',$start_date->format('Y-m-d'))->first();
                       @endphp

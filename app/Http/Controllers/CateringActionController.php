@@ -238,7 +238,8 @@ class CateringActionController extends Controller
 		}
 
 		$start_date = Carbon::now()->startOfMonth();
-		return view('Catering.index_schedule',compact('months','menus','start_date'));
+		$total_days = $start_date->daysInMonth;
+		return view('Catering.index_schedule',compact('months','menus','start_date','total_days'));
 	}
 	public function get_month_schedule(Request $request)
 	{
