@@ -122,13 +122,12 @@
           <!--Footer-->
           <div class="flex justify-end pt-2">
 
-            <button class=" px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Send</button>
+            <button type="submit" name="submit" value="storeReview" class=" px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Send</button>
           </div>
 
         </div>
       </div>
     </div>
-  </form>
 
 
    <div class="modal z-10 opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center" id="noteModal">
@@ -157,8 +156,8 @@
           <div class="flex flex-wrap mt-6">
             <div class="relative w-full appearance-none label-floating">
               <p class="text-xl font-base text-gray-600 font-bold">Note</p>
-              <textarea required name="review" class="autoexpand tracking-wide py-2 px-4 mb-3 leading-relaxed appearance-none block w-full bg-gray-50 border border-gray-200 rounded focus:outline-none focus:bg-white focus:border-gray-500 h-52"
-              id="message" type="text" placeholder="Message...">.. your notes</textarea>
+              <textarea name="note" class="autoexpand tracking-wide py-2 px-4 mb-3 leading-relaxed appearance-none block w-full bg-gray-50 border border-gray-200 rounded focus:outline-none focus:bg-white focus:border-gray-500 h-52"
+              id="message" type="text" placeholder="Message...">{{$menu_today->note}}</textarea>
               <label for="message" class="absolute tracking-wide py-2 px-4 mb-4 opacity-0 leading-tight block top-0 left-0 cursor-text">Write your Notes ...
               </label>
             </div>
@@ -167,13 +166,14 @@
           <!--Footer-->
           <div class="flex justify-end pt-2">
 
-            <button class=" px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Save</button>
+            <button type="submit" name="submit" value='storeNote' class=" px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Save</button>
           </div>
 
         </div>
       </div>
     </div>
 
+  </form>
   @endif
 
 
