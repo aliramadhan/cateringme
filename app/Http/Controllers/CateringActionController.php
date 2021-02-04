@@ -3,260 +3,66 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Carbon\Carbon;
-use Carbon\CarbonPeriod;
-use App\Models\Menu;
-use App\Models\ScheduleMenu;
-use App\Models\Order;
-use App\Models\User;
+use Illuminate\Support\Facades\Validator;
+use \App\Models\Menu;
+use \App\Models\Order;
+use \App\Models\PhotoMenu;
+use \App\Models\ScheduleMenu;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Collection;
+use Carbon\Carbon;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
-class EmployeeActionController extends Controller
+class CateringActionController extends Controller
 {
     public function dashboard()
     {
         //declare variable
-        $now = Carbon::now();
-        $start = Carbon::parse($now->format('Y-m-1'));
-        $stop = Carbon::now()->endOfMonth();
-        $total_days = $now->diffInDays($stop);
         $user = auth()->user();
-        $menu_today = $user->orders()->where('order_date',$now->format('Y-m-d'))->first();
-        $menu_tomorrow = $user->orders()->where('order_date',$now->addDay()->format('Y-m-d'))->first();
-        $reviews = Order::where('employee_id',$user->id)->orderBy('reviewed_at','desc')->limit(10)->get();
-        //data for statistik
-        $total_review = Order::where('employee_id',$user->id)->where('reviewed_at','!=',null)->count();
-        $total_catering = Order::where('employee_id',$user->id)->whereBetween('order_date',[$now->format('Y-m-1'),$stop->format('Y-m-d')])->count();
-        $total_dayoff = 0;
-        $total_empty_order = 0;
-        for ($i=1; $i <= $now->daysInMonth; $i++, $start->addDay()) { 
-            $schedule = ScheduleMenu::where('date',$start->format('Y-m-d'))->first();
-            $order = Order::where('employee_id',$user->id)->where('order_date',$start->format('Y-m-d'))->first();
-            if ($schedule == null) {
-                $total_dayoff++;
+        $now = Carbon::now();
+        $prev_month = Carbon::parse($now->format('Y-m'))->subMonth(1);
+        $menus = $user->menus->take(10);
+        $menu_today = Menu::all();
+        $total_review = 0;
+        $stars = 0;
+        $prev_stars = 0;
+        $menu_id = [];
+        foreach ($menu_today as $item) {
+            $item->total_order = $item->orders->where('order_date',$now->format('Y-m-d'))->count();
+        }
+        foreach ($menus as $menu) {
+            if ($menu->orders->count() == 0) {
+                continue;
             }
-            else{
-                if($order == null) {
-                    $total_empty_order++;
-                }
-            }
+            $menu_id [] = $menu->id;
+            $total_review += $menu->orders->where('reviewed_at','!=',null)->count();
+            $stars += ( (1*$menu->orders->where('stars',1)->count()) + (2 * $menu->orders->where('stars',2)->count()) + (3 * $menu->orders->where('stars',3)->count()) + (4 * $menu->orders->where('stars', 4)->count()) + (5 * $menu->orders->where('stars',5)->count()) ) / ($menu->orders->count()); 
+            $prev_stars += $menu->orders->whereBetween('reviewed_at',[$prev_month->startOfMonth()->format('Y-m-d'),$prev_month->endOfMonth()->format('Y-m-d')])->sum('stars');
         }
-
-        $now = Carbon::now();
-        return view('Employee.dashboard',compact('menu_today','menu_tomorrow','now','user','reviews','stop','total_days','total_review','total_catering','total_dayoff','total_empty_order'));
-    }
-    public function history_order(Request $request)
-    {
-        //declare variables
-        $now = Carbon::now();
-        $start = Carbon::now()->startOfMonth();
-        $stop = Carbon::now()->endOfMonth();
-        if ($request->month != null) {
-            $start = Carbon::parse($request->month)->startOfMonth();
-            $stop = Carbon::parse($request->month)->endOfMonth();
-        }
-        $total_days = $start->daysInMonth;
-
-        return view('Employee.index_history_order',compact('now','start','stop','total_days'));     
-    }
-    public function history_review(Request $request)
-    {
-        //declare variables
-        $now = Carbon::now();
-        $start = Carbon::now()->startOfMonth();
-        $stop = Carbon::now()->endOfMonth();
-        if ($request->month != null) {
-            $start = Carbon::parse($request->month)->startOfMonth();
-            $stop = Carbon::parse($request->month)->endOfMonth();
-        }
-
-        return view('Employee.index_history_review',compact('now','start','stop'));   
-    }
-    public function get_photos(Request $request)
-    {
-        //declare variable
-        $menu = Menu::findOrFail($request->menu_id);
-        $photos = [];
-        $data_photo = new Collection;
-        $i = 1;
-        //Set item photos
-        if($menu->photos->count() < 1){
-            $data = "<div class='carousel-item h-100 active'>
-                      <img class='d-block w-100 h-96 bg-cover' src='".url('public/images/no-image.png')."' alt='First slide'>
-                    </div>";
-            $data_photo->push($input);
+        //calculation   
+        if ($menus->count() < 1) {
+            $stars = 0;
+            $prev_stars = 0;
         }
         else{
-            foreach ($menu->photos as $photo) {
-                if ($i == 1) {
-                    $data = "<div class='carousel-item h-100 active'>
-                              <img class='d-block w-100 h-96 bg-cover' src='".url('public/'.$photo->file)."' alt='First slide'>
-                            </div>";
-                }
-                else{
-                    $data = "<div class='carousel-item h-100'>
-                          <img class='d-block w-100 h-96 bg-cover' src='".url('public/'.$photo->file)."' alt='".$menu->name.'-'.$i."'>
-                        </div>";
-                }
-                $data_photo->push($data);
-                $i++;
-            }
+            $stars = round($stars/$menus->count());
+            $prev_stars = $prev_stars/$menus->count();
+        }
+        if($prev_stars == 0){
+            $persen_stars = 100;
+        }
+        else{
+            $persen_stars = ($stars / $prev_stars) * 100;
+        }
+        $reviews = Order::whereIn('menu_id',$menu_id)->where('review','!=',null)->orderBy('reviewed_at','desc')->get();
 
-        }
-        $photos = ['menu' => $menu, 'data' => $data_photo];
-        return $photos;
+        return view('Catering.dashboard',compact('menu_today','user','menus','total_review','stars','prev_stars','persen_stars','reviews'));
     }
-    public function get_schedule(Request $request)
-    {
-        //declare variable
-        $data = [];
-        $user = auth()->user();
-        $date = Carbon::parse($request->date);
-        $schedule = ScheduleMenu::where('date',$date->format('Y-m-d'))->first();
-        $order = Order::where('employee_id',$user->id)->where('order_date',$date->format('Y-m-d'))->first();
-        $i = 1;
-        foreach (explode(",",$schedule->menu_list) as $menu_id) {
-            $menu = Menu::find($menu_id);
-            if ($menu->photos->count() < 1) {
-                $photo = url('public/images/no-image.png');
-            }
-            else{
-                $photo = url('public/'.$menu->photos->first()->file);
-            }
-            if($i == 1){
-                $schedule->menu1 = $menu;
-                $schedule->menu1->photo = $photo;
-            }
-            else{
-                $schedule->menu2 = $menu;
-                $schedule->menu2->photo = $photo;
-            }
-            $i++;
-        }
-        //cek if order is exist
-        if ($order != null) {
-           $schedule->order = $order;
-        }
-        return $schedule;
-    }
-    /*public function get_date(Request $request)
-    {
-        //declare variable
-        $user = auth()->user();
-        $now = Carbon::parse($request->month);
-        $dates = new Collection;
-        $month = $now->format('F Y');
-        $total = $now->daysInMonth;
-        $off_date = OffDate::where('year',$now->year)->where('month',$now->month)->first();
-        if($off_date == null){
-            $off_date = ['0'];
-        }
-        else{
-            $off_date = explode(',', $off_date->date_list);
-        }
-        for ($i=1; $i <= $total; $i++,$now->addDay()) { 
-            $order = Order::where('employee_id',$user->id)->where('order_date',$now->format('Y-m-d'))->first();
-            if(in_array($now->day, $off_date)){
-                $input = "<label class='label flex-auto  duration-1000'>
-                    <input class='label__checkbox  duration-1000' type='checkbox' disabled value='".$now->format('Y-m-d')."' name='dates[]'>
-                    <span class='label__text '>
-                            <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background: linear-gradient(to right, #ff416c, #ff4b2b);'>
-                              <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 duration-1000 p-10' style='font-family: Poppins, sans-serif;'>
-                           
-                                <div class='font-semibold text-4xl mb-2 '>".$now->format('d')."</div>
-                                <div class='text-xs font-base'>".$now->format('l')."</div>
-                                
-                                </i>
-                            </span>
-                        </span>
-                </label>";
-            }
-            elseif ($now < Carbon::now() && $order != null) {
-                $input = "<label class='label flex-auto  duration-1000'>
-                    <input class='label__checkbox  duration-1000' type='checkbox' checked disabled value='".$now->format('Y-m-d')."' name='dates[]'>
-                    <span class='label__text font-base'>
-                         <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient( 135deg, #FCCF31 10%, #F55555 100%);'>
-                              <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col ' style='font-family: Poppins, sans-serif;'>
-                           
-                                <div class='font-semibold text-4xl'>".$now->format('d')."</div>
-                                <div class='text-xs font-base'>".$now->format('l')."</div>
-                                
-                                </i>
-                            </span>
-                    </span>
-                </label>";
-            }
-            elseif($order != null){
-                $input = "<label class='label flex-auto  duration-1000'>
-                    <input class='label__checkbox  duration-1000' type='checkbox' value='".$now->format('Y-m-d')."' name='dates[]'>
-                    <span class='label__text font-base'>
-                        <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: radial-gradient( circle 422px at -10.3% 110.7%, rgba(219,76,180,1) 9.5%, rgba(231,119,209,1) 50.8%, rgba(255,180,241,1) 88.5% );'>
-                              <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col ' style='font-family: Poppins, sans-serif;'>
-                           
-                                <div class='font-semibold text-4xl'>".$now->format('d')."</div>
-                                <div class='text-xs font-base'>".$now->format('l')."</div>
-                                
-                                </i>
-                            </span>
-                    </span>
-                </label>";
-            }
-            elseif($now < Carbon::now()){
-                $input = "<label class='label flex-auto  duration-1000'>
-                    <input class='label__checkbox  duration-1000' type='checkbox' disabled value='".$now->format('Y-m-d')."' name='dates[]'>
-                      <span class='label__text '>
-                          <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient(160deg, #bdbdbe 0%, #032a32 100%);'>
-                              <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col ' style='font-family: Poppins, sans-serif;'>
-                           
-                                <div class='font-semibold text-4xl'>".$now->format('d')."</div>
-                                <div class='text-xs font-base'>".$now->format('l')."</div>
-                                
-                                </i>
-                            </span>
-                        </span>
-                </label>";
-            }
-            else{
-                $input = "<label class='label flex-auto  duration-1000'>
-                    <input class='label__checkbox  duration-1000' type='checkbox' value='".$now->format('Y-m-d')."' name='dates[]'>
-                     <span class='label__text '>
-                            <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);'>
-                              <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 duration-1000 p-10' style='font-family: Poppins, sans-serif;'>
-                           
-                                <div class='font-semibold text-4xl'>".$now->format('d')."</div>
-                                <div class='text-xs font-base'>".$now->format('l')."</div>
-                                
-                                </i>
-                            </span>
-                        </span>
-                </label>";
-            }
-            $dates->push($input);
-        }
-        $data = ['month' => $month, 'dates' => $dates];
-        return $data;
-    }
-    public function choose_order()
+    public function index_menu()
     {
         $now = Carbon::now();
-        $start = Carbon::now()->startOfMonth();
-        $stop = Carbon::now()->endOfMonth();
-        return view('Employee.create_order',compact('now','start','stop'));
-        //declare variable
-        $user = auth()->user();
-        $now = Carbon::now();
-        $start = $now->startofMonth();
-        $total_date = $now->daysInMonth;
-        $menus = Menu::where('show',1)->get();
-        //declare off date
-        $off_date = OffDate::where('year',$now->year)->where('month',$now->month)->first();
-        if($off_date == null){
-            $off_date = ['0'];
-        }
-        else{
-            $off_date = explode(',', $off_date->date_list);
-        }
+        $menus = auth()->user()->menus;
         foreach ($menus as $menu) {
             $rate = $menu->orders()->where('order_date','<=',$now->format('Y-m-d'))->avg('stars');
             $menu->rate = $rate;
@@ -264,142 +70,370 @@ class EmployeeActionController extends Controller
                 $menu->rate = 0;
             }
         }
-    	foreach (CarbonPeriod::create(Carbon::parse('01-01-2021'), '1 month', Carbon::today()) as $month) {
 
-            $months[$month->format('m-Y')] = $month;
-        }
-        return view('Employee.choose_order',compact('months','menus','start','total_date','now','user','off_date'));
-    }*/
-    public function create_order()
-    {
-        //declare variable
-        $now = Carbon::now();
-        $next_month = Carbon::parse($now->format('Y-m'))->addMonth()->startOfMonth();
-        $start = Carbon::now()->startOfMonth();
-        $stop = Carbon::now()->endOfMonth();
-        return view('Employee.create_order',compact('now','start','stop','next_month'));
+        return view('Catering.index_Menu',compact('menus','now'));
     }
-    public function store_order(Request $request)
-    {   
+    public function create_menu()
+    {
+        return view('Catering.create_Menu');
+    }
+    public function store_menu(Request $request)
+    {
         //Validation Request
         $this->validate($request, [
-            'date' => ['required'],
-            'menu' => ['required'],
-            'porsi' => ['required'],
-            'shift' => ['required'],
+            'name' => ['required', 'string', 'max:255'],
+            'photo' => ['required'],
+            'photo.*' => ['mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'desc' => ['required', 'string']
         ]);
-        //declare
-        $now = Carbon::now();
-        $user = auth()->user();
-        //cek if employee can order
-        if($user->can_order == 0){
-            return redirect()->back()->withErrors(['message' => "Cant submit order, please call admin to activated feature order catering."]);
+
+        //create code number for menu
+        $last_id = Menu::orderBy('id','desc')->pluck('id')->first();
+        $len = strlen(++$last_id);
+        for($i=$len; $i< 4; ++$i) {
+            $last_id = '0'.$last_id;
         }
-        //input to database
-        $date = Carbon::parse($request->date);
-        $code_number = 'ORD'.$date->format('ymd').$user->id;
-        $menu = Menu::find($request->menu);
+        $code_number = 'MNU'.$last_id;
+
         //inser into database
         DB::beginTransaction();
         try {
-            $order = Order::where('employee_id',$user->id)->where('order_date',$date->format('Y-m-d'))->first();
-            //check if sambal added
-            if ($request->input('sambal') == null) {
-                $sambal = 0;
+            $menu = Menu::create([
+                'name' => $request->name,
+                'catering_id' => auth()->user()->id,
+                'menu_code' => $code_number,
+                'desc' => $request->desc,
+            ]);
+            if($request->hasfile('photo')){
+                //save image to directory
+                $no = 1;
+                foreach ($request->file('photo') as $image) {
+                    //create name and store photo
+                    $imageName = Str::slug($request->name).'_'.$no.'.'.$image->extension();
+                    $image->move(public_path('images/photo-menu/'.$code_number), $imageName);
+                    $fileName = 'images/photo-menu/'.$code_number.'/'.$imageName;
+
+                    $menu->photos()->create(['file' => $fileName]);
+                    $no++;
+                }
             }
-            else{
-                $sambal = 1;
-            }
-            if($order == null){
-                $order = Order::create([
-                    'employee_id' => $user->id,
-                    'order_number' => $code_number,
-                    'menu_id' => $menu->id,
-                    'order_date' => $date->format('Y-m-d'),
-                    'serving' => $request->porsi,
-                    'is_sauce' => $sambal,
-                    'shift' => $request->shift,
-                    'fee' => $menu->price
-                ]);
-            }
-            else{
-                $order->update([
-                    'menu_id' => $menu->id,
-                    'serving' => $request->porsi,
-                    'is_sauce' => $sambal,
-                    'shift' => $request->shift,
-                    'fee' => $menu->price
-                ]);
-            }
-            if($order != null){
+
+
+            if($menu != null){
                 DB::commit();
+                return redirect()->route('catering.index.menu')->with(['message' => 'new Menu added successfully.']);
             }
+            // all good
         } catch (\Exception $e) {
             DB::rollback();
-            $message = $e->getMessage();
-            return $message;
+            return redirect()->back()->withErrors(['message' => 'Error Accuired.']);
+        }
+    }
+    public function edit_menu($menu_code)
+    {
+        $menu = Menu::where('menu_code',$menu_code)->first();
+
+        return view('Catering.edit_menu',compact('menu'));
+    }
+    public function update_menu(Request $request, $menu_code)
+    {
+
+        //declare variable
+        $now = Carbon::now();
+        $menu = Menu::where('menu_code',$menu_code)->first();
+
+        //Validation Request
+        if ($request->submit == 'UpdateInfo') {
+            $this->validate($request, [
+                'name' => ['required'],
+                'desc' => ['required']
+            ]);
+
+            $menu->update([
+                'name' => $request->name,
+                'desc' => $request->desc,
+            ]);
+        }
+        elseif($request->submit == 'UpdatePhoto'){
+            $i = 1;
+            foreach ($menu->photos as $photo) {
+                $file = $request->file($photo->id);
+                if ($file == null) {
+                    continue;
+                }
+
+                if(\File::exists(public_path($photo->file))){
+                    \File::delete(public_path($photo->file));
+                    
+                }
+                //create name and store photo
+                $imageName = Str::slug($menu->name).'_'.$now->format('Ymdhsi').'_'.$i.'.'.$file->extension();
+                $file->move(public_path('images/photo-menu/'.$menu->menu_code), $imageName);
+                $fileName = 'images/photo-menu/'.$menu->menu_code.'/'.$imageName;
+                $photo->update([
+                    'file' => $fileName
+                ]);
+                $i++;
+            }
+            if($request->addPhoto != null){
+                foreach ($request->addPhoto as $new_image) {
+                    //create name and store photo
+                    $imageName = Str::slug($menu->name).'_'.$now->format('Ymdhsi').'_'.$i.'.'.$new_image->extension();
+                    $new_image->move(public_path('images/photo-menu/'.$menu->menu_code), $imageName);
+                    $fileName = 'images/photo-menu/'.$menu->menu_code.'/'.$imageName;
+                    $photoMenu = PhotoMenu::create([
+                        'menu_id' => $menu->id,
+                        'file' => $fileName
+                    ]);
+                    $i++;
+                }
+            }
         }
 
-        $message = 'Order submited successfully.';
-		return $message;
+        return redirect()->back()->with(['message' => 'Menu '.$menu->name.' updated successfully.']);
     }
-    public function delete_order($id)
+    public function delete_menu(Request $request, $menu_code)
     {
-        $order = Order::findOrFail($id);
-        $date = Carbon::parse($order->order_date);
-        $message = "Your order on date ". $date->format('d, M Y'). ' has been canceled successfully.';
-        $order->delete();
-
-        return redirect()->back()->with(['message' => $message]);
+        $menu = Menu::where('menu_code',$menu_code)->first();
+        if($menu->photos->first() != null){
+            foreach ($menu->photos as $photo) {
+                $check = \File::exists(public_path($photo->file));
+                if($photo != null){
+                    if ($check) {
+                        $delete = \File::delete(public_path($photo->file));
+                    }
+                    $photo->delete();
+                }
+            }
+        }
+        $message = 'Menu '.$menu->name.' deleted successfully.';
+        $menu->delete();
+        return redirect()->route('catering.index.menu')->with(['message' => $message]);
     }
-    public function store_review(Request $request, $code)
+    public function delete_photo($id)
+    {
+        $photo = PhotoMenu::find($id);
+        $check = \File::exists(public_path($photo->file));
+        $message = 'Photo '.$photo->menu->name.' deleted successfully.';
+        if($photo != null){
+            if ($check) {
+                $delete = \File::delete(public_path($photo->file));
+            }
+            $photo->delete();
+        }
+        return redirect()->back()->with(['message' => $message]);
+
+    }
+    public function index_schedule()
     {
         //declare variable
         $now = Carbon::now();
-        $order = Order::where('order_number',$code)->first();
-        //check if order founded
-        if($order == null){
-            return redirect()->back()->withErrors(['message' => 'Order not found.']);
-        }
+        $menus = Menu::all();
+        $months = new Collection;
         
-        if($request->submit == 'storeNote'){
+        //get month
+        $start = Carbon::parse($now->format('Y-m-1'));
+        for ($i=0; $i < 6; $i++, $start->addMonth()) { 
+            $months->push(Carbon::parse($start->format('Y-m')));
+        }
+
+        $start_date = Carbon::now()->startOfMonth();
+        $total_days = $start_date->daysInMonth;
+        return view('Catering.index_schedule',compact('months','menus','start_date','total_days'));
+    }
+    public function get_month_schedule(Request $request)
+    {
+        //declare variable
+        $date = Carbon::parse($request->month);
+        $start = $date->startOfMonth();
+        $total_days = $date->daysInMonth;
+        $days = new Collection;
+        for ($i=1; $i <= $total_days ; $i++, $start->addDay()) { 
+            $schedule = ScheduleMenu::where('date',$start->format('Y-m-d'))->first();
+            if($schedule == null){
+                $input = "<label class='label flex-auto contents duration-1000'>
+                        <input class='label__checkbox duration-1000' type='checkbox' value='".$start->format('Y-m-d')."' name='dates[]' >
+                        <span class='label__text '>
+                            <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);'>
+                              <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 p-10 duration-1000' style='font-family: Poppins, sans-serif;'>
+                           
+                                <div class='font-semibold text-4xl mb-2 '>".$start->format('d')."</div>
+                                <div class='text-xs font-base'>".$start->format('l')."</div>
+                                
+                                </i>
+                            </span>
+                        </span>
+                    </label>";
+            }
+            else{
+                $input = "<label class='label flex-auto contents duration-1000'>
+                        <input class='label__checkbox duration-1000' type='checkbox' value='".$start->format('Y-m-d')."' name='dates[]' >
+                        <span class='label__text '>
+                            <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient(135deg, #FCCF31 10%, #F55555 100%);'>
+                              <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 p-10 duration-1000' style='font-family: Poppins, sans-serif;'>
+                           
+                                <div class='font-semibold text-4xl mb-2 '>".$start->format('d')."</div>
+                                <div class='text-xs font-base'>".$start->format('l')."</div>
+                                
+                                </i>
+                            </span>
+                        </span>
+                    </label>";
+            }
+            $days->push($input);
+        }
+        return $days;
+    }
+    public function store_schedule(Request $request)
+    {
+        if ($request->submit == "cancelSchedule") {
             //Validation Request
             $this->validate($request, [
-                'note' => ['required']
+                'month' => ['required'],
+                'dates' => ['required'],
             ]);
-            //add review and stars rating to order
+            //declare variable
+            $now = Carbon::parse($request->month);
+            $message = "Schedule at ";
+            //cancel schedule
             DB::beginTransaction();
             try {
-                $order->update([
-                    'note' => $request->note,
-                ]);
+                foreach ($request->dates as $date) {
+                    $date = Carbon::parse($date);
+                    $schedule = ScheduleMenu::where('date',$date->format('Y-m-d'))->first();
+                    if($schedule != null){
+                        $message .= $schedule->date.",";
+                        $schedule->delete();
+                    }
+                }
             } catch (\Exception $e) {
                 DB::rollback();
-                return redirect()->back()->withErrors(['message' => $e->message]);
+                return redirect()->back()->withInputs()->withErrors(['message' => $e->message]);
             }
+
+            // all good
             DB::commit();
-            return redirect()->back()->with(['message' => 'Note submited successfully.']);
+            return redirect()->back()->with(['message' => $message. ' deleted successfully.']);
         }
         //Validation Request
         $this->validate($request, [
-            'review' => ['required', 'min:5'],
-            'stars' => ['required', 'numeric']
+            'month' => ['required'],
+            'dates' => ['required'],
+            'menus' => ['required','min:2'],
         ]);
-        
-        //add review and stars rating to order
+        //declare variable
+        $menu_list = [];
+        foreach ($request->menus as $menu) {
+            $menu_list [] = $menu;
+        }
+        $now = Carbon::parse($request->month);
+
+        //insert into database
         DB::beginTransaction();
         try {
-            $order->update([
-                'review' => $request->review,
-                'stars' => $request->stars,
-                'note' => $request->note,
-                'reviewed_at' => $now
-            ]);
+            foreach ($request->dates as $date) {
+                $date = Carbon::parse($date);
+                $schedule = ScheduleMenu::where('date',$date->format('Y-m-d'))->first();
+                if($schedule == null){
+                    $input_schedule = ScheduleMenu::create([
+                        'date' => $date->format('Y-m-d'),
+                        'menu_list' => implode(',', $menu_list)
+                    ]);
+                }
+                else{
+                    $schedule->update([
+                        'menu_list' => implode(',', $menu_list)
+                    ]);
+                }
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->withInputs()->withErrors(['message' => $e->message]);
+        }
+        // all good
+        DB::commit();
+        return redirect()->back()->with(['message' => 'Order has been scheduled.']);
+    }
+    public function index_catering()
+    {
+        //declare variable
+        $now = Carbon::now();
+        $orders = Order::where('order_date',$now->format('Y-m-d'))->get();
+
+        return view('Catering.index_catering',compact('now','orders'));
+    }
+    public function index_report(Request $request)
+    {
+        //declare variable
+        $user = auth()->user();
+        $now = Carbon::now();
+        $from = null;
+        $to = null;
+        
+        foreach ($user->menus as $menu) {
+            if ($request->from != null && $request->to != null) {
+                $from = Carbon::parse($request->from);
+                $to = Carbon::parse($request->to);
+                if($to < $from){
+                    return redirect()->back()->withErrors(['message' => "Error Date picker."]);
+                }
+                $order = $menu->orders->whereBetween('order_date',[$from->format('Y-m-d'),$to->format('Y-m-d')]);
+            }
+            else{
+                $order = $menu->orders->where('order_date','<=',$now->format('Y-m-d'));
+            }
+            $menu->total_order = $order->count();
+            $menu->total_served = $order->where('status',1)->count();
+            $menu->stars = $order->avg('stars');
+        }
+        
+        return view('Catering.index_report',compact('user','now'));
+    }
+    public function index_review(Request $request)
+    {
+        //declare variable
+        $user = auth()->user();
+        $now = Carbon::now();
+        $menu_id = $user->menus->pluck('id');
+        $from = null;
+        $to = null;
+
+        //get review data
+        $reviews = Order::whereIn('menu_id',$menu_id)->where('reviewed_at','<=',$now->format('Y-m-d'))->orderBy('reviewed_at','desc')->get();
+        if ($request->form != null && $request->to != null) {
+            $from = Carbon::parse($request->from);
+            $to = Carbon::parse($request->to);
+            if($to < $from){
+                return redirect()->back()->withErrors(['message' => "Error Date picker."]);
+            }
+            $reviews = Order::whereIn('menu_id',$menu_id)->whereBetween('reviewed_at',[$from->format('Y-m-d'),$to->format('Y-m-d')])->orderBy('reviewed_at','desc')->get();
+
+        }
+
+        return view('Catering.index_review',compact('user','now','reviews'));
+    }
+    public function served_menu(Request $request)
+    {
+        //Validation Request
+        $this->validate($request, [
+            'orders' => ['required']
+        ]);
+        DB::beginTransaction();
+        try {
+            foreach ($request->orders as $item) {
+                $order = Order::findOrFail($item);
+                $order->update(['status' => 1]);
+            }
+            
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->withErrors(['message' => $e->message]);
         }
         DB::commit();
-        return redirect()->back()->with(['message' => 'Review submited successfully.']);
+        return redirect()->back()->with(['message' => 'Orders Menu updated status successfully.']);
+    }
+    public function send_message()
+    {
+        
     }
 }
