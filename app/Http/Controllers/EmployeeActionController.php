@@ -24,15 +24,15 @@ class EmployeeActionController extends Controller
         $user = auth()->user();
         $menu_today = $user->orders()->where('order_date',$now->format('Y-m-d'))->first();
         $menu_tomorrow = $user->orders()->where('order_date',$now->addDay()->format('Y-m-d'))->first();
-        $reviews = Order::orderBy('reviewed_at','desc')->limit(10)->get();
+        $reviews = Order::where('employee_id',$user->id)->orderBy('reviewed_at','desc')->limit(10)->get();
         //data for statistik
-        $total_review = Order::where('reviewed_at','!=',null)->count();
-        $total_catering = Order::whereBetween('order_date',[$now->format('Y-m-1'),$stop->format('Y-m-d')])->count();
+        $total_review = Order::where('employee_id',$user->id)->where('reviewed_at','!=',null)->count();
+        $total_catering = Order::where('employee_id',$user->id)->whereBetween('order_date',[$now->format('Y-m-1'),$stop->format('Y-m-d')])->count();
         $total_dayoff = 0;
         $total_empty_order = 0;
         for ($i=1; $i <= $now->daysInMonth; $i++, $start->addDay()) { 
             $schedule = ScheduleMenu::where('date',$start->format('Y-m-d'))->first();
-            $order = Order::where('order_date',$start->format('Y-m-d'))->first();
+            $order = Order::where('employee_id',$user->id)->where('order_date',$start->format('Y-m-d'))->first();
             if ($schedule == null) {
                 $total_dayoff++;
             }
@@ -56,8 +56,9 @@ class EmployeeActionController extends Controller
             $start = Carbon::parse($request->month)->startOfMonth();
             $stop = Carbon::parse($request->month)->endOfMonth();
         }
-
-        return view('Employee.index_history_order',compact('now','start','stop'));     
+        $total_days = $start->daysInMonth;
+        
+        return view('Employee.index_history_order',compact('now','start','stop','total_days'));     
     }
     public function history_review(Request $request)
     {
