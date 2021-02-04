@@ -28,7 +28,8 @@
      </div>
      <div class="flex flex-shrink-0 items-center">
 
-        <input type="text" name="searching" class="focus:ring-red-100 focus:border-red-100 flex-1 block  bg-gray-100 rounded-l rounded-r-md sm:text-sm border-gray-100 py-2 px-4 mr-2 hover:border-blue-200 w-36 md:w-full" placeholder="Search" id="searching" onkeyup="searchingEmployee()" >
+        <input type="text" id="searching2" onkeyup="searchingTwo()"  class="focus:ring-red-100 focus:border-red-100 flex-1 block  bg-gray-100 rounded-l rounded-r-md sm:text-sm border-gray-100 py-2 px-4 mr-2 hover:border-blue-200 w-36 md:w-full " placeholder="Search"> 
+        
 
         <div class="flex items-center text-sm sm:hidden">
           <button type="button" onclick="previousSlide()" id="btn-slide-dis" class="inline-block rounded-lg font-medium leading-none py-3 px-3 focus:outline-none text-gray-400 hover:text-gray-600 focus:text-gray-600">

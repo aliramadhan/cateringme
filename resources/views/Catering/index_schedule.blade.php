@@ -85,9 +85,9 @@
       @csrf
 
       <div class="relative h-full  overflow-y-hidden overflow-x-hidden ">
-        <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide" >
+        <div class="absolute inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide hide-scroll" >
           
-            <div class="grid grid-rows-7 gap-1 w-full ">  
+            <div class="grid gap-1 w-full ">  
 
                 <div class="flex md:flex-row flex-col px-4 content-center text-left ">
                 <div class="flex-initial">       
@@ -127,18 +127,19 @@
                     @endfor  
                   </div>
               </div>
-          </div>
-       
-           
-            <div class="text-xl row-span-1 text-right pointer px-6 flex md:flex-row flex-col gap-4 justify-between">
+               <div class="text-xl row-span-1 text-right pointer px-6 flex md:flex-row flex-col gap-4 justify-between">
               <button type="submit" name="submit" value="cancelSchedule" class="cursor-pointer bg-red-600 px-6 py-2 rounded-lg text-white opacity-75 hover:opacity-100 duration-1000 focus:border-gray-200">Cancel</button>    
 
                <a onclick="nextSlide()" id="btn-slide-dis-2y" class="text-center cursor-pointer bg-gray-700 px-6 py-2 rounded-lg text-white opacity-75 hover:opacity-100 duration-1000 focus:border-gray-200"> Next  <i class="fas fa-arrow-right ml-2"></i></a>
             </div>
           </div>
+       
+           
+           
+          </div>
         </div>
   
-        <div class="absolute inset-0 w-full h-screen bg-gray-900 text-white flex text-5xl transition-all ease-in-out duration-1000 transform translate-x-full slide p-6 " >
+        <div class=" inset-0 w-full h-screen bg-gray-900 text-white flex text-5xl transition-all ease-in-out duration-1000 transform translate-x-full slide p-6 " >
 
            <div class="flex flex-col gap-6 w-full text-center h-max">  
            <h3 class="col-span-3 min-w-0 font-medium text-2xl leading-snug text-center ">
@@ -146,7 +147,7 @@
             </h3>
         
 
-              <ul id="myUL" class="md:grid md:grid-cols-3 grid-cols-1 hide-scroll overflow-y-auto lg:h-6/12 md:h-7/12 h-6/12">   
+              <ul id="myUL" class="md:grid md:grid-cols-3 grid-cols-1 hide-scroll overflow-y-auto ">   
                
                 @foreach($menus as $menu) 
                 <li class="flex-auto">
@@ -170,7 +171,7 @@
                   </a>
                 </li>
                 @endforeach      
-                       
+               
                 </ul>
                   <div class="flex text-xl col-span-3 text-left pointer md:px-3 pb-6 justify-between">
                  <button type="button" onclick="previousSlide()" id="btn-slide-disy" class="ml-2 bg-gray-700 px-6 py-2 rounded-lg text-white opacity-75 hover:opacity-100 duration-1000 focus:border-none"><i class="fas fa-arrow-left"></i> Back</button>

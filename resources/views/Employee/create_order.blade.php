@@ -197,11 +197,16 @@
     <a href="#carouselExampleControls" role="button" data-slide="next" id="next-step">
       <button type="button" class="btn btn-success" >Next</button>
     </a>
-    <button type="button" class="btn btn-primary" id="save-step" style="display: none;" data-dismiss="modal" >Save </button>
+    <button type="button" class="btn btn-primary" id="save-step" style="display: none;" data-dismiss="modal" onclick="backward()">Save </button>
     <script type="text/javascript">
       var buttonBack = document.getElementById("back-step");        
       var buttonNext = document.getElementById("next-step");       
       var buttonSave = document.getElementById("save-step");
+
+      function backward()
+      {
+       document.getElementById('back-step').click();
+      }
 
 
       buttonNext.addEventListener('click', function(event) {
@@ -214,10 +219,8 @@
         buttonNext.style.display = "block"; 
         buttonSave.style.display = "none";
       });
-
-
-
     </script>
+
     </form>
 
   </div>
@@ -264,9 +267,66 @@
 
     </div></div>
 
+   
+    <script>
+      $(document).ready(function(){
+        $("#hideDesc").click(function(){
+          $("#hideTarget").toggle(500);
+        });
+        
+      });
+    </script>
 
+    <div class="flex flex-col row-span-1 text-right pointer px-6 capitalize gap-4">
+      <h4 class="min-w-0  text-xl leading-snug text-left " >
+        <button id="hideDesc" class="font-semibold">
 
-    <div class="text-xl row-span-1 text-right pointer px-6 ">
+       Description
+       </button>
+     </h4>
+     <div class="flex flex-col gap-2" id="hideTarget">
+      <h4 class="min-w-0 font-medium text-lg leading-snug text-left flex items-center">
+        <span class="flex h-3 w-3 mr-2">
+          <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-purple-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3" style="background-image: linear-gradient( 160deg, #bdbdbe 0%, #032a32 100% );"></span>
+        </span>
+        color for days that have passed
+      </h4>
+
+      <h4 class="min-w-0 font-medium text-lg leading-snug text-left flex items-center">
+        <span class="flex h-3 w-3 mr-2">
+          <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-orange-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3" style="background-image: linear-gradient( 135deg, #FCCF31 10%, #F55555 100% );"></span>
+        </span>
+        color for the day filled in the schedule
+      </h4>
+
+      <h4 class="min-w-0 font-medium text-lg leading-snug text-left flex items-center">
+        <span class="flex h-3 w-3 mr-2">
+          <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-blue-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3" style="background-image: linear-gradient( 160deg, #0093E9 0%, #80D0C7 100% );"></span>
+        </span>
+        color for empty schedule
+      </h4>
+
+      <h4 class="min-w-0 font-medium text-lg leading-snug text-left flex items-center">
+        <span class="flex h-3 w-3 mr-2">
+          <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-green-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500" ></span>
+        </span>
+        color for the schedule you just filled in (this time)
+      </h4>
+
+      <h4 class="min-w-0 font-medium text-lg leading-snug text-left flex items-center">
+        <span class="flex h-3 w-3 mr-2">
+          <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-red-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3" style="background-image: linear-gradient( to right, #ff416c, #ff4b2b );"></span>
+        </span>
+        color for scheduled holidays or day off
+      </h4>
+
+    </div>
+     
    </div>
  </div>
 </div>
