@@ -15,6 +15,7 @@ use DB;
 use Telegram\Bot\Laravel\Facades\Telegram;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Exception;
 
 class AdminActionController extends Controller
 {
@@ -65,7 +66,7 @@ class AdminActionController extends Controller
 		$employees = User::where('role','Employee')->get();
 		$yesterday = Carbon::now()->subDay();
 		$menus = Menu::get();
-		$reviews = Order::orderBy('reviewed_at','desc')->get();
+		$reviews = Order::where('reviewed_at','!=',null)->orderBy('reviewed_at','desc')->get();
 		$orders = Order::where('order_date',$now->format('Y-m-d'))->get();
 		$price = Menu::pluck('price')->first();
 		if($price == null){
@@ -158,13 +159,14 @@ class AdminActionController extends Controller
 				'code_number' => $code_number,
 				'address' => $request->address,
 			]);
-		    DB::commit();
-			$send_mail = Mail::to($request->email)->send(new RegisterSuccessfully($data));
 		    // all good
-		} catch (\Exception $e) {
+		} catch (Exception $e) {
 		    DB::rollback();
-        	return redirect()->back()->withInputs()->withErrors(['message' => $e->getMessage()]);
+        	return redirect()->back()->withInput()->withErrors(['message' => $e->getMessage()]);
 		}
+		
+	    DB::commit();
+		$send_mail = Mail::to($request->email)->send(new RegisterSuccessfully($data));
         return redirect()->route('admin.index.account')->with(['message' => 'new '.$request->role.' added succesfully.']);
 	}
 	public function index_menu()
