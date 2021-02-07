@@ -56,10 +56,10 @@
                                         {{ __('Summary Employees ') }}
                                     </x-jet-dropdown-link>
                                       <x-jet-dropdown-link href="{{ route('admin.index.order') }}">
-                                        {{ __('Order Taken ') }}
+                                        {{ __('Meal`s Taken ') }}
                                     </x-jet-dropdown-link>
                                       <x-jet-dropdown-link href="{{ route('admin.index.order_not_taken') }}">
-                                        {{ __('Order Not Taken  ') }}
+                                        {{ __('Meal`s Not Taken  ') }}
                                     </x-jet-dropdown-link>
 
                                 </x-slot>
@@ -126,10 +126,10 @@
                             {{ __('Create Order') }}
                         </x-jet-nav-link>
                         <x-jet-nav-link href="{{ route('employee.history.order') }}" :active="request()->routeIs('employee.history.order')">
-                            {{ __('History Order') }}
+                            {{ __('Catering Order History') }}
                         </x-jet-nav-link>
                         <x-jet-nav-link href="{{ route('employee.history.review') }}" :active="request()->routeIs('employee.history.review')">
-                            {{ __('History Review') }}
+                            {{ __('Review History') }}
                         </x-jet-nav-link>
                     @endif
                 </div>
@@ -288,10 +288,10 @@
                             {{ __('Create Order') }}
                         </x-jet-responsive-nav-link>
                         <x-jet-responsive-nav-link href="{{ route('employee.history.order') }}" :active="request()->routeIs('employee.history.order')">
-                            {{ __('History Order') }}
+                            {{ __('Order History ') }}
                         </x-jet-responsive-nav-link>
                         <x-jet-responsive-nav-link href="{{ route('employee.history.review') }}" :active="request()->routeIs('employee.history.review')">
-                            {{ __('History Review') }}
+                            {{ __('History of Your Review and Feed') }}
                         </x-jet-responsive-nav-link>
                     @endif
         </div>

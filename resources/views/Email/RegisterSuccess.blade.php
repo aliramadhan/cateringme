@@ -37,87 +37,35 @@
     display: flex;">
     
     <p style="    color: #ffffff;
-    font-size: 1.5rem;">New Account Registered !</p>
+    font-size: 1.5rem;">Your New Account for Office Catering Registered! </p>
   </div>
 
-  <div style="    padding-top: 2rem;
-  padding-bottom: 2rem;border-bottom-width: 1px;">
+  <div style="    padding:2em;background-color: #fff;border-bottom-width: 1px;">
   <p>
-    Hey {{$data['name']}} !<br><br>
-    Congratulations , your account has been successfully created<br>        
-    Now you can use this catering application by entering the following email and password<br><br>
-    This your password  <b>{{$data['password']}}</b> <br><br> 
-    You can also change it on the profile view on the web page  
+    Hey {{$data['name']}}!<br><br>
+    Congratulations, your account has been successfully created.<br>        
+    Now you can use this catering application by entering your following email and password<br><br>
+    This your password:  <b>{{$data['password']}}</b> <br><br> 
+    You can also change it on the profile view on the webpage.<br> Access your account here:
+    <a href="https://catering.pahlawandesignstudio.com/" style="
+    text-decoration: none;font-weight: 600;">catering.pahlawandesignstudio.com</a>  
+
   </p>
-  <button style="letter-spacing: 0.025em;
-  width: 100%;
-  color: #ffffff;
-  padding: 1rem;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  font-weight: 600;
-  font-size: 0.875rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  background-color: #3f83f8;
-  border: none;" onclick="window.location.href='https://catering.pahlawandesignstudio.com/'">ACTIVED YOUR ACCOUNT</button>
+  <br>
   <p style="    font-size: 0.875rem;">
-    Best Regard !<br>
-    Your The App team
+    Best Regard!<br>
+    <a href="mailto:ainun@24slides.com&subject=My%20Ask&body=for Employee Happiness" style="text-decoration: none;font-weight: 600;color: #000000;"><i>Employee Happiness</i></a>
+    
   </p>
 </div>
 
-<div style="color: #4b5563;
-text-align: center;
-margin-top: 2rem;">
-<h3 style="    font-size: 1.125rem;
-margin-bottom: 1rem;">Thanks for using Catering App!</h3>
-<img style="    margin-left: auto;
-margin-right: auto;
-height: 2.5rem;" src="{{ asset('resources/image/logo2.png')}}" alt="24Slides Logo" >
-</div>
+
 
 </div>
 
 <div style="text-align: center;
 margin-top: 2rem;
 font-size: 0.875rem;">
-
-<div style="    margin-top: 1rem;
-margin-bottom: 1rem;
-justify-content: center;
-display: flex;">
-<a href="#" style="color: #ffffff;
-margin-right: 1rem;
-height: 2rem;
-width: 2rem;
-display: flex;
-align-items: center;
-justify-content: center;
-border-radius: 9999px;
-background-color: #f05252;
-text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
-<a href="#" style="color: #ffffff;
-margin-right: 1rem;
-height: 2rem;
-width: 2rem;
-display: flex;
-align-items: center;
-justify-content: center;
-border-radius: 9999px;
-background-color: #f05252;
-text-decoration: none;"><i class="fab fa-instagram"></i></a>
-<a href="#" style="color: #ffffff;
-margin-right: 1rem;
-height: 2rem;
-width: 2rem;
-display: flex;
-align-items: center;
-justify-content: center;
-border-radius: 9999px;
-background-color: #f05252;
-text-decoration: none;"><i class="fab fa-twitter"></i></a>
-</div>
 
 <div >
   <p style="    line-height: 2;">

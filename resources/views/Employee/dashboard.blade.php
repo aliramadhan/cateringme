@@ -184,12 +184,12 @@
 
       <div class="bg-cover bg-top text-center bg-gradient-to-t bg-blue-400 to bg-green-400  bg-center text-white  object-fill w-full" style="background-image: url(https://assets.kompasiana.com/items/album/2018/04/16/suasana-kantor-24slides-indonesia-3-5ad4a44bcaf7db40dd0deff2.jpg?t=o&v=760);background-position-y: -70px;">
         <div class="h-full md:px-20 p-8 md:pb-40 md:pt-20" style="background-image: linear-gradient(0deg,#252525,#27272769) !important;">
-          <p class="font-bold text-2xl uppercase"> Today Breakfast </p>
-          <div class="flex md:flex-row flex-col justify-center mb-8 ">
-            <p class="text-5xl font-bold leading-none capitalize"> no catering schedule today   </p>        
+          <p class="font-bold text-2xl uppercase"> Today's Meal </p>
+          <div class="flex md:flex-row flex-col justify-center mb-10 ">
+            <p class="text-5xl font-bold leading-none capitalize"> you don't have any meal scheduled today   </p>        
 
           </div>
-          <p class="text-2xl mb-4 leading-none">Sorry you dont have catering schedule today, Please comeback tomorrow  </p>
+        
 
         </div>       
       </div> 
@@ -197,7 +197,7 @@
       @else
       <div class="bg-cover bg-top text-center bg-gradient-to-t bg-blue-400 to bg-green-400  bg-center text-white  object-fill w-full" style="background-image: url(@if($menu_today->menu->photos->first() != null){{ url('public/'.$menu_today->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif);background-position-y: -70px;">
         <div class="h-full md:px-20 p-8 md:pb-40 md:pt-20" style="background-image: linear-gradient(0deg,#252525,#27272769) !important;">
-          <p class="font-bold text-2xl uppercase"> Today Breakfast </p>
+          <p class="font-bold text-2xl uppercase">Today's Meal </p>
           <div class="flex md:flex-row flex-col justify-center mb-8">
             <p class="text-5xl font-bold leading-none "> {{$menu_today->menu->name}}   </p>         
 
@@ -228,7 +228,7 @@
        <div class="bg-cover bg-top w-full md:w-1/4 bg-gradient-to-t bg-blue-400 to bg-green-400 bg-center text-white  object-fill" style="background-image: url(https://assets.kompasiana.com/items/album/2018/04/16/suasana-kantor-24slides-indonesia-3-5ad4a44bcaf7db40dd0deff2.jpg?t=o&v=760});">
       <div class=" p-4 h-full px-10 grid grid-rows-4" style="background-image: linear-gradient(60deg,#252525,#27272769) !important;">
         <div>
-        <p class="font-bold text-lg uppercase mb-8 border-b-2 "> Tomorrow Breakfast </p>
+        <p class="font-bold text-lg uppercase mb-8 border-b-2 "> Tomorrow's meal </p>
         </div>
         <p class="text-4xl font-bold row-span-2 capitalize"> no catering schedule for tomorrow </p>
          
@@ -241,7 +241,7 @@
      <div class="bg-cover bg-top w-full md:w-1/4 bg-gradient-to-t bg-blue-400 to bg-green-400 bg-center text-white  object-fill" style="background-image: url(@if($menu_tomorrow->menu->photos->first() != null ){{url('public/'.$menu_tomorrow->menu->photos->first()->file)}} @else {{url('public/images/no-image.png')}} @endif);">
       <div class=" p-4 h-full px-10 grid grid-rows-4" style="background-image: linear-gradient(60deg,#252525,#27272769) !important;">
         <div>
-        <p class="font-bold text-lg uppercase mb-8 border-b-2 "> Tomorrow Breakfast </p>
+        <p class="font-bold text-lg uppercase mb-8 border-b-2 "> Tomorrow's meal </p>
        </div>
         <p class="text-4xl font-bold row-span-2 capitalize"> {{$menu_tomorrow->menu->name}} </p>
          
@@ -280,7 +280,7 @@
                     <i class="fas fa-calendar-times rounded-full bg-red-200 text-red-500 p-5 text-4xl"></i>
                     <div class="flex flex-col flex-auto">
                       <h3 class="text-5xl text-red-500 font-semibold leading-tight">{{$total_dayoff}}</h3>  
-                      <h4 class="text-base font-semibold uppercase flex-auto text-center text-gray-500 leading-tight">Catering Day Off</h4>
+                      <h4 class="text-base font-semibold uppercase flex-auto text-center text-gray-500 leading-tight">No catering</h4>
 
                     </div>
                   </div>

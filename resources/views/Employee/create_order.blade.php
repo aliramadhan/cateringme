@@ -76,7 +76,7 @@
       <div class="px-4 py-2 border-b border-gray-200 flex justify-between items-center bg-white sm:py-4 sm:px-6 sm:items-baseline">
         <div class="flex-shrink min-w-0 flex items-center">
           <h3 class="flex-shrink min-w-0 font-regular text-base md:text-lg leading-snug truncate">
-            Selection of schedule for order
+           Select Meal on Blue Date
           </h3>
         </div>
         <div class="ml-4 flex flex-shrink-0 items-center cursor-pointer">
@@ -281,7 +281,7 @@
       <h4 class="min-w-0  text-xl leading-snug text-left " >
         <button id="hideDesc" class="font-semibold">
 
-       Description
+       Legend
        </button>
      </h4>
      <div class="flex flex-col gap-2" id="hideTarget">
@@ -290,7 +290,7 @@
           <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-purple-400 opacity-75"></span>
           <span class="relative inline-flex rounded-full h-3 w-3" style="background-image: linear-gradient( 160deg, #bdbdbe 0%, #032a32 100% );"></span>
         </span>
-        color for days that have passed
+        Past Days
       </h4>
 
       <h4 class="min-w-0 font-medium text-lg leading-snug text-left flex items-center">
@@ -298,7 +298,7 @@
           <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-orange-400 opacity-75"></span>
           <span class="relative inline-flex rounded-full h-3 w-3" style="background-image: linear-gradient( 135deg, #FCCF31 10%, #F55555 100% );"></span>
         </span>
-        color for the day filled in the schedule
+        Catering Submitted
       </h4>
 
       <h4 class="min-w-0 font-medium text-lg leading-snug text-left flex items-center">
@@ -306,7 +306,7 @@
           <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-blue-400 opacity-75"></span>
           <span class="relative inline-flex rounded-full h-3 w-3" style="background-image: linear-gradient( 160deg, #0093E9 0%, #80D0C7 100% );"></span>
         </span>
-        color for empty schedule
+        Catering Available
       </h4>
 
       <h4 class="min-w-0 font-medium text-lg leading-snug text-left flex items-center">
@@ -314,7 +314,7 @@
           <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-green-400 opacity-75"></span>
           <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500" ></span>
         </span>
-        color for the schedule you just filled in (this time)
+        Recent Update
       </h4>
 
       <h4 class="min-w-0 font-medium text-lg leading-snug text-left flex items-center">
@@ -322,7 +322,7 @@
           <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-red-400 opacity-75"></span>
           <span class="relative inline-flex rounded-full h-3 w-3" style="background-image: linear-gradient( to right, #ff416c, #ff4b2b );"></span>
         </span>
-        color for scheduled holidays or day off
+        No Catering
       </h4>
 
     </div>
