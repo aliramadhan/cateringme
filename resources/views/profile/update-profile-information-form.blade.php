@@ -66,6 +66,20 @@
             <x-jet-input-error for="email" class="mt-2" />
         </div>
 
+        <!-- Division -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="division" value="{{ __('Division') }}" />
+            <x-jet-input id="division" type="text" class="mt-1 block w-full" wire:model.defer="state.division" autocomplete="division" />
+            <x-jet-input-error for="division" class="mt-2" />
+        </div>
+
+        <!-- Role -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="roles" value="{{ __('Role') }}" />
+            <x-jet-input id="roles" type="text" class="mt-1 block w-full" wire:model.defer="state.roles" autocomplete="roles" />
+            <x-jet-input-error for="roles" class="mt-2" />
+        </div>
+
         <!-- Number Phone -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="number_phone" value="{{ __('Number Phone') }}" />
