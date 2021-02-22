@@ -120,6 +120,7 @@ class AdminActionController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'role' => ['required', 'string'],
             'division' => ['required', 'string'],
+            'roles' => ['required', 'string'],
             'number_phone' => ['numeric','unique:users','digits_between:10,15'],
             'address' => ['string'],
         ]);
@@ -157,6 +158,7 @@ class AdminActionController extends Controller
 				'password' => Hash::make($password),
 				'role' => $request->role,
 				'division' => $request->division,
+				'roles' => $request->roles,
 				'number_phone' => $request->number_phone,
 				'code_number' => $code_number,
 				'address' => $request->address,
