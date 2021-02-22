@@ -87,6 +87,11 @@
           </div>
 
           <div class="mt-4">
+            <x-jet-label for="division" value="{{ __('Division') }}" />
+            <x-jet-input id="division" class="block mt-1 w-full" type="text" name="division" :value="old('division')" required autofocus autocomplete="division" />
+          </div>
+
+          <div class="mt-4">
             <x-jet-label for="number_phone" value="{{ __('Number Phone') }}" />
             <x-jet-input id="number_phone" class="block mt-1 w-full {{ $errors->has('number_phone') ? 'border-1 border-red-300' :'' }}" type="text" name="number_phone" :value="old('number_phone')" required />
             </div>
