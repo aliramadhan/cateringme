@@ -57,7 +57,7 @@ class EmployeeActionController extends Controller
             $stop = Carbon::parse($request->month)->endOfMonth();
         }
         $total_days = $start->daysInMonth;
-        
+
         return view('Employee.index_history_order',compact('now','start','stop','total_days'));     
     }
     public function history_review(Request $request)
@@ -138,6 +138,7 @@ class EmployeeActionController extends Controller
         if ($order != null) {
            $schedule->order = $order;
         }
+        $schedule->date = $date->format('d M Y');
         return $schedule;
     }
     /*public function get_date(Request $request)
@@ -264,7 +265,7 @@ class EmployeeActionController extends Controller
                 $menu->rate = 0;
             }
         }
-    	foreach (CarbonPeriod::create(Carbon::parse('01-01-2021'), '1 month', Carbon::today()) as $month) {
+        foreach (CarbonPeriod::create(Carbon::parse('01-01-2021'), '1 month', Carbon::today()) as $month) {
 
             $months[$month->format('m-Y')] = $month;
         }
@@ -277,7 +278,9 @@ class EmployeeActionController extends Controller
         $next_month = Carbon::parse($now->format('Y-m'))->addMonth()->startOfMonth();
         $start = Carbon::now()->startOfMonth();
         $stop = Carbon::now()->endOfMonth();
-        return view('Employee.create_order',compact('now','start','stop','next_month'));
+        $total_dadakan = Order::where('order_date',$now->format('Y-m-d'))->whereDate('created_at', $now)->count();
+        
+        return view('Employee.create_order',compact('now','start','stop','next_month','total_dadakan'));
     }
     public function store_order(Request $request)
     {   
@@ -341,7 +344,7 @@ class EmployeeActionController extends Controller
         }
 
         $message = 'Order submited successfully.';
-		return $message;
+        return $message;
     }
     public function delete_order($id)
     {
@@ -354,11 +357,6 @@ class EmployeeActionController extends Controller
     }
     public function store_review(Request $request, $code)
     {
-        //Validation Request
-        $this->validate($request, [
-            'review' => ['required', 'min:5'],
-            'stars' => ['required', 'numeric']
-        ]);
         //declare variable
         $now = Carbon::now();
         $order = Order::where('order_number',$code)->first();
@@ -366,7 +364,31 @@ class EmployeeActionController extends Controller
         if($order == null){
             return redirect()->back()->withErrors(['message' => 'Order not found.']);
         }
-
+        
+        if($request->submit == 'storeNote'){
+            //Validation Request
+            $this->validate($request, [
+                'note' => ['required']
+            ]);
+            //add review and stars rating to order
+            DB::beginTransaction();
+            try {
+                $order->update([
+                    'note' => $request->note,
+                ]);
+            } catch (\Exception $e) {
+                DB::rollback();
+                return redirect()->back()->withErrors(['message' => $e->message]);
+            }
+            DB::commit();
+            return redirect()->back()->with(['message' => 'Note submited successfully.']);
+        }
+        //Validation Request
+        $this->validate($request, [
+            'review' => ['required', 'min:5'],
+            'stars' => ['required', 'numeric']
+        ]);
+        
         //add review and stars rating to order
         DB::beginTransaction();
         try {
