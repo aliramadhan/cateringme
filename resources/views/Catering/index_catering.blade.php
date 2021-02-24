@@ -21,6 +21,18 @@
            </div>
            <div class="ml-4 flex flex-shrink-0 items-center">
 
+          
+           <div class="md:ml-4 flex items-center gap-4 lg:w-7/12  md:w-8/12 w-full">
+              <form class="contents">
+                @csrf
+                <input type="date" class="md:w-full w-4/12 text border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-30" name="from" class="p-4" @if($from != null) value="{{$from->format('Y-m-d')}}" @endif>
+
+                To 
+                <input type="date" class="md:w-full w-4/12 text border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-30" name="to" @if($to != null) value="{{$to->format('Y-m-d')}}" @endif>
+                <button type="submit" name="submit" class="py-2 px-3 rounded-lg transition-500 bg-blue-400 hover:bg-blue-500 focus:outline-none text-white"> <i class="fas fa-search"></i></button>
+            </form>
+            
+        </div>
             <input type="text" name="searching" class="focus:ring-red-100 focus:border-red-100 flex-1 block md:w-full  w-24 bg-gray-100 rounded-l rounded-r-md sm:text-sm border-gray-100 py-2 px-4 mr-2 hover:border-blue-200 " placeholder="Search" id="searching" onkeyup="searchingEmployee()" >
 
             <div class="flex items-center text-sm sm:hidden">
@@ -85,11 +97,7 @@
                         <div class="ml-2 text-left">
                           <a href="#" class=" font-semibold ">{{$order->employee->name}}</a>
                           <div class=" text-sm font-semibold text-indigo-700 -mt-1 truncate">
-                            @if($order->status == 0)
-                              not served
-                            @else
-                              served
-                            @endif
+                            {{Carbon\Carbon::parse($order->order_date)->format('d F Y')}}
                           </div>
                         </div>
                       </div>
@@ -132,7 +140,7 @@
         <tr>
           <th>No.</th>
           <th>Employee Name</th>
-          <th>Employee Role</th>
+          <th>Order Date</th>
           <th>Menu</th>
       </tr>
   </thead>
@@ -141,7 +149,7 @@
     <tr>
       <td>{{$loop->iteration}}</td>
       <td>{{$order->employee->name}}</td>
-       <td>{{$order->employee->role}}</td>
+       <td>{{Carbon\Carbon::parse($order->order_date)->format('d F Y')}}</td>
       <td>{{$order->menu->name}}</td>
   </tr>
     @endforeach

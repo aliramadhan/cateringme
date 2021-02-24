@@ -354,13 +354,20 @@ class CateringActionController extends Controller
         DB::commit();
         return redirect()->back()->with(['message' => 'Order has been scheduled.']);
     }
-    public function index_catering()
+    public function index_catering(Request $request)
     {
         //declare variable
         $now = Carbon::now();
+        $from = null;
+        $to = null;
         $orders = Order::where('order_date',$now->format('Y-m-d'))->get();
+        if($request->from != null && $request->to != null){
+            $from = Carbon::parse($request->from);
+            $to = Carbon::parse($request->to);
+            $orders = Order::whereBetween('order_date',[$from->format('Y-m-d'),$to->format('Y-m-d')])->orderBy('order_date','desc')->get();
+        }
 
-        return view('Catering.index_catering',compact('now','orders'));
+        return view('Catering.index_catering',compact('now','orders','from','to'));
     }
     public function index_report(Request $request)
     {

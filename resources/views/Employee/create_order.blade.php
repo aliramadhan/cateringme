@@ -52,13 +52,12 @@
     } 
 
     input[type="radio"]:checked + label span {
-      background-color: #3490DC; 
+      background-color: #3490DC; //bg-blue
       box-shadow: 0px 0px 0px 2px white inset;
     }
 
     input[type="radio"]:checked + label{
-     color: #3490DC; 
-    border: 2px solid #3f83f8 !important;
+     color: #3490DC; //text-blue
    }
    input[type="radio"]:checked + label:before{
     display: none;
@@ -135,7 +134,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 p-4 gap-4 bg-gray-50">
                       <div class="w-full ">
                       <h5 class="font-semibold text-center">Additional Catering</h5>
-                      <div class="text-center md:grid md:grid-cols-1  lg:grid-cols-2 flex hide-scroll">                         
+                      <div class="text-center md:grid md:gridrows-2 flex hide-scroll">                         
                          
                           <input type="radio" name="porsi" value="L" class="flex-auto hidden" id="nasiL">
                           <label for="nasiL" class="flex cursor-pointer text-base font-semibold items-center not-menu px-4 bg-white rounded-xl border hover:shadow-md duration-500">
@@ -253,7 +252,7 @@
         <input class='label__checkbox duration-1000 ' name="dates[]" type='checkbox' id="tanggal{{$start->format('Y-m-d')}}"  @if($start < $now && $total_dadakan <= 5) @elseif($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" onclick="document.getElementById('tanggal{!! $start->format("Y-m-d") !!}').checked = false;" data-toggle="modal" data-target="#ScheduleModal">
 
         <span class='label__text '>
-          <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient( @if($order != null)  135deg, #FCCF31 10%, #F55555 100% @elseif($start->day == $now->day && $total_dadakan <= 5) 160deg, #0093E9 0%, #80D0C7 100% @elseif($start < $now) 160deg, #bdbdbe 0%, #032a32 100% @elseif($schedule != null) 160deg, #0093E9 0%, #80D0C7 100%   @else to right, #ff416c, #ff4b2b @endif );'>
+          <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient( @if($order != null)  135deg, #FCCF31 10%, #F55555 100% @elseif($schedule != null && $start->day == $now->day && $total_dadakan <= 5) 160deg, #0093E9 0%, #80D0C7 100% @elseif($start < $now) 160deg, #bdbdbe 0%, #032a32 100% @elseif($schedule != null) 160deg, #0093E9 0%, #80D0C7 100%   @else to right, #ff416c, #ff4b2b @endif );'>
             <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 p-10 duration-1000' style='font-family: Poppins, sans-serif;'>
 
               <div class='font-semibold text-5xl mb-2 '>{{$start->format('d')}}</div>
@@ -281,61 +280,7 @@
       });
     </script>
 
-   
- </div>
-</div>
-</form>
-
-<div class="absolute inset-0 w-full h-full bg-gray-900 text-white flex text-5xl transition-all ease-in-out duration-1000 transform translate-x-full slide p-6" >
-
-  <div class="grid grid-rows-7 gap-1 w-full ">  
-
-    <h3 class="flex-shrink min-w-0 font-medium text-5xl leading-snug text-center mb-6 h-28 md:h-15 ">
-     {{$next_month->format('F Y')}}
-   </h3>  
-    <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5 mt-4">                      
-     <div id="div1" class="duration-1000 targetDiv  justify-content content-center text-center rounded-lg pt-4"> 
-      @for($i = 1; $i <= $next_month->daysInMonth; $i++, $start->addDay())
-      @php
-      $user = auth()->user();
-      $schedule = App\Models\ScheduleMenu::where('date',$start->format('Y-m-d'))->first();
-      $order = App\Models\Order::where('employee_id',$user->id)->where('order_date',$start->format('Y-m-d'))->first();
-      @endphp
-
-
-      <label class='label flex-auto contents duration-1000'>
-        <input class='label__checkbox duration-1000 ' name="dates[]" type='checkbox' id="tanggal{{$start->format('Y-m-d')}}"  @if($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" onclick="document.getElementById('tanggal{{$i}}').checked = false;">
-
-        <span class='label__text '>
-          <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient( @if($order != null)  135deg, #FCCF31 10%, #F55555 100% @elseif($start < $now) 160deg, #bdbdbe 0%, #032a32 100% @elseif($schedule != null) 160deg, #0093E9 0%, #80D0C7 100%   @else to right, #ff416c, #ff4b2b @endif );'>
-            <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 p-10 duration-1000' style='font-family: Poppins, sans-serif;'>
-
-              <div class='font-semibold text-5xl mb-2 '>{{$start->format('d')}}</div>
-              <div class='text-xs font-base'>{{$start->format('l')}}</div>
-
-            </i>
-          </span>
-        </span>
-      </label>
-
-      @endfor
-
-    </div></div>
-
-
-
-
-
-  
-</div>
-</div>
-</form>
-
-
-</div>
-</div>
-
- <div class="flex flex-col row-span-1 text-right pointer p-6 mt-8 capitalize gap-4 bg-white rounded-xl">
+    <div class="flex flex-col row-span-1 text-right pointer px-6 capitalize gap-4">
       <h4 class="min-w-0  text-xl leading-snug text-left " >
         <button id="hideDesc" class="font-semibold">
 
@@ -386,7 +331,7 @@
     </div>
      
    </div>
-</div>
+ </div>
 </div>
 </form>
 <div class="absolute inset-0 w-full h-full bg-gray-900 text-white flex text-5xl transition-all ease-in-out duration-1000 transform translate-x-full slide p-6" >
@@ -437,10 +382,12 @@
 </div>
 </form>
 
-</div>
-</div>
-</div>
 
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
 <script type="text/javascript">
