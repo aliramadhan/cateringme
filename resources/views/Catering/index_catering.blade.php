@@ -5,7 +5,7 @@
     @endif
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Menu Today') }}
+            {{ __('Catering Orders') }}
         </h2>
     </x-slot>
      <link rel="stylesheet" href="{{asset('resources/css/Foodcheckbox.css')}}" />
@@ -13,16 +13,9 @@
 
       <div class="max-w-7xl mx-auto  lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg Static h-full">
-          <div class="px-4 py-2 border-b border-gray-200 flex justify-between items-center bg-white sm:py-4 sm:px-6 sm:items-baseline">
-            <div class="flex-shrink min-w-0 flex items-center">
-              <h3 class="flex-shrink min-w-0 font-regular text-base md:text-lg leading-snug truncate">
-               Catering Order
-             </h3>
-           </div>
-           <div class="ml-4 flex flex-shrink-0 items-center">
-
-          
-           <div class="md:ml-4 flex items-center gap-4 lg:w-7/12  md:w-8/12 w-full">
+          <div class="px-4 py-2 border-b border-gray-200 flex justify-between items-center bg-white sm:py-4 sm:px-6 sm:items-baseline md:flex-col gap-5 flex-col lg:flex-row">          
+           
+             <div class="md:ml-0 flex items-center gap-4 lg:w-4/12  md:w-full w-full">
               <form class="contents">
                 @csrf
                 <input type="date" class="md:w-full w-4/12 text border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-30" name="from" class="p-4" @if($from != null) value="{{$from->format('Y-m-d')}}" @endif>
@@ -30,10 +23,12 @@
                 To 
                 <input type="date" class="md:w-full w-4/12 text border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-30" name="to" @if($to != null) value="{{$to->format('Y-m-d')}}" @endif>
                 <button type="submit" name="submit" class="py-2 px-3 rounded-lg transition-500 bg-blue-400 hover:bg-blue-500 focus:outline-none text-white"> <i class="fas fa-search"></i></button>
-            </form>
-            
-        </div>
-            <input type="text" name="searching" class="focus:ring-red-100 focus:border-red-100 flex-1 block md:w-full  w-24 bg-gray-100 rounded-l rounded-r-md sm:text-sm border-gray-100 py-2 px-4 mr-2 hover:border-blue-200 " placeholder="Search" id="searching" onkeyup="searchingEmployee()" >
+              </form>
+
+            </div>
+
+            <div class="md:ml-0 flex flex-shrink-0 items-center md:w-full lg:w-4/12 w-11/12 -ml-6">
+            <input type="text" id="searching2" onkeyup="searchingtwo()"  class="focus:ring-red-100 focus:border-red-100 flex-1 block md:w-full  w-24 bg-gray-100 rounded-l rounded-r-md sm:text-sm border-gray-100 py-2 px-4 mr-2 hover:border-blue-200 " placeholder="Search" >
 
             <div class="flex items-center text-sm sm:hidden">
               <button type="button" onclick="previousSlide()" id="btn-slide-dis" class="inline-block rounded-lg font-medium leading-none py-3 px-3 focus:outline-none text-gray-400 hover:text-gray-600 focus:text-gray-600">
@@ -52,24 +47,11 @@
               Tables
             </button>
           </div>
-          <form action="{{route('catering.served.menu')}}" method="POST">
-          @csrf            
-          <div class="flex items-center md:block hidden">
-            <div class="pl-4 pr-4 self-stretch">
-              <div class="h-full border-l border-gray-200"></div>
-            </div>
-              <button type="submit" name="submit" value="submit" id="btn-slide-dis-2y" class="bg-blue-500  rounded-lg text-white pr-4 duration-1000 hover:bg-blue-700 duration-1000 shadow-2xl bottom-20 mx-auto ">
-                <i class="fas fa-save mr-2 bg-blue-700 p-3 rounded-l-lg"></i> Save</button>
-          </div>
-
-           <div class="flex items-center sm:hidden ">
-            <div class="pl-4 pr-4 self-stretch">
-              <div class="h-full border-l border-gray-200"></div>
-            </div>
-              <button type="submit" name="submit" id="btn-slide-dis-2y" class="bg-blue-500  rounded-lg text-white duration-1000 hover:bg-blue-700 duration-1000 shadow-2xl bottom-20 mx-auto ">
-                <i class="fas fa-save p-3 "></i></button>
-          </div>
         </div>
+       
+
+          
+       
       </div>
 
       <div class="relative md:h-screen h-full">

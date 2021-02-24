@@ -85,9 +85,87 @@
               <option>Catering</option>
             </select>
             </div>
+          </div>       
+
+          <div class="mt-4 grid grid-cols-2 gap-2">
+            <div>
+            <x-jet-label for="division" value="{{ __('Division') }}" />
+            <x-jet-input id="division" class="block mt-1 w-full" type="text" name="division" :value="old('division')" required autofocus autocomplete="division" />
+            </div>
+             <div>
+            <x-jet-label for="roles" value="{{ __('Role') }}" />
+            <x-jet-input id="roles" class="block mt-1 w-full" type="text" name="roles" :value="old('roles')" required autofocus autocomplete="roles" />
+            </div>
           </div>
 
-       
+         
+
+          <div class="mt-4">
+            <x-jet-label for="number_phone" value="{{ __('Number Phone') }}" />
+            <x-jet-input id="number_phone" class="block mt-1 w-full {{ $errors->has('number_phone') ? 'border-1 border-red-300' :'' }}" type="text" name="number_phone" :value="old('number_phone')" required />
+            </div>
+
+            <div class="mt-4">
+              <x-jet-label for="address" value="{{ __('Address') }}" />
+              <x-jet-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required />
+            </div>
+            <!--Footer-->
+            <div class="flex justify-end pt-4">
+              <x-jet-button class="px-4 bg-transparent p-3 rounded-lg hover:bg-gray-100 hover:text-indigo-400 mr-2 bg-blue-500 p-3 rounded-lg text-white">   {{ __('Save') }}</x-jet-button>
+              
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50" id="editModal">
+    <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+    
+    <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+      
+      <div class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+        <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+          <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+        </svg>
+        <span class="text-sm">(Esc)</span>
+      </div>
+
+      <!-- Add margin if you want to see some of the overlay behind the modal-->
+      <div class="modal-content py-4 text-left px-6">
+        <!--Title-->
+        <div class="flex justify-between items-center pb-3">
+          <p class="text-2xl font-bold text-gray-600 mb-4">Add Account</p>
+          <div class="modal-close cursor-pointer z-50">
+            <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+              <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+            </svg>
+          </div>
+        </div>
+
+        <!--Body-->
+        
+        <form method="POST" action="{{ route('admin.store.account') }}">
+          @csrf
+
+          <div>
+            <x-jet-label for="name" value="{{ __('Name') }}" />
+            <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+          </div>
+
+          <div class="mt-4  grid grid-cols-2 gap-2">
+              <div>
+            <x-jet-label for="email" value="{{ __('Email') }}" />
+            <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+            </div>
+            <div>
+                            <x-jet-label for="role" value="{{ __('Status') }}" />
+            <select id="role" name="role" class="block mt-1 w-full form-select" required>
+              <option>Employee</option>
+              <option>Catering</option>
+            </select>
+            </div>
+          </div>       
 
           <div class="mt-4 grid grid-cols-2 gap-2">
             <div>
@@ -133,7 +211,7 @@
            </div>
            <div class="ml-4 flex flex-shrink-0 items-center">
 
-            <input type="text" name="searching" class="focus:ring-red-100 focus:border-red-100 flex-1 block bg-gray-100 rounded-l rounded-r-md sm:text-sm border-gray-100 py-2 px-4 mr-2 hover:border-blue-200 w-28" placeholder="Search" id="searching" onkeyup="searchingEmployee()" >
+            <input type="text" id="searching2" onkeyup="searchingTwo()" class="focus:ring-red-100 focus:border-red-100 flex-1 block bg-gray-100 rounded-l rounded-r-md sm:text-sm border-gray-100 py-2 px-4 mr-2 hover:border-blue-200 w-28" placeholder="Search"  >
             
 
             <div class="flex items-center text-sm sm:hidden">
@@ -174,10 +252,12 @@
 
             <ul id="myUL" class="contents">         
              @foreach($users as $user)
-             <li>
-                <a href="@if($user->role == 'Employee') {{route('admin.can_order',$user->code_number)}} @else # @endif" @if($user->can_order == 1 && $user->role == 'Employee') onclick="return confirm('Disable feature can order for {!! $user->name !!} ?')" @elseif($user->can_order == 0 && $user->role == 'Employee') onclick="return confirm('enable feature can order for {!! $user->name !!} ?')" @endif>
+             <li>                
+              <a href="@if($user->role == 'Employee') {{route('admin.can_order',$user->code_number)}} @else # @endif" @if($user->can_order == 1 && $user->role == 'Employee') onclick="return confirm('Disable feature can order for {!! $user->name !!} ?')" @elseif($user->can_order == 0 && $user->role == 'Employee') onclick="return confirm('enable feature can order for {!! $user->name !!} ?')" @endif>                
+               
               <div class="transform bg-white shadow-xl rounded-xl pb-3 hover:-translate-y-2 hover:shadow-2xl duration-500">
-               @if($user->role == 'Employee')                         
+               @if($user->role == 'Employee')         
+                
                  <div class="flex flex-row text-base absolute bg-gray-600 absolute rounded-tl-xl rounded-br-xl text-white px-4 hover:bg-gray-700 duration-500 cursor-pointer">
                   <div class="px-2 py-1 font-semibold ">Can Order?</div>
                   <div class="px-2 py-1 font-bold"> 
@@ -187,6 +267,7 @@
                       <font class="text-red-400">No</font> 
                     @endif</div>
                 </div>
+            
               @endif
                 <div class="photo-wrapper p-2">
 
@@ -212,13 +293,16 @@
                             <div class="px-2 py-1 text-gray-500 font-semibold w-20 text-left">Email</div>
                             <div class="px-2 py-1  text-left flex-auto">{{$user->email}}</div>
                         </div>
-                       
+                      </a>
+                       <button class="modal-open rounded-xl text-lg p-3 bg-blue-400 text-white font-semibold mt-4 mx-4 z-10 pointer hover:bg-blue-600" data-target="editModal" data-toggle="modal" id="modal-click">Edit Account</button>
                     </div>
 
                    
                 </div>
             </div>
+
           </a>
+
           </li>
           @endforeach
         
