@@ -78,7 +78,7 @@
                 <img src="@if($order->menu->photos->first() != null){{url('public/'.$order->menu->photos->first()->file)}} @else {{url('public/images/no-image.png')}} @endif" alt="#" class="h-52 rounded-xl object-cover w-full">
 
               </div>
-              <div class=" text-base font-bold text-gray-600 text-left px-2">{{$order->menu->name}}</div>
+              <div class=" text-xl font-bold text-gray-600 text-left px-2">{{$order->menu->name}}</div>
               <div class=" text-base font-base text-gray-600 text-left px-2">{{$order->menu->desc}}</div>     
               <div class=" text-base font-base text-orange-500 text-right px-2">@for($k = 1; $k <= $order->menu->orders->avg('stars'); $k++) <i class="fas fa-star"></i>@endfor </div>     
               </div>

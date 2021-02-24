@@ -186,7 +186,7 @@
         <div class="h-full md:px-20 p-8 md:pb-40 md:pt-20" style="background-image: linear-gradient(0deg,#252525,#27272769) !important;">
           <p class="font-bold text-2xl uppercase"> Today's Meal </p>
           <div class="flex md:flex-row flex-col justify-center mb-10 ">
-            <p class="text-5xl font-bold leading-none capitalize"> you don't have any meal scheduled today   </p>        
+            <p class="text-5xl font-bold leading-none mt-5  capitalize"> you don't have any meal scheduled today   </p>        
 
           </div>
         
@@ -230,7 +230,7 @@
         <div>
         <p class="font-bold text-lg uppercase mb-8 border-b-2 "> Tomorrow's meal </p>
         </div>
-        <p class="text-4xl font-bold row-span-2 capitalize"> no catering schedule for tomorrow </p>
+        <p class="text-4xl font-bold row-span-2 capitalize -mt-5 "> no catering schedule for tomorrow </p>
          
       </div>
 
@@ -252,7 +252,7 @@
       </div>
     </div>
 
-      <div class="flex hide-scroll md:grid md:grid-cols-4 pr-9 mb-8 mt-8 md:-mt-20 gap-4 w-full pl-6">        
+      <div class="flex hide-scroll md:grid md:grid-cols-2 lg:grid-cols-4 pr-9 mb-8 mt-8 md:-mt-20 gap-4 w-full pl-6 py-6">        
         <div class="w-full px-2">
          
             <a href="{{ route('employee.create.order') }}">
@@ -386,43 +386,8 @@
             <a href="#">{{$order->menu->name}}</a>
           </div>
 
-          <div class="bootstrapiso z-50">
-              <div class="modal fade" id="CateringImage{{$img_modal}}" tabindex="-1" role="dialog" aria-labelledby="MenuPhotosModal" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="MenuPhotosModal"></h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close" class="right-4">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body p-0">
-                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                      <div class="carousel-inner photos-menu">
-                        <!-- Data photo -->
-                      </div>
-                      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                         <i class="fas fa-backward  text-xl bg-gray-700 p-2 rounded-full"></i>
-                        <span class="sr-only">Previous</span>
-                      </a>
-                      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                         <i class="fas fa-forward  text-xl bg-gray-700 p-2 rounded-full"></i>
-                        <span class="sr-only">Next</span>
-                      </a>
-                    </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>  
-
-          <button data-toggle="modal" data-target="#CateringImage{{$img_modal++}}" class="bootstrapiso contents">
-            <img src="@if($order->menu->photos->first() != null){{ url('public/'.$order->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-8 w-8 mr-2 rounded flex-initial transform hover:scale-125 duration-500 ease-in-out hover:shadow=lg" onclick="get_photos({{$order->menu->id}})">
-          </button>
+            <img src="@if($order->menu->photos->first() != null){{ url('public/'.$order->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-8 w-8 mr-2 rounded flex-initial transform hover:scale-125 duration-500 ease-in-out hover:shadow=lg" >
+        
             @if($start_date > Carbon\Carbon::now())
             <a href="{{route('employee.delete.order',$order->id)}}" onclick="return confirm('Cancel order date {{$start_date->format('d, M Y')}}')">
               <div class="close-container shadow-lg">

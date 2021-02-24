@@ -73,28 +73,34 @@
             <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
           </div>
 
-          <div class="mt-4">
+          <div class="mt-4  grid grid-cols-2 gap-2">
+              <div>
             <x-jet-label for="email" value="{{ __('Email') }}" />
             <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-          </div>
-
-          <div class="mt-4">
-            <x-jet-label for="role" value="{{ __('Role') }}" />
+            </div>
+            <div>
+                            <x-jet-label for="role" value="{{ __('Status') }}" />
             <select id="role" name="role" class="block mt-1 w-full form-select" required>
               <option>Employee</option>
               <option>Catering</option>
             </select>
+            </div>
           </div>
 
-          <div class="mt-4">
+       
+
+          <div class="mt-4 grid grid-cols-2 gap-2">
+            <div>
             <x-jet-label for="division" value="{{ __('Division') }}" />
             <x-jet-input id="division" class="block mt-1 w-full" type="text" name="division" :value="old('division')" required autofocus autocomplete="division" />
+            </div>
+             <div>
+            <x-jet-label for="roles" value="{{ __('Role') }}" />
+            <x-jet-input id="roles" class="block mt-1 w-full" type="text" name="roles" :value="old('roles')" required autofocus autocomplete="roles" />
+            </div>
           </div>
 
-          <div class="mt-4">
-            <x-jet-label for="roles" value="{{ __('Roles at Division') }}" />
-            <x-jet-input id="roles" class="block mt-1 w-full" type="text" name="roles" :value="old('roles')" required autofocus autocomplete="roles" />
-          </div>
+         
 
           <div class="mt-4">
             <x-jet-label for="number_phone" value="{{ __('Number Phone') }}" />
