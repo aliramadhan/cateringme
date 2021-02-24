@@ -249,10 +249,10 @@
 
 
       <label class='label flex-auto contents duration-1000'>
-        <input class='label__checkbox duration-1000 ' name="dates[]" type='checkbox' id="tanggal{{$start->format('Y-m-d')}}"  @if($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" onclick="document.getElementById('tanggal{!! $start->format("Y-m-d") !!}').checked = false;" data-toggle="modal" data-target="#ScheduleModal">
+        <input class='label__checkbox duration-1000 ' name="dates[]" type='checkbox' id="tanggal{{$start->format('Y-m-d')}}"  @if($start < $now && $total_dadakan <= 5) @elseif($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" onclick="document.getElementById('tanggal{!! $start->format("Y-m-d") !!}').checked = false;" data-toggle="modal" data-target="#ScheduleModal">
 
         <span class='label__text '>
-          <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient( @if($order != null)  135deg, #FCCF31 10%, #F55555 100% @elseif($start < $now) 160deg, #bdbdbe 0%, #032a32 100% @elseif($schedule != null) 160deg, #0093E9 0%, #80D0C7 100%   @else to right, #ff416c, #ff4b2b @endif );'>
+          <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient( @if($order != null)  135deg, #FCCF31 10%, #F55555 100% @elseif($start->day == $now->day && $total_dadakan <= 5) 160deg, #0093E9 0%, #80D0C7 100% @elseif($start < $now) 160deg, #bdbdbe 0%, #032a32 100% @elseif($schedule != null) 160deg, #0093E9 0%, #80D0C7 100%   @else to right, #ff416c, #ff4b2b @endif );'>
             <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 p-10 duration-1000' style='font-family: Poppins, sans-serif;'>
 
               <div class='font-semibold text-5xl mb-2 '>{{$start->format('d')}}</div>
@@ -262,6 +262,9 @@
           </span>
         </span>
       </label>
+      @if($start->dayOfWeek == 0)
+        <br>
+      @endif
 
       @endfor
 
@@ -331,7 +334,6 @@
  </div>
 </div>
 </form>
-
 <div class="absolute inset-0 w-full h-full bg-gray-900 text-white flex text-5xl transition-all ease-in-out duration-1000 transform translate-x-full slide p-6" >
 
   <div class="grid grid-rows-7 gap-1 w-full ">  
@@ -341,6 +343,7 @@
    </h3>  
     <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5 mt-4">                      
      <div id="div1" class="duration-1000 targetDiv  justify-content content-center text-center rounded-lg pt-4"> 
+     @if(($now->daysInMonth - $now->day) < 2)
       @for($i = 1; $i <= $next_month->daysInMonth; $i++, $start->addDay())
       @php
       $user = auth()->user();
@@ -350,7 +353,7 @@
 
 
       <label class='label flex-auto contents duration-1000'>
-        <input class='label__checkbox duration-1000 ' name="dates[]" type='checkbox' id="tanggal{{$start->format('Y-m-d')}}"  @if($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" onclick="document.getElementById('tanggal{{$i}}').checked = false;">
+        <input class='label__checkbox duration-1000 ' name="dates[]" type='checkbox' id="tanggal{{$start->format('Y-m-d')}}"  @if($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" onclick="document.getElementById('tanggal{!! $start->format("Y-m-d") !!}').checked = false;" data-toggle="modal" data-target="#ScheduleModal">
 
         <span class='label__text '>
           <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient( @if($order != null)  135deg, #FCCF31 10%, #F55555 100% @elseif($start < $now) 160deg, #bdbdbe 0%, #032a32 100% @elseif($schedule != null) 160deg, #0093E9 0%, #80D0C7 100%   @else to right, #ff416c, #ff4b2b @endif );'>
@@ -363,9 +366,12 @@
           </span>
         </span>
       </label>
+      @if($start->dayOfWeek == 0)
+        <br>
+      @endif
 
       @endfor
-
+     @endif
     </div></div>
 
 
@@ -387,7 +393,6 @@
 <script type="text/javascript">
   $('.label__checkbox').click(function() {
     var date = $(this).val();
-    console.log(date);
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
