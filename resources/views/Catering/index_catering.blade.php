@@ -79,7 +79,9 @@
                         <div class="ml-2 text-left">
                           <a href="#" class=" font-semibold ">{{$order->employee->name}}</a>
                           <div class=" text-sm font-semibold text-indigo-700 -mt-1 truncate">
-                            {{Carbon\Carbon::parse($order->order_date)->format('d F Y')}}
+                            {{Carbon\Carbon::parse($order->order_date)->format('d F Y')}}<br>
+                            {{$order->shift}}<br>
+                            {{$order->serving}}
                           </div>
                         </div>
                       </div>
@@ -124,6 +126,8 @@
           <th>Employee Name</th>
           <th>Order Date</th>
           <th>Menu</th>
+          <th>Shift</th>
+          <th>Serving</th>
       </tr>
   </thead>
   <tbody class="text-center">   
@@ -133,6 +137,8 @@
       <td>{{$order->employee->name}}</td>
        <td>{{Carbon\Carbon::parse($order->order_date)->format('d F Y')}}</td>
       <td>{{$order->menu->name}}</td>
+      <td>{{$order->shift}}</td>
+      <td>{{$order->serving}}</td>
   </tr>
     @endforeach
   </tbody>

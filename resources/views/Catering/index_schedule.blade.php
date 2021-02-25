@@ -124,6 +124,9 @@
                           </span>
                         </span>
                       </label>
+                      @if($start_date->dayOfWeek == 0)     
+                        <br class="lg:block hidden">      
+                      @endif
                     @endfor  
                   </div>
               </div>

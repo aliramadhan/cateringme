@@ -20,7 +20,7 @@
              </h3>
            </div>
            <div class="md:ml-4 flex items-center gap-4 lg:w-7/12  md:w-8/12 w-full">
-              <form action="{{route('admin.index.order_not_taken')}}" method="GET" class="contents">
+              <form action="{{route('admin.index.review')}}" method="GET" class="contents">
             @csrf
             <input type="date" class="md:w-full w-4/12 text border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-30" @if($from != null) value="{{$from->format('Y-m-d')}}" @endif name="from" class="p-4">
              To 
