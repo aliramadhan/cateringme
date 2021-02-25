@@ -252,17 +252,20 @@
       </div>
     </div>
 
-      <div class="flex hide-scroll md:grid md:grid-cols-2 lg:grid-cols-4 pr-9 mb-8 mt-8 md:-mt-20 gap-4 w-full pl-6 py-6">        
-        <div class="w-full px-2">
-         
+      <div class="flex px-5 md:px-10 mb-0 md:mb-8 mt-8 md:-mt-28 gap-4 w-full py-6  ">      
+      
+        <div class="bg-white md:grid md:grid-cols-2 xl:grid-cols-4 rounded-2xl md:px-8 md:py-6 py-2 shadow-xl mx-auto flex hide-scroll w-full">
+           <div class="absolute bg-red-500 px-6 py-4 text-white z-10 -mt-12  md:ml-6 ml-15 rounded-2xl">
+        Weekly Report </div>
+        <div class="w-full px-4 mt-4 md:mt-0 border-0 xl:border-r-2">         
             <a href="{{ route('employee.create.order') }}">
-            <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000 h-full">
-              <div class="p-6 text-center relative z-10 mt-1">
+            <div class="bg-white relative overflow-hidden   animate transform transition-transform hover:-translate-y-2 duration-1000 h-full">
+              <div class="p-6 text-left relative mt-1">
                 <div class="flex items-center gap-4 ">
-                  <i class="fas fa-calendar-plus rounded-full bg-green-200 text-green-500 p-5 text-4xl"></i>
+                  <i class="fas fa-calendar-plus rounded-full bg-green-200 text-green-500 p-5 text-3xl"></i>
                   <div class="flex flex-col flex-auto">
-                  <h3 class="text-5xl text-green-500 font-semibold leading-tight">{{$total_catering}}</h3>
-                  <h4 class="text-base font-semibold uppercase flex-auto text-center text-gray-500 leading-tight">catering is taken</h4>
+                  <h3 class="text-4xl text-green-500 font-semibold leading-none">{{$total_catering}}</h3>
+                  <h4 class="text-base font-semibold uppercase flex-auto text-gray-500 leading-none">catering is taken</h4>
                   </div>
                 </div>
                                
@@ -271,17 +274,16 @@
             </a>
           
         </div>
-        <div class="w-full px-2">
+        <div class="w-full px-4 mt-4 md:mt-0 border-0 xl:border-r-2">
          
             <a href="{{ route('employee.create.order') }}">
-              <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl animate transform transition-transform hover:-translate-y-2 duration-1000 h-full">
-                <div class="p-6 text-center relative z-10 mt-1">
+              <div class="bg-white relative overflow-hidden  animate transform transition-transform hover:-translate-y-2 duration-1000 h-full">
+                <div class="p-6 text-left relative mt-1">
                   <div class="flex items-center gap-4 ">
-                    <i class="fas fa-calendar-times rounded-full bg-red-200 text-red-500 p-5 text-4xl"></i>
+                    <i class="fas fa-calendar-times rounded-full bg-red-200 text-red-500 p-5 text-3xl"></i>
                     <div class="flex flex-col flex-auto">
-                      <h3 class="text-5xl text-red-500 font-semibold leading-tight">{{$total_dayoff}}</h3>  
-                      <h4 class="text-base font-semibold uppercase flex-auto text-center text-gray-500 leading-tight">No catering</h4>
-
+                      <h3 class="text-4xl text-red-500 font-semibold leading-none">{{$total_dayoff}}</h3>  
+                      <h4 class="text-base font-semibold uppercase flex-auto text-gray-500 leading-none">No catering</h4>
                     </div>
                   </div>
 
@@ -290,17 +292,16 @@
             </a>
          
         </div>
-        <div class="w-full px-2">
+        <div class="w-full px-4 mt-4 md:mt-0 border-0 xl:border-r-2">
           
             <a href="{{ route('employee.create.order') }}">
-              <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000 h-full">
-                <div class="p-6 text-center relative z-10 mt-1">
+              <div class="bg-white relative overflow-hidden   animate transform transition-transform hover:-translate-y-2 duration-1000 h-full">
+                <div class="p-6 text-left relative mt-1">
                   <div class="flex items-center gap-4 ">
-                    <i class="fas fa-calendar rounded-full bg-indigo-200 text-indigo-500 p-5 text-4xl"></i>
+                    <i class="fas fa-calendar rounded-full bg-indigo-200 text-indigo-500 p-5 text-3xl"></i>
                     <div class="flex flex-col flex-auto">
-                      <h3 class="text-5xl text-indigo-500 font-semibold leading-tight">{{$total_empty_order}}</h3>
-                      <h4 class="text-base font-semibold uppercase flex-auto text-center text-gray-500 leading-tight flex-auto ">empty schedule</h4>
-
+                      <h3 class="text-4xl text-indigo-500 font-semibold leading-none">{{$total_empty_order}}</h3>
+                      <h4 class="text-base font-semibold uppercase flex-auto text-gray-500 leading-none flex-auto ">empty schedule</h4>
                     </div>
                   </div>               
 
@@ -309,24 +310,23 @@
             </a>
          
         </div>
-        <div class="w-full px-2">
-         
+        <div class="w-full px-4 mt-4 md:mt-0">         
             <a href="{{ route('employee.history.review') }}">
-              <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden hover:shadow-xl  animate transform transition-transform hover:-translate-y-2 duration-1000 h-full">
-                <div class="p-6 text-center relative z-10 mt-1">
+              <div class="bg-white relative overflow-hidden   animate transform transition-transform hover:-translate-y-2 duration-1000 h-full">
+                <div class="p-6 text-left relative mt-1">
                   <div class="flex items-center gap-4 ">
-                    <i class="fas fa-feather-alt rounded-full bg-blue-200 text-blue-500 p-5 text-4xl"></i>
+                    <i class="fas fa-feather-alt rounded-full bg-blue-200 text-blue-500 p-5 text-3xl"></i>
                     <div class="flex flex-col flex-auto">
-                      <h3 class="text-5xl text-blue-500 font-semibold leading-tight">{{$total_review}}</h3>
-                      <h4 class="text-base font-semibold uppercase text-gray-500 leading-tight flex-auto text-center">Review & Feeds</h4>
-
+                      <h3 class="text-4xl text-blue-500 font-semibold leading-none">{{$total_review}}</h3>
+                      <h4 class="text-base font-semibold uppercase text-gray-500 leading-none flex-auto">Review & Feeds</h4>
                     </div>
                   </div>                
 
                 </div>              
               </div>
-            </a>
-          
+            </a>          
+        </div>
+
         </div>
       </div>
 

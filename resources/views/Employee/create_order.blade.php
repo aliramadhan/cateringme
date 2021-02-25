@@ -236,7 +236,7 @@
   <div class="grid grid-rows-7 gap-1 w-full ">  
 
     <h3 class="flex-shrink min-w-0 font-medium text-5xl leading-snug text-center mb-6 h-28 md:h-15 ">
-     {{$now->format('F Y')}}
+     {{$now->format('F')}}
    </h3>  
    <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5 mt-4">                      
      <div id="div1" class="duration-1000 targetDiv bg-gray-100 justify-content content-center text-center rounded-lg pt-4"> 
@@ -262,8 +262,8 @@
           </span>
         </span>
       </label>
-      @if($start->dayOfWeek == 0)
-        <br>
+      @if($start->dayOfWeek == 0)     
+        <br class="lg:block hidden">      
       @endif
 
       @endfor
@@ -280,57 +280,7 @@
       });
     </script>
 
-    <div class="flex flex-col row-span-1 text-right pointer px-6 capitalize gap-4">
-      <h4 class="min-w-0  text-xl leading-snug text-left " >
-        <button id="hideDesc" class="font-semibold">
-
-       Legend
-       </button>
-     </h4>
-     <div class="flex flex-col gap-2" id="hideTarget">
-      <h4 class="min-w-0 font-medium text-lg leading-snug text-left flex items-center">
-        <span class="flex h-3 w-3 mr-2">
-          <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-purple-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-3 w-3" style="background-image: linear-gradient( 160deg, #bdbdbe 0%, #032a32 100% );"></span>
-        </span>
-        Past Days
-      </h4>
-
-      <h4 class="min-w-0 font-medium text-lg leading-snug text-left flex items-center">
-        <span class="flex h-3 w-3 mr-2">
-          <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-orange-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-3 w-3" style="background-image: linear-gradient( 135deg, #FCCF31 10%, #F55555 100% );"></span>
-        </span>
-        Catering Submitted
-      </h4>
-
-      <h4 class="min-w-0 font-medium text-lg leading-snug text-left flex items-center">
-        <span class="flex h-3 w-3 mr-2">
-          <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-blue-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-3 w-3" style="background-image: linear-gradient( 160deg, #0093E9 0%, #80D0C7 100% );"></span>
-        </span>
-        Catering Available
-      </h4>
-
-      <h4 class="min-w-0 font-medium text-lg leading-snug text-left flex items-center">
-        <span class="flex h-3 w-3 mr-2">
-          <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-green-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500" ></span>
-        </span>
-        Recent Update
-      </h4>
-
-      <h4 class="min-w-0 font-medium text-lg leading-snug text-left flex items-center">
-        <span class="flex h-3 w-3 mr-2">
-          <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-red-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-3 w-3" style="background-image: linear-gradient( to right, #ff416c, #ff4b2b );"></span>
-        </span>
-        No Catering
-      </h4>
-
-    </div>
-     
-   </div>
+   
  </div>
 </div>
 </form>
@@ -339,7 +289,7 @@
   <div class="grid grid-rows-7 gap-1 w-full ">  
 
     <h3 class="flex-shrink min-w-0 font-medium text-5xl leading-snug text-center mb-6 h-28 md:h-15 ">
-     {{$next_month->format('F Y')}}
+     {{$next_month->format('F')}}
    </h3>  
     <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5 mt-4">                      
      <div id="div1" class="duration-1000 targetDiv  justify-content content-center text-center rounded-lg pt-4"> 
@@ -367,10 +317,12 @@
         </span>
       </label>
       @if($start->dayOfWeek == 0)
-        <br>
+        <br class="lg:block hidden">
       @endif
 
       @endfor
+      @else
+      sorry scheduling is not yet available, please wait 2 days before  <font class="border-b-2">{{$next_month->format('F Y')}}</font>
      @endif
     </div></div>
 
@@ -385,6 +337,58 @@
 
 </div>
 </div>
+
+   <div class="flex flex-col row-span-1 text-right pointer px-8 capitalize gap-4 bg-white py-4 ">
+        <h4 class="min-w-0  text-xl leading-snug text-left " >
+          <button id="hideDesc" class="font-semibold">
+
+         Legend
+         </button>
+       </h4>
+       <div class="flex flex-col gap-2" id="hideTarget">
+        <h4 class="min-w-0 font-medium text-lg leading-snug text-left flex items-center">
+          <span class="flex h-3 w-3 mr-2">
+            <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-purple-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3" style="background-image: linear-gradient( 160deg, #bdbdbe 0%, #032a32 100% );"></span>
+          </span>
+          Past Days
+        </h4>
+
+        <h4 class="min-w-0 font-medium text-lg leading-snug text-left flex items-center">
+          <span class="flex h-3 w-3 mr-2">
+            <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-orange-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3" style="background-image: linear-gradient( 135deg, #FCCF31 10%, #F55555 100% );"></span>
+          </span>
+          Catering Submitted
+        </h4>
+
+        <h4 class="min-w-0 font-medium text-lg leading-snug text-left flex items-center">
+          <span class="flex h-3 w-3 mr-2">
+            <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-blue-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3" style="background-image: linear-gradient( 160deg, #0093E9 0%, #80D0C7 100% );"></span>
+          </span>
+          Catering Available
+        </h4>
+
+        <h4 class="min-w-0 font-medium text-lg leading-snug text-left flex items-center">
+          <span class="flex h-3 w-3 mr-2">
+            <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-green-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500" ></span>
+          </span>
+          Recent Update
+        </h4>
+
+        <h4 class="min-w-0 font-medium text-lg leading-snug text-left flex items-center">
+          <span class="flex h-3 w-3 mr-2">
+            <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-red-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3" style="background-image: linear-gradient( to right, #ff416c, #ff4b2b );"></span>
+          </span>
+          No Catering
+        </h4>
+
+      </div>     
+     </div>
+
 </div>
 </div>
 </div>
