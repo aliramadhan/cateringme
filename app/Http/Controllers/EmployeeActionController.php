@@ -9,6 +9,7 @@ use App\Models\Menu;
 use App\Models\ScheduleMenu;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\slideshow;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -17,6 +18,7 @@ class EmployeeActionController extends Controller
     public function dashboard()
     {
         //declare variable
+        $slideshows = Slideshow::all();
         $now = Carbon::now();
         $start = Carbon::parse($now->format('Y-m-1'));
         $stop = Carbon::now()->endOfMonth();
@@ -44,7 +46,7 @@ class EmployeeActionController extends Controller
         }
 
         $now = Carbon::now();
-        return view('Employee.dashboard',compact('menu_today','menu_tomorrow','now','user','reviews','stop','total_days','total_review','total_catering','total_dayoff','total_empty_order'));
+        return view('Employee.dashboard',compact('menu_today','menu_tomorrow','now','user','reviews','stop','total_days','total_review','total_catering','total_dayoff','total_empty_order','slideshows'));
     }
     public function history_order(Request $request)
     {

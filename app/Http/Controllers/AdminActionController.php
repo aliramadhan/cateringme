@@ -7,6 +7,7 @@ use \App\Models\User;
 use \App\Models\Order;
 use \App\Models\Menu;
 use \App\Models\ScheduleMenu;
+use \App\Models\Slideshow;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RegisterSuccessfully;
@@ -15,6 +16,7 @@ use DB;
 use Telegram\Bot\Laravel\Facades\Telegram;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Str;
 use Exception;
 
 class AdminActionController extends Controller
@@ -413,5 +415,57 @@ class AdminActionController extends Controller
 		$employees->sortBy('date');
 
 		return view('Admin.index_order_not_taken',compact('employees','now','from','to'));
+	}
+	public function index_slideshow()
+	{
+		$slides = Slideshow::all();
+		return view('Admin.index_slideshow',compact('slides'));
+	}
+	public function store_slideshow(Request $request)
+	{
+        //Validation Request
+        if ($request->submit == 'addPhoto') {
+	        $this->validate($request, [
+	            'name' => ['required'],
+	            'name.*' => ['required', 'string', 'max:255'],
+	            'file' => ['required'],
+	            'file.*' => ['mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+	        ]);
+			for ($i=0; $i < count($request->file('file')); $i++) { 
+				//create name and store photo
+				$image = $request->file('file')[$i];
+		        $imageName = Str::slug($request->name[$i]).'_'.date('Ymd').'.'.$image->extension();
+		        $image->move(public_path('images/slideshow/'), $imageName);
+		        $fileName = 'images/slideshow/'.$imageName;
+
+		        $slideshow = Slideshow::create([
+		        	'name' => $request->name[$i],
+		        	'file' => $fileName
+		        ]);
+			}
+			$message = 'Slideshow pict uploaded succesfully';
+        }
+        elseif($request->submit == 'UpdatePhoto'){
+        	$slides = Slideshow::all();
+        	foreach ($slides as $slide) {
+        		$slide->name = $request->input('name'.$slide->id);
+        		if ($request->file('file'.$slide->id) != null) {
+        			$image = $request->file('file'.$slide->id);
+        			if(\File::exists(public_path($slide->file))){
+	                    \File::delete(public_path($slide->file));
+	                }
+	                //create name and store photo
+	                $imageName = Str::slug($slide->name).'_'.date('Ymd').'.'.$image->extension();
+	                $image->move(public_path('images/slideshow/'), $imageName);
+	                $slide->file = $fileName = 'images/photo-menu/'.$imageName;
+        		}
+        		$slide->save();
+        	}
+        	$message = 'Slideshow pict updated succesfully.';
+        }
+        else{
+        	return redirect()->back()->withErrors(['errors' => 'Gagal']);
+        }
+		return redirect()->back()->with(['message' => $message]);
 	}
 }

@@ -182,7 +182,7 @@
     <div class=" mb-4 rounded-xl shadow-lg flex md:flex-row flex-col">
       @if($menu_today == null)
 
-      <div class="bg-cover bg-top text-center bg-gradient-to-t bg-blue-400 to bg-green-400  bg-center text-white  object-fill w-full" style="background-image: url(https://assets.kompasiana.com/items/album/2018/04/16/suasana-kantor-24slides-indonesia-3-5ad4a44bcaf7db40dd0deff2.jpg?t=o&v=760);background-position-y: -70px;">
+      <div class="bg-cover bg-top text-center bg-gradient-to-t bg-blue-400 to bg-green-400  bg-center text-white  object-fill w-full" style="background-image: url(@if($slideshows->first() == null) {{url('public/images/no-image.png')}} @else {{url('public/'.$slideshows->first()->file)}} @endif);background-position-y: -70px;">
         <div class="h-full md:px-20 p-8 md:pb-40 md:pt-20" style="background-image: linear-gradient(0deg,#252525,#27272769) !important;">
           <p class="font-bold text-2xl uppercase"> Today's Meal </p>
           <div class="flex md:flex-row flex-col justify-center mb-10 ">
@@ -225,7 +225,7 @@
    
  @if($menu_tomorrow == null)
 
-       <div class="bg-cover bg-top w-full md:w-1/4 bg-gradient-to-t bg-blue-400 to bg-green-400 bg-center text-white  object-fill" style="background-image: url(https://assets.kompasiana.com/items/album/2018/04/16/suasana-kantor-24slides-indonesia-3-5ad4a44bcaf7db40dd0deff2.jpg?t=o&v=760});">
+       <div class="bg-cover bg-top w-full md:w-1/4 bg-gradient-to-t bg-blue-400 to bg-green-400 bg-center text-white  object-fill" style="background-image: url(https://assets.kompasiana.com/items/album/2018/04/16/suasana-kantor-24slides-indonesia-3-5ad4a44bcaf7db40dd0deff2.jpg?t=o&v=760);">
       <div class=" p-4 h-full px-10 grid grid-rows-4" style="background-image: linear-gradient(60deg,#252525,#27272769) !important;">
         <div>
         <p class="font-bold text-lg uppercase mb-8 border-b-2 "> Tomorrow's meal </p>

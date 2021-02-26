@@ -24,6 +24,9 @@
                         <x-jet-nav-link href="{{ route('admin.index.menu') }}" :active="request()->routeIs('admin.index.menu')">
                             {{ __('Index Menu') }}
                         </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('admin.index.slideshow') }}" :active="request()->routeIs('admin.index.slideshow')">
+                            {{ __('Manage SlideShow') }}
+                        </x-jet-nav-link>
                        
                         <div class="hidden sm:flex sm:items-center sm:ml-6 hover:border-gray-300  focus:outline-none focus:text-gray-700 focus:border-gray-300  border-transparent 
                         transition duration-150 ease-in-out  hover:text-gray-700">
@@ -244,6 +247,9 @@
                         </x-jet-responsive-nav-link>
                         <x-jet-responsive-nav-link href="{{ route('admin.index.menu') }}" :active="request()->routeIs('admin.index.menu')">
                             {{ __('Index Menu') }}
+                        </x-jet-responsive-nav-link> 
+                        <x-jet-responsive-nav-link href="{{ route('admin.index.slideshow') }}" :active="request()->routeIs('admin.index.slideshow')">
+                            {{ __('Manage Slideshow') }}
                         </x-jet-responsive-nav-link>                       
                        
                         <x-jet-responsive-nav-link  href="{{ route('admin.index.review') }}" :active="request()->routeIs('admin.index.review')">
