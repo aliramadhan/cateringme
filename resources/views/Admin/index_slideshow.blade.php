@@ -59,7 +59,7 @@
                  
 
                 <div  class="col-span-6 sm:col-span-4">
-                <form action="{{route('admin.store.slideshow')}}" method="POST">
+                <form action="{{route('admin.store.slideshow')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                  @foreach($slides as $slide)
                 <label class="block font-medium text-sm text-gray-700" for="slide">
@@ -74,12 +74,6 @@
                 </a>
 
                  @endforeach
-                <div class="flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6">
-                  <button type="submit" class="opacity-75 hover:opacity-100 items-center px-4 py-2  border-transparent rounded-md font-semibold text-lg uppercase tracking-widest  active:bg-gray-900 active:text-white focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150" name="submit" value="UpdatePhoto">
-                    Update
-                  </button>
-                </div>
-                </form>
                
                  <div class="" >
                   <div class="input-group-btn"> 
@@ -88,13 +82,11 @@
                     </p>
                   </div>
                 </div>
-                <form id="formUp" method="POST" action="{{route('admin.store.slideshow')}}" enctype="multipart/form-data">
-                @csrf
 
 
                 <div class="input-group hdtuto control-group lst increment" >
                   <input type="text" name="name[]" placeholder="name here">
-                  <input type="file" name="file[]" class="myfrm form-control">
+                  <input type="file" name="inputFile[]" class="myfrm form-control">
                   <div class="input-group-btn"> 
                     <button class="addnew btn btn-success" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>Add</button>
                   </div>
@@ -110,14 +102,18 @@
                 </div>
 
 
-                <button type="submit" name="submit" value="AddPhoto" class="btn btn-success" style="margin-top:10px">Submit</button>
 
 
-            </form>   
               </div>
               </div>
             </div>
+                <div class="flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6">
+                  <button type="submit" class="opacity-75 hover:opacity-100 items-center px-4 py-2  border-transparent rounded-md font-semibold text-lg uppercase tracking-widest  active:bg-gray-900 active:text-white focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150" name="submit" value="UpdatePhoto">
+                    Save
+                  </button>
+                </div>
           </div>
+            </form>   
       </div>
     </div>
   </div>

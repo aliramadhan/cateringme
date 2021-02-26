@@ -423,16 +423,19 @@ class AdminActionController extends Controller
 	}
 	public function store_slideshow(Request $request)
 	{
-        //Validation Request
-        if ($request->submit == 'AddPhoto') {
-	        $this->validate($request, [
-	            'name' => ['required'],
-	            'file' => ['required'],
-	            'file.*' => ['mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
-	        ]);
-			for ($i=0; $i < count($request->file('file')); $i++) { 
+        //Insert new
+        if($request->file('inputFile') != null){
+			for ($i=0; $i < count($request->file('inputFile')); $i++) { 
+
+		        $this->validate($request, [
+		            'inputFile' => ['required'],
+		            'inputFile.*' => ['mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+		        ]);
+		        if($request->name[$i] == null){
+		        	return redirect()->back()->withErrors(['errors' => 'name field for new image empty.']);
+		        }
 				//create name and store photo
-				$image = $request->file('file')[$i];
+				$image = $request->file('inputFile')[$i];
 		        $imageName = Str::slug($request->name[$i]).'_'.date('Ymd').'.'.$image->extension();
 		        $image->move(public_path('images/slideshow/'), $imageName);
 		        $fileName = 'images/slideshow/'.$imageName;
@@ -442,29 +445,29 @@ class AdminActionController extends Controller
 		        	'file' => $fileName
 		        ]);
 			}
-			$message = 'Slideshow pict uploaded succesfully';
-        }
-        elseif($request->submit == 'UpdatePhoto'){
-        	$slides = Slideshow::all();
-        	foreach ($slides as $slide) {
-        		$slide->name = $request->input('name'.$slide->id);
-        		if ($request->file('file'.$slide->id) != null) {
-        			$image = $request->file('file'.$slide->id);
-        			if(\File::exists(public_path($slide->file))){
-	                    \File::delete(public_path($slide->file));
-	                }
-	                //create name and store photo
-	                $imageName = Str::slug($slide->name).'_'.date('Ymd').'.'.$image->extension();
-	                $image->move(public_path('images/slideshow/'), $imageName);
-	                $slide->file = $fileName = 'images/photo-menu/'.$imageName;
-        		}
-        		$slide->save();
-        	}
-        	$message = 'Slideshow pict updated succesfully.';
-        }
-        else{
-        	return redirect()->back()->withErrors(['errors' => 'Gagal']);
-        }
+		}
+		//Update image
+    	$slides = Slideshow::all();
+    	foreach ($slides as $slide) {
+    		if($request->input('name'.$slide->id) != null){
+    			$slide->name = $request->input('name'.$slide->id);
+    		}
+    		else{
+				continue;
+    		}
+    		if ($request->file('file'.$slide->id) != null) {
+    			$photo = $request->file('file'.$slide->id);
+    			if(\File::exists(public_path($slide->file))){
+                    \File::delete(public_path($slide->file));
+                }
+                //create name and store photo
+                $photoName = Str::slug($slide->name).'_'.date('Ymd').'.'.$photo->extension();
+                $photo->move(public_path('images/slideshow/'), $photoName);
+                $slide->file = $fileName = 'images/slideshow/'.$photoName;
+    		}
+    		$slide->save();
+    	}
+    	$message = 'Slideshow pict updated succesfully.';
 		return redirect()->back()->with(['message' => $message]);
 	}
 	public function delete_slideshow($id)
