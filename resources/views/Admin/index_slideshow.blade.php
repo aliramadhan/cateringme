@@ -96,7 +96,6 @@
                     Update
                   </button>
                 </div>
-                </form>
               
             </div>
           </div>
@@ -107,8 +106,6 @@
               </p>
          </h2>
           <div class="bg-white shadow-md mt-6">
-           <form id="formUp" method="POST" action="{{route('admin.store.slideshow')}}" enctype="multipart/form-data">
-            @csrf
           
               <div class="input-group hdtuto control-group lst increment grid grid-cols-4 px-6 py-8 border-b" >
                 <div class="col-span-4">
@@ -120,10 +117,10 @@
 
                       <div class="mt-2">
                         <x-jet-label for="name" value="{{ __('Upload Picture') }}" class="mb-1" />
-                        <input type="file" name="file[]"  accept="image/x-png,image/gif,image/jpeg" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300  font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mr-2 mb-8 myfrm md:w-auto w-full rounded-lg">  
+                        <input type="file" name="inputFile[]"  accept="image/x-png,image/gif,image/jpeg" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300  font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mr-2 mb-8 myfrm md:w-auto w-full rounded-lg">  
                       </div> 
                     </div>
- </div>             
+              </div>             
             
             <div class="clone hide">
               <div class="deletethis hdtuto control-group lst input-group grid grid-cols-4 px-6 py-8 border-b" >
@@ -135,7 +132,7 @@
                 </div>
                 <div class="mt-2">
                   <x-jet-label for="name" value="{{ __('Upload Picture') }}" class="mb-1" />
-                  <input type="file" name="file[]"  accept="image/x-png,image/gif,image/jpeg" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300  font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mr-2 mb-8 myfrm md:w-auto w-full rounded-lg">    
+                  <input type="file" name="inputFile[]"  accept="image/x-png,image/gif,image/jpeg" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300  font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mr-2 mb-8 myfrm md:w-auto w-full rounded-lg">    
                 </div>
                 </div>
 
@@ -164,7 +161,6 @@
     $(document).ready(function() {
       $(".addnew").click(function(){ 
           var lsthmtl = $(".clone").html();
-          console.log(lsthmtl);
           $(".increment").after(lsthmtl);
       });
       $("#formUp").on("click",".btn-danger",function(){

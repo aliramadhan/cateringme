@@ -448,12 +448,10 @@ class AdminActionController extends Controller
 	}
 	public function store_slideshow(Request $request)
 	{
-        //Insert new
+		return dd($request->all());
         if($request->file('inputFile') != null){
 			for ($i=0; $i < count($request->file('inputFile')); $i++) { 
-
 		        $this->validate($request, [
-		            'inputFile' => ['required'],
 		            'inputFile.*' => ['mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
 		        ]);
 		        if($request->name[$i] == null){
@@ -461,7 +459,7 @@ class AdminActionController extends Controller
 		        }
 				//create name and store photo
 				$image = $request->file('inputFile')[$i];
-		        $imageName = Str::slug($request->name[$i]).'_'.date('Ymd').'.'.$image->extension();
+		        $imageName = Str::slug($request->name[$i]).'_'.date('Ymdhsi').'.'.$image->extension();
 		        $image->move(public_path('images/slideshow/'), $imageName);
 		        $fileName = 'images/slideshow/'.$imageName;
 
@@ -469,6 +467,7 @@ class AdminActionController extends Controller
 		        	'name' => $request->name[$i],
 		        	'file' => $fileName
 		        ]);
+    			$message = 'Slideshow pict added succesfully.';
 			}
 		}
 		//Update image
@@ -489,13 +488,13 @@ class AdminActionController extends Controller
                     \File::delete(public_path($slide->file));
                 }
                 //create name and store photo
-                $photoName = Str::slug($slide->name).'_'.date('Ymd').'.'.$photo->extension();
+                $photoName = Str::slug($slide->name).'_'.date('Ymdhsi').'.'.$photo->extension();
                 $photo->move(public_path('images/slideshow/'), $photoName);
                 $slide->file = $fileName = 'images/slideshow/'.$photoName;
     		}
     		$slide->save();
+    		$message = 'Slideshow pict updated succesfully.';
     	}
-    	$message = 'Slideshow pict updated succesfully.';
 		return redirect()->back()->with(['message' => $message]);
 	}
 	public function delete_slideshow($id)

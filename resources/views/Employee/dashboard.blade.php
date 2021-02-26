@@ -190,7 +190,7 @@
           
         </div>
         <?php 
-         for ($i=0; $i < 1; $i++) { 
+         for ($i=0; $i <= 1; $i++) { 
           
           ?>
           <div class="carousel-item h-100">
