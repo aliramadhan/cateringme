@@ -43,10 +43,10 @@
     <div  class="md:grid md:grid-cols-3 md:gap-6">
            <div class="md:col-span-1">
             <div class="px-4 sm:px-0">
-              <h3 class="text-lg font-medium text-gray-900">Catering Pictures</h3>
+              <h3 class="text-lg font-medium text-gray-900">Slideshow Pictures</h3>
 
               <p class="mt-1 text-sm text-gray-600">
-                Update your catering pictures.
+               Upload your picture for slideshow app, you can add more than 2 pictures with clicked button add frame.
               </p>
             </div>
           </div>
@@ -83,9 +83,7 @@
                
                  <div class="" >
                   <div class="input-group-btn"> 
-                    <p class="mt-1 text-sm text-gray-600">
-                      Add new photos (choose multiple pictures).
-                    </p>
+                   
                   </div>
                 </div>
                 <form id="formUp" method="POST" action="{{route('admin.store.slideshow')}}" enctype="multipart/form-data">
@@ -96,7 +94,7 @@
                   <input type="text" name="name[]" placeholder="name here">
                   <input type="file" name="file[]" class="myfrm form-control">
                   <div class="input-group-btn"> 
-                    <button class="addnew btn btn-success" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>Add</button>
+                    <button class="addnew bg-blue-400 text-white rounded-lg py-2 px-4" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>Add Frame</button>
                   </div>
                 </div>
                 <div class="clone hide">
