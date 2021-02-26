@@ -39,7 +39,7 @@
         <img src="{{ asset('/resources/image/logo.png')}}" class="img-fluid mx-auto" width="138px" height="138px">
         @csrf
         <h1 class="text-3xl font-bold text-gray-600 tracking-tight">Log In</h1>
-        <p class="mt-1 text-lg text-gray-500 border-b-1 mb-4 font-medium">Enter your email and password to log in our app.</p>
+        <p class="mt-1 text-lg text-gray-500 mb-4 font-medium leading-tight">Enter your email and password to log in our app.</p>
 
         <div class="relative flex w-full flex-wrap items-stretch mb-3">
 

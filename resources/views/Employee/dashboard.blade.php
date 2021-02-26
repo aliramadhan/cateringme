@@ -258,11 +258,11 @@
  @if($menu_tomorrow == null)
 
        <div class="bg-cover bg-top w-full md:w-1/4 bg-gradient-to-t bg-blue-400 to bg-green-400 bg-center text-white  object-fill" style="background-image: url(https://assets.kompasiana.com/items/album/2018/04/16/suasana-kantor-24slides-indonesia-3-5ad4a44bcaf7db40dd0deff2.jpg?t=o&v=760);">
-      <div class=" p-4 h-full px-10 grid grid-rows-4" style="background-image: linear-gradient(60deg,#252525,#27272769) !important;">
+      <div class="hide-scroll p-4 h-full px-10 grid grid-rows-4" style="background-image: linear-gradient(60deg,#252525,#27272769) !important;">
         <div>
         <p class="font-bold text-lg uppercase mb-8 border-b-2 "> Tomorrow's meal </p>
         </div>
-        <p class="text-4xl font-bold row-span-2 capitalize -mt-5 "> no catering schedule for tomorrow </p>
+        <p class="text-4xl font-bold row-span-2 capitalize -mt-5 leading-tight"> no catering schedule for tomorrow </p>
          
       </div>
 

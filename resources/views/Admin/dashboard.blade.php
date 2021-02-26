@@ -56,8 +56,8 @@
         <!-- Add margin if you want to see some of the overlay behind the modal-->
         <div class="modal-content py-4 text-left px-6">
           <!--Title-->
-          <div class="flex justify-between items-center pb-3">
-            <p class="text-2xl font-normal text-gray-600">Configuration <font class="text-orange-500">Catering Price</font></p>
+          <div class="flex justify-between items-center pb-3 border-b">
+            <p class="text-2xl font-normal text-gray-600">Price <font class="text-orange-500">Setting</font></p>
             <div class="modal-close cursor-pointer z-50">
               <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                 <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
@@ -67,7 +67,7 @@
 
           <!--Body-->
           <div class="my-6">
-          	<label for="price" class="block text-base font-medium text-gray-700">Price</label>
+          	<label for="price" class="block text-base font-medium text-gray-700">Catering Price</label>
           	<div class="mt-1 relative rounded-md shadow-sm">
           		<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           			<span class="text-gray-500 sm:text-sm">
@@ -169,8 +169,8 @@
 
 	<div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 ">
 		<div class="p-6 mt-6">       
-			<div class="col-span-2 text-2xl text-center mb-6 font-semibold text-gray-700">          
-				Employee Feed & Review
+			<div class="col-span-2 text-2xl text-center mb-6  text-gray-700">          
+				Employee <span class="font-semibold">Feed & Review</span>
 			</div>
 
 			<div class="grid grid-cols-9 mx-auto p-2 text-blue-50">
@@ -317,8 +317,8 @@
 		</div>
 
 <div class="p-6 mt-6">       
-	<div class="col-span-2 text-2xl text-center mb-6 font-semibold text-gray-700">          
-		Catering Menu
+	<div class="col-span-2 text-2xl text-center mb-6 text-gray-700">          
+		Catering <span class=" font-semibold "> Food List</span>
 	</div>
 		<div class="bootstrapiso mb-4 rounded-xl shadow-lg">
 		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -370,7 +370,7 @@
 
 		<div class="text-center mt-6 font-base bg-price rounded-xl py-6 px-6 w-full" > 
 			<div class="flex">
-				<p class="text-2xl font-semibold text-white mb-4 text-left flex-auto">Catering Price</p>
+				<p class="text-2xl  text-white mb-4 text-left flex-auto">Catering <span class="font-semibold">Price</span></p>
 				<div id="priceModal" >
 					<i data-toggle="modal" data-target="priceModal"  class="fas fa-cog border rounded-full p-2 hover:border-orange-700 font-semibold text-gray-100 hover:text-orange-700 duration-500 cursor-pointer modal-open"></i></div>  
 				</div>

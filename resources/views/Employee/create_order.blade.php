@@ -229,7 +229,7 @@
 </div>
 </div>
 <!-- End Modal -->
-<div class="relative h-full  overflow-y-hidden overflow-x-hidden ">
+<div class="relative h-full hide-scroll overflow-y-hidden overflow-x-hidden ">
 
  <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide" >
 
