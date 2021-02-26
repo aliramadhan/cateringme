@@ -361,8 +361,6 @@
 			</a>
 		</div>
 	</div>
-	
-	
 
 	<div class="col-span-2 gap-4  font-base rounded-xl py-6 flex items-center lg:flex-row flex-col">  
 		<div class="text-center mt-6 font-base bg-catering rounded-xl py-6 px-6 w-full" > 
