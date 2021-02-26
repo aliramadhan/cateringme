@@ -54,24 +54,43 @@
 
           <div class="mt-5 md:mt-0 md:col-span-2">
               <div class="shadow overflow-hidden sm:rounded-md">
-                <div class="px-4 py-5 bg-white sm:p-6">
-                  <div class="grid grid-cols-6 gap-6">
-                 
-
-                <div  class="col-span-6 sm:col-span-4">
+                <div class="bg-white ">
+                             
+             
                 <form action="{{route('admin.store.slideshow')}}" method="POST">
                 @csrf
                  @foreach($slides as $slide)
-                <label class="block font-medium text-sm text-gray-700" for="slide">
+                <div class="md:grid md:grid-cols-4 px-6 py-8 border-b flex-wrap-reverse flex">
+                <label class="md:block hidden font-semibold text-lg text-gray-700 col-span-4" for="slide">
                   Picture {{$loop->iteration}}
                 </label>
-                 <div class="mt-2" x-show="! photoPreview">
-                  <img src="{{url('public/'.$slide->file)}}" alt="Catering 1" class="rounded-full h-40 w-40 object-cover">
-                </div>
-                <input type="text" name="name{{$slide->id}}" placeholder="name here" value="{{$slide->name}}">
-                <input type="file" name="file{{$slide->id}}" accept="image/x-png,image/gif,image/jpeg" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mt-2 mr-2 mb-8">    
-                <a href="{{route('admin.delete.slideshow',$slide->id)}}"" class="bg-red-400 text-white hover:bg-red-500 transition-500 py-2 px-4 rounded-lg" onclick="return confirm('Delete slide {{$slide->name}}?');">Delete 
-                </a>
+              
+                  <div class="md:col-span-3 col-span-4">
+                    <div class="mt-2">
+                      <x-jet-label for="name" value="{{ __('Name') }}" class="mb-1" />
+                      <x-jet-input type="text" name="name{{$slide->id}}" placeholder="picture name" value="{{$slide->name}}" class="w-full md:w-auto" />
+                      <x-jet-input-error for="name" class="mt-2" />
+                    </div>                
+
+                      <div class="mt-2 ">
+                        <x-jet-label for="name" value="{{ __('Upload Picture') }}" class="mb-1" />
+                        <input type="file" name="file{{$slide->id}}" accept="image/x-png,image/gif,image/jpeg" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300  font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mr-2 mb-8 md:w-11/12 w-full lg:w-auto rounded-lg">    
+                        <a href="{{route('admin.delete.slideshow',$slide->id)}}" class="bg-red-400 text-white hover:bg-red-500 transition-500 py-2 px-4 rounded-lg" onclick="return confirm('Delete slide {{$slide->name}}?');">Delete 
+                        </a>
+                      </div>   
+                    </div>
+                    
+                    <div class="md:col-span-1 col-span-4">
+                     <div class="mt-2" x-show="! photoPreview">
+                      <img src="{{url('public/'.$slide->file)}}" alt="Catering 1" class="rounded-xl h-40 w-40 object-cover">
+                    </div>
+                  </div>
+                   <label class="block  md:hidden font-semibold text-lg text-gray-700 w-full" for="slide">
+                  Picture {{$loop->iteration}}
+                </label>
+
+
+            </div>
 
                  @endforeach
                 <div class="flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6">
@@ -80,42 +99,65 @@
                   </button>
                 </div>
                 </form>
-               
-                 <div class="" >
-                  <div class="input-group-btn"> 
-                   
-                  </div>
-                </div>
-                <form id="formUp" method="POST" action="{{route('admin.store.slideshow')}}" enctype="multipart/form-data">
-                @csrf
-
-
-                <div class="input-group hdtuto control-group lst increment" >
-                  <input type="text" name="name[]" placeholder="name here">
-                  <input type="file" name="file[]" class="myfrm form-control">
-                  <div class="input-group-btn"> 
-                    <button class="addnew bg-blue-400 text-white rounded-lg py-2 px-4" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>Add Frame</button>
-                  </div>
-                </div>
-                <div class="clone hide">
-                  <div class="deletethis hdtuto control-group lst input-group" style="margin-top:10px">
-                    <input type="text" name="name[]" placeholder="name here">
-                    <input type="file" name="file[]" class="myfrm form-control">
-                    <div class="input-group-btn"> 
-                      <button class="btn btn-danger" type="button"><i class="fldemo glyphicon glyphicon-remove"></i> Remove</button>
-                    </div>
-                  </div>
-                </div>
-
-
-                <button type="submit" name="submit" value="AddPhoto" class="btn btn-success" style="margin-top:10px">Submit</button>
-
-
-            </form>   
-              </div>
-              </div>
+              
             </div>
           </div>
+          <h2 class="font-semibold text-2xl mt-10 text-gray-800 leading-tight px-3">
+            New Picture Form
+             <p class="mt-1 text-sm text-gray-600">
+               You can upload multiple picture.
+              </p>
+         </h2>
+          <div class="bg-white shadow-md mt-6">
+           <form id="formUp" method="POST" action="{{route('admin.store.slideshow')}}" enctype="multipart/form-data">
+            @csrf
+          
+              <div class="input-group hdtuto control-group lst increment grid grid-cols-4 px-6 py-8 border-b" >
+                <div class="col-span-4">
+                  <div>
+                    <x-jet-label for="name" value="{{ __('Name') }}" class="mb-1" />
+                    <x-jet-input type="text" name="name[]" placeholder="picture name"  />
+                    <x-jet-input-error for="name" class="mt-2" />
+                  </div>
+
+                      <div class="mt-2">
+                        <x-jet-label for="name" value="{{ __('Upload Picture') }}" class="mb-1" />
+                        <input type="file" name="file[]"  accept="image/x-png,image/gif,image/jpeg" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300  font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mr-2 mb-8 myfrm md:w-auto w-full rounded-lg">  
+                      </div> 
+                    </div>
+
+               </div>             
+            
+            <div class="clone hide">
+              <div class="deletethis hdtuto control-group lst input-group grid grid-cols-4 px-6 py-8 border-b" >
+                <div class="lg:col-span-3 col-span-4">
+                <div>
+                      <x-jet-label for="name" value="{{ __('Name') }}" class="mb-1" />
+                      <x-jet-input type="text" name="name[]" placeholder="picture name"  />
+                      <x-jet-input-error for="name" class="mt-2" />
+                </div>
+                <div class="mt-2">
+                  <x-jet-label for="name" value="{{ __('Upload Picture') }}" class="mb-1" />
+                  <input type="file" name="file[]"  accept="image/x-png,image/gif,image/jpeg" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300  font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mr-2 mb-8 myfrm md:w-auto w-full rounded-lg">    
+                </div>
+                </div>
+
+                <div class="input-group-btn"> 
+                 <button class="bg-red-500 text-white py-2 px-8 rounded-lg" type="button"><i class="fldemo glyphicon glyphicon-remove"></i> Remove</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6 justify-between">
+              <button class="addnew bg-blue-400 text-white rounded-lg py-2 px-4" type="button"><i class="fas fa-plus p-1 border rounded-full text-base hover:border-blue-400  focus:outline-none mr-2"></i>Frame</button>
+                  <button type="submit" name="submit" value="AddPhoto" class="opacity-75 hover:opacity-100 items-center px-4 py-2  border-transparent rounded-md font-semibold text-lg uppercase tracking-widest  active:bg-gray-900 active:text-white focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150" >
+                    Save
+                  </button>
+                </div>
+            
+          </form>   
+        </div>
+
       </div>
     </div>
   </div>
