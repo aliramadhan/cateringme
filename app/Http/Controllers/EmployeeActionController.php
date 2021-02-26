@@ -9,7 +9,7 @@ use App\Models\Menu;
 use App\Models\ScheduleMenu;
 use App\Models\Order;
 use App\Models\User;
-use App\Models\slideshow;
+use App\Models\Slideshow;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Collection;
 
