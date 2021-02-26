@@ -53,6 +53,11 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth:sanctum','role:Admin'
     Route::post('/menu', [ AdminActionController::class, 'scheduled_menu'])->name('admin.scheduled.menu');
     Route::post('/update/menu-price', [ AdminActionController::class, 'update_menu_price'])->name('admin.update.menu_price');
 
+    //Manage Slideshow
+    Route::get('/slideshow', [ AdminActionController::class, 'index_slideshow'])->name('admin.index.slideshow');
+    Route::post('/slideshow', [ AdminActionController::class, 'store_slideshow'])->name('admin.store.slideshow');
+    Route::get('/slideshow/{id}/destroy', [ AdminActionController::class, 'delete_slideshow'])->name('admin.delete.slideshow');
+
     //Report
     Route::get('/order', [ AdminActionController::class, 'index_order_catering'])->name('admin.index.order_catering');
     Route::get('/order/today', [ AdminActionController::class, 'index_order'])->name('admin.index.order');
