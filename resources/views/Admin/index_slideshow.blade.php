@@ -70,7 +70,7 @@
                 </div>
                 <input type="text" name="name{{$slide->id}}" placeholder="name here" value="{{$slide->name}}">
                 <input type="file" name="file{{$slide->id}}" accept="image/x-png,image/gif,image/jpeg" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mt-2 mr-2 mb-8">    
-                <a href="{{route('admin.delete.slideshow',$slide->id)}}"" class="bg-red-400 text-white hover:bg-red-500 transition-500 py-2 px-4 rounded-lg" onclick="return confirm('Delete Picture {{$loop->iteration}} slide?');">Delete 
+                <a href="{{route('admin.delete.slideshow',$slide->id)}}"" class="bg-red-400 text-white hover:bg-red-500 transition-500 py-2 px-4 rounded-lg" onclick="return confirm('Delete slide {{$slide->name}}?');">Delete 
                 </a>
 
                  @endforeach

@@ -467,4 +467,20 @@ class AdminActionController extends Controller
         }
 		return redirect()->back()->with(['message' => $message]);
 	}
+	public function delete_slideshow($id)
+	{
+		$slide = Slideshow::find($id);
+
+		if ($slide == null) {
+			return redirect()->back()->withErrors(['errors' => 'Data not Found!']);
+		}
+		//cek if file founded, then deleted.
+		if(\File::exists(public_path($slide->file))){
+            \File::delete(public_path($slide->file));
+        }
+        $slide->delete();
+        $message = 'Slide '. $slide->name.' deleted succesfully.';
+		return redirect()->back()->with(['message' => $message]);
+
+	}
 }
