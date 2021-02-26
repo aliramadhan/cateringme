@@ -423,12 +423,10 @@ class AdminActionController extends Controller
 	}
 	public function store_slideshow(Request $request)
 	{
-		return dd($request->all());
         //Validation Request
         if ($request->submit == 'AddPhoto') {
 	        $this->validate($request, [
 	            'name' => ['required'],
-	            'name.*' => ['required', 'string', 'max:255'],
 	            'file' => ['required'],
 	            'file.*' => ['mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
 	        ]);
