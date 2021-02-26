@@ -179,10 +179,42 @@
 
   <div class=" border-gray-200 bg-no-repeat bg-cover bg-center "  >
 
-    <div class=" mb-4 rounded-xl shadow-lg flex md:flex-row flex-col">
+    <div class=" mb-4 rounded-xl shadow-lg flex md:flex-row flex-col h-100">
       @if($menu_today == null)
+      <div class="bootstrapiso shadow-lg w-full h-full">
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+     
+      <div class="carousel-inner  h-auto">
+        <div class="carousel-item  active h-100">
+          <img class="d-block w-100 object-cover " style="height: 532px;" src="https://images.pexels.com/photos/4275885/pexels-photo-4275885.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="First slide">
+          
+        </div>
+        <?php 
+         for ($i=0; $i < 1; $i++) { 
+          
+          ?>
+          <div class="carousel-item h-100">
+            <img class="d-block w-full  object-cover " style="height: 532px;" src="https://images.pexels.com/photos/2832039/pexels-photo-2832039.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="First slide">
 
-      <div class="bg-cover bg-top text-center bg-gradient-to-t bg-blue-400 to bg-green-400  bg-center text-white  object-fill w-full" style="background-image: url(@if($slideshows->first() == null) {{url('public/images/no-image.png')}} @else {{url('public/'.$slideshows->first()->file)}} @endif);background-position-y: -70px;">
+          </div>
+        
+      <?php }  ?>
+         <div class="h-full md:px-20 m-auto pt-10 md:pb-40 md:pt-20 absolute text-white text-center" style="background-image: linear-gradient(0deg,#252525,#27272769) !important;">
+          <p class="font-bold text-2xl uppercase"> Today's Meal </p>
+          <div class="flex md:flex-row flex-col justify-center mb-10 ">
+            <p class="text-5xl font-bold leading-none mt-5  capitalize"> you don't have any meal scheduled today   </p>        
+
+          </div>
+        
+
+        </div>     
+        
+      </div>
+      
+    </div>
+  </div>
+     <!--  <div class="bg-cover bg-top text-center bg-gradient-to-t bg-blue-400 to bg-green-400  bg-center text-white  object-fill w-full" style="background-image: url(@if($slideshows->first() == null) {{url('public/images/no-image.png')}} @else {{url('public/'.$slideshows->first()->file)}} @endif);background-position-y: -70px;">
+
         <div class="h-full md:px-20 p-8 md:pb-40 md:pt-20" style="background-image: linear-gradient(0deg,#252525,#27272769) !important;">
           <p class="font-bold text-2xl uppercase"> Today's Meal </p>
           <div class="flex md:flex-row flex-col justify-center mb-10 ">
@@ -193,7 +225,7 @@
 
         </div>       
       </div> 
-
+ -->
       @else
       <div class="bg-cover bg-top text-center bg-gradient-to-t bg-blue-400 to bg-green-400  bg-center text-white  object-fill w-full" style="background-image: url(@if($menu_today->menu->photos->first() != null){{ url('public/'.$menu_today->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif);background-position-y: -70px;">
         <div class="h-full md:px-20 p-8 md:pb-40 md:pt-20" style="background-image: linear-gradient(0deg,#252525,#27272769) !important;">
@@ -254,7 +286,7 @@
 
       <div class="flex px-5 md:px-10 mb-0 md:mb-8 mt-8 md:-mt-28 gap-4 w-full py-6  ">      
       
-        <div class="bg-white md:grid md:grid-cols-2 xl:grid-cols-4 rounded-2xl md:px-8 md:py-6 py-2 shadow-xl mx-auto flex hide-scroll w-full">
+        <div class="bg-white z-10 md:grid md:grid-cols-2 xl:grid-cols-4 rounded-2xl md:px-8 md:py-6 py-2 shadow-xl mx-auto flex hide-scroll w-full">
            <div class="absolute bg-red-500 px-6 py-4 text-white z-10 -mt-12  md:ml-6 ml-15 rounded-2xl">
         Weekly Report </div>
         <div class="w-full px-4 mt-4 md:mt-0 border-0 xl:border-r-2">         
@@ -606,5 +638,5 @@
           });
     }
   </script>
-
+<script src="{{asset('resources/js/slider.js')}}"></script>
   </x-app-layout>
