@@ -175,6 +175,31 @@ class AdminActionController extends Controller
 		$send_mail = Mail::to($request->email)->send(new RegisterSuccessfully($data));
         return redirect()->route('admin.index.account')->with(['message' => 'new '.$request->role.' added succesfully.']);
 	}
+	public function update_account(Request $request)
+	{
+		//Validation Request
+		$this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'division' => ['required', 'string'],
+            'roles' => ['required', 'string'],
+            'number_phone' => ['numeric','digits_between:10,15'],
+            'address' => ['string'],
+        ]);
+		$user = User::where('email',$request->email)->first();
+		if($user == null){
+			return redirect()->back()->withErrors(['errors' => 'User not found.']);
+		}
+
+		$user->update([
+			'name' => $request->name,
+			'division' => $request->division,
+			'roles' => $request->roles,
+			'number_phone' => $request->number_phone,
+			'address' => $request->address,
+		]);
+
+		return redirect()->back()->with(['message' => $user->role.' '.$user->name.' updated succesfully.']);
+	}
 	public function index_menu()
 	{
 		$menus = Menu::all();
