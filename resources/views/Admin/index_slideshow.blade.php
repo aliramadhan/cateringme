@@ -59,7 +59,7 @@
                  
 
                 <div  class="col-span-6 sm:col-span-4">
-                <form action="{{route('admin.store.slideshow')}}" method="POST" enctype="multipart/form-data">
+                <form id="formUp" action="{{route('admin.store.slideshow')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                  @foreach($slides as $slide)
                 <label class="block font-medium text-sm text-gray-700" for="slide">
@@ -94,7 +94,7 @@
                 <div class="clone hide">
                   <div class="deletethis hdtuto control-group lst input-group" style="margin-top:10px">
                     <input type="text" name="name[]" placeholder="name here">
-                    <input type="file" name="file[]" class="myfrm form-control" accept="image/x-png,image/gif,image/jpeg">
+                    <input type="file" name="inputFile[]" class="myfrm form-control" accept="image/x-png,image/gif,image/jpeg">
                     <div class="input-group-btn"> 
                       <button class="btn btn-danger" type="button"><i class="fldemo glyphicon glyphicon-remove"></i> Remove</button>
                     </div>
