@@ -456,6 +456,9 @@ class AdminActionController extends Controller
 				continue;
     		}
     		if ($request->file('file'.$slide->id) != null) {
+		        $this->validate($request, [
+		            'file'.$slide->id => ['required','mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+		        ]);
     			$photo = $request->file('file'.$slide->id);
     			if(\File::exists(public_path($slide->file))){
                     \File::delete(public_path($slide->file));
