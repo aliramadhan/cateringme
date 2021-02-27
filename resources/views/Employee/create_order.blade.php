@@ -284,11 +284,11 @@
  </div>
 </div>
 </form>
-<div class="absolute inset-0 w-full h-full bg-gray-900 text-white flex text-5xl transition-all ease-in-out duration-1000 transform translate-x-full slide p-6" >
+<div class="absolute inset-0 w-full h-full  text-white flex text-5xl transition-all ease-in-out duration-1000 transform translate-x-full slide p-6" >
 
   <div class="grid grid-rows-7 gap-1 w-full ">  
 
-    <h3 class="flex-shrink min-w-0 font-medium text-5xl leading-snug text-center mb-6 h-28 md:h-15 ">
+    <h3 class="flex-shrink min-w-0 font-medium text-5xl leading-snug text-center mb-6 h-28 md:h-15 text-gray-900">
      {{$next_month->format('F')}}
    </h3>  
     <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5 mt-4">                      
