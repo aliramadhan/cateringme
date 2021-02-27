@@ -47,6 +47,7 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth:sanctum','role:Admin'
     Route::get('/account', [ AdminActionController::class, 'index_account'])->name('admin.index.account');
     Route::get('/create/account', [ AdminActionController::class, 'create_account'])->name('admin.create.account');
     Route::post('/create/account', [ AdminActionController::class, 'store_account'])->name('admin.store.account');
+    Route::put('/update/account', [ AdminActionController::class, 'update_account'])->name('admin.update.account');
 
     //Manage Menu
     Route::get('/menu', [ AdminActionController::class, 'index_menu'])->name('admin.index.menu');

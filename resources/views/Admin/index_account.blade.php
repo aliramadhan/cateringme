@@ -145,22 +145,22 @@
 
         <!--Body-->
         
-        <form method="POST" action="{{ route('admin.store.account') }}">
+        <form method="POST" action="{{ route('admin.update.account') }}">
           @csrf
-
+          @method('PUT')
           <div>
-            <x-jet-label for="name" value="{{ __('Name') }}" />
-            <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            <x-jet-label for="editName" value="{{ __('Name') }}" />
+            <x-jet-input id="editName" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
           </div>
 
           <div class="mt-4  grid grid-cols-2 gap-2">
               <div>
-            <x-jet-label for="email" value="{{ __('Email') }}" />
-            <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+            <x-jet-label for="editEmail" value="{{ __('Email') }}" />
+            <x-jet-input readonly id="editEmail" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
             <div>
                             <x-jet-label for="role" value="{{ __('Status') }}" />
-            <select id="role" name="role" class="block mt-1 w-full form-select" required>
+            <select disabled id="role" name="role" class="block mt-1 w-full form-select" required>
               <option>Employee</option>
               <option>Catering</option>
             </select>
@@ -169,31 +169,32 @@
 
           <div class="mt-4 grid grid-cols-2 gap-2">
             <div>
-            <x-jet-label for="division" value="{{ __('Division') }}" />
-            <x-jet-input id="division" class="block mt-1 w-full" type="text" name="division" :value="old('division')" required autofocus autocomplete="division" />
+            <x-jet-label for="editDivision" value="{{ __('Division') }}" />
+            <x-jet-input id="editDivision" class="block mt-1 w-full" type="text" name="division" :value="old('division')" required autofocus autocomplete="division" />
             </div>
              <div>
-            <x-jet-label for="roles" value="{{ __('Role') }}" />
-            <x-jet-input id="roles" class="block mt-1 w-full" type="text" name="roles" :value="old('roles')" required autofocus autocomplete="roles" />
+            <x-jet-label for="editRoles" value="{{ __('Role') }}" />
+            <x-jet-input id="editRoles" class="block mt-1 w-full" type="text" name="roles" :value="old('roles')" required autofocus autocomplete="roles" />
             </div>
           </div>
 
          
 
           <div class="mt-4">
-            <x-jet-label for="number_phone" value="{{ __('Number Phone') }}" />
-            <x-jet-input id="number_phone" class="block mt-1 w-full {{ $errors->has('number_phone') ? 'border-1 border-red-300' :'' }}" type="text" name="number_phone" :value="old('number_phone')" required />
+            <x-jet-label for="editNumber_phone" value="{{ __('Number Phone') }}" />
+            <x-jet-input id="editNumber_phone" class="block mt-1 w-full {{ $errors->has('number_phone') ? 'border-1 border-red-300' :'' }}" type="text" name="number_phone" :value="old('number_phone')" required />
             </div>
 
             <div class="mt-4">
-              <x-jet-label for="address" value="{{ __('Address') }}" />
-              <x-jet-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required />
+              <x-jet-label for="editAddress" value="{{ __('Address') }}" />
+              <x-jet-input id="editAddress" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required />
             </div>
             <!--Footer-->
-            <div class="flex justify-between pt-4">
+   <div class="flex justify-between pt-4">
                <x-jet-button class="px-4 bg-transparent p-3 rounded-lg hover:bg-gray-100 hover:text-red-400 mr-2 bg-red-500 p-3 rounded-lg text-white">   {{ __('Delete') }}</x-jet-button>
 
               <x-jet-button class="px-4 bg-transparent p-3 rounded-lg hover:bg-gray-100 hover:text-indigo-400 mr-2 bg-blue-500 p-3 rounded-lg text-white">   {{ __('Save') }}</x-jet-button>
+              
               
             </div>
           </form>
@@ -296,7 +297,7 @@
                             <div class="px-2 py-1  text-left flex-auto">{{$user->email}}</div>
                         </div>
                       </a>
-                       <button class="modal-open rounded-xl text-lg p-3 bg-blue-400 text-white font-semibold mt-4 mx-4 z-10 pointer hover:bg-blue-600" data-target="editModal" data-toggle="modal" id="modal-click">Edit Account</button>
+                       <button class="modal-open rounded-xl text-lg p-3 bg-blue-400 text-white font-semibold mt-4 mx-4 z-10 pointer hover:bg-blue-600" data-target="editModal" data-toggle="modal" id="modal-edit" data-name="{{$user->name}}" data-role="{{$user->role}}" data-email="{{$user->email}}" data-division="{{$user->division}}" data-roles="{{$user->roles}}" data-number_phone="{{$user->number_phone}}" data-address="{{$user->address}}">Edit Account</button>
                     </div>
 
                    
@@ -392,4 +393,28 @@
 </div>
 <script src="{{asset('resources/js/myJs.js')}}"></script>
 <script src="{{asset('resources/js/searching.js')}}"></script>
+<script type="text/javascript">
+  $(document).on("click", "#modal-edit", function (e) {
+
+    e.preventDefault();
+
+    var _self = $(this);
+    var name = _self.data("name"),
+    email = _self.data("email"),
+    role = _self.data("role"),
+    division = _self.data("division"),
+    roles = _self.data("roles"),
+    number_phone = _self.data("number_phone"),
+    address = _self.data("address");
+
+    $("#editName").val(name);
+    $("#editEmail").val(email);
+    $("#editRole").val(role);
+    $("#editDivision").val(division);
+    $("#editRoles").val(roles);
+    $("#editNumber_phone").val(number_phone);
+    $("#editAddress").val(address);
+
+  });
+</script>
 </x-app-layout>
