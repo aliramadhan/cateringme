@@ -391,15 +391,18 @@
 <script src="{{asset('resources/js/myJs.js')}}"></script>
 <script src="{{asset('resources/js/searching.js')}}"></script>
 <script type="text/javascript">
-  $( "#modal-edit" ).click(function() {
-    var link = $(this),
-    name = link.data("name"),
-    email = link.data("email"),
-    role = link.data("role"),
-    division = link.data("division"),
-    roles = link.data("roles"),
-    number_phone = link.data("number_phone"),
-    address = link.data("address");
+  $(document).on("click", "#modal-edit", function (e) {
+
+    e.preventDefault();
+
+    var _self = $(this);
+    var name = _self.data("name"),
+    email = _self.data("email"),
+    role = _self.data("role"),
+    division = _self.data("division"),
+    roles = _self.data("roles"),
+    number_phone = _self.data("number_phone"),
+    address = _self.data("address");
 
     $("#editName").val(name);
     $("#editEmail").val(email);
@@ -408,6 +411,7 @@
     $("#editRoles").val(roles);
     $("#editNumber_phone").val(number_phone);
     $("#editAddress").val(address);
+
   });
 </script>
 </x-app-layout>
