@@ -18,7 +18,7 @@ class EmployeeActionController extends Controller
     public function dashboard()
     {
         //declare variable
-        $slideshows = Slideshow::all();
+        $slideshows = Slideshow::orderBy('id','desc')->get();
         $now = Carbon::now();
         $start = Carbon::parse($now->format('Y-m-1'));
         $stop = Carbon::now()->endOfMonth();

@@ -186,17 +186,18 @@
      
       <div class="carousel-inner  h-auto">
         <div class="carousel-item  active h-100">
-          <img class="d-block w-100 object-cover " style="height: 532px;" src="https://images.pexels.com/photos/4275885/pexels-photo-4275885.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="First slide">
+          <img class="d-block w-100 object-cover " style="height: 532px;" src="@if($slideshows->first() == null) {{url('public/images/no-image.png')}} @else {{url('public/'.$slideshows->first()->file)}} @endif" alt="First slide">
           
         </div>
+        @foreach($slideshows as $slideshow)
+          <div class="carousel-item h-100">
+            <img class="d-block w-full  object-cover " style="height: 532px;" src="@if($slideshow->file == null) {{url('public/images/no-image.png')}} @else {{url('public/'.$slideshow->file)}} @endif" alt="{{$slideshow->name}}">
+          </div>
+        @endforeach
         <?php 
          for ($i=0; $i <= 1; $i++) { 
           
           ?>
-          <div class="carousel-item h-100">
-            <img class="d-block w-full  object-cover " style="height: 532px;" src="https://images.pexels.com/photos/2832039/pexels-photo-2832039.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="First slide">
-
-          </div>
         
       <?php }  ?>
          <div class="h-full md:px-20 m-auto pt-10 md:pb-40 md:pt-20 absolute text-white text-center" style="background-image: linear-gradient(0deg,#252525,#27272769) !important;">
