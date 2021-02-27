@@ -366,7 +366,7 @@
     <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 md:px-6 mb-8 px-0">  
       <div class="p-6 px-6 mx-6 mt-6 bg-white rounded-xl p-4 shadow-lg">       
         <div class="col-span-2 text-4xl text-left text-gray-600 mb-9 font-base flex item-center">          
-          <p class="flex-auto text-left font-semibold ">
+          <p class="flex-auto text-left font-semibold leading-tight">
             <span class="font-normal text-gray-600"> Schedule </span>{{Carbon\Carbon::now()->format('F Y')}}</p>
           <a href="{{ route('employee.create.order') }}" id="btn-slide-dis-2"  class="inline-block rounded-full leading-none focus:outline-none text-gray-400 hover:text-gray-700  focus:outline-none duration-500">
               <i class="fas fa-plus p-2 border rounded-full text-lg hover:border-blue-400  focus:outline-none"></i>
@@ -435,11 +435,14 @@
         </div>
 
         @endfor
+        <div class="flex items-center mt-8">
+          <a href="{{ route('employee.history.order') }}" class="bg-gray-700 text-white py-4 font-semibold text-center w-full rounded-xl tracking-wider hover:bg-gray-900 shadow-lg">My History</a>
+        </div>
       </div>
 
       <div class="p-6 mt-6">       
-        <div class="col-span-2 text-4xl text-center mb-6 font-base">          
-          My Feed & Review
+        <div class="col-span-2 text-4xl text-center mb-6 font-base text-gray-700">          
+          <span class="font-semibold">My</span> Feed & Review
         </div>
         @foreach($reviews as $review)
 
