@@ -280,6 +280,10 @@ class CateringActionController extends Controller
                         </span>
                     </label>";
             }
+
+            if($start->dayOfWeek == 0){
+                $input .= "<br class='lg:block hidden'>";      
+            } 
             $days->push($input);
         }
         return $days;
