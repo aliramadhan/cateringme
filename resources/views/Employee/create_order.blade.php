@@ -52,12 +52,13 @@
     } 
 
     input[type="radio"]:checked + label span {
-      background-color: #3490DC; //bg-blue
+      background-color: #3490DC;
       box-shadow: 0px 0px 0px 2px white inset;
     }
 
     input[type="radio"]:checked + label{
-     color: #3490DC; //text-blue
+     color: #3490DC;
+     border: 2px solid #3490DC !important;
    }
    input[type="radio"]:checked + label:before{
     display: none;
@@ -413,7 +414,7 @@
         }
         else{
           $('#dateOrder').val(data.date);
-          $('#MenuPhotosModal1').html(`Create Schedule for <br class="block md:hidden">` + data.date );
+          $('#MenuPhotosModal1').text("Create Schedule for " + data.date );
           $('.after-select').html(`
           <span class="block col-span-2 -mt-2">
           <h5 class="text-center border-b relative"><span class="relative top-3 px-4 bg-gray-50">Select Your Menu </span></h5>
