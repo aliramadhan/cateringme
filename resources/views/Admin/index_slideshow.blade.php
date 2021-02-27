@@ -53,10 +53,11 @@
 
 
           <div class="mt-5 md:mt-0 md:col-span-2">
-              <div class="shadow overflow-hidden sm:rounded-md">       <div class="bg-white ">
+              <form id="formUp" action="{{route('admin.store.slideshow')}}" method="POST" enctype="multipart/form-data">
+              @csrf
+              <div class="shadow overflow-hidden sm:rounded-md">
+               <div class="bg-white ">
 
-                 <form id="formUp" action="{{route('admin.store.slideshow')}}" method="POST" enctype="multipart/form-data">
-                @csrf
                  @foreach($slides as $slide)
                 <div class="md:grid md:grid-cols-4 px-6 py-8 border-b flex-wrap-reverse flex">
                 <label class="md:block hidden font-semibold text-lg text-gray-700 col-span-4" for="slide">
@@ -88,14 +89,9 @@
                 </label>
 
 
-            </div>
+                  </div>
 
                  @endforeach
-                   <div class="flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6">
-                  <button type="submit" class="opacity-75 hover:opacity-100 items-center px-4 py-2  border-transparent rounded-md font-semibold text-lg uppercase tracking-widest  active:bg-gray-900 active:text-white focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150" name="submit" value="UpdatePhoto">
-                    Update
-                  </button>
-                </div>
               
             </div>
           </div>
@@ -117,12 +113,12 @@
 
                       <div class="mt-2">
                         <x-jet-label for="name" value="{{ __('Upload Picture') }}" class="mb-1" />
-                        <input type="file" name="inputFile[]"  accept="image/x-png,image/gif,image/jpeg" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300  font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mr-2 mb-8 myfrm md:w-auto w-full rounded-lg">  
+                        <input type="file" name="inputFile[]"  accept="image/x-png,image/gif,image/jpeg" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300  font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mr-2 mb-8 myfrm md:w-auto w-full rounded-lg" multiple>  
                       </div> 
                     </div>
               </div>             
             
-            <div class="clone hide">
+            <div class="clone hide" style="display: none;">
               <div class="deletethis hdtuto control-group lst input-group grid grid-cols-4 px-6 py-8 border-b" >
                 <div class="lg:col-span-3 col-span-4">
                 <div>
@@ -132,12 +128,12 @@
                 </div>
                 <div class="mt-2">
                   <x-jet-label for="name" value="{{ __('Upload Picture') }}" class="mb-1" />
-                  <input type="file" name="inputFile[]"  accept="image/x-png,image/gif,image/jpeg" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300  font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mr-2 mb-8 myfrm md:w-auto w-full rounded-lg">    
+                  <input type="file" name="inputFile[]"  accept="image/x-png,image/gif,image/jpeg" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300  font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mr-2 mb-8 myfrm md:w-auto w-full rounded-lg" multiple>    
                 </div>
                 </div>
 
                 <div class="input-group-btn"> 
-                 <button class="bg-red-500 text-white py-2 px-8 rounded-lg" type="button"><i class="fldemo glyphicon glyphicon-remove"></i> Remove</button>
+                 <button class="bg-red-500 text-white py-2 px-8 rounded-lg btn-danger" type="button"><i class="fldemo glyphicon glyphicon-remove"></i> Remove</button>
                 </div>
               </div>
             </div>
@@ -148,8 +144,8 @@
                     Save
                   </button>
                 </div>
-            
-          </form>   
+              </form>   
+            </div>
         </div>
 
       </div>

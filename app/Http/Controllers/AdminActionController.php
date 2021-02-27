@@ -448,18 +448,18 @@ class AdminActionController extends Controller
 	}
 	public function store_slideshow(Request $request)
 	{
-		return dd($request->all());
+        $this->validate($request, [
+            'inputFile.*' => ['mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+        ]);
         if($request->file('inputFile') != null){
 			for ($i=0; $i < count($request->file('inputFile')); $i++) { 
-		        $this->validate($request, [
-		            'inputFile.*' => ['mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
-		        ]);
 		        if($request->name[$i] == null){
 		        	return redirect()->back()->withErrors(['errors' => 'name field for new image empty.']);
 		        }
+		        $sum = Slideshow::all()->sum('id');
 				//create name and store photo
 				$image = $request->file('inputFile')[$i];
-		        $imageName = Str::slug($request->name[$i]).'_'.date('Ymdhsi').'.'.$image->extension();
+		        $imageName = Str::slug($request->name[$i]).'_'.date('Ymdhsi').'_'.$sum.'.'.$image->extension();
 		        $image->move(public_path('images/slideshow/'), $imageName);
 		        $fileName = 'images/slideshow/'.$imageName;
 
