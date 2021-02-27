@@ -191,7 +191,7 @@
             </div>
             <!--Footer-->
    <div class="flex justify-between pt-4">
-               <x-jet-button class="px-4 bg-transparent p-3 rounded-lg hover:bg-gray-100 hover:text-red-400 mr-2 bg-red-500 p-3 rounded-lg text-white">   {{ __('Delete') }}</x-jet-button>
+               <a id="accountDelete" href="" class="px-4 bg-transparent p-3 rounded-lg hover:bg-gray-100 hover:text-red-400 mr-2 bg-red-500 p-3 rounded-lg text-white" onclick="return confirm('Do you really want to delete this User ? All data related to User will be deleted,  This process cannot be undone.');">   {{ __('Delete') }}</a>
 
               <x-jet-button class="px-4 bg-transparent p-3 rounded-lg hover:bg-gray-100 hover:text-indigo-400 mr-2 bg-blue-500 p-3 rounded-lg text-white">   {{ __('Save') }}</x-jet-button>
               
@@ -407,6 +407,7 @@
     number_phone = _self.data("number_phone"),
     address = _self.data("address");
 
+    $("#accountDelete").attr("href", "{!! url('admin/delete/account/') !!}/"+email);
     $("#editName").val(name);
     $("#editEmail").val(email);
     $("#editRole").val(role);

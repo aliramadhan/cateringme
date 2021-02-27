@@ -385,8 +385,8 @@
 		<div class=" p-4 cursor-default flex  border-b-2  border-gray-200">
 			<img src="@if($order->menu->photos->first() != null) {{ url('public/'.$order->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-10 w-10 rounded-full mr-3  my-auto">
 			<div class="text-base flex-auto text-left">
-				<h3 class="font-semibold text-lg mb-1">{{$order->employee->name}}</h3>
-				<p class="leading-tight ">{{$order->menu->name}}</p>
+				<h3 class="font-semibold text-lg mb-1">{{$order->employee_name}}</h3>
+				<p class="leading-tight ">{{$order->menu_name}}</p>
 			</div>
 			@if($now->format('H') >= 9 )
 			<p>Served</p>

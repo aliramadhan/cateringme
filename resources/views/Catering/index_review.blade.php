@@ -75,8 +75,8 @@
        @foreach($reviews as $review)
             <tr>
                 <td>{{$loop->iteration}}</td>
-                <td>{{$review->menu->name}}</td>
-                <td>{{$review->employee->name}}</td>
+                <td>{{$review->menu_name}}</td>
+                <td>{{$review->employee_name}}</td>
                 <td>{{$review->review}}</td>
                 <td>{{$review->stars}}</td>
                 <td>{{Carbon\Carbon::parse($review->reviewed_at)->format('l F Y')}}</td>

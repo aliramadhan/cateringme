@@ -74,9 +74,9 @@
             <td>{{$loop->iteration}}</td>
             <td> <div class="flex items-center h-full mr-2">
                 <img src="{{$order->employee->profile_photo_url}}" class="rounded-full">
-                <a> {{$order->employee->name}}</a></div>
+                <a> {{$order->employee_name}}</a></div>
             </td>
-            <td>{{$order->menu->name}}</td>
+            <td>{{$order->menu_name}}</td>
             <td>{{Carbon\Carbon::parse($order->order_date)->format('l, d M Y')}}</td>
             <td>{{$order->note}}</td>
             <td><p class="m-0 border-green-300 border rounded-2xl bg-green-200 text-green-600 py-2 font-semibold px-4 hover:bg-green-300 hover:text-green-700 transition-500">Served</p></td>

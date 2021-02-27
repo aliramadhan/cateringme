@@ -72,7 +72,7 @@
    @endphp
    <tr>
     <td>{{$i}}</td>   
-    <td>@if($review != null) {{$review->menu->name}} @endif</td>
+    <td>@if($review != null) {{$review->menu_name}} @endif</td>
     <td>{{$review->stars}}</td>
     <td>{{$review->review}}</td>
     <td>{{$start->format('d, M Y')}}</td>

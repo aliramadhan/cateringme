@@ -73,8 +73,8 @@
              @foreach($reviews as $review)
             <tr>
                 <td>{{$loop->iteration}}</td>
-                <td>{{$review->employee->name}}</td>
-                <td>{{$review->menu->name}}</td>
+                <td>{{$review->employee_name}}</td>
+                <td>{{$review->menu_name}}</td>
                 <td>{{$review->review}}</td>
                 <td><i class="fas fa-star"></i>{{$review->stars}}</td>
                 <td>{{Carbon\Carbon::parse($review->order_date)->format('H:s, d, M Y')}}</td>

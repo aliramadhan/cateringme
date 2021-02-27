@@ -69,7 +69,7 @@
                   <div class="rounded-lg shadow-sm mb-4">
                     <div class="rounded-lg bg-white shadow-lg md:shadow-xl relative overflow-hidden transform hover:-translate-y-2 hover:shadow-2xl duration-500 cursor-pointer">
                       <div class="px-3 text-center pt-4 pb-52 relative z-10 bg-gradient-to-b from-gray-900 to-transparent ">
-                          <h4 class="font-semibold text-xl text-white ">{{$order->menu->name}}</h4>
+                          <h4 class="font-semibold text-xl text-white ">{{$order->menu_name}}</h4>
                       </div>
                       <div class="absolute bottom-0 inset-x-0">
                          <img src="@if($order->menu->photos->first() != null){{url('public/'.$order->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-full">
@@ -77,7 +77,7 @@
                       <div class="flex flex-col md:flex-row text-base bg-white py-2 z-10 bottom-0 absolute rounded-br-xl text-gray-600 px-1 md:px-4 hover:bg-gray-900 hover:text-white duration-500 cursor-pointer flex items-center w-full">
                         <img src="{{ $order->employee->profile_photo_url }}" class="object-cover h-10 w-10 rounded-full">
                         <div class="ml-2 text-left">
-                          <a href="#" class=" font-semibold ">{{$order->employee->name}}</a>
+                          <a href="#" class=" font-semibold ">{{$order->employee_name}}</a>
                           <div class=" text-sm font-semibold text-indigo-700 -mt-1 truncate">
                             {{Carbon\Carbon::parse($order->order_date)->format('d F Y')}}<br>
                             {{$order->shift}}<br>
@@ -134,9 +134,9 @@
     @foreach($orders as $order)
     <tr>
       <td>{{$loop->iteration}}</td>
-      <td>{{$order->employee->name}}</td>
+      <td>{{$order->employee_name}}</td>
        <td>{{Carbon\Carbon::parse($order->order_date)->format('d F Y')}}</td>
-      <td>{{$order->menu->name}}</td>
+      <td>{{$order->menu_name}}</td>
       <td>{{$order->shift}}</td>
       <td>{{$order->serving}}</td>
   </tr>

@@ -200,6 +200,30 @@ class AdminActionController extends Controller
 
 		return redirect()->back()->with(['message' => $user->role.' '.$user->name.' updated succesfully.']);
 	}
+	public function delete_account($email)
+	{
+		$user = User::where('email',$email)->first();
+		if ($user->role == 'Employee') {
+			foreach ($user->orders as $order) {
+				$order->delete();
+			}
+		}
+		elseif($user->role == 'Catering'){
+			foreach ($user->menus as $menu) {
+				foreach ($menu->photos as $photo) {
+					if (\File::exists(public_path($photo->file))) {
+					    $delete = \File::delete(public_path($photo->file));
+					}
+					$photo->delete();
+				}
+				$menu->delete();
+			}
+		}
+		$message = $user->name.' account deleted succesfully.';
+		$user->delete();
+
+		return redirect()->back()->with(['message' => $message]);	
+	}
 	public function index_menu()
 	{
 		$menus = Menu::all();

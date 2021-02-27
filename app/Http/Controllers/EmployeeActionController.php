@@ -318,8 +318,10 @@ class EmployeeActionController extends Controller
             if($order == null){
                 $order = Order::create([
                     'employee_id' => $user->id,
+                    'employee_name' => $user->name,
                     'order_number' => $code_number,
                     'menu_id' => $menu->id,
+                    'menu_name' => $menu->name,
                     'order_date' => $date->format('Y-m-d'),
                     'serving' => $request->porsi,
                     'is_sauce' => $sambal,
@@ -330,6 +332,7 @@ class EmployeeActionController extends Controller
             else{
                 $order->update([
                     'menu_id' => $menu->id,
+                    'menu_name' => $menu->name,
                     'serving' => $request->porsi,
                     'is_sauce' => $sambal,
                     'shift' => $request->shift,

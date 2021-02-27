@@ -185,12 +185,8 @@
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
      
       <div class="carousel-inner  h-auto">
-        <div class="carousel-item  active h-100">
-          <img class="d-block w-100 object-cover " style="height: 532px;" src="@if($slideshows->first() == null) {{url('public/images/no-image.png')}} @else {{url('public/'.$slideshows->first()->file)}} @endif" alt="First slide">
-          
-        </div>
         @foreach($slideshows as $slideshow)
-          <div class="carousel-item h-100">
+          <div class="carousel-item @if($loop->iteration == 1) active @endif h-100">
             <img class="d-block w-full  object-cover " style="height: 532px;" src="@if($slideshow->file == null) {{url('public/images/no-image.png')}} @else {{url('public/'.$slideshow->file)}} @endif" alt="{{$slideshow->name}}">
           </div>
         @endforeach
@@ -416,7 +412,7 @@
           </div>
 
           <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto">
-            <a href="#">{{$order->menu->name}}</a>
+            <a href="#">{{$order->menu_name}}</a>
           </div>
 
             <img src="@if($order->menu->photos->first() != null){{ url('public/'.$order->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-8 w-8 mr-2 rounded flex-initial transform hover:scale-125 duration-500 ease-in-out hover:shadow=lg" >
