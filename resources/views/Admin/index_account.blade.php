@@ -334,7 +334,8 @@
     data-pagination="true"
     data-minimum-count-columns="2"
     data-response-handler="responseHandler"
-    data-export-types= "['excel','doc', 'txt']">
+    data-export-types= "['excel','doc', 'txt']"
+    data-export-options='{"fileName": "Account List"}'>
     
     <thead class="bg-gray-800 text-white uppercase font-semibold text-sm ">
       <th data-sortable="true">No</th>      

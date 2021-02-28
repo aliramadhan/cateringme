@@ -5,7 +5,7 @@
     @endif
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Report Catering') }} <span class="font-normal text-lg">{{ __('/ Order Taken ') }}</span>
+            {{ __('Report') }} <span class="font-normal text-lg">{{ __('/ Order Taken ') }}</span>
         </h2>
     </x-slot>
 
@@ -30,7 +30,7 @@
         </div>
       </div>
          <div class="relative h-full">
-              <div class=" inset-0 w-full h-full text-gray-600 flex text-5xl p-3 md:p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide text-base overflow-y-auto bg-white" >      
+              <div class=" inset-0 w-full h-full text-gray-600 flex text-5xl p-3 md:p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide text-base overflow-y-auto bg-gray-100" >      
 
             <div class="bootstrapiso w-full bg-transparent text-base ">
                 <div class="md:absolute text-2xl font-semibold top-9 md:text-left text-center"><span class="text-gray-500">Period : </span> @if($from == null) {{$now->format('d F Y')}} @else {{$from->format('d F Y')}} - {{$to->format('d F Y')}} @endif </div>
@@ -50,7 +50,8 @@
             data-pagination="true"
             data-minimum-count-columns="2"
             data-response-handler="responseHandler"
-            data-export-types= "['excel','doc', 'txt']">
+            data-export-types= "['excel','doc', 'txt']"
+            data-export-options='{"fileName": "Summary | @if($from == null) All time @else {{$from->format('d F Y')}} - {{$to->format('d F Y')}} @endif "}'>
 
             <thead class="text-gray-600 uppercase font-semibold text-lg font-semibold rounded-lg bg-gray-100" style="
             background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
@@ -70,8 +71,8 @@
         @foreach($employees as $employee)
         <tr>
             <td>{{$loop->iteration}}</td>
-            <td > <div class="flex items-center h-full">
-                <img src="{{$employee->profile_photo_url}}" class="rounded-full mr-2">
+            <td > <div class="flex items-center md:flex-row flex-col ">
+                <img src="{{$employee->profile_photo_url}}" class="rounded-full md:mr-2 w-12 h-12">
                 <a> {{$employee->name}}</a></div>
             </td>
             <td>{{$employee->total_order}}</td>

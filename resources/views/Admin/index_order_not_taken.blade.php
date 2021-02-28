@@ -5,7 +5,7 @@
     @endif
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Report Admin') }} <span class="font-normal text-lg">{{ __('/ Order Not Taken ') }}</span>
+            {{ __('Report') }} <span class="font-normal text-lg">{{ __('/ Order Not Taken ') }}</span>
         </h2>
     </x-slot>
       
@@ -51,7 +51,7 @@
             data-minimum-count-columns="2"
             data-response-handler="responseHandler"
             data-export-types= "['excel','doc', 'txt']"
-            data-export-name= "tes">
+             data-export-options='{"fileName": "Order not Taken  @if($from == null) All time @else {{$from->format('d F Y')}} - {{$to->format('d F Y')}} @endif "}' >
 
             <thead class="text-gray-600 uppercase font-semibold text-lg font-semibold rounded-lg bg-gray-100" style="
             background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);

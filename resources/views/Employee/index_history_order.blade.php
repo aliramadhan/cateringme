@@ -146,7 +146,8 @@
   data-pagination="true"
   data-minimum-count-columns="2"
   data-response-handler="responseHandler"
-  data-export-types= "['excel','doc', 'txt']">
+  data-export-types= "['excel','doc', 'txt']"
+  data-export-options='{"fileName": "History My Catering"}'>
 
   <thead class="bg-gray-800 text-white uppercase font-semibold text-base font-semibold ">
     <tr>

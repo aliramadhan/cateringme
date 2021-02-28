@@ -5,7 +5,7 @@
     @endif
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Report Catering') }} <span class="font-normal text-lg">{{ __('/ Order Taken ') }}</span>
+            {{ __('Report') }} <span class="font-normal text-lg">{{ __('/ Order Taken ') }}</span>
         </h2>
     </x-slot>
 
@@ -50,7 +50,8 @@
             data-pagination="true"
             data-minimum-count-columns="2"
             data-response-handler="responseHandler"
-            data-export-types= "['excel','doc', 'txt']">
+            data-export-types= "['excel','doc', 'txt']"
+            data-export-options='{"fileName": "Order | @if($from == null) All time @else {{$from->format('d F Y')}} - {{$to->format('d F Y')}} @endif "}'>
 
             <thead class="text-gray-600 uppercase font-semibold text-lg font-semibold rounded-lg bg-gray-100" style="
             background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
@@ -58,7 +59,7 @@
            
             <tr>
             <th class="w-12">No</th>            
-            <th class="w-full">Employee </th>
+            <th>Employee </th>
             <th>Menu</th>
             <th>Order Date</th>
             <th>Note</th>
@@ -72,8 +73,8 @@
         @foreach($orders as $order)
         <tr>
             <td>{{$loop->iteration}}</td>
-            <td> <div class="flex items-center h-full mr-2">
-                <img src="{{$order->employee->profile_photo_url}}" class="rounded-full">
+            <td> <div class="flex items-center md:flex-row flex-col ">
+                <img src="{{$order->employee->profile_photo_url}}" class="rounded-full md:mr-2 w-12 h-12">
                 <a> {{$order->employee_name}}</a></div>
             </td>
             <td>{{$order->menu_name}}</td>
