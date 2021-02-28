@@ -52,7 +52,7 @@
     } 
 
     input[type="radio"]:checked + label span {
-      background-color: #3490DC; 
+background-color: #3490DC; 
       box-shadow: 0px 0px 0px 2px white inset;
     }
 
@@ -121,6 +121,7 @@
                   </button>
                 </div>
                 <input type="hidden" name="date" id="dateOrder">
+                <input type="hidden" name="date" id="dateSelected">
                 <div class="modal-body p-0">
                  <div id="carouselExampleControls" class="carousel slide" data-interval="false">
                   <div class="carousel-inner h-100">
@@ -410,6 +411,7 @@
         }
         else{
           $('#dateOrder').val(data.date);
+          $('#dateSelected').val(date);
           $('#MenuPhotosModal1').text("Create Schedule for " + data.date );
           $('.after-select').html(`
           <span class="block col-span-2 -mt-2">
@@ -463,6 +465,7 @@
 
   $('#save-step').click(function() {
     var date = $('#dateOrder').val();
+    var dateSelected = $('#dateSelected').val();
     var menu = $("input[name='menu']").val();
     $('input[name="menu"]:checked').each(function() {
        menu = this.value; 
@@ -481,7 +484,7 @@
       type: "post",
       data: {date : date, menu : menu, porsi : porsi, shift : shift},
       success: function(data) {
-        $('#tanggal'+date).prop('checked',true);
+        $('#tanggal'+dateSelected).prop('checked',true);
         alert(data);
       }
     });
