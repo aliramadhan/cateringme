@@ -196,18 +196,17 @@
 						<div class="col-start-6 col-end-10 text-left relative text-black my-auto animate transform transition-transform hover:translate-x-2 
 						duration-1000">
 							<h3 class="font-semibold text-lg mb-1">{{$review->menu->name}}</h3>
-							<p class="leading-tight text-justify">{{Carbon\Carbon::parse($review->reviewed_at)->format('H:s, d, M Y')}}<br>{{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}</p>     
+							<p class="leading-tight text-justify">{{Carbon\Carbon::parse($review->reviewed_at)->format('H:s, d, M Y')}}<br><span class="font-semibold text-sm text-purple-700">{{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}</span></p>     
 						</div>
-
 
 					</div>
 					@else
 					<!-- right -->
 					<div class="contents">
-							<div class="col-start-1 col-end-5 text-right relative text-black my-auto animate transform transition-transform hover:-translate-x-2 
-							duration-1000">
+							<div class="col-start-1 col-end-5 text-right relative text-black my-auto animate transform transition-transform hover:-translate-x-2 duration-1000">
 							<h3 class="font-semibold text-lg mb-1">{{$review->menu->name}}</h3>
-							<p class="leading-tight ">{{Carbon\Carbon::parse($review->reviewed_at)->format('H:s, d, M Y')}}<br>{{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}</p>     
+							<p class="leading-tight ">{{Carbon\Carbon::parse($review->reviewed_at)->format('H:s, d, M Y')}}<br>
+								<span class="font-semibold text-sm text-purple-700">{{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}</span></p>     
 						</div>
 						<div class="col-start-5 col-end-6 mx-auto relative">
 							<div class="h-full w-6 flex items-center justify-center">
