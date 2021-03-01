@@ -125,7 +125,8 @@
     data-pagination="true"
     data-minimum-count-columns="2"
     data-response-handler="responseHandler"
-    data-export-types= "['excel','doc', 'txt']">
+    data-export-types= "['excel','doc', 'txt']"
+    data-export-options='{"fileName": "Report Catering Order @if($from == null && $to == null) @else{{$from->format('d F Y')}} - {{$to->format('d F Y')}}"}@endif'>
     
     <thead class="bg-gray-800 text-white uppercase font-semibold text-sm ">
         <tr>

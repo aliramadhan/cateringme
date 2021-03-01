@@ -29,10 +29,10 @@
            <div class="md:ml-4 flex items-center gap-4 lg:w-7/12  md:w-8/12 w-full">
               <form class="contents">
                 @csrf
-                <input type="date" class="md:w-full w-4/12 text border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-30" name="from" class="p-4">
+                <input type="date" class="md:w-full w-4/12 text border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-30" name="from" class="p-4" value="@if($from != null){{$from->format('Y-m-d')}}@endif">
 
                 To 
-                <input type="date" class="md:w-full w-4/12 text border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-30" name="to">
+                <input type="date" class="md:w-full w-4/12 text border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-30" name="to" value="@if($to != null){{$to->format('Y-m-d')}}@endif">
                 <button type="submit" name="submit" class="py-2 px-3 rounded-lg transition-500 bg-blue-400 hover:bg-blue-500 focus:outline-none text-white"> <i class="fas fa-search"></i></button>
             </form>
             
@@ -62,7 +62,8 @@
             data-pagination="true"
             data-minimum-count-columns="2"
             data-response-handler="responseHandler"
-            data-export-types= "['excel','doc', 'txt']">
+            data-export-types= "['excel','doc', 'txt']"
+            data-export-options='{"fileName": "Report Catering @if($from == null && $to == null) @else{{$from->format('d F Y')}} - {{$to->format('d F Y')}}"}@endif'>
 
             <thead class="text-gray-600 capitalize font-semibold text-base font-semibold rounded-xl bg-gray-100" style="
             background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);

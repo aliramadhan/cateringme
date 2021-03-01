@@ -398,7 +398,7 @@ class CateringActionController extends Controller
             $menu->stars = $order->avg('stars');
         }
         
-        return view('Catering.index_report',compact('user','now'));
+        return view('Catering.index_report',compact('user','now','from','to'));
     }
     public function index_review(Request $request)
     {
@@ -411,7 +411,7 @@ class CateringActionController extends Controller
 
         //get review data
         $reviews = Order::whereIn('menu_id',$menu_id)->where('reviewed_at','<=',$now->format('Y-m-d'))->orderBy('reviewed_at','desc')->get();
-        if ($request->form != null && $request->to != null) {
+        if ($request->from != null && $request->to != null) {
             $from = Carbon::parse($request->from);
             $to = Carbon::parse($request->to);
             if($to < $from){
@@ -420,8 +420,7 @@ class CateringActionController extends Controller
             $reviews = Order::whereIn('menu_id',$menu_id)->whereBetween('reviewed_at',[$from->format('Y-m-d'),$to->format('Y-m-d')])->orderBy('reviewed_at','desc')->get();
 
         }
-
-        return view('Catering.index_review',compact('user','now','reviews'));
+        return view('Catering.index_review',compact('user','now','reviews','from','to'));
     }
     public function served_menu(Request $request)
     {
