@@ -51,7 +51,7 @@
             data-minimum-count-columns="2"
             data-response-handler="responseHandler"
             data-export-types= "['excel','doc', 'txt']"
-            data-export-options='{"fileName": "History My Review"}'>
+            data-export-options='{"fileName": "History Review {{$now->format('F Y')}}"}'>
 
             <thead class="text-gray-600 capitalize font-semibold text-base font-semibold rounded-xl bg-gray-100" style="
             background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
