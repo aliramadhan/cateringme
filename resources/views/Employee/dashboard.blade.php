@@ -242,7 +242,7 @@
              <div class="mt-4 ">
                       <button type="button" class="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-white py-3 px-8 rounded-xl opacity-75 hover:opacity-100 duration-200 modal-open text-2xl shadow-2xl mt-6 w-full md:w-auto" data-toggle="modal" data-target="reviewModal"><i class="fas fa-feather-alt"></i>@if($menu_today->review != null || $menu_today->stars != null) Edit Review @else Review @endif</button>
 
-                       <button type="button" class="bg-gradient-to-r from-blue-400 via-blue-500 to-indigo-500 text-white py-3 px-8 rounded-xl opacity-75 hover:opacity-100 duration-200 modal-open text-2xl shadow-2xl mt-6 md:ml-6 w-full md:w-auto" data-toggle="modal" data-target="noteModal"><i class="far fa-clipboard"></i>@if($menu_today->review != null || $menu_today->stars != null) Edit Note @else Note @endif</button>
+                       <button type="button" class="bg-gradient-to-r from-blue-400 via-blue-500 to-indigo-500 text-white py-3 px-8 rounded-xl opacity-75 hover:opacity-100 duration-200 modal-open text-2xl shadow-2xl mt-6 md:ml-6 w-full md:w-auto" data-toggle="modal" data-target="noteModal"><i class="far fa-clipboard"></i>@if($menu_today->note != null) Edit Note @else Note @endif</button>
                   </div>
           </div>
          
