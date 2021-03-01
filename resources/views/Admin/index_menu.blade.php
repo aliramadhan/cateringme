@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Manage Menu') }}
+            {{ __('Catering Foods') }}
         </h2>
     </x-slot>
       
@@ -15,7 +15,7 @@
           <div class="px-4 py-2 border-b border-gray-200 flex justify-between items-center bg-white sm:py-4 sm:px-6 sm:items-baseline">
             <div class="flex-shrink min-w-0 flex items-center">
               <h3 class="flex-shrink min-w-0 font-regular text-base md:text-lg leading-snug truncate">
-              Select Food Menu for Catering
+              List of Catering Foods
            </h3>
        </div>
 

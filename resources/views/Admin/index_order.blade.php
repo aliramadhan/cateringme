@@ -12,7 +12,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto  lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg Static h-full">
-          <div class="md:px-4 py-2 border-b border-gray-200 flex justify-between items-center bg-white sm:py-4 sm:px-6 sm:items-baseline">
+          <div class="py-2 border-b border-gray-200 flex justify-between items-center bg-white sm:py-4 px-4 sm:items-baseline">
             <div class="flex-shrink min-w-0 flex items-center">
               <h3 class="flex-shrink min-w-0 font-regular text-base md:text-lg leading-snug truncate capitalize">
                 please select the reporting time you want
@@ -33,7 +33,7 @@
               <div class=" inset-0 w-full h-full text-gray-600 flex text-5xl p-3 md:p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide text-base overflow-y-auto bg-white" >      
 
             <div class="bootstrapiso w-full bg-transparent text-base ">
-                <div class="md:absolute text-2xl font-semibold top-9 md:text-left text-center"><span class="text-gray-500">Period : </span> @if($from == null) {{$now->format('d F Y')}} @else {{$from->format('d F Y')}} - {{$to->format('d F Y')}} @endif </div>
+               <div class="lg:absolute text-xl font-semibold top-9 md:text-left text-center"><span class="text-gray-500 font-base">Period:</span>  @if($from == null) All time @else {{$from->format('d F Y')}} - {{$to->format('d F Y')}} @endif </div>
             <table class="w-fulltable min-w-full divide-y divide-gray-200 text-gray-600 text-center rounded-lg table-striped table-borderless " 
             id="table"        
             data-locale="en-US"

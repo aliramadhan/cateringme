@@ -214,7 +214,7 @@
            </div>
            <div class="ml-4 flex flex-shrink-0 items-center">
 
-            <input type="text" id="searching2" onkeyup="searchingTwo()" class="focus:ring-red-100 focus:border-red-100 flex-1 block bg-gray-100 rounded-l rounded-r-md sm:text-sm border-gray-100 py-2 px-4 mr-2 hover:border-blue-200 w-28" placeholder="Search"  >
+            <input type="text" id="searching2" onkeyup="searchingTwo()" class="focus:ring-red-100 focus:border-red-100 flex-1 block bg-gray-100 rounded-l rounded-r-md md:w-full sm:text-sm border-gray-100 py-2 px-4 mr-2 hover:border-blue-200 w-28" placeholder="Search"  >
             
 
             <div class="flex items-center text-sm sm:hidden">
@@ -274,7 +274,7 @@
               @endif
                 <div class="photo-wrapper p-2">
 
-                    <img class="w-32 h-32 rounded-full mx-auto object-cover mt-8" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}">
+                    <img class="w-32 h-32 rounded-full mx-auto object-cover mt-12" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}">
                 </div>
                 <div class="p-2">
                    
@@ -297,7 +297,7 @@
                             <div class="px-2 py-1  text-left flex-auto">{{$user->email}}</div>
                         </div>
                       </a>
-                       <button class="modal-open rounded-xl text-lg p-3 bg-blue-400 text-white font-semibold mt-4 mx-4 z-10 pointer hover:bg-blue-600" data-target="editModal" data-toggle="modal" id="modal-edit" data-name="{{$user->name}}" data-role="{{$user->role}}" data-email="{{$user->email}}" data-division="{{$user->division}}" data-roles="{{$user->roles}}" data-number_phone="{{$user->number_phone}}" data-address="{{$user->address}}">Edit Account</button>
+                       <button class="modal-open rounded-xl text-base p-3 bg-blue-400 text-white font-semibold mt-4 mx-4 z-10 pointer hover:bg-blue-600 focus:outline-none" data-target="editModal" data-toggle="modal" id="modal-edit" data-name="{{$user->name}}" data-role="{{$user->role}}" data-email="{{$user->email}}" data-division="{{$user->division}}" data-roles="{{$user->roles}}" data-number_phone="{{$user->number_phone}}" data-address="{{$user->address}}">Edit Account</button>
                     </div>
 
                    
@@ -341,7 +341,10 @@
       <th data-sortable="true">No</th>      
       <th >Name</th>
       <th>Email</th>
-      <th data-visible="true">Role</th>
+      <th data-visible="true">Status</th>
+      <th data-visible="false">Division</th>
+      <th data-visible="false">Role</th>
+      <th data-visible="false">Address</th>
       <th data-visible="true">Order</th>
     </tr>
   </thead>
@@ -353,6 +356,10 @@
       <td>{{$user->name}}</td>
       <td>{{$user->email}}</td>
       <td>{{$user->role}}</td>
+      <td>{{$user->division}}</td>
+      <td>{{$user->roles}}</td>
+      <td>{{$user->address}}</td>
+      
       <td>
         <a class="contents" href="@if($user->role == 'Employee') {{route('admin.can_order',$user->code_number)}} @else # @endif" @if($user->can_order == 1) onclick="return confirm('Disable feature can order for {!! $user->name !!} ?')" @else onclick="return confirm('enable feature can order for {!! $user->name !!} ?')" @endif>
             @if($user->can_order == 1)  
