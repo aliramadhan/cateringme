@@ -51,7 +51,7 @@
             data-minimum-count-columns="2"
             data-response-handler="responseHandler"
             data-export-types= "['excel','doc', 'txt']"
-            data-export-options='{"fileName": "History Review {{$now->format('F Y')}}"}'>
+            data-export-options='{"fileName": "History Review {{$start->subMonth()->format('F Y')}}"}'>
 
             <thead class="text-gray-600 capitalize font-semibold text-base font-semibold rounded-xl bg-gray-100" style="
             background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
@@ -64,7 +64,7 @@
         </tr>
     </thead>
     <tbody class="text-center bg-white py-4" >
-     @for($i = 1, $start->subMonth(); $i <= $now->daysInMonth; $i++, $start->addDay())
+     @for($i = 1; $i <= $now->daysInMonth; $i++, $start->addDay())
      @php
      $review = auth()->user()->orders->where('review_at',$start->format('Y-m-d'))->first();
      if($review == null){

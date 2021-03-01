@@ -147,7 +147,7 @@
   data-minimum-count-columns="2"
   data-response-handler="responseHandler"
   data-export-types= "['excel','doc', 'txt']"
-  data-export-options='{"fileName": "History Catering {{$now->format('F Y')}}"}'>
+  data-export-options='{"fileName": "History Catering {{$start->subMonth()->format('F Y')}}"}'>
 
   <thead class="bg-gray-800 text-white uppercase font-semibold text-base font-semibold ">
     <tr>
@@ -158,7 +158,7 @@
  </tr>
 </thead>
 <tbody class="text-center font-semibold tracking-wider">
- @for($i = 1, $start->subMonth(); $i <= $now->daysInMonth; $i++, $start->addDay())
+ @for($i = 1; $i <= $now->daysInMonth; $i++, $start->addDay())
  @php
   $schedule = \App\Models\ScheduleMenu::where('date',$start->format('Y-m-d'))->first();
   $order = auth()->user()->orders->where('order_date',$start->format('Y-m-d'))->first();
