@@ -140,6 +140,9 @@ class EmployeeActionController extends Controller
         if ($order != null) {
            $schedule->order = $order;
         }
+        else{
+            $schedule->order = null;
+        }
         $schedule->date = $date->format('d M Y');
         return $schedule;
     }

@@ -417,36 +417,104 @@
           $('#dateOrder').val(data.date);
           $('#dateSelected').val(date);
           $('#MenuPhotosModal1').text("Create Schedule for " + data.date );
-          $('.after-select').html(`
-          <span class="block col-span-2 -mt-2">
-          <h5 class="text-center border-b relative"><span class="relative top-3 px-4 bg-gray-50">Select Your Menu </span></h5>
-          </span>
-          <input type="checkbox" id="menuradio1" name="menu" value="`+data.menu1.id+`" class="schedule-menu hidden" >
-          <label for="menuradio1" class="m-0 p-0 h-60 col-span-2 md:col-span-1" >
-            <div class="grayscale-effect">            
-              <img  class="object-cover w-100 h-60 inline-block rounded-bl-3xl rounded-tr-3xl hover:shadow-xl bg-white" src="`+data.menu1.photo+`" alt="">
-             </div> 
-            <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu1.name+`</div>
-
-            <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
-              <i class="fas fa-star"></i> 4
-            </div>
-          </label>`);
-          if (data.menu2 != null) {
-            $('.after-select').append(`
-            <input type="checkbox" id="menuradio2" name="menu" value="`+data.menu2.id+`" class="schedule-menu hidden" >
-            <label for="menuradio2" class="m-0 p-0 h-60 col-span-2 md:col-span-1" >
+          if (data.order == null) {
+            $('.after-select').html(`
+            <span class="block col-span-2 -mt-2">
+            <h5 class="text-center border-b relative"><span class="relative top-3 px-4 bg-gray-50">Select Your Menu </span></h5>
+            </span>
+            <input type="checkbox" id="menuradio1" name="menu" value="`+data.menu1.id+`" class="schedule-menu hidden" >
+            <label for="menuradio1" class="m-0 p-0 h-60 col-span-2 md:col-span-1" >
               <div class="grayscale-effect">            
-                <img  class="object-cover w-100 h-60 inline-block rounded-bl-3xl rounded-tr-3xl hover:shadow-xl bg-white" src="`+data.menu2.photo+`" alt="">
+                <img  class="object-cover w-100 h-60 inline-block rounded-bl-3xl rounded-tr-3xl hover:shadow-xl bg-white" src="`+data.menu1.photo+`" alt="">
                </div> 
-              <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu2.name+`</div>
+              <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu1.name+`</div>
 
               <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
                 <i class="fas fa-star"></i> 4
               </div>
             </label>`);
+            if (data.menu2 != null) {
+              $('.after-select').append(`
+              <input type="checkbox" id="menuradio2" name="menu" value="`+data.menu2.id+`" class="schedule-menu hidden" >
+              <label for="menuradio2" class="m-0 p-0 h-60 col-span-2 md:col-span-1" >
+                <div class="grayscale-effect">            
+                  <img  class="object-cover w-100 h-60 inline-block rounded-bl-3xl rounded-tr-3xl hover:shadow-xl bg-white" src="`+data.menu2.photo+`" alt="">
+                 </div> 
+                <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu2.name+`</div>
+
+                <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
+                  <i class="fas fa-star"></i> 4
+                </div>
+              </label>`);
+            }
+          }
+          else{
+            if(data.order.menu_id == data.menu1.id)
+              $('.after-select').html(`
+              <span class="block col-span-2 -mt-2">
+              <h5 class="text-center border-b relative"><span class="relative top-3 px-4 bg-gray-50">Select Your Menu </span></h5>
+              </span>
+              <input type="checkbox" id="menuradio1" checked name="menu" value="`+data.menu1.id+`" class="schedule-menu hidden" >
+              <label for="menuradio1" class="m-0 p-0 h-60 col-span-2 md:col-span-1" >
+                <div class="grayscale-effect">            
+                  <img  class="object-cover w-100 h-60 inline-block rounded-bl-3xl rounded-tr-3xl hover:shadow-xl bg-white" src="`+data.menu1.photo+`" alt="">
+                 </div> 
+                <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu1.name+`</div>
+
+                <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
+                  <i class="fas fa-star"></i> 4
+                </div>
+              </label>`);
+            else{
+              $('.after-select').html(`
+              <span class="block col-span-2 -mt-2">
+              <h5 class="text-center border-b relative"><span class="relative top-3 px-4 bg-gray-50">Select Your Menu </span></h5>
+              </span>
+              <input type="checkbox" id="menuradio1" name="menu" value="`+data.menu1.id+`" class="schedule-menu hidden" >
+              <label for="menuradio1" class="m-0 p-0 h-60 col-span-2 md:col-span-1" >
+                <div class="grayscale-effect">            
+                  <img  class="object-cover w-100 h-60 inline-block rounded-bl-3xl rounded-tr-3xl hover:shadow-xl bg-white" src="`+data.menu1.photo+`" alt="">
+                 </div> 
+                <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu1.name+`</div>
+
+                <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
+                  <i class="fas fa-star"></i> 4
+                </div>
+              </label>`);
+            }
+            if (data.menu2 != null) {
+              if(data.order.menu_id == data.menu2.id){
+                $('.after-select').append(`
+                <input type="checkbox" id="menuradio2" checked name="menu" value="`+data.menu2.id+`" class="schedule-menu hidden" >
+                <label for="menuradio2" class="m-0 p-0 h-60 col-span-2 md:col-span-1" >
+                  <div class="grayscale-effect">            
+                    <img  class="object-cover w-100 h-60 inline-block rounded-bl-3xl rounded-tr-3xl hover:shadow-xl bg-white" src="`+data.menu2.photo+`" alt="">
+                   </div> 
+                  <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu2.name+`</div>
+
+                  <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
+                    <i class="fas fa-star"></i> 4
+                  </div>
+                </label>`);
+              }
+              else{
+                $('.after-select').append(`
+                <input type="checkbox" id="menuradio2" name="menu" value="`+data.menu2.id+`" class="schedule-menu hidden" >
+                <label for="menuradio2" class="m-0 p-0 h-60 col-span-2 md:col-span-1" >
+                  <div class="grayscale-effect">            
+                    <img  class="object-cover w-100 h-60 inline-block rounded-bl-3xl rounded-tr-3xl hover:shadow-xl bg-white" src="`+data.menu2.photo+`" alt="">
+                   </div> 
+                  <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu2.name+`</div>
+
+                  <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
+                    <i class="fas fa-star"></i> 4
+                  </div>
+                </label>`);
+              }
+            }
+          }
             
-            $("input:checkbox").on('click', function() {
+          $("input:checkbox").on('click', function() {
             // in the handler, 'this' refers to the box clicked on
             var $box = $(this);
             if ($box.is(":checked")) {
@@ -461,7 +529,6 @@
               $box.prop("checked", false);
             }
           });
-          }
         }
       }
     });
