@@ -17,7 +17,7 @@
              </h3>
            </div>
           
-           <div class="ml-4 flex items-center gap-4 md:w-4/12 w-full">
+           <div class="ml-4 flex items-center gap-4 lg:w-4/12 md:w-5/12 w-full">
             <form class="contents">
               @csrf
               <input type="month" name="month" min="2020-12" max="{{$now->format('Y-m')}}" class="w-5/6 md:w-full text border px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-30 mr-2">

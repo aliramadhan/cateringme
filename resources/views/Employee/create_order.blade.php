@@ -135,8 +135,8 @@
                   <div class="carousel-item h-100">
                     <div class="grid grid-cols-1 md:grid-cols-2 p-4 gap-4 bg-gray-50">
                       <div class="w-full ">
-                      <h5 class="font-semibold text-center">Additional Catering</h5>
-                      <div class="text-center md:grid md:gridrows-2 flex hide-scroll">                         
+                      <h5 class="font-semibold text-center mb-4">Additional Catering</h5>
+                      <div class="text-center md:grid lg:grid-cols-2 flex hide-scroll">                         
                          
                           <input type="radio" name="porsi" value="L" class="flex-auto hidden" id="nasiL">
                           <label for="nasiL" class="flex cursor-pointer text-base font-semibold items-center not-menu px-4 bg-white rounded-xl border hover:shadow-md duration-500">
@@ -164,7 +164,7 @@
                 </div>
 
                 <div class="text-center">
-                  <h5 class="font-semibold">Catering Delivery</h5>
+                  <h5 class="font-semibold mb-4">Catering Delivery</h5>
                   
                     <input type="radio" name="shift" checked value="Pagi" class="flex-auto hidden" id="shiftA">
                     <label for="shiftA" class="flex cursor-pointer text-base font-semibold items-center not-menu px-4 bg-white rounded-xl border hover:shadow-md duration-500">
@@ -193,13 +193,13 @@
 
     <div class="modal-footer">
      <a  href="#carouselExampleControls" role="button" data-slide="prev" style="display: none;" id="back-step">
-      <button type="button" class="btn btn-warning" >Back</button>
+      <button type="button" class="btn btn-warning px-3" ><i class="mr-2 fas fa-arrow-left"></i> Back</button>
     </a>
 
     <a href="#carouselExampleControls" role="button" data-slide="next" id="next-step">
-      <button type="button" class="btn btn-success" >Next</button>
+      <button type="button" class="btn btn-success px-4" > Next <i class="ml-3 fas fa-arrow-right"></i></button>
     </a>
-    <button type="button" class="btn btn-primary" id="save-step" style="display: none;" data-dismiss="modal" onclick="backward()">Save </button>
+    <button type="button" class="btn btn-primary ml-3 px-4" id="save-step" style="display: none;" data-dismiss="modal" onclick="backward()"><i class="fas fa-save mr-2"></i> Save </button>
     <script type="text/javascript">
       var buttonBack = document.getElementById("back-step");        
       var buttonNext = document.getElementById("next-step");       
@@ -241,7 +241,7 @@
      {{$now->format('F')}}
    </h3>  
    <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5 mt-4">                      
-     <div id="div1" class="duration-1000 targetDiv bg-gray-100 justify-content content-center text-center rounded-lg pt-4"> 
+     <div id="div1" class="duration-1000 targetDiv justify-content content-center md:text-left text-center pt-4 md:mx-4 lg:mx-auto" style="width: fit-content;"> 
       @for($i = 1; $i <= $now->daysInMonth; $i++, $start->addDay())
       @php
       $user = auth()->user();
@@ -251,10 +251,10 @@
 
 
       <label class='label flex-auto contents duration-1000'>
-        <input class='label__checkbox duration-1000 ' name="dates[]" type='checkbox' id="tanggal{{$start->format('Y-m-d')}}" @if($start->day == $now->day && $total_dadakan <= 5) @elseif($order != null) @elseif($schedule != null) disabled @elseif($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" onclick="document.getElementById('tanggal{!! $start->format("Y-m-d") !!}').checked = false;" data-toggle="modal" data-target="#ScheduleModal">
+        <input class='label__checkbox duration-1000 ' name="dates[]" type='checkbox' id="tanggal{{$start->format('Y-m-d')}}"  @if($start->day == $now->day && $total_dadakan <= 5) @elseif($order != null && $start > $now) @elseif($schedule != null)  @elseif($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" onclick="document.getElementById('tanggal{!! $start->format("Y-m-d") !!}').checked = false;" data-toggle="modal" data-target="#ScheduleModal">
 
         <span class='label__text '>
-          <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient( @if($order != null)  135deg, #FCCF31 10%, #F55555 100% @elseif($schedule != null && $start->day == $now->day && $total_dadakan <= 5) 160deg, #0093E9 0%, #80D0C7 100% @elseif($start < $now) 160deg, #bdbdbe 0%, #032a32 100% @elseif($schedule != null) 160deg, #0093E9 0%, #80D0C7 100%   @else to right, #ff416c, #ff4b2b @endif );'>
+          <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient( @if($order != null && $start->day >= $now->day )  135deg, #FCCF31 10%, #F55555 100% @elseif($schedule != null && $start->day == $now->day && $total_dadakan <= 5) 160deg, #0093E9 0%, #80D0C7 100% @elseif($start < $now) 160deg, #bdbdbe 0%, #032a32 100% @elseif($schedule != null) 160deg, #0093E9 0%, #80D0C7 100%   @else to right, #ff416c, #ff4b2b @endif );'>
             <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 p-10 duration-1000' style='font-family: Poppins, sans-serif;'>
 
               <div class='font-semibold text-5xl mb-2 '>{{$start->format('d')}}</div>
@@ -294,7 +294,7 @@
      {{$next_month->format('F')}}
    </h3>  
     <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5 mt-4">                      
-     <div id="div1" class="duration-1000 targetDiv  justify-content content-center text-center rounded-lg pt-4"> 
+     <div id="div1"  class="duration-1000 targetDiv justify-content content-center md:text-left text-center pt-4 md:mx-4 lg:mx-auto text-gray-700" style="width: fit-content;"> 
      @if(($now->daysInMonth - $now->day) < 2)
       @for($i = 1; $i <= $next_month->daysInMonth; $i++, $start->addDay())
       @php
@@ -324,7 +324,7 @@
 
       @endfor
       @else
-      sorry scheduling is not yet available, please wait 2 days before  <font class="border-b-2">{{$next_month->format('F Y')}}</font>
+      sorry scheduling is <span class="text-red-500">not yet available </span> , please wait 2 days before  <font class="border-b-4 border-green-400">{{$next_month->format('F Y')}}</font>
      @endif
     </div></div>
 
@@ -430,7 +430,7 @@
               <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu1.name+`</div>
 
               <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
-                <i class="fas fa-star"></i> 4
+                <i class="fas fa-star"></i>  `+data.menu1.stars+`
               </div>
             </label>`);
             if (data.menu2 != null) {
@@ -443,7 +443,7 @@
                 <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu2.name+`</div>
 
                 <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
-                  <i class="fas fa-star"></i> 4
+                  <i class="fas fa-star"></i>  `+data.menu2.stars+`
                 </div>
               </label>`);
             }
@@ -462,7 +462,7 @@
                 <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu1.name+`</div>
 
                 <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
-                  <i class="fas fa-star"></i> 4
+                  <i class="fas fa-star"></i>  `+data.menu1.stars+`
                 </div>
               </label>`);
             else{
@@ -478,7 +478,7 @@
                 <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu1.name+`</div>
 
                 <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
-                  <i class="fas fa-star"></i> 4
+                  <i class="fas fa-star"></i> `+data.menu1.stars+`
                 </div>
               </label>`);
             }
@@ -493,7 +493,7 @@
                   <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu2.name+`</div>
 
                   <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
-                    <i class="fas fa-star"></i> 4
+                    <i class="fas fa-star"></i> `+data.menu2.stars+`
                   </div>
                 </label>`);
               }
@@ -507,7 +507,7 @@
                   <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu2.name+`</div>
 
                   <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
-                    <i class="fas fa-star"></i> 4
+                    <i class="fas fa-star"></i>  `+data.menu2.stars+`
                   </div>
                 </label>`);
               }
