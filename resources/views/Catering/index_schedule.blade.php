@@ -95,7 +95,7 @@
               </div>
               <div class="flex-auto">
                 <!-- <input type="month" name="month" class="month-select border py-2 px-3 rounded-lg w-full text-lg"> -->
-                <select class="form-select w-full month-select text-lg" onchange="get_date()" name="month" >
+                <select class="form-select w-full month-select text-lg" name="month" >
                   <option>Select Month</option>
                   @foreach($months as $month)
                     <option value="{{$month->format('Y-m')}}" @if($month->format('Y-m-d') == $start_date->format('Y-m-d')) selected @endif >{{$month->format('F Y')}}</option>
