@@ -26,7 +26,7 @@ class EmployeeActionController extends Controller
         $user = auth()->user();
         $menu_today = $user->orders()->where('order_date',$now->format('Y-m-d'))->first();
         $menu_tomorrow = $user->orders()->where('order_date',$now->addDay()->format('Y-m-d'))->first();
-        $reviews = Order::where('employee_id',$user->id)->orderBy('reviewed_at','desc')->limit(10)->get();
+        $reviews = Order::where('employee_id',$user->id)->where('reviewed_at','!=',null)->orderBy('reviewed_at','desc')->limit(10)->get();
         //data for statistik
         $total_review = Order::where('employee_id',$user->id)->where('reviewed_at','!=',null)->count();
         $total_catering = Order::where('employee_id',$user->id)->whereBetween('order_date',[$now->format('Y-m-1'),$stop->format('Y-m-d')])->count();
