@@ -83,6 +83,9 @@ Route::group(['prefix' => 'catering',  'middleware' => ['auth:sanctum','role:Cat
     //served menu
     Route::post('/served/menu', [ CateringActionController::class, 'served_menu'])->name('catering.served.menu');
 
+    //Index Menu at Scheduler
+    Route::get('/index/menu-schedule', [ CateringActionController::class, 'index_menu_schedule'])->name('catering.index.menu_schedule');
+
     //Manage Schedule
     Route::get('/schedule', [ CateringActionController::class, 'index_schedule'])->name('catering.index.schedule');
     Route::post('/schedule', [ CateringActionController::class, 'store_schedule'])->name('catering.store.schedule');

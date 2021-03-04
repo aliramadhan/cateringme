@@ -59,6 +59,21 @@ class CateringActionController extends Controller
 
         return view('Catering.dashboard',compact('menu_today','user','menus','total_review','stars','prev_stars','persen_stars','reviews'));
     }
+    public function index_menu_schedule(Request $request)
+    {
+        $now = Carbon::now();
+        if($request->from != null && $request->to != null){
+            $from = Carbon::parse($request->from);
+            $to = Carbon::parse($request->to);
+        }
+        else{
+            $from = Carbon::now()->startOfMonth();
+            $to = Carbon::now()->endOfMonth();
+        }
+        $schedules = ScheduleMenu::whereBetween('date',[$from->format('Y-m-d'),$to->format('Y-m-d')])->orderBy('date','desc')->get();
+
+        return view('Catering.index_menu_schedule',compact('schedules','from','to'));
+    }
     public function index_menu()
     {
         $now = Carbon::now();
