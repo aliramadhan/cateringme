@@ -126,13 +126,26 @@ class EmployeeActionController extends Controller
             else{
                 $photo = url('public/'.$menu->photos->first()->file);
             }
+            $star1 = Order::where('menu_id',$menu->id)->where('stars',1)->count();
+            $star2 = Order::where('menu_id',$menu->id)->where('stars',2)->count();
+            $star3 = Order::where('menu_id',$menu->id)->where('stars',3)->count();
+            $star4 = Order::where('menu_id',$menu->id)->where('stars',4)->count();
+            $star5 = Order::where('menu_id',$menu->id)->where('stars',5)->count();
+            if(($star1+$star2+$star3+$star4+$star5) == 0){
+                $stars = 0;
+            }
+            else{
+                $stars = ( ($star1 * 1) + ($star2 * 2) + ($star3 * 3) + ($star4 * 4) + ($star5 * 5) )/($star1 + $star2 + $star3 + $star4 +$star5);
+            }
             if($i == 1){
                 $schedule->menu1 = $menu;
                 $schedule->menu1->photo = $photo;
+                $schedule->menu1->stars = $stars;
             }
             else{
                 $schedule->menu2 = $menu;
                 $schedule->menu2->photo = $photo;
+                $schedule->menu2->stars = $stars;
             }
             $i++;
         }

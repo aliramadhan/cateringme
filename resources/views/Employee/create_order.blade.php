@@ -251,7 +251,7 @@
 
 
       <label class='label flex-auto contents duration-1000'>
-        <input class='label__checkbox duration-1000 ' name="dates[]" type='checkbox' id="tanggal{{$start->format('Y-m-d')}}" @if($start->day == $now->day && $total_dadakan <= 5) @elseif($order != null) @elseif($schedule != null) disabled @elseif($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" onclick="document.getElementById('tanggal{!! $start->format("Y-m-d") !!}').checked = false;" data-toggle="modal" data-target="#ScheduleModal">
+        <input class='label__checkbox duration-1000 ' name="dates[]" type='checkbox' id="tanggal{{$start->format('Y-m-d')}}" @if($start->day == $now->day && $total_dadakan <= 5) @elseif($schedule != null) disabled @elseif($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" onclick="document.getElementById('tanggal{!! $start->format("Y-m-d") !!}').checked = false;" data-toggle="modal" data-target="#ScheduleModal">
 
         <span class='label__text '>
           <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient( @if($order != null)  135deg, #FCCF31 10%, #F55555 100% @elseif($schedule != null && $start->day == $now->day && $total_dadakan <= 5) 160deg, #0093E9 0%, #80D0C7 100% @elseif($start < $now) 160deg, #bdbdbe 0%, #032a32 100% @elseif($schedule != null) 160deg, #0093E9 0%, #80D0C7 100%   @else to right, #ff416c, #ff4b2b @endif );'>
@@ -430,7 +430,8 @@
               <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu1.name+`</div>
 
               <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
-                <i class="fas fa-star"></i> 4
+                <i class="fas fa-star"></i>  `+data.menu1.stars+`
+                    <p>`+data.menu1.desc+`</p>
               </div>
             </label>`);
             if (data.menu2 != null) {
@@ -443,7 +444,8 @@
                 <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu2.name+`</div>
 
                 <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
-                  <i class="fas fa-star"></i> 4
+                  <i class="fas fa-star"></i>  `+data.menu2.stars+`
+                    <p>`+data.menu2.desc+`</p>
                 </div>
               </label>`);
             }
@@ -462,7 +464,8 @@
                 <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu1.name+`</div>
 
                 <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
-                  <i class="fas fa-star"></i> 4
+                  <i class="fas fa-star"></i>  `+data.menu1.stars+`
+                    <p>`+data.menu1.desc+`</p>
                 </div>
               </label>`);
             else{
@@ -478,7 +481,8 @@
                 <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu1.name+`</div>
 
                 <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
-                  <i class="fas fa-star"></i> 4
+                  <i class="fas fa-star"></i> `+data.menu1.stars+`
+                    <p>`+data.menu1.desc+`</p>
                 </div>
               </label>`);
             }
@@ -493,7 +497,8 @@
                   <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu2.name+`</div>
 
                   <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
-                    <i class="fas fa-star"></i> 4
+                    <i class="fas fa-star"></i> `+data.menu2.stars+`
+                    <p>`+data.menu2.desc+`</p>
                   </div>
                 </label>`);
               }
@@ -507,7 +512,8 @@
                   <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu2.name+`</div>
 
                   <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
-                    <i class="fas fa-star"></i> 4
+                    <i class="fas fa-star"></i>  `+data.menu2.stars+`
+                    <p>`+data.menu2.desc+`</p>
                   </div>
                 </label>`);
               }
