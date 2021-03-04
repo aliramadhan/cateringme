@@ -577,7 +577,7 @@
           </div>
         @endif
        <!--  <div class="w-full text-center  animate transform transition-transform hover:translate-y-1 duration-1000">
-          <a href="#kemanaya" class="bg-gray-700 px-6 py-2 rounded-lg  shadow-lg text-white opacity-75 transform hover:opacity-100  focus:border-gray-200 hover:translate-x-2  "> Show More</a>
+          <a href="#kemanaya" class="bg-gray-700 px-6 py-2 rounded-lg  shadow-lg text-white opacity-75 transform hover:opacity-100  focus:border-0-gray-200 hover:translate-x-2  "> Show More</a>
         </div> -->
       </div>
 
