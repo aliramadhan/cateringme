@@ -251,7 +251,7 @@
 
 
       <label class='label flex-auto contents duration-1000'>
-<input class='label__checkbox duration-1000 ' name="dates[]" type='checkbox' id="tanggal{{$start->format('Y-m-d')}}" @if($start->day == $now->day && $total_dadakan <= 5) @elseif($schedule != null) disabled @elseif($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" onclick="document.getElementById('tanggal{!! $start->format("Y-m-d") !!}').checked = false;" data-toggle="modal" data-target="#ScheduleModal">
+        <input class='label__checkbox duration-1000 ' name="dates[]" type='checkbox' id="tanggal{{$start->format('Y-m-d')}}"  @if($start->day == $now->day && $total_dadakan <= 5) @elseif($order != null && $start > $now) @elseif($schedule != null)  @elseif($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" onclick="document.getElementById('tanggal{!! $start->format("Y-m-d") !!}').checked = false;" data-toggle="modal" data-target="#ScheduleModal">
 
         <span class='label__text '>
           <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient( @if($order != null && $start->day >= $now->day )  135deg, #FCCF31 10%, #F55555 100% @elseif($schedule != null && $start->day == $now->day && $total_dadakan <= 5) 160deg, #0093E9 0%, #80D0C7 100% @elseif($start < $now) 160deg, #bdbdbe 0%, #032a32 100% @elseif($schedule != null) 160deg, #0093E9 0%, #80D0C7 100%   @else to right, #ff416c, #ff4b2b @endif );'>
@@ -416,37 +416,47 @@
         else{
           $('#dateOrder').val(data.date);
           $('#dateSelected').val(date);
-          $('#MenuPhotosModal1').text("Create Schedule for " + data.date );
+          $('#MenuPhotosModal1').html(`Create Schedule for <br class="md:hidden block">` + data.date );
           if (data.order == null) {
             $('.after-select').html(`
             <span class="block col-span-2 -mt-2">
             <h5 class="text-center border-b relative"><span class="relative top-3 px-4 bg-gray-50">Select Your Menu </span></h5>
             </span>
             <input type="checkbox" id="menuradio1" name="menu" value="`+data.menu1.id+`" class="schedule-menu hidden" >
-            <label for="menuradio1" class="m-0 p-0 h-60 col-span-2 md:col-span-1" >
-              <div class="grayscale-effect">            
+            <label for="menuradio1" class="m-0 p-0 h-60 col-span-2 md:col-span-1 " >
+              <div class="grayscale-effect trigger-effect">            
                 <img  class="object-cover w-100 h-60 inline-block rounded-bl-3xl rounded-tr-3xl hover:shadow-xl bg-white" src="`+data.menu1.photo+`" alt="">
-               </div> 
-              <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu1.name+`</div>
-
-              <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
+                <div class="hide-desc absolute text-base rounded-bl-2xl text-white font-base leading-tight flex-initial md:py-1 px-2 w-100 text-sm bottom-0 w-screen px-4 py-2" style="background: #0000009e;">
+                `+data.menu1.desc+`
+                </div>
+                <div class="star-hide absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
                 <i class="fas fa-star"></i>  `+data.menu1.stars+`
 
               </div>
+               </div> 
+              <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-2 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu1.name+`</div>
+             
+              
+              
             </label>`);
             if (data.menu2 != null) {
               $('.after-select').append(`
               <input type="checkbox" id="menuradio2" name="menu" value="`+data.menu2.id+`" class="schedule-menu hidden" >
               <label for="menuradio2" class="m-0 p-0 h-60 col-span-2 md:col-span-1" >
-                <div class="grayscale-effect">            
+                <div class="grayscale-effect trigger-effect">            
                   <img  class="object-cover w-100 h-60 inline-block rounded-bl-3xl rounded-tr-3xl hover:shadow-xl bg-white" src="`+data.menu2.photo+`" alt="">
-                 </div> 
-                <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu2.name+`</div>
-
-                <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
+                  <div class="hide-desc absolute text-base rounded-bl-2xl text-white font-base leading-tight flex-initial md:py-1 px-2 w-100 text-sm bottom-0 w-screen px-4 py-2" style="background: #0000009e;">
+                  `+data.menu2.desc+`
+                  </div>
+                  <div class="star-hide absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
                   <i class="fas fa-star"></i>  `+data.menu2.stars+`
 
-                </div>
+                
+                  </div>
+                 </div> 
+                <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-2 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu2.name+`</div>
+
+                
               </label>`);
             }
           }
@@ -458,15 +468,19 @@
               </span>
               <input type="checkbox" id="menuradio1" checked name="menu" value="`+data.menu1.id+`" class="schedule-menu hidden" >
               <label for="menuradio1" class="m-0 p-0 h-60 col-span-2 md:col-span-1" >
-                <div class="grayscale-effect">            
+                <div class="grayscale-effect trigger-effect">            
                   <img  class="object-cover w-100 h-60 inline-block rounded-bl-3xl rounded-tr-3xl hover:shadow-xl bg-white" src="`+data.menu1.photo+`" alt="">
-                 </div> 
-                <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu1.name+`</div>
+                  <div class="hide-desc absolute text-base rounded-bl-2xl text-white font-base leading-tight flex-initial md:py-1 px-2 w-100 text-sm bottom-0 w-screen px-4 py-2" style="background: #0000009e;">
+                  `+data.menu2.desc+`
+                  </div>
 
-                <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
+                <div class="star-hide absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
                   <i class="fas fa-star"></i>  `+data.menu1.stars+`
-
                 </div>
+
+                 </div> 
+                <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-2 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu1.name+`</div>
+
               </label>`);
             else{
               $('.after-select').html(`
@@ -475,15 +489,17 @@
               </span>
               <input type="checkbox" id="menuradio1" name="menu" value="`+data.menu1.id+`" class="schedule-menu hidden" >
               <label for="menuradio1" class="m-0 p-0 h-60 col-span-2 md:col-span-1" >
-                <div class="grayscale-effect">            
+                <div class="grayscale-effect trigger-effect">            
                   <img  class="object-cover w-100 h-60 inline-block rounded-bl-3xl rounded-tr-3xl hover:shadow-xl bg-white" src="`+data.menu1.photo+`" alt="">
+                  <div class="hide-desc absolute text-base rounded-bl-2xl text-white font-base leading-tight flex-initial md:py-1 px-2 w-100 text-sm bottom-0 w-screen px-4 py-2" style="background: #0000009e;">
+                  `+data.menu2.desc+`
+                  </div>
+                  <div class="star-hide absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
+                  <i class="fas fa-star"></i> `+data.menu1.stars+` </div>
                  </div> 
-                <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu1.name+`</div>
+                <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-2 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu1.name+`</div>
 
-                <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
-                  <i class="fas fa-star"></i> `+data.menu1.stars+`
-
-                </div>
+                
               </label>`);
             }
             if (data.menu2 != null) {
@@ -491,30 +507,34 @@
                 $('.after-select').append(`
                 <input type="checkbox" id="menuradio2" checked name="menu" value="`+data.menu2.id+`" class="schedule-menu hidden" >
                 <label for="menuradio2" class="m-0 p-0 h-60 col-span-2 md:col-span-1" >
-                  <div class="grayscale-effect">            
+                  <div class="grayscale-effect trigger-effect">            
                     <img  class="object-cover w-100 h-60 inline-block rounded-bl-3xl rounded-tr-3xl hover:shadow-xl bg-white" src="`+data.menu2.photo+`" alt="">
-                   </div> 
-                  <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu2.name+`</div>
-
-                  <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
-                    <i class="fas fa-star"></i> `+data.menu2.stars+`
-
+                    <div class="hide-desc absolute text-base rounded-bl-2xl text-white font-base leading-tight flex-initial md:py-1 px-2 w-100 text-sm bottom-0 w-screen px-4 py-2" style="background: #0000009e;">
+                  `+data.menu2.desc+`
                   </div>
+                   <div class="star-hide absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
+                    <i class="fas fa-star"></i> `+data.menu2.stars+`</div>
+                   </div> 
+                  <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-2 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu2.name+`</div>
+
+                 
                 </label>`);
               }
               else{
                 $('.after-select').append(`
                 <input type="checkbox" id="menuradio2" name="menu" value="`+data.menu2.id+`" class="schedule-menu hidden" >
                 <label for="menuradio2" class="m-0 p-0 h-60 col-span-2 md:col-span-1" >
-                  <div class="grayscale-effect">            
+                  <div class="grayscale-effect trigger-effect">            
                     <img  class="object-cover w-100 h-60 inline-block rounded-bl-3xl rounded-tr-3xl hover:shadow-xl bg-white" src="`+data.menu2.photo+`" alt="">
-                   </div> 
-                  <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-4 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu2.name+`</div>
-
-                  <div class="absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
-                    <i class="fas fa-star"></i>  `+data.menu2.stars+`
-
+                    <div class="hide-desc absolute text-base rounded-bl-2xl text-white font-base leading-tight flex-initial md:py-1 px-2 w-100 text-sm bottom-0 w-screen px-4 py-2" style="background: #0000009e;">
+                  `+data.menu2.desc+`
                   </div>
+                   <div class="star-hide absolute md:text-xl text-lg rounded-xl border-orange-300 text-orange-500 leading-7 font-bold flex-initial bg-white  md:py-1 px-2  md:w-auto w-12 text-sm bottom-2 right-2 w-auto" style="border: 2px solid">
+                    <i class="fas fa-star"></i>  `+data.menu2.stars+`</div>
+                   </div> 
+                  <div class="md:text-xl text-gray-700  text-lg font-semibold absolute px-2 py-1 rounded-br-lg shadow-md bg-gradient bg-white top-0 hover:z-10">`+data.menu2.name+`</div>
+
+                 
                 </label>`);
               }
             }
@@ -571,3 +591,5 @@
 
 
 </x-app-layout>
+
+

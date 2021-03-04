@@ -85,7 +85,7 @@
       @csrf
 
       <div class="relative h-full  overflow-y-hidden overflow-x-hidden ">
-        <div class="absolute inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide hide-scroll" >
+        <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide hide-scroll" >
           
             <div class="grid gap-1 w-full ">  
 
@@ -142,7 +142,7 @@
           </div>
         </div>
   
-        <div class=" inset-0 w-full h-screen bg-gray-900 text-white flex text-5xl transition-all ease-in-out duration-1000 transform translate-x-full slide p-6 " >
+        <div class="absolute inset-0 w-full h-full bg-gray-900 text-white flex text-5xl transition-all ease-in-out duration-1000 transform translate-x-full slide p-6 " >
 
            <div class="flex flex-col gap-6 w-full text-center h-max">  
            <h3 class="col-span-3 min-w-0 font-medium text-2xl leading-snug text-center ">
