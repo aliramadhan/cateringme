@@ -45,7 +45,7 @@
   <!--Modal-->
   <form action="{{route('employee.store.review',$menu_today->order_number)}}" method="POST">
     @csrf
-    <div class="modal z-10 opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center" id="reviewModal">
+    <div class="modal z-20 opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center" id="reviewModal">
       <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
       <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
@@ -130,7 +130,7 @@
     </div>
 
 
-   <div class="modal z-10 opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center" id="noteModal">
+   <div class="modal z-20 opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center" id="noteModal">
       <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
       <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
         <div class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
