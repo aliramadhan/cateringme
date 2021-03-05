@@ -569,6 +569,7 @@
     });
     var porsi = $("input[name='porsi']:checked").val();
     var shift = $("input[name='shift']:checked").val();
+    var sambal = $("input[name='sambal']:checked").val();
 
     $.ajaxSetup({
         headers: {
@@ -579,7 +580,7 @@
     $.ajax({
       url: "{{ route('employee.store.order') }}",
       type: "post",
-      data: {date : date, menu : menu, porsi : porsi, shift : shift},
+      data: {date : date, menu : menu, porsi : porsi, shift : shift, sambal : sambal},
       success: function(data) {
         $('#tanggal'+dateSelected).prop('checked',true);
         alert(data);

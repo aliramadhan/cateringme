@@ -71,20 +71,26 @@
     </thead>
     <tbody class="text-center bg-white py-4" >
 
-        @foreach($schedules as $schedule)
+        @for($i = 1; $i <= $total_days; $i++, $from->addDay())
         @php
-
-            $MenuId = explode(',',$schedule->menu_list);
-            $first_menu = \App\Models\Menu::find($MenuId[0]);
-            $second_menu = \App\Models\Menu::find($MenuId[1]);
+            $schedule = \App\Models\ScheduleMenu::where('date',$from->format('Y-m-d'))->first();
+            if($schedule == null){
+                $first_menu = "-";
+                $second_menu = "-";
+            }
+            else{
+                $MenuId = explode(',',$schedule->menu_list);
+                $first_menu = \App\Models\Menu::find($MenuId[0])->name;
+                $second_menu = \App\Models\Menu::find($MenuId[1])->name;
+            }
         @endphp
             <tr>
-                <td>{{$loop->iteration}}</td>
-                <td>{{Carbon\Carbon::parse($schedule->date)->format('d, l F Y')}}</td>
-                <td>{{$first_menu->name}}</td>
-                <td>{{$second_menu->name}}</td>
+                <td>{{$i}}</td>
+                <td>{{$from->format('d, l F Y')}}</td>
+                <td>{{$first_menu}}</td>
+                <td>{{$second_menu}}</td>
             </tr>
-        @endforeach
+        @endfor
 
         
     </tbody>

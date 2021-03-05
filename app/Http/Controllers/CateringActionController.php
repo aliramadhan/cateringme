@@ -70,9 +70,9 @@ class CateringActionController extends Controller
             $from = Carbon::now()->startOfMonth();
             $to = Carbon::now()->endOfMonth();
         }
-        $schedules = ScheduleMenu::whereBetween('date',[$from->format('Y-m-d'),$to->format('Y-m-d')])->orderBy('date','desc')->get();
+        $total_days = $from->daysInMonth;
 
-        return view('Catering.index_menu_schedule',compact('schedules','from','to'));
+        return view('Catering.index_menu_schedule',compact('total_days','from','to'));
     }
     public function index_menu()
     {

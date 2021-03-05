@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Slideshow;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Collection;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 class EmployeeActionController extends Controller
 {
@@ -312,9 +313,10 @@ class EmployeeActionController extends Controller
         //declare
         $now = Carbon::now();
         $user = auth()->user();
+        $total_dadakan = Order::where('order_date',$now->format('Y-m-d'))->whereDate('created_at', $now)->count();
         //cek if employee can order
         if($user->can_order == 0){
-            return redirect()->back()->withErrors(['message' => "Cant submit order, please call admin to activated feature order catering."]);
+            $message = 'Cant submit order, please call admin to activated feature order catering.';
         }
         //input to database
         $date = Carbon::parse($request->date);
@@ -325,13 +327,21 @@ class EmployeeActionController extends Controller
         try {
             $order = Order::where('employee_id',$user->id)->where('order_date',$date->format('Y-m-d'))->first();
             //check if sambal added
-            if ($request->input('sambal') == null) {
+            if ($request->sambal == null) {
                 $sambal = 0;
             }
             else{
                 $sambal = 1;
             }
             if($order == null){
+                if($total_dadakan > 5){
+                    $message = 'Cant submit order, Order closed.';
+                    return $message;
+                }
+                elseif($date->format('Y-m-d') == $now->format('Y-m-d') && $now->hour >= 9){
+                    $message = 'Cant submit order, Order closed.';
+                    return $message;
+                }
                 $order = Order::create([
                     'employee_id' => $user->id,
                     'employee_name' => $user->name,
@@ -346,6 +356,11 @@ class EmployeeActionController extends Controller
                 ]);
             }
             else{
+
+                if($date->format('Y-m-d') == $now->format('Y-m-d') && $now->hour >= 9){
+                    $message = 'Cant Update order, Order closed.';
+                    return $message;
+                }
                 $order->update([
                     'menu_id' => $menu->id,
                     'menu_name' => $menu->name,
@@ -362,6 +377,32 @@ class EmployeeActionController extends Controller
             DB::rollback();
             $message = $e->getMessage();
             return $message;
+        }
+        if($order->order_date == $now->format('Y-m-d')) {
+            $sudden_orders = Order::where('order_date',$now->format('Y-m-d'))->whereDate('created_at', $now)->get();
+            $text = "Additional Catering today \n".$now->format('d, M Y l')."\n \n";
+            //order dadakan
+            $text .= "============================== \n";
+            $i = 1;
+            foreach ($sudden_orders as $sudden_order) {
+                $cekCreated_at = Carbon::parse($order->created_at);
+                $cekUpdated_at = Carbon::parse($order->updated_at);
+                $text .= $i.". ".$sudden_order->employee_name." - ".$sudden_order->menu_name.' porsi '.$sudden_order->serving." ";
+                if($sudden_order->is_sauce == 1){
+                    $text .= "(sambal)";
+                }
+                if ($cekUpdated_at != $cekCreated_at) {
+                    $text .= " |edited";
+                }
+                $text .= "\n";
+            }
+            $text .= "\n ===========================\n";
+            $text .= "Total Fee = Rp. ". number_format($sudden_orders->sum('fee'));
+            Telegram::sendMessage([
+                'chat_id' => env('TELEGRAM_CHANNEL_ID',''),
+                'parse_mode' => 'HTML',
+                'text' => $text
+            ]);
         }
 
         $message = 'Order submited successfully.';

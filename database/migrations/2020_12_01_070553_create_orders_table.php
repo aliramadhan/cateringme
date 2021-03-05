@@ -16,7 +16,9 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('employee_id')->constrained('users');
+            $table->string('employee_name')->nullable();
             $table->foreignId('menu_id')->constrained('menus');
+            $table->string('menu_name')->nullable();
             $table->string('order_number')->unique();
             $table->date('order_date');
             $table->enum('serving',['S','M','L','XL'])->default('M');
