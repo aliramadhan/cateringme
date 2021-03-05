@@ -33,7 +33,7 @@
               <div class=" inset-0 w-full h-full text-gray-600 flex text-5xl p-3 md:p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide text-base overflow-y-auto bg-gray-100" >      
 
             <div class="bootstrapiso w-full bg-transparent text-base ">
-               <div class="lg:absolute text-xl font-semibold top-9 md:text-left text-center"><span class="text-gray-500 font-base">Period:</span>  @if($from == null) All time @else {{$from->format('d F Y')}} - {{$to->format('d F Y')}} @endif </div>
+               <div class="lg:absolute text-xl font-semibold top-9 md:text-left text-center"><span class="text-gray-500 font-base">Period:</span>  @if($from == null) Today @else {{$from->format('d F Y')}} - {{$to->format('d F Y')}} @endif </div>
             <table class="w-fulltable min-w-full divide-y divide-gray-200 text-gray-600 text-center rounded-lg table-striped table-borderless " 
             id="table"        
             data-locale="en-US"

@@ -74,7 +74,7 @@
             <div class="pl-4 pr-4 self-stretch">
             <div class="h-full border-l border-gray-200"></div>
             </div>
-            <a @click="$refs[`${activeSnippet}ClipboardCode`].select(); document.execCommand('copy')" class="ml-3 text-gray-400 hover:text-gray-500" >
+            <a href="{{ route('catering.index.menu_schedule') }}" class="ml-3 text-gray-400 hover:text-gray-500" >
             <i class="fas fa-calendar-week"></i>
             </a>
           </div>
