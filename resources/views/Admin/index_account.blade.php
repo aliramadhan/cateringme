@@ -256,11 +256,12 @@
             <ul id="myUL" class="contents">         
              @foreach($users as $user)
              <li>                
-              <a href="@if($user->role == 'Employee') {{route('admin.can_order',$user->code_number)}} @else # @endif" @if($user->can_order == 1 && $user->role == 'Employee') onclick="return confirm('Disable feature can order for {!! $user->name !!} ?')" @elseif($user->can_order == 0 && $user->role == 'Employee') onclick="return confirm('enable feature can order for {!! $user->name !!} ?')" @endif>                
+             
                
               <div class="transform bg-white shadow-xl rounded-xl pb-3 hover:-translate-y-2 hover:shadow-2xl duration-500">
+                 <a class="z-0" href="@if($user->role == 'Employee') {{route('admin.can_order',$user->code_number)}} @else # @endif" @if($user->can_order == 1 && $user->role == 'Employee') onclick="return confirm('Disable feature can order for {!! $user->name !!} ?')" @elseif($user->can_order == 0 && $user->role == 'Employee') onclick="return confirm('enable feature can order for {!! $user->name !!} ?')" @endif>  
                @if($user->role == 'Employee')         
-                
+                 
                  <div class="flex flex-row text-base absolute bg-gray-600 absolute rounded-tl-xl rounded-br-xl text-white px-4 hover:bg-gray-700 duration-500 cursor-pointer">
                   <div class="px-2 py-1 font-semibold ">Can Order?</div>
                   <div class="px-2 py-1 font-bold"> 
@@ -276,8 +277,10 @@
 
                     <img class="w-32 h-32 rounded-full mx-auto object-cover mt-12" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}">
                 </div>
+
                 <div class="p-2">
-                   
+                    
+
                     <h3 class="text-center text-xl text-gray-900 font-medium leading-8">{{$user->name}}</h3>
                     <div class="text-center text-gray-400 text-sm font-semibold">
                         <p>{{$user->role}}</p>
@@ -296,15 +299,19 @@
                             <div class="px-2 py-1 text-gray-500 font-semibold w-20 text-left">Email</div>
                             <div class="px-2 py-1  text-left flex-auto">{{$user->email}}</div>
                         </div>
-                      </a>
-                       <button class="modal-open rounded-xl text-base p-3 bg-blue-400 text-white font-semibold mt-4 mx-4 z-10 pointer hover:bg-blue-600 focus:outline-none" data-target="editModal" data-toggle="modal" id="modal-edit" data-name="{{$user->name}}" data-role="{{$user->role}}" data-email="{{$user->email}}" data-division="{{$user->division}}" data-roles="{{$user->roles}}" data-number_phone="{{$user->number_phone}}" data-address="{{$user->address}}">Edit Account</button>
+                        
+                      
                     </div>
 
                    
                 </div>
+                 </a> 
+                 <div class="px-4">
+                  <button class="modal-open rounded-xl text-base p-3 bg-blue-400 text-white font-semibold mt-4 mx-auto w-full z-10 pointer hover:bg-blue-600 focus:outline-none px-6" data-target="editModal" data-toggle="modal" id="modal-edit" data-name="{{$user->name}}" data-role="{{$user->role}}" data-email="{{$user->email}}" data-division="{{$user->division}}" data-roles="{{$user->roles}}" data-number_phone="{{$user->number_phone}}" data-address="{{$user->address}}"><i class="fas fa-user-circle mr-2"></i> Edit Account</button>
+                  </div>
             </div>
 
-          </a>
+           
 
           </li>
           @endforeach
