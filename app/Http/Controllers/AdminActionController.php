@@ -11,6 +11,7 @@ use \App\Models\Slideshow;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RegisterSuccessfully;
+use App\Mail\ResetPasswordUser;
 use Illuminate\Support\Facades\Hash;
 use DB;
 use Telegram\Bot\Laravel\Facades\Telegram;
@@ -185,9 +186,18 @@ class AdminActionController extends Controller
             'number_phone' => ['numeric','digits_between:10,15'],
             'address' => ['string'],
         ]);
-		$user = User::where('email',$request->email)->first();
+		$user = User::where('email',$request->prev_email)->first();
 		if($user == null){
 			return redirect()->back()->withErrors(['errors' => 'User not found.']);
+		}
+
+		if ($request->email != $request->prev_email) {
+			$this->validate($request,[
+            	'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+			]);
+			$user->update([
+				'email' => $request->email
+			]);
 		}
 
 		$user->update([
@@ -535,6 +545,29 @@ class AdminActionController extends Controller
         $slide->delete();
         $message = 'Slide '. $slide->name.' deleted succesfully.';
 		return redirect()->back()->with(['message' => $message]);
+	}
+	public function reset_password($email)
+	{
+		$user = User::where('email',$email)->first();
+		if($user == null){
+			return redirect()->back()->withErrors(['message' => 'User not found.']);
+		}
 
+		//Create Random char
+		$password = bin2hex(random_bytes(4));
+
+		$user->update([
+			'password' => Hash::make($password),
+		]);
+
+		//Fill detail for email
+		$data = [
+			'name' => $user->name,
+			'email' => $user->email,
+			'password' => $password
+		];
+		$send_mail = Mail::to($email)->send(new ResetPasswordUser($data));
+
+		return redirect()->back()->with(['message' => 'Reset Password for '.$user->name.' succesfully.']);
 	}
 }

@@ -49,6 +49,7 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth:sanctum','role:Admin'
     Route::post('/create/account', [ AdminActionController::class, 'store_account'])->name('admin.store.account');
     Route::put('/update/account', [ AdminActionController::class, 'update_account'])->name('admin.update.account');
     Route::get('/delete/account/{email}', [ AdminActionController::class, 'delete_account'])->name('admin.delete.account');
+    Route::get('/reset/password/{email}', [ AdminActionController::class, 'reset_password'])->name('admin.reset.password');
 
     //Manage Menu
     Route::get('/menu', [ AdminActionController::class, 'index_menu'])->name('admin.index.menu');

@@ -156,7 +156,8 @@
           <div class="mt-4  grid grid-cols-2 gap-2">
               <div>
             <x-jet-label for="editEmail" value="{{ __('Email') }}" />
-            <x-jet-input readonly id="editEmail" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+            <x-jet-input id="editEmail" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+            <x-jet-input id="prevEmail" class="block mt-1 w-full" type="hidden" name="prev_email" :value="old('prev_email')" required />
             </div>
             <div>
                             <x-jet-label for="role" value="{{ __('Status') }}" />
@@ -192,6 +193,7 @@
             <!--Footer-->
    <div class="flex justify-between pt-4">
                <a id="accountDelete" href="" class="px-4 bg-transparent p-3 rounded-lg hover:bg-gray-100 hover:text-red-400 mr-2 bg-red-500 p-3 rounded-lg text-white" onclick="return confirm('Do you really want to delete this User ? All data related to User will be deleted,  This process cannot be undone.');">   {{ __('Delete') }}</a>
+               <a id="resetPassword" href="" class="px-4 bg-transparent p-3 rounded-lg hover:bg-gray-100 hover:text-red-400 mr-2 bg-red-500 p-3 rounded-lg text-white" onclick="return confirm('Do you really want to reset Password for this User ?, This process cannot be undone.');">   {{ __('Reset Password') }}</a>
 
               <x-jet-button class="px-4 bg-transparent p-3 rounded-lg hover:bg-gray-100 hover:text-indigo-400 mr-2 bg-blue-500 p-3 rounded-lg text-white">   {{ __('Save') }}</x-jet-button>
               
@@ -416,8 +418,10 @@
     address = _self.data("address");
 
     $("#accountDelete").attr("href", "{!! url('admin/delete/account/') !!}/"+email);
+    $("#resetPassword").attr("href", "{!! url('admin/reset/password/') !!}/"+email);
     $("#editName").val(name);
     $("#editEmail").val(email);
+    $("#prevEmail").val(email);
     $("#editRole").val(role);
     $("#editDivision").val(division);
     $("#editRoles").val(roles);
