@@ -5,7 +5,7 @@
     @endif
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Report Review Catering') }}
+            {{ __('Scheduling') }}
         </h2>
     </x-slot>
  
@@ -22,7 +22,7 @@
           <div class="px-4 py-2 border-b border-gray-200 flex justify-between items-center bg-white sm:py-4 sm:px-6 sm:items-baseline">
             <div class="flex-shrink min-w-0 flex items-center">
               <h3 class="flex-shrink min-w-0 font-regular text-base md:text-lg leading-snug truncate">
-               Reporting Review for Catering 
+               Scheduling results that have been set 
              </h3>
            </div>
            <div class="md:ml-4 flex items-center gap-4 lg:w-7/12  md:w-8/12 w-full">
@@ -37,7 +37,7 @@
             
         </div>
       </div>
-         <div class="relative md:h-screen h-full">
+         <div class="relative h-full">
               <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide text-base overflow-y-auto bg-gray-100" >      
 
             <div class="bootstrapiso w-full bg-transparent ">
@@ -58,13 +58,13 @@
             data-minimum-count-columns="2"
             data-response-handler="responseHandler"
             data-export-types= "['excel','doc', 'txt']"
-            data-export-options='{"fileName": "Report Review @if($from == null && $to == null) @else{{$from->format('d F Y')}} - {{$to->format('d F Y')}}"}@endif'>
+            data-export-options='{"fileName": "Scheduling Report @if($from == null && $to == null) @else{{$from->format('d F Y')}} - {{$to->format('d F Y')}}"}@endif'>
 
             <thead class="text-gray-600 capitalize font-semibold text-base font-semibold rounded-xl bg-gray-100" style="
             background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
             ">
             <th class="w-12">No</th>
-            <th>Date</th>
+            <th class="text-left">Date</th>
             <th>First Menu</th>
             <th>Second Menu</th>
         </tr>
