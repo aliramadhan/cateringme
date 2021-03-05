@@ -18,7 +18,7 @@
         <x-jet-validation-errors class="mb-4" />
 
         <form method="POST" action="{{ route('password.email') }}" class="flex flex-col">
-              <a href="javascript:history.back()" class="px-5 py-2 font-semibold absolute bg-gray-500 rounded-full text-white hover:bg-gray-700 duration-500 cursor-pointer text-2xl mb-4 opacity-75 hover:opacity-100"><i class="fas fa-chevron-left"></i></a>               
+              <a href="{{ route('login') }}" class="px-4 py-2 font-semibold absolute bg-gray-500 rounded-full text-white hover:bg-gray-700 duration-500 cursor-pointer text-xl mb-4 opacity-75 hover:opacity-100"><i class="fas fa-chevron-left"></i></a>               
             @csrf
             <img src="{{ asset('/resources/image/logo.png')}}" class="img-fluid mx-auto md:mb-5 mb-10 mt-10" width="138px" height="138px">
             <div class="mb-4 text-base text-gray-600 ">             

@@ -336,9 +336,11 @@
 						<div class="flex mb-6">
 						<h2 class="font-bold uppercase my-auto md:block hidden">{{$menu->name}}</h2>
 						<h5 class="font-bold uppercase my-auto block md:hidden">{{$menu->name}}</h5>
-						<div class="md:block hidden ml-2 text-lg text-orange-500 leading-7 font-bold flex-initial bg-white border  p-1 px-2 rounded-xl w-16 h-auto" style="border-color: #FF5A1F !important">
+						<div>
+							<div class="md:block hidden ml-2 text-lg text-orange-500 leading-7 font-bold flex-initial bg-white border  p-1 px-2 rounded-xl w-16 h-auto" style="border-color: #FF5A1F !important">
 								<i class="fas fa-star"></i> {{$menu->orders->avg('stars')}}
 							</div>   
+						</div>
 						</div>
 						<h5 class="fw-normal d-none d-md-block">{{$menu->desc}}</h5>
 						<div class="block md:hidden ml-2 text-lg text-orange-500 leading-7 font-bold flex-initial bg-white border  p-1 px-2 rounded-xl w-16 h-auto" style="border-color: #FF5A1F !important">

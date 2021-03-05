@@ -9,7 +9,7 @@
            
 
         <form method="POST" action="{{ route('password.update') }}" class="flex flex-col">
-              <a href="javascript:history.back()" class="px-5 py-2 font-semibold absolute bg-gray-500 rounded-full text-white hover:bg-gray-700 duration-500 cursor-pointer text-2xl"><i class="fas fa-chevron-left"></i></a> 
+              <a href="{{ route('login') }}" class="px-5 py-2 font-semibold absolute bg-gray-500 rounded-full text-white hover:bg-gray-700 duration-500 cursor-pointer text-2xl"><i class="fas fa-chevron-left"></i></a> 
             @csrf
              <img src="{{ asset('/resources/image/logo.png')}}" class="img-fluid mx-auto md:mb-5 mb-10" width="138px" height="138px">
             <input type="hidden" name="token" value="{{ $request->route('token') }}">

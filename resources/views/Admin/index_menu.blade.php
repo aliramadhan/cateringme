@@ -38,7 +38,7 @@
 
                   <div>
                   <span>  
-                      <div class=" text-xl font-semibold text-orange-600 mt-3 absolute  px-4 py-1 bg-white rounded-r-lg">{{$menu->name}}                         
+                      <div class="text-left text-lg font-semibold text-orange-600 mt-3 absolute w-8/12 md:w-3/12 lg:w-2/12 px-4 py-1 bg-white rounded-r-lg">{{$menu->name}}                         
 
                           </div>
                       </span>

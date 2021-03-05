@@ -151,7 +151,7 @@
                 <div class="flex flex-col text-center mb-6 gap-2 border-2 border-opacity-25 h-auto top-0 w-full mx-auto check-resize bg-white p-3 rounded-xl hover:shadow-xl hover:border-orange-400 duration-500 ">
                    <div >
                     <span>  
-                        <div class=" text-xl font-semibold text-orange-600 mt-3 absolute  px-4 py-1 bg-white rounded-r-lg">{{$menu->name}}</div>
+                        <div class="text-left text-lg font-semibold text-orange-600 mt-3 absolute w-8/12 md:w-3/12 lg:w-2/12 px-4 py-1 bg-white rounded-r-lg">{{$menu->name}}</div>
                     </span>
                     <img src="@if($menu->photos->first() != null) {{url('public/'.$menu->photos->first()->file)}} @else {{url('public/images/no-image.png')}} @endif" alt="{{ $menu->name }}" class="h-52 rounded-xl object-cover w-full">
 
