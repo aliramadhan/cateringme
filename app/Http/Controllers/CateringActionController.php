@@ -70,7 +70,7 @@ class CateringActionController extends Controller
             $from = Carbon::now()->startOfMonth();
             $to = Carbon::now()->endOfMonth();
         }
-        $schedules = ScheduleMenu::whereBetween('date',[$from->format('Y-m-d'),$to->format('Y-m-d')])->orderBy('date','desc')->get();
+        $schedules = ScheduleMenu::whereBetween('date',[$from->format('Y-m-d'),$to->format('Y-m-d')])->orderBy('date','asc')->get();
 
         return view('Catering.index_menu_schedule',compact('schedules','from','to'));
     }
