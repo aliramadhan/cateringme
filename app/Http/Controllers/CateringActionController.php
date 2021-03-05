@@ -102,6 +102,15 @@ class CateringActionController extends Controller
             'desc' => ['required', 'string']
         ]);
 
+        //cek fee
+        $cekPrice = Menu::first();
+        if ($cekPrice == null) {
+            $price = 20000;
+        }
+        else{
+            $price = $cekPrice->price;
+        }
+
         //create code number for menu
         $last_id = Menu::orderBy('id','desc')->pluck('id')->first();
         $len = strlen(++$last_id);
@@ -118,6 +127,7 @@ class CateringActionController extends Controller
                 'catering_id' => auth()->user()->id,
                 'menu_code' => $code_number,
                 'desc' => $request->desc,
+                'price' => $price
             ]);
             if($request->hasfile('photo')){
                 //save image to directory

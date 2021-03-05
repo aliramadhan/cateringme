@@ -62,7 +62,7 @@ class CateringNotif extends Command
             }
             $text .= "\n";
         }
-        $text .= "================================\n \n";
+        $text .= "===========================\n \n";
         //summary
         $i = 1;
         foreach ($servings as $serving) {
