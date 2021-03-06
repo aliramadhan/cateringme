@@ -76,6 +76,7 @@
           <div class="mt-4  grid grid-cols-2 gap-2">
               <div>
             <x-jet-label for="email" value="{{ __('Email') }}" />
+            
             <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
             <div>
@@ -155,9 +156,19 @@
 
           <div class="mt-4  grid grid-cols-2 gap-2">
               <div>
+                <div class="flex justify-between">
             <x-jet-label for="editEmail" value="{{ __('Email') }}" />
-            <x-jet-input id="editEmail" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            <x-jet-input id="prevEmail" class="block mt-1 w-full" type="hidden" name="prev_email" :value="old('prev_email')" required />
+           
+            </div>
+
+              <div class="relative flex w-full flex-wrap items-stretch mb-3 flex-row-reverse">
+                <span class="z-10 h-full leading-snug font-normal absolute text-center text-gray-400 absolute bg-transparent rounded text-lg items-center justify-center w-10 pl-3 py-3">
+                   <a id="resetPassword" href="" class="text-sm text-blue-500 hover:text-blue-700" onclick="return confirm('Do you really want to reset Password for this User ?, This process cannot be undone.');"><i class="fas fa-redo mr-1"></i></a>
+                </span>
+                <x-jet-input id="editEmail" class="form-input rounded-md relative  shadow-sm block mt-1 pr-7 w-full" type="email" name="email" :value="old('email')" required />
+                <x-jet-input id="prevEmail" class="form-input rounded-md relative  shadow-sm block mt-1 pr-7 w-full" type="hidden" name="prev_email" :value="old('prev_email')" required />
+              </div>
+
             </div>
             <div>
                             <x-jet-label for="role" value="{{ __('Status') }}" />
@@ -193,7 +204,8 @@
             <!--Footer-->
    <div class="flex justify-between pt-4">
                <a id="accountDelete" href="" class="px-4 bg-transparent p-3 rounded-lg hover:bg-gray-100 hover:text-red-400 mr-2 bg-red-500 p-3 rounded-lg text-white" onclick="return confirm('Do you really want to delete this User ? All data related to User will be deleted,  This process cannot be undone.');">   {{ __('Delete') }}</a>
-               <a id="resetPassword" href="" class="px-4 bg-transparent p-3 rounded-lg hover:bg-gray-100 hover:text-red-400 mr-2 bg-red-500 p-3 rounded-lg text-white" onclick="return confirm('Do you really want to reset Password for this User ?, This process cannot be undone.');">   {{ __('Reset Password') }}</a>
+
+              
 
               <x-jet-button class="px-4 bg-transparent p-3 rounded-lg hover:bg-gray-100 hover:text-indigo-400 mr-2 bg-blue-500 p-3 rounded-lg text-white">   {{ __('Save') }}</x-jet-button>
               
