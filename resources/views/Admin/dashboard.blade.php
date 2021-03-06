@@ -105,7 +105,7 @@
 								<h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{$catering_taken}}</h3>
 								<p class="text-base animate-bounce @if($catering_taken > $subcatering_taken) text-green-500 @else text-red-500 @endif leading-tight">
 								@if($catering_taken > $subcatering_taken) ▲ 
-								@else ▼ @endif {{$persen_catering_taken}} %</p>
+								@else ▼ @endif {{number_format($persen_catering_taken,2,",",".")}} %</p>
 							</div>
 							
 							<div class="absolute bottom-0 inset-x-0">
@@ -122,7 +122,7 @@
 							<div class="px-3 pt-8 pb-10 text-center relative z-10">
 								<h4 class="text-base font-semibold uppercase text-gray-500 leading-tight">Catering not Taken</h4>
 								<h3 class="text-3xl text-gray-700 font-semibold leading-tight my-3">{{$not_taken}}</h3>
-								<p class="text-base animate-bounce @if($not_taken > $subnot_taken) text-green-500-500  @else text-red-500  @endif  leading-tight">@if($not_taken > $subnot_taken) ▲ @else ▼ @endif {{$persen_not_taken}}%</p>
+								<p class="text-base animate-bounce @if($not_taken > $subnot_taken) text-green-500-500  @else text-red-500  @endif  leading-tight">@if($not_taken > $subnot_taken) ▲ @else ▼ @endif {{number_format($persen_not_taken,2,",",".")}}%</p>
 							</div>
 							<div class="absolute bottom-0 inset-x-0">
 								<canvas id="chart2" height="70" style="height:100px !important;"></canvas>
