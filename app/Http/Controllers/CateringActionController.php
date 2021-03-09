@@ -332,6 +332,12 @@ class CateringActionController extends Controller
                     $schedule = ScheduleMenu::where('date',$date->format('Y-m-d'))->first();
                     if($schedule != null){
                         $message .= $schedule->date.",";
+                        $orders = Order::whereDate('order_date',$date)->get();
+                        //delete order at selected day
+                        foreach ($orders as $order) {
+                            $order->delete();
+                        }
+
                         $schedule->delete();
                     }
                 }
