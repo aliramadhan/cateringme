@@ -22,6 +22,10 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 Route::get('/', function () {
     return redirect()->route('login');
 });
+Route::get('/cek-telegram', function () {
+    $activity = Telegram::getUpdates();
+    return dd($activity);
+});
 Route::middleware(['auth:sanctum'])->get('/dashboard', function () {
     if (auth()->user()->role == 'Employee') {
         return redirect()->route('employee.dashboard');
