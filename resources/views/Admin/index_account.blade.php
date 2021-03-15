@@ -202,14 +202,14 @@
               <x-jet-input id="editAddress" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required />
             </div>
             <!--Footer-->
-   <div class="flex justify-between pt-4">
-               <a id="accountDelete" href="" class="px-4 bg-transparent p-3 rounded-lg hover:bg-gray-100 hover:text-red-400 mr-2 bg-red-500 p-3 rounded-lg text-white" onclick="return confirm('Do you really want to delete this User ? All data related to User will be deleted,  This process cannot be undone.');">   {{ __('Delete') }}</a>
+            <div class="flex justify-between pt-4">
+             <a id="accountDelete" href="" class="px-4 bg-transparent p-3 rounded-lg hover:bg-gray-100 hover:text-red-400 mr-2 bg-red-500 p-3 rounded-lg text-white" onclick="return confirm('Do you really want to delete this User ? All data related to User will be deleted,  This process cannot be undone.');">   {{ __('Delete') }}</a>
 
-              
+             
 
-              <x-jet-button class="px-4 bg-transparent p-3 rounded-lg hover:bg-gray-100 hover:text-indigo-400 mr-2 bg-blue-500 p-3 rounded-lg text-white">   {{ __('Save') }}</x-jet-button>
-              
-              
+             <x-jet-button class="px-4 bg-transparent p-3 rounded-lg hover:bg-gray-100 hover:text-indigo-400 mr-2 bg-blue-500 p-3 rounded-lg text-white">   {{ __('Save') }}</x-jet-button>
+             
+             
             </div>
           </form>
         </div>
