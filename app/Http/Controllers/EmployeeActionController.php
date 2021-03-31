@@ -118,6 +118,12 @@ class EmployeeActionController extends Controller
         $date = Carbon::parse($request->date);
         $schedule = ScheduleMenu::where('date',$date->format('Y-m-d'))->first();
         $order = Order::where('employee_id',$user->id)->where('order_date',$date->format('Y-m-d'))->first();
+        if ($order != null) {
+            $schedule->id_ordered = $order->id;
+        }
+        else{
+            $schedule->id_ordered = null;
+        }
         $i = 1;
         foreach (explode(",",$schedule->menu_list) as $menu_id) {
             $menu = Menu::find($menu_id);
