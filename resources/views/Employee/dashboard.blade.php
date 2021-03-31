@@ -371,6 +371,9 @@
         @php
         $start_date = $now;
         $img_modal=1;
+        if(Carbon\Carbon::now()->day > 28){
+          $total_days += 30;
+        }
         @endphp
         @for($i = 0 ; $i <= $total_days;$i++,$start_date->addDay())
           @php

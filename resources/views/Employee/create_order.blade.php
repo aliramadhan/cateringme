@@ -144,7 +144,7 @@
                            </label>
                          
                           
-                            <input type="radio" name="porsi" checked value="M" class="flex-auto hidden" id="nasiM">
+                            <input type="radio" name="porsi" value="M" class="flex-auto hidden" id="nasiM">
                             <label for="nasiM"  class="flex cursor-pointer text-base font-semibold items-center not-menu px-4 bg-white rounded-xl border hover:shadow-md duration-500">
                              Porsi M
                            </label>
@@ -166,7 +166,7 @@
                 <div class="text-center">
                   <h5 class="font-semibold mb-4">Catering Delivery</h5>
                   
-                    <input type="radio" name="shift" checked value="Pagi" class="flex-auto hidden" id="shiftA">
+                    <input type="radio" name="shift" value="Pagi" class="flex-auto hidden" id="shiftA">
                     <label for="shiftA" class="flex cursor-pointer text-base font-semibold items-center not-menu px-4 bg-white rounded-xl border hover:shadow-md duration-500">
                      <i class="fas fa-cloud-sun text-blue-400 mr-2"> </i>Shift Pagi
                    </label>
@@ -194,6 +194,7 @@
     <div class="modal-footer">
      <a  href="#carouselExampleControls" role="button" data-slide="prev" style="display: none;" id="back-step">
       <button type="button" class="btn btn-warning px-3" ><i class="mr-2 fas fa-arrow-left"></i> Back</button>
+      <a href="" id="linkDeleteOrder" class="btn btn-danger px-3"><i class="fa fa-trash" style="display: none;"></i> Cancel Order</a>
     </a>
 
     <a href="#carouselExampleControls" role="button" data-slide="next" id="next-step">
@@ -414,6 +415,15 @@
           alert('Error get date.');
         }
         else{
+          if (data.id_ordered != null) {
+            $('#linkDeleteOrder').css('display','block');
+            $('#linkDeleteOrder').show();
+            $('#linkDeleteOrder').attr('href',"{!! url('employee/order') !!}"+'/'+data.id_ordered);
+          }
+          else{
+            $('#linkDeleteOrder').css('display','none');
+            $('#linkDeleteOrder').attr('href',"#");
+          }
           $('#dateOrder').val(data.date);
           $('#dateSelected').val(date);
           $('#MenuPhotosModal1').html(`Create Schedule for <br class="md:hidden block">` + data.date );
