@@ -273,6 +273,12 @@ class CateringActionController extends Controller
         $start = $date->startOfMonth();
         $total_days = $date->daysInMonth;
         $days = new Collection;
+        
+         for($x = 1; $x <= 7-$start->dayOfWeek; $x++){
+                    $blank_d=  "<label class='w-16 mx-4  inline-flex'> 
+                      </label>";
+                        $blank_p->push($blank_d);
+         }
         for ($i=1; $i <= $total_days ; $i++, $start->addDay()) { 
             $schedule = ScheduleMenu::where('date',$start->format('Y-m-d'))->first();
             if($schedule == null){

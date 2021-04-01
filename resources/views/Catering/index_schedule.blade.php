@@ -106,9 +106,13 @@
          
 
             <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5 mt-4">                      
-               <div id="div1" class=" duration-1000 targetDiv bg-gray-50 justify-content content-center text-center rounded-lg pt-4"> 
+               <div id="div1" class="duration-1000 targetDiv justify-content content-center md:text-left text-center pt-4 md:mx-4 lg:mx-auto" style="width: fit-content;width: -moz-fit-content;" > 
                   <h1 id="date-month" class=" text-center"></h1>
-                  <div id="showresults">
+                  <div id="showresults" >
+                      @for($x = 1; $x <= 7-$start_date->dayOfWeek; $x++)
+                      <label class="w-16 mx-4  inline-flex"> 
+                      </label>
+                      @endfor
                     @for($i = 1; $i <= $total_days; $i++, $start_date->addDay())
                       @php
                         $schedule = \App\Models\ScheduleMenu::where('date',$start_date->format('Y-m-d'))->first();

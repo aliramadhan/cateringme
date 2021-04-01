@@ -243,6 +243,10 @@
    </h3>  
    <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5 mt-4">                      
      <div id="div1" class="duration-1000 targetDiv justify-content content-center md:text-left text-center pt-4 md:mx-4 lg:mx-auto" style="width: fit-content;"> 
+      @for($x = 1; $x <= 7-$start->dayOfWeek; $x++)
+      <label class="w-16 mx-4  inline-flex"> 
+      </label>
+      @endfor
       @for($i = 1; $i <= $now->daysInMonth; $i++, $start->addDay())
       @php
       $user = auth()->user();
@@ -266,7 +270,8 @@
         </span>
       </label>
       @if($start->dayOfWeek == 0)     
-        <br class="lg:block hidden">      
+        <br class="lg:block hidden">     
+       
       @endif
 
       @endfor
