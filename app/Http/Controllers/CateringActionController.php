@@ -273,43 +273,76 @@ class CateringActionController extends Controller
         $start = $date->startOfMonth();
         $total_days = $date->daysInMonth;
         $days = new Collection;
-        
-         for($x = 1; $x <= 7-$start->dayOfWeek; $x++){
-                    $blank_d=  "<label class='w-16 mx-4  inline-flex'> 
+        $input = "";
+        for($x = 1; $x <= 7-$start->dayOfWeek; $x++){
+            $input .=  "<label class='w-16 mx-4  inline-flex'> 
                       </label>";
-                        $blank_p->push($blank_d);
-         }
+        }
         for ($i=1; $i <= $total_days ; $i++, $start->addDay()) { 
             $schedule = ScheduleMenu::where('date',$start->format('Y-m-d'))->first();
-            if($schedule == null){
-                $input = "<label class='label flex-auto contents duration-1000'>
-                        <input class='label__checkbox duration-1000' type='checkbox' value='".$start->format('Y-m-d')."' name='dates[]' >
-                        <span class='label__text '>
-                            <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);'>
-                              <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 p-10 duration-1000' style='font-family: Poppins, sans-serif;'>
-                           
-                                <div class='font-semibold text-4xl mb-2 '>".$start->format('d')."</div>
-                                <div class='text-xs font-base'>".$start->format('l')."</div>
-                                
-                                </i>
+            if ($i == 1) {
+                if($schedule == null){
+                    $input .= "<label class='label flex-auto contents duration-1000'>
+                            <input class='label__checkbox duration-1000' type='checkbox' value='".$start->format('Y-m-d')."' name='dates[]' >
+                            <span class='label__text '>
+                                <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);'>
+                                  <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 p-10 duration-1000' style='font-family: Poppins, sans-serif;'>
+                               
+                                    <div class='font-semibold text-4xl mb-2 '>".$start->format('d')."</div>
+                                    <div class='text-xs font-base'>".$start->format('l')."</div>
+                                    
+                                    </i>
+                                </span>
                             </span>
-                        </span>
-                    </label>";
+                        </label>";
+                }
+                else{
+                    $input .= "<label class='label flex-auto contents duration-1000'>
+                            <input class='label__checkbox duration-1000' type='checkbox' value='".$start->format('Y-m-d')."' name='dates[]' >
+                            <span class='label__text '>
+                                <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient(135deg, #FCCF31 10%, #F55555 100%);'>
+                                  <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 p-10 duration-1000' style='font-family: Poppins, sans-serif;'>
+                               
+                                    <div class='font-semibold text-4xl mb-2 '>".$start->format('d')."</div>
+                                    <div class='text-xs font-base'>".$start->format('l')."</div>
+                                    
+                                    </i>
+                                </span>
+                            </span>
+                        </label>";
+                }
             }
             else{
-                $input = "<label class='label flex-auto contents duration-1000'>
-                        <input class='label__checkbox duration-1000' type='checkbox' value='".$start->format('Y-m-d')."' name='dates[]' >
-                        <span class='label__text '>
-                            <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient(135deg, #FCCF31 10%, #F55555 100%);'>
-                              <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 p-10 duration-1000' style='font-family: Poppins, sans-serif;'>
-                           
-                                <div class='font-semibold text-4xl mb-2 '>".$start->format('d')."</div>
-                                <div class='text-xs font-base'>".$start->format('l')."</div>
-                                
-                                </i>
+                if($schedule == null){
+                    $input = "<label class='label flex-auto contents duration-1000'>
+                            <input class='label__checkbox duration-1000' type='checkbox' value='".$start->format('Y-m-d')."' name='dates[]' >
+                            <span class='label__text '>
+                                <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);'>
+                                  <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 p-10 duration-1000' style='font-family: Poppins, sans-serif;'>
+                               
+                                    <div class='font-semibold text-4xl mb-2 '>".$start->format('d')."</div>
+                                    <div class='text-xs font-base'>".$start->format('l')."</div>
+                                    
+                                    </i>
+                                </span>
                             </span>
-                        </span>
-                    </label>";
+                        </label>";
+                }
+                else{
+                    $input = "<label class='label flex-auto contents duration-1000'>
+                            <input class='label__checkbox duration-1000' type='checkbox' value='".$start->format('Y-m-d')."' name='dates[]' >
+                            <span class='label__text '>
+                                <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient(135deg, #FCCF31 10%, #F55555 100%);'>
+                                  <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 p-10 duration-1000' style='font-family: Poppins, sans-serif;'>
+                               
+                                    <div class='font-semibold text-4xl mb-2 '>".$start->format('d')."</div>
+                                    <div class='text-xs font-base'>".$start->format('l')."</div>
+                                    
+                                    </i>
+                                </span>
+                            </span>
+                        </label>";
+                }
             }
 
             if($start->dayOfWeek == 0){
