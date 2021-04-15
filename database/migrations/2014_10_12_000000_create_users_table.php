@@ -20,15 +20,17 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->enum('role', ['Admin', 'Catering','Employee'])->default('Employee');
+            $table->enum('role', ['Admin', 'Catering','Employee','Manager'])->default('Employee');
+            $table->string('division')->default('Support');
             $table->string('roles')->nullable();
-            $table->string('division')->nullable();
             $table->foreignId('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();
             $table->string('number_phone')->nullable();
             $table->string('code_number')->unique()->nullable();
             $table->string('address')->nullable();
             $table->boolean('can_order')->default(0);
+            $table->boolean('is_active')->default(1);
+            $table->timestamp('last_seen')->nullable();
             $table->timestamps();
         });
     }
