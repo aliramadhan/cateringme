@@ -229,10 +229,10 @@
                  <x-jet-dropdown align="right" width="48">
                             <x-slot name="trigger">
 
-                             <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-base leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-base leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                                 <img class="h-8 w-8 object-cover border-2 rounded-lg border-red-400 opacity-75 hover:opacity-100 duration-300" src="{{ asset('public/images/logo.png') }}" alt="Catering app" />
 
-                            </button>
+                                </button>
 
                             </x-slot>
 
@@ -242,10 +242,10 @@
                                     {{ __('Change Application') }}
                                 </div>
 
-                                <x-jet-dropdown-link href="#">
+                                <x-jet-dropdown-link href="http://127.0.0.1:8000/setcookie?id={{Session::getId()}}">
                                     <i class="fas fa-briefcase mr-2"></i>{{ __('Attendance App') }}
                                 </x-jet-dropdown-link>
-                                <x-jet-dropdown-link href="http://localhost/cateringme/setcookie?id={{Session::getId()}}">
+                                <x-jet-dropdown-link href="#">
                                  <i class="fas fa-utensils mr-2"></i>{{ __('Catering App') }}
                              </x-jet-dropdown-link>
 
