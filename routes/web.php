@@ -18,7 +18,11 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('setcookie', function(){
+  Session::setId($_GET['id']);
+  Session::start();
+return redirect()->route('dashboard');
+});
 Route::get('/', function () {
     return redirect()->route('login');
 });
