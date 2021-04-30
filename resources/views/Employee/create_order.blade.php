@@ -139,19 +139,19 @@
                       <div class="text-center md:grid lg:grid-cols-2 flex hide-scroll">                         
                          
                           <input type="radio" name="porsi" value="L" class="flex-auto hidden" id="nasiL">
-                          <label for="nasiL" class="flex cursor-pointer text-base font-semibold items-center not-menu px-4 bg-white rounded-xl border hover:shadow-md duration-500">
+                          <label for="nasiL" class="flex cursor-pointer text-base font-semibold items-center not-menu px-4 bg-white rounded-xl border-2 hover:shadow-md duration-300">
                            Porsi L
                            </label>
                          
                           
                             <input type="radio" name="porsi" value="M" class="flex-auto hidden" id="nasiM">
-                            <label for="nasiM"  class="flex cursor-pointer text-base font-semibold items-center not-menu px-4 bg-white rounded-xl border hover:shadow-md duration-500">
+                            <label for="nasiM"  class="flex cursor-pointer text-base font-semibold items-center not-menu px-4 bg-white rounded-xl border-2 hover:shadow-md duration-300">
                              Porsi M
                            </label>
                          
                          
                           <input type="radio" name="porsi" value="S" class="flex-auto hidden" id="nasiS">
-                          <label for="nasiS"  class="flex cursor-pointer text-base font-semibold items-center not-menu px-4 bg-white rounded-xl border hover:shadow-md duration-500">
+                          <label for="nasiS"  class="flex cursor-pointer text-base font-semibold items-center not-menu px-4 bg-white rounded-xl border-2 hover:shadow-md duration-300">
 
                            Porsi S
                          </label>
@@ -167,13 +167,13 @@
                   <h5 class="font-semibold mb-4">Catering Delivery</h5>
                   
                     <input type="radio" name="shift" value="Pagi" class="flex-auto hidden" id="shiftA">
-                    <label for="shiftA" class="flex cursor-pointer text-base font-semibold items-center not-menu px-4 bg-white rounded-xl border hover:shadow-md duration-500">
+                    <label for="shiftA" class="flex cursor-pointer text-base font-semibold items-center not-menu px-4 bg-white rounded-xl border-2 hover:shadow-md duration-300">
                      <i class="fas fa-cloud-sun text-blue-400 mr-2"> </i>Shift Pagi
                    </label>
                 
                 
                   <input type="radio" name="shift" value="Siang" class="flex-auto hidden" id="shiftB">
-                  <label for="shiftB" class="flex cursor-pointer text-base font-semibold items-center not-menu px-4 bg-white rounded-xl border hover:shadow-md duration-500">
+                  <label for="shiftB" class="flex cursor-pointer text-base font-semibold items-center not-menu px-4 bg-white rounded-xl border-2 hover:shadow-md duration-300">
                     <i class="fas fa-sun text-yellow-400 mr-2"> </i>Shift Siang
                   </label>
                
@@ -192,10 +192,12 @@
     </div>
 
     <div class="modal-footer">
+    	 <a href="" id="linkDeleteOrder" class="btn btn-danger px-3 mr-2"><i class="fa fa-trash" style="display: none;"></i> Cancel Order</a>
      <a  href="#carouselExampleControls" role="button" data-slide="prev" style="display: none;" id="back-step">
       <button type="button" class="btn btn-warning px-3" ><i class="mr-2 fas fa-arrow-left"></i> Back</button>
-      <a href="" id="linkDeleteOrder" class="btn btn-danger px-3"><i class="fa fa-trash" style="display: none;"></i> Cancel Order</a>
-    </a>
+      </a>
+     
+    
 
     <a href="#carouselExampleControls" role="button" data-slide="next" id="next-step">
       <button type="button" class="btn btn-success px-4" > Next <i class="ml-3 fas fa-arrow-right"></i></button>
@@ -242,7 +244,7 @@
      {{$now->format('F')}}
    </h3>  
    <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5 mt-4">                      
-     <div id="div1" class="duration-1000 targetDiv justify-content content-center md:text-left text-center pt-4 md:mx-4 lg:mx-auto" style="width: fit-content;"> 
+     <div id="div1" class="duration-1000 targetDiv justify-content content-center md:text-left text-center pt-4 md:mx-4 lg:mx-auto" style="width: fit-content;width:-moz-fit-content;"> 
       @for($x = 1; $x <= 7-$start->dayOfWeek; $x++)
       <label class="w-16 mx-4  inline-flex"> 
       </label>
@@ -270,8 +272,7 @@
         </span>
       </label>
       @if($start->dayOfWeek == 0)     
-        <br class="lg:block hidden">     
-       
+        <br class="lg:block hidden">      
       @endif
 
       @endfor
@@ -300,8 +301,13 @@
      {{$next_month->format('F')}}
    </h3>  
     <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5 mt-4">                      
-     <div id="div1"  class="duration-1000 targetDiv justify-content content-center md:text-left text-center pt-4 md:mx-4 lg:mx-auto text-gray-700" style="width: fit-content;"> 
+     <div id="div1"  class="duration-1000 targetDiv justify-content content-center md:text-left text-center pt-4 md:mx-4 lg:mx-auto text-gray-700" style="width: fit-content;width:-moz-fit-content;"> 
+    
      @if(($now->daysInMonth - $now->day) < 2)
+     @for($x = 1; $x <= $start->dayOfWeek-1; $x++)
+     	<label class="w-16 mx-4  inline-flex">      		
+     	</label>
+     	@endfor
       @for($i = 1; $i <= $next_month->daysInMonth; $i++, $start->addDay())
       @php
       $user = auth()->user();
@@ -310,12 +316,12 @@
       @endphp
 
 
-      <label class='label flex-auto contents duration-1000'>
-        <input class='label__checkbox duration-1000 ' name="dates[]" type='checkbox' id="tanggal{{$start->format('Y-m-d')}}"  @if($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" onclick="document.getElementById('tanggal{!! $start->format("Y-m-d") !!}').checked = false;" data-toggle="modal" data-target="#ScheduleModal">
+      <label class='label flex-auto contents duration-300'>
+        <input class='label__checkbox duration-300 ' name="dates[]" type='checkbox' id="tanggal{{$start->format('Y-m-d')}}"  @if($schedule == null || $start < $now) disabled @endif value="{{$start->format('Y-m-d')}}" onclick="document.getElementById('tanggal{!! $start->format("Y-m-d") !!}').checked = false;" data-toggle="modal" data-target="#ScheduleModal">
 
         <span class='label__text '>
-          <span class='label__check rounded-lg text-white  duration-1000 text-justify' style='background-image: linear-gradient( @if($order != null)  135deg, #FCCF31 10%, #F55555 100% @elseif($start < $now) 160deg, #bdbdbe 0%, #032a32 100% @elseif($schedule != null) 160deg, #0093E9 0%, #80D0C7 100%   @else to right, #ff416c, #ff4b2b @endif );'>
-            <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 p-10 duration-1000' style='font-family: Poppins, sans-serif;'>
+          <span class='label__check rounded-lg text-white  duration-300 text-justify' style='background-image: linear-gradient( @if($order != null)  135deg, #FCCF31 10%, #F55555 100% @elseif($start < $now) 160deg, #bdbdbe 0%, #032a32 100% @elseif($schedule != null) 160deg, #0093E9 0%, #80D0C7 100%   @else to right, #ff416c, #ff4b2b @endif );'>
+            <i class='fa icon font-bold absolute text-xl m-auto text-center flex flex-col transform hover:scale-125 p-10 duration-300' style='font-family: Poppins, sans-serif;'>
 
               <div class='font-semibold text-5xl mb-2 '>{{$start->format('d')}}</div>
               <div class='text-xs font-base'>{{$start->format('l')}}</div>

@@ -33,10 +33,10 @@
    
   </div>
 
-  <div class="xl:col-span-2 lg:col-span-3 md:col-span-4 col-span-7 bg-white py-12 px-8 md:rounded-3xl shadow-xl h-screen md:h-auto">
+  <div class="xl:col-span-2 lg:col-span-3 md:col-span-4 col-span-7 bg-white md:py-9 py-6 px-8 md:rounded-3xl shadow-xl h-screen md:h-auto">
 
-    <form method="POST" action="{{ route('login') }}">
-        <img src="{{ asset('/resources/image/logo.png')}}" class="img-fluid mx-auto" width="138px" height="138px">
+    <form method="POST" action="{{ route('login') }}" class="grid">
+        <img src="{{ asset('/resources/image/logo.png')}}" class="img-fluid mx-auto " width="138px" height="138px">
         @csrf
         <h1 class="text-3xl font-bold text-gray-600 tracking-tight">Log In</h1>
         <p class="mt-1 text-lg text-gray-500 mb-4 font-medium leading-tight">Enter your email and password to log in our app.</p>
@@ -57,17 +57,17 @@
             <x-jet-input  type="password" id="password" name="password" autocomplete="current-password" required autofocus placeholder="{{ __('Password') }}" class="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-12 text-lg hover:border-blue-400 duration-1000"/>
         </div>
 
-        <div class="block mt-4">
+        <div class="block">
             <label for="remember_me" class="flex items-center">
                 <input id="remember_me" type="checkbox" class="form-checkbox h-5 w-5" name="remember">
                 <span class="ml-2 text-sm text-gray-600 font-semibold text-lg">{{ __('remember me') }}</span>
             </label>
         </div>
 
-        <div class="flex md:flex-row flex-col-reverse justify-end md:mt-4 mt-12 gap-4 md:gap-0">
+        <div class="flex md:flex-row flex-col-reverse justify-end md:mt-4 mt-6 gap-2 md:gap-0 items-center">
             @if (Route::has('password.request'))
-            <a class="underline  text-gray-600 hover:text-gray-900 text-base md:py-2 py-0 content-center text-right text-purple-500 font-semibold no-underline hover:text-purple-700" href="{{ route('password.request') }}">
-                {{ __('Forgot your password?') }}
+            <a class="underline  text-gray-600 hover:text-gray-900 text-base md:py-2 py-0 content-center text-right text-purple-500 font-semibold no-underline hover:text-purple-700 duration-300" href="{{ route('password.request') }}">
+                {{ __('Forgot password?') }}
             </a>
             @endif
 

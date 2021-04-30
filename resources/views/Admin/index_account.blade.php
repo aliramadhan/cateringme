@@ -54,8 +54,8 @@
       <!-- Add margin if you want to see some of the overlay behind the modal-->
       <div class="modal-content py-4 text-left px-6">
         <!--Title-->
-        <div class="flex justify-between items-center pb-3">
-          <p class="text-2xl font-bold text-gray-600 mb-4">Add Account</p>
+        <div class="flex justify-between items-center pb-3 mb-4">
+          <p class="text-2xl font-bold text-gray-600 ">Add Account</p>
           <div class="modal-close cursor-pointer z-50">
             <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
               <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
@@ -135,8 +135,8 @@
       <!-- Add margin if you want to see some of the overlay behind the modal-->
       <div class="modal-content py-4 text-left px-6">
         <!--Title-->
-        <div class="flex justify-between items-center pb-3">
-          <p class="text-2xl font-bold text-gray-600 mb-4">Edit Account</p>
+        <div class="flex justify-between items-center pb-3 mb-4">
+          <p class="text-2xl font-bold text-gray-600 ">Edit Account</p>
           <div class="modal-close cursor-pointer z-50">
             <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
               <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
@@ -203,11 +203,11 @@
             </div>
             <!--Footer-->
             <div class="flex justify-between pt-4">
-             <a id="accountDelete" href="" class="px-4 bg-transparent p-3 rounded-lg hover:bg-gray-100 hover:text-red-400 mr-2 bg-red-500 p-3 rounded-lg text-white" onclick="return confirm('Do you really want to delete this User ? All data related to User will be deleted,  This process cannot be undone.');">   {{ __('Delete') }}</a>
+             <a id="accountDelete" href="" class="px-4 bg-transparent p-3 rounded-lg hover:bg-red-600  mr-2 bg-red-500 p-3 rounded-lg text-white" onclick="return confirm('Do you really want to delete this User ? All data related to User will be deleted,  This process cannot be undone.');"> <i class="fas fa-trash-alt"></i></a>
 
              
 
-             <x-jet-button class="px-4 bg-transparent p-3 rounded-lg hover:bg-gray-100 hover:text-indigo-400 mr-2 bg-blue-500 p-3 rounded-lg text-white">   {{ __('Save') }}</x-jet-button>
+             <x-jet-button class="px-4 bg-transparent p-3 rounded-lg hover:bg-blue-600  bg-blue-500 p-3 rounded-lg text-white">   {{ __('Save') }}</x-jet-button>
              
              
             </div>

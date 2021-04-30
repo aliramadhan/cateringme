@@ -17,12 +17,15 @@
 
         <x-jet-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('password.email') }}" class="flex flex-col">
-              <a href="{{ route('login') }}" class="px-4 py-2 font-semibold absolute bg-gray-500 rounded-full text-white hover:bg-gray-700 duration-500 cursor-pointer text-xl mb-4 opacity-75 hover:opacity-100"><i class="fas fa-chevron-left"></i></a>               
+        <form method="POST" action="{{ route('password.email') }}" class="flex flex-col md:px-4 px-0">
+            <div class="flex items-center gap-4">
+               <a href="{{ route('login') }}" class="px-4 py-1 font-semibold hover:bg-gray-400 duration-300 rounded-full text-gray-600 hover:text-white cursor-pointer text-2xl"><i class="fas fa-chevron-left"></i></a>
+               <label class="font-bold text-3xl text-gray-700 flex-auto  tracking-wide">Forgot Password</label>        
+               </div>
             @csrf
-            <img src="{{ asset('/resources/image/logo.png')}}" class="img-fluid mx-auto md:mb-5 mb-10 mt-10" width="138px" height="138px">
+            <img src="{{ asset('/resources/image/logo.png')}}" class="img-fluid mx-auto my-5" width="138px" height="138px">
             <div class="mb-4 text-base text-gray-600 ">             
-              <b>Forgot your password?</b> No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.
+              Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.
            </div>
             <div class="relative flex w-full flex-wrap items-stretch mb-3">
                 <span class="z-10 h-full leading-snug font-normal absolute text-center text-gray-400 absolute bg-transparent rounded text-base items-center justify-center w-10 pl-3 py-3">
@@ -32,7 +35,7 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <x-jet-button id="auto" class="ml-0 md:ml-4 px-6 py-2 text-center shadow w-full md:w-auto bg-gradient-to-r from-red-400  to-blue-500 text-white">
+                <x-jet-button id="auto" class="ml-0 md:ml-4 px-8 py-2 text-center shadow w-full md:w-auto bg-gradient-to-r from-red-400  to-blue-400 text-white">
                 {{ __('Reset Password') }}
             </x-jet-button>
             </div>

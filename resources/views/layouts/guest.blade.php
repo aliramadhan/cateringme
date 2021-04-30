@@ -46,7 +46,7 @@
         </div>
       </div>
         <div style="display:none;" id="myDiv" class="animate-bottom contents">
-        <div class="font-sans text-gray-900 antialiased " >
+        <div class=" text-gray-900 antialiased " >
 
             {{ $slot }}
           </div>

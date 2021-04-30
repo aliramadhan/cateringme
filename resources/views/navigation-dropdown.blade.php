@@ -7,7 +7,7 @@
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}" class="flex items-center">
                         <img class="h-10" src="{{ asset('public/images/logo.png') }}" alt="" height="38px">
-                        <label class=" text-gray-700 font-semibold text-sm flex flex-col leading-none"><span>Catering</span><span>application</span></label>
+                        <label class=" text-gray-700 font-semibold text-sm flex flex-col leading-tight"><span>Catering</span><span>application</span></label>
                       
                     </a>
 
@@ -401,6 +401,27 @@
                         <x-jet-switchable-team :team="$team" component="jet-responsive-nav-link" />
                     @endforeach
                 @endif
+            </div>
+        </div>
+         <div class="pt-4 pb-1 border-t border-gray-200">
+            <div class="flex items-center px-4">
+              
+
+                <div class="hide-scroll">
+                    <div class="font-semibold text-base text-gray-800">Change Application</div>
+                 
+                </div>
+            </div>            
+
+            <div class="mt-3 space-y-1">
+                <!-- Account Management -->
+                <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
+                     <i class="fas fa-briefcase mr-2"></i>{{ __('Attendance App') }}
+                </x-jet-responsive-nav-link>
+                   <x-jet-responsive-nav-link href="http://localhost/cateringme/setcookie?id={{Session::getId()}}" :active="request()->routeIs('profile.show')">
+                   <i class="fas fa-utensils mr-2"></i>{{ __('Catering App') }}
+                </x-jet-responsive-nav-link>
+           
             </div>
         </div>
     </div>
