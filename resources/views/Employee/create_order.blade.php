@@ -192,7 +192,7 @@
     </div>
 
     <div class="modal-footer">
-    	 <a href="" id="linkDeleteOrder" class="btn btn-danger px-3 mr-2"><i class="fa fa-trash" style="display: none;"></i> Cancel Order</a>
+       <a href="" id="linkDeleteOrder" class="btn btn-danger px-3"><i class="fa fa-trash" style="display: none;"></i> Cancel Order</a>
      <a  href="#carouselExampleControls" role="button" data-slide="prev" style="display: none;" id="back-step">
       <button type="button" class="btn btn-warning px-3" ><i class="mr-2 fas fa-arrow-left"></i> Back</button>
       </a>
@@ -234,6 +234,7 @@
 </div>
 </div>
 <!-- End Modal -->
+
 <div class="relative h-full hide-scroll overflow-y-hidden overflow-x-hidden ">
 
  <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide" >
@@ -245,8 +246,9 @@
    </h3>  
    <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5 mt-4">                      
      <div id="div1" class="duration-1000 targetDiv justify-content content-center md:text-left text-center pt-4 md:mx-4 lg:mx-auto" style="width: fit-content;width:-moz-fit-content;"> 
-      @for($x = 1; $x <= 7-$start->dayOfWeek; $x++)
+      @for($x = 1; $x <= $start->dayOfWeek-1; $x++)
       <label class="w-16 mx-4  inline-flex"> 
+      
       </label>
       @endfor
       @for($i = 1; $i <= $now->daysInMonth; $i++, $start->addDay())
@@ -303,11 +305,11 @@
     <div class="flex-row gap-2 row-span-3 px-4 mb-8 row-span-5 mt-4">                      
      <div id="div1"  class="duration-1000 targetDiv justify-content content-center md:text-left text-center pt-4 md:mx-4 lg:mx-auto text-gray-700" style="width: fit-content;width:-moz-fit-content;"> 
     
-     @if(($now->daysInMonth - $now->day) < 2)
+     @if(($now->daysInMonth - $now->day) <= 2)
      @for($x = 1; $x <= $start->dayOfWeek-1; $x++)
-     	<label class="w-16 mx-4  inline-flex">      		
-     	</label>
-     	@endfor
+      <label class="w-16 mx-4  inline-flex">          
+      </label>
+      @endfor
       @for($i = 1; $i <= $next_month->daysInMonth; $i++, $start->addDay())
       @php
       $user = auth()->user();

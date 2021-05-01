@@ -382,8 +382,8 @@
           @endphp
         
           @if($schedule == null)
-          <div class="flex items-center bg-gradient-to-r from-red-400 to-red-200 border-orange-500 gap-2 p-2 rounded border-l-4 mb-2">
-          <div class=" text-center w-8 text-xl text-white leading-7 font-bold flex-initial">
+          <div class="flex items-center bg-gradient-to-r from-red-400 to-red-200 border-orange-500 gap-2 p-2 rounded border-l-4 mb-2 hover:border-gray-700 duration-300 hover:text-gray-600 text-white">
+          <div class=" text-center w-8 text-xl  leading-7 font-bold flex-initial">
             {{$start_date->format('d')}}
           </div>            
           <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto uppercase font-semibold">
@@ -454,7 +454,7 @@
             <img src="@if($review->menu->photos->first() != null){{ url('public/'.$review->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-10 md:w-10 w-20 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-l-lg">
             <div class="flex flex-col p-3 flex-auto">
               <div class="flex items-center">           
-                <div class="text-lg flex-auto text-gray-600 leading-7 font-semibold w-40 mr-1"><a href="#">{{$review->menu->name}}</a>
+                <div class="text-lg flex-auto text-gray-600 leading-7 font-semibold w-auto mr-1"><a href="#">{{$review->menu->name}}</a>
                   <div class=" text-sm font-semibold text-indigo-700 -mt-2">
                     {{Carbon\Carbon::parse($review->reviewed_at)->diffForHumans()}}
                   </div>
@@ -475,7 +475,7 @@
           </div>
           @else
           <div class=" rounded-lg bg-gradient-to-r from-white to-purple-50 shadow mb-4 flex flex-row-reverse">
-            <img src="@if($review->menu->photos->first() != null){{ url('public/'.$review->menu->photos->random()->file) }} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-10 w-10 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-r-lg">
+            <img src="@if($review->menu->photos->first() != null){{ url('public/'.$review->menu->photos->random()->file) }} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-10 md:w-10 w-20 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-r-lg">
             <div class="flex flex-col p-3 flex-auto">
               <div class="flex flex-row-reverse items-center">           
                 <div class=" text-lg flex-auto text-right text-gray-600 leading-7 font-semibold">
@@ -503,7 +503,7 @@
           <span id="pc1" class="contents hidden"> 
           @if($loop->iteration % 2 != 0)
           <div class=" rounded-lg bg-gradient-to-r from-white to-purple-50 shadow mb-4 flex ">
-            <img src="@if($review->menu->photos->first() != null){{ url('public/'.$review->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-10 w-10 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-l-lg">
+            <img src="@if($review->menu->photos->first() != null){{ url('public/'.$review->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-10 md:w-10 w-20 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-l-lg">
             <div class="flex flex-col p-3 flex-auto">
               <div class="flex items-center">           
                 <div class=" text-lg flex-auto text-gray-600 leading-7 font-semibold"><a href="https://laravel.com/docs">{{$review->menu->name}}</a>
@@ -527,7 +527,7 @@
           </div>
           @else
           <div class=" rounded-lg bg-gradient-to-r from-white to-purple-50 shadow mb-4 flex flex-row-reverse">
-            <img src="@if($review->menu->photos->first() != null){{ url('public/'.$review->menu->photos->random()->file) }} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-10 w-10 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-r-lg">
+            <img src="@if($review->menu->photos->first() != null){{ url('public/'.$review->menu->photos->random()->file) }} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-10 md:w-10 w-20 flex-none bg-cover h-48 lg:h-auto lg:w-14 overflow-hidden rounded-r-lg">
             <div class="flex flex-col p-3 flex-auto">
               <div class="flex flex-row-reverse items-center">           
                 <div class=" text-lg flex-auto text-right text-gray-600 leading-7 font-semibold">
