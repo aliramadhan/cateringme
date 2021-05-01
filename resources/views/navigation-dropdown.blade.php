@@ -134,7 +134,7 @@
                             {{ __('Create Order') }}
                         </x-jet-nav-link>
                         <x-jet-nav-link href="{{ route('employee.history.order') }}" :active="request()->routeIs('employee.history.order')">
-                            {{ __('Catering Order History') }}
+                            {{ __('Order History') }}
                         </x-jet-nav-link>
                         <x-jet-nav-link href="{{ route('employee.history.review') }}" :active="request()->routeIs('employee.history.review')">
                             {{ __('Review History') }}
