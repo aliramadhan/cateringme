@@ -241,10 +241,11 @@
                                 <div class="block px-4 py-2 text-xs text-gray-700 font-semibold border-b">
                                     {{ __('Change Application') }}
                                 </div>
-
+                                @if(auth()->user()->role != 'Catering')
                                 <x-jet-dropdown-link href="http://127.0.0.1:8000/setcookie?id={{Session::getId()}}">
                                     <i class="fas fa-briefcase mr-2"></i>{{ __('Attendance App') }}
                                 </x-jet-dropdown-link>
+                                @endif
                                 <x-jet-dropdown-link href="#">
                                  <i class="fas fa-utensils mr-2"></i>{{ __('Catering App') }}
                              </x-jet-dropdown-link>
