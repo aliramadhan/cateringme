@@ -19,9 +19,9 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 |
 */
 Route::get('setcookie', function(){
-  Session::setId($_GET['id']);
-  Session::start();
-return redirect()->route('dashboard');
+    Session::setId($_GET['id']);
+    Session::start();
+    return redirect()->route('dashboard');
 });
 Route::get('/', function () {
     return redirect()->route('login');
