@@ -91,11 +91,19 @@
           <div class="mt-4 grid grid-cols-2 gap-2">
             <div>
             <x-jet-label for="division" value="{{ __('Division') }}" />
-            <x-jet-input id="division" class="block mt-1 w-full" type="text" name="division" :value="old('division')" required autofocus autocomplete="division" />
+            <select id="division"  name="division" class="block mt-1 w-full form-select" required>
+                @foreach($divisions as $division)
+                    <option>{{$division->name}}</option>
+                @endforeach
+            </select>
             </div>
              <div>
             <x-jet-label for="roles" value="{{ __('Role') }}" />
-            <x-jet-input id="roles" class="block mt-1 w-full" type="text" name="roles" :value="old('roles')" required autofocus autocomplete="roles" />
+            <select id="roles" name="roles" class="block mt-1 w-full form-select" required>
+              <option>Employee</option>
+              <option>Catering</option>
+              <option>Manager</option>
+            </select>
             </div>
           </div>
 
