@@ -607,6 +607,10 @@
       success: function(data) {
         $('#tanggal'+dateSelected).prop('checked',true);
         alert(data);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
+        alert('Error create order, check your input.');
       }
     });
   });
@@ -617,3 +621,4 @@
 </x-app-layout>
 
 
+  
