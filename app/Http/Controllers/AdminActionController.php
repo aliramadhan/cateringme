@@ -127,6 +127,7 @@ class AdminActionController extends Controller
             'roles' => ['required', 'string'],
             'number_phone' => ['numeric','unique:users','digits_between:10,15'],
             'address' => ['string'],
+            'joined_at' => ['date'],
         ]);
 		//Create Random char
 		$password = bin2hex(random_bytes(4));
@@ -166,6 +167,7 @@ class AdminActionController extends Controller
 				'number_phone' => $request->number_phone,
 				'code_number' => $code_number,
 				'address' => $request->address,
+				'joined_at' => $request->joined_at,
 			]);
 		    // all good
 		} catch (Exception $e) {

@@ -109,7 +109,7 @@
 
          
 
-          <div class="mt-4">
+            <div class="mt-4">
             <x-jet-label for="number_phone" value="{{ __('Number Phone') }}" />
             <x-jet-input id="number_phone" class="block mt-1 w-full {{ $errors->has('number_phone') ? 'border-1 border-red-300' :'' }}" type="text" name="number_phone" :value="old('number_phone')" required />
             </div>
@@ -118,6 +118,10 @@
               <x-jet-label for="address" value="{{ __('Address') }}" />
               <x-jet-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required />
             </div>
+          <div>
+            <x-jet-label for="joined_at" value="{{ __('Joined at') }}" />
+            <x-jet-input id="joined_at" class="block mt-1 w-full" type="date" name="joined_at" :value="old('joined_at')" required autofocus autocomplete="joined_at" />
+          </div>
             <!--Footer-->
             <div class="flex justify-end pt-4">
               <x-jet-button class="px-4 bg-transparent p-3 rounded-lg hover:bg-gray-100 hover:text-indigo-400 mr-2 bg-blue-500 p-3 rounded-lg text-white">   {{ __('Save') }}</x-jet-button>

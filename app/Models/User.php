@@ -32,7 +32,11 @@ class User extends Authenticatable
         'roles',
         'number_phone',
         'code_number',
-        'address'
+        'address',
+        'last_seen',
+        'leave_count',
+        'is_active',
+        'joined_at',
     ];
 
     /**
