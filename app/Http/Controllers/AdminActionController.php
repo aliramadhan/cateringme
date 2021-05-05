@@ -110,7 +110,7 @@ class AdminActionController extends Controller
 	{
 		$users = User::where('role','!=','Admin')->orderBy('role','desc')->get();
 		$divisions = DB::table('divisions')->get();
-		return view('Admin.index_account',compact('users'));
+		return view('Admin.index_account',compact('users','divisions'));
 	}
 	public function create_account()
 	{
