@@ -605,7 +605,10 @@
       type: "post",
       data: {date : date, menu : menu, porsi : porsi, shift : shift, sambal : sambal},
       success: function(data) {
-        $('#tanggal'+dateSelected).prop('checked',true);
+        var cekMessage = data.split(" ");
+        if(cekMessage[0] != 'Cant'){
+            $('#tanggal'+dateSelected).prop('checked',true);
+        }
         alert(data);
       },
       error: function(jqXHR, textStatus, errorThrown) {

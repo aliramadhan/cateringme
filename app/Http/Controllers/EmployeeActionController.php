@@ -401,6 +401,7 @@ class EmployeeActionController extends Controller
                     $text .= " |edited";
                 }
                 $text .= "\n";
+                $i++;
             }
             $text .= "\n ===========================\n";
             $text .= "Total Fee = Rp. ". number_format($sudden_orders->sum('fee'));
@@ -409,6 +410,7 @@ class EmployeeActionController extends Controller
                 'parse_mode' => 'HTML',
                 'text' => $text
             ]);
+
         }
 
         $message = 'Order submited successfully.';

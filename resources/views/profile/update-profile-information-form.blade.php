@@ -69,14 +69,14 @@
         <!-- Division -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="division" value="{{ __('Division') }}" />
-            <x-jet-input id="division" type="text" class="mt-1 block w-full" wire:model.defer="state.division" autocomplete="division" />
+            <x-jet-input id="division" type="text" class="mt-1 block w-full" wire:model.defer="state.division" autocomplete="division" readonly />
             <x-jet-input-error for="division" class="mt-2" />
         </div>
 
         <!-- Role -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="roles" value="{{ __('Role') }}" />
-            <x-jet-input id="roles" type="text" class="mt-1 block w-full" wire:model.defer="state.roles" autocomplete="roles" />
+            <x-jet-input id="roles" type="text" class="mt-1 block w-full" wire:model.defer="state.roles" autocomplete="roles" readonly />
             <x-jet-input-error for="roles" class="mt-2" />
         </div>
 
