@@ -274,7 +274,7 @@ class CateringActionController extends Controller
         $total_days = $date->daysInMonth;
         $days = new Collection;
         $input = "";
-        for($x = 1; $x <= 7-$start->dayOfWeek; $x++){
+        for($x = 1; $x <= $start->dayOfWeek-1; $x++){
             $input .=  "<label class='w-16 mx-4  inline-flex'> 
                       </label>";
         }

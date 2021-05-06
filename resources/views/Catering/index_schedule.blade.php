@@ -109,7 +109,7 @@
                <div id="div1" class="duration-1000 targetDiv justify-content content-center md:text-left text-center pt-4 md:mx-4 lg:mx-auto" style="width: fit-content;width: -moz-fit-content;" > 
                   <h1 id="date-month" class=" text-center"></h1>
                   <div id="showresults" >
-                      @for($x = 1; $x <= 7-$start_date->dayOfWeek; $x++)
+                      @for($x = 1; $x <= $start_date->dayOfWeek-1; $x++)
                       <label class="w-16 mx-4  inline-flex"> 
                       </label>
                       @endfor
