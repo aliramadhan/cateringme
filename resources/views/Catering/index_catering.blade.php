@@ -83,9 +83,9 @@
                       </div>
                       <div class="flex flex-col md:flex-row text-base bg-white py-2 z-10 bottom-0 absolute  text-gray-600 px-1 md:px-4 hover:bg-gray-900 hover:text-white duration-500 cursor-pointer flex items-center w-full">
                         <img src="{{ $order->employee->profile_photo_url }}" class="object-cover h-10 w-10 rounded-full">
-                        <div class="ml-2 text-left text-sm font-semibold ">
-                          <label >{{$order->employee_name}}</label>
-                          <label class="text-indigo-700 ">
+                        <div class="ml-2 text-left text-sm font-semibold flex flex-col">
+                          <label class="p-0 m-0">{{$order->employee_name}}</label>
+                          <label class="text-indigo-700 p-0 m-0">
                             {{Carbon\Carbon::parse($order->order_date)->format('d F Y')}}                        
                           </label>
                         </div>
