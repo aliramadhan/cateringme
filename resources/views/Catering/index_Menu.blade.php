@@ -54,8 +54,8 @@
     <!-- Add margin if you want to see some of the overlay behind the modal-->
     <div class="modal-content py-4 text-left px-6">
       <!--Title-->
-      <div class="flex justify-between items-center pb-3">
-        <p class="text-2xl font-bold text-gray-600 mb-4">Add Catering Menu</p>
+      <div class="flex justify-between items-center pb-3 border-b">
+        <p class="text-2xl font-bold text-gray-600">Add Catering Menu</p>
         <div class="modal-close cursor-pointer z-50">
           <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
             <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
@@ -68,7 +68,7 @@
 <form method="POST" action="{{ route('catering.store.menu') }}" enctype="multipart/form-data">
     @csrf
 
-    <div>
+    <div class="mt-4">
         <x-jet-label for="name" value="{{ __('Menu Name') }}" />
         <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
     </div>
@@ -83,7 +83,7 @@
     </div>
 
     <div class="flex items-center justify-end mt-4">
-        <x-jet-button class="ml-4">
+        <x-jet-button class="ml-4 bg-blue-500 text-white px-7">
             {{ __('Submit') }}
         </x-jet-button>
     </div>
@@ -132,7 +132,7 @@
   </div>
 
 
-  <button type="button" class="ml-1 px-2 rounded-lg opacity-75 hover:opacity-100  bg-gradient-to-r from-blue-400 via-blue-500 duration-500  to-indigo-500 text-white font-medium text-2xl modal-open focus:border-none" data-toggle="modal" data-target="modalAdd">
+  <button type="button" class="ml-1 px-2 rounded-lg opacity-75 hover:opacity-100  bg-gradient-to-r from-blue-400 via-blue-500 duration-500  to-indigo-500 text-white font-medium text-2xl modal-open focus:border-none focus:outline-none" data-toggle="modal" data-target="modalAdd">
      +</button> 
   
 </div>

@@ -415,7 +415,16 @@
           </div>
 
           <div class="ml-4 text-lg text-gray-700 leading-7 font-base flex-auto">
-            <a href="#">{{$order->menu_name}}</a>
+            <a href="#">{{$order->menu_name}} 
+               @if($order->is_sauce=='1')
+              <i class="fas fa-pepper-hot text-red-600 ml-1"></i>
+              @endif
+              @if($order->shift=='Pagi')
+              <i class="fas fa-cloud-sun text-blue-400 ml-1"> </i>
+              @else
+               <i class="fas fa-sun text-yellow-400 ml-1"> </i>
+              @endif            
+            </a>
           </div>
 
             <img src="@if($order->menu->photos->first() != null){{ url('public/'.$order->menu->photos->random()->file)}} @else {{url('public/images/no-image.png')}} @endif" class="object-cover h-8 w-8 mr-2 rounded flex-initial transform hover:scale-125 duration-500 ease-in-out hover:shadow=lg" >
