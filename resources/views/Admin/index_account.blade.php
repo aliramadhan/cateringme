@@ -107,6 +107,13 @@
             </div>
           </div>
 
+          <div class="mt-4 grid grid-cols-2 gap-2">
+            <div>
+            <x-jet-label for="position" value="{{ __('Position') }}" />
+            <x-jet-input id="position" class="block mt-1 w-full" type="text" name="position" :value="old('position')" required autofocus autocomplete="position" />
+            </div>
+          </div>
+
          
           <div class="mt-4 grid grid-cols-2 gap-2">
             <div >
