@@ -79,13 +79,6 @@
             
             <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
-            <div>
-                            <x-jet-label for="role" value="{{ __('Status') }}" />
-            <select id="role" name="role" class="block mt-1 w-full form-select" required>
-              <option>Employee</option>
-              <option>Catering</option>
-            </select>
-            </div>
           </div>       
 
           <div class="mt-4 grid grid-cols-2 gap-2">

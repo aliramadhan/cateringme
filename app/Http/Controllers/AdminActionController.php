@@ -122,7 +122,6 @@ class AdminActionController extends Controller
 		$this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'role' => ['required', 'string'],
             'division' => ['required', 'string'],
             'position' => ['required', 'string'],
             'roles' => ['required', 'string'],
@@ -130,11 +129,17 @@ class AdminActionController extends Controller
             'address' => ['string'],
             'joined_at' => ['date'],
         ]);
+        if ($request->roles == 'Employee' || $request->roles == 'Manager') {
+        	$role = 'Employee';
+        }
+        else{
+        	$role = 'Catering';
+        }
 		//Create Random char
 		$password = bin2hex(random_bytes(4));
 
 		//Create Employee/Catering Code
-		if($request->role == 'Catering'){	
+		if($role == 'Catering'){	
 			$code_initial = 'CTR';
 			$last_id = User::where('role','Catering')->orderBy('id','desc')->pluck('id')->first();
 		}
@@ -162,7 +167,7 @@ class AdminActionController extends Controller
 				'name' => $request->name,
 				'email' => $request->email,
 				'password' => Hash::make($password),
-				'role' => $request->role,
+				'role' => $role,
 				'division' => $request->division,
 				'position' => $request->position,
 				'roles' => $request->roles,
@@ -179,7 +184,7 @@ class AdminActionController extends Controller
 		
 	    DB::commit();
 		$send_mail = Mail::to($request->email)->send(new RegisterSuccessfully($data));
-        return redirect()->route('admin.index.account')->with(['message' => 'new '.$request->role.' added succesfully.']);
+        return redirect()->route('admin.index.account')->with(['message' => 'new '.$role.' added succesfully.']);
 	}
 	public function update_account(Request $request)
 	{
