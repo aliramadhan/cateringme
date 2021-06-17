@@ -102,7 +102,7 @@
         <div class="mt-4 grid grid-cols-2 gap-2">
           <div>
             <x-jet-label for="position" value="{{ __('Position') }}" />
-            <x-jet-input id="position" class="block mt-1 w-full" type="text" name="position" :value="old('position')" required autofocus autocomplete="position" />
+            <x-jet-input id="position" class="block mt-1 w-full" type="text" name="position" :value="old('position')" required autofocus autocomplete="position" placeholder="Junior Designer/Senior Designer" />
           </div>
           <div >
             <x-jet-label for="number_phone" value="{{ __('Number Phone') }}" />
@@ -208,8 +208,8 @@
       
       <div class="mt-4 grid grid-cols-2 gap-2">
        <div>
-        <x-jet-label for="position" value="{{ __('Position') }}" />
-        <x-jet-input id="position" class="block mt-1 w-full" type="text" name="position" :value="old('position')" required autofocus autocomplete="position" />
+        <x-jet-label for="editPosition" value="{{ __('Position') }}" />
+        <x-jet-input id="editPosition" class="block mt-1 w-full" type="text" name="position" :value="old('number_phone')" required autofocus autocomplete="position" placeholder="Junior Designer/Senior Designer" />
       </div>
       <div>
         <x-jet-label for="editNumber_phone"  value="{{ __('Number Phone') }}" />
@@ -225,8 +225,8 @@
           <x-jet-input id="editAddress" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required />
         </div>
         <div>
-          <x-jet-label for="joined_at" value="{{ __('Joined at') }}" />
-          <x-jet-input id="joined_at" class="block mt-1 w-full" type="date" name="joined_at" :value="old('joined_at')" required autofocus autocomplete="joined_at" />
+          <x-jet-label for="editJoinedAt" value="{{ __('Joined at') }}" />
+          <x-jet-input id="editJoinedAt" class="block mt-1 w-full" type="date" name="joined_at" :value="old('joined_at')" required autofocus autocomplete="joined_at" />
         </div>
       </div>
       <!--Footer-->
@@ -301,8 +301,8 @@
 
 
           <div class="transform bg-white shadow-xl rounded-xl pb-3 hover:-translate-y-2 hover:shadow-2xl duration-500">
-           <a class="z-0" href="@if($user->role == 'Employee') {{route('admin.can_order',$user->code_number)}} @else # @endif" @if($user->can_order == 1 && $user->role == 'Employee') onclick="return confirm('Disable feature can order for {!! $user->name !!} ?')" @elseif($user->can_order == 0 && $user->role == 'Employee') onclick="return confirm('enable feature can order for {!! $user->name !!} ?')" @endif>  
-             @if($user->role == 'Employee')         
+           <a class="z-0" href="@if($user->roles == 'Employee') {{route('admin.can_order',$user->code_number)}} @else # @endif" @if($user->can_order == 1 && $user->roles == 'Employee') onclick="return confirm('Disable feature can order for {!! $user->name !!} ?')" @elseif($user->can_order == 0 && $user->roles == 'Employee') onclick="return confirm('enable feature can order for {!! $user->name !!} ?')" @endif>  
+             @if($user->roles == 'Employee')         
 
              <div class="flex flex-row text-base absolute bg-gray-600 absolute rounded-tl-xl rounded-br-xl text-white px-4 hover:bg-gray-700 duration-500 cursor-pointer">
               <div class="px-2 py-1 font-semibold ">Can Order?</div>
@@ -330,6 +330,10 @@
               <div class="flex flex-col text-sm hide-scroll">
 
                 <div class="flex flex-row mt-2">
+                  <div class="px-2 py-1 text-gray-500 font-semibold w-20 text-left">Position</div>
+                  <div class="px-2 py-1  text-left flex-auto">{{$user->position}}</div>
+                </div>
+                <div class="flex flex-row mt-2">
                   <div class="px-2 py-1 text-gray-500 font-semibold w-20 text-left">Address</div>
                   <div class="px-2 py-1  text-left flex-auto">{{$user->address}}</div>
                 </div>
@@ -341,6 +345,10 @@
                   <div class="px-2 py-1 text-gray-500 font-semibold w-20 text-left">Email</div>
                   <div class="px-2 py-1  text-left flex-auto">{{$user->email}}</div>
                 </div>
+                <div class="flex flex-row mt-2">
+                  <div class="px-2 py-1 text-gray-500 font-semibold w-20 text-left">Joined at</div>
+                  <div class="px-2 py-1  text-left flex-auto">{{Carbon\Carbon::parse($user->joined_at)->format('d, l F Y')}}</div>
+                </div>
 
 
               </div>
@@ -349,7 +357,7 @@
             </div>
           </a> 
           <div class="px-4">
-            <button class="modal-open rounded-xl text-base p-3 bg-blue-400 text-white font-semibold mt-4 mx-auto w-full z-10 pointer hover:bg-blue-600 focus:outline-none px-6" data-target="editModal" data-toggle="modal" id="modal-edit" data-name="{{$user->name}}" data-role="{{$user->role}}" data-email="{{$user->email}}" data-division="{{$user->division}}" data-roles="{{$user->roles}}" data-number_phone="{{$user->number_phone}}" data-address="{{$user->address}}"><i class="fas fa-user-circle mr-2"></i> Edit Account</button>
+            <button class="modal-open rounded-xl text-base p-3 bg-blue-400 text-white font-semibold mt-4 mx-auto w-full z-10 pointer hover:bg-blue-600 focus:outline-none px-6" data-target="editModal" data-toggle="modal" id="modal-edit" data-name="{{$user->name}}" data-role="{{$user->role}}" data-email="{{$user->email}}" data-division="{{$user->division}}" data-roles="{{$user->roles}}" data-position="{{$user->position}}" data-number_phone="{{$user->number_phone}}" data-address="{{$user->address}}" data-joined_at="{{Carbon\Carbon::parse($user->joined_at)->format('Y-m-d')}}"><i class="fas fa-user-circle mr-2"></i> Edit Account</button>
           </div>
         </div>
 
@@ -394,6 +402,8 @@
     <th data-visible="false">Division</th>
     <th data-visible="false">Role</th>
     <th data-visible="false">Address</th>
+    <th data-visible="false">Position</th>
+    <th data-visible="false">joined_at</th>
     <th data-visible="true">Order</th>
   </tr>
 </thead>
@@ -408,6 +418,8 @@
     <td>{{$user->division}}</td>
     <td>{{$user->roles}}</td>
     <td>{{$user->address}}</td>
+    <td>{{$user->position}}</td>
+    <td>{{Carbon\Carbon::parse($user->joined_at)->format('d, l F Y')}}</td>
 
     <td>
       <a class="contents" href="@if($user->role == 'Employee') {{route('admin.can_order',$user->code_number)}} @else # @endif" @if($user->can_order == 1) onclick="return confirm('Disable feature can order for {!! $user->name !!} ?')" @else onclick="return confirm('enable feature can order for {!! $user->name !!} ?')" @endif>
@@ -461,9 +473,11 @@
     role = _self.data("role"),
     division = _self.data("division"),
     roles = _self.data("roles"),
+    position = _self.data("position"),
     number_phone = _self.data("number_phone"),
     address = _self.data("address");
-
+    joined_at = _self.data("joined_at");
+    
     $("#accountDelete").attr("href", "{!! url('admin/delete/account/') !!}/"+email);
     $("#resetPassword").attr("href", "{!! url('admin/reset/password/') !!}/"+email);
     $("#editName").val(name);
@@ -471,9 +485,11 @@
     $("#prevEmail").val(email);
     $("#editRole").val(role);
     $("#editDivision").val(division);
+    $("#editPosition").val(position);
     $("#editRoles").val(roles);
     $("#editNumber_phone").val(number_phone);
     $("#editAddress").val(address);
+    $("#editJoinedAt").val(joined_at);
 
   });
 </script>
