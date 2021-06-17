@@ -102,7 +102,7 @@
         <div class="mt-4 grid grid-cols-2 gap-2">
           <div>
             <x-jet-label for="position" value="{{ __('Position') }}" />
-            <x-jet-input id="position" class="block mt-1 w-full" type="text" name="position" :value="old('position')" required autofocus autocomplete="position" />
+            <x-jet-input id="position" class="block mt-1 w-full" type="text" name="position" :value="old('position')" required autofocus autocomplete="position" placeholder="Junior Designer/Senior Designer" />
           </div>
           <div >
             <x-jet-label for="number_phone" value="{{ __('Number Phone') }}" />
@@ -208,8 +208,8 @@
       
       <div class="mt-4 grid grid-cols-2 gap-2">
        <div>
-        <x-jet-label for="position" value="{{ __('Position') }}" />
-        <x-jet-input id="position" class="block mt-1 w-full" type="text" name="position" :value="old('position')" required autofocus autocomplete="position" />
+        <x-jet-label for="editPosition" value="{{ __('Position') }}" />
+        <x-jet-input id="editPosition" class="block mt-1 w-full" type="text" name="position" :value="old('number_phone')" required autofocus autocomplete="position" placeholder="Junior Designer/Senior Designer" />
       </div>
       <div>
         <x-jet-label for="editNumber_phone"  value="{{ __('Number Phone') }}" />
@@ -333,6 +333,10 @@
                   <div class="px-2 py-1 text-gray-500 font-semibold w-20 text-left">Address</div>
                   <div class="px-2 py-1  text-left flex-auto">{{$user->address}}</div>
                 </div>
+                <div class="flex flex-row mt-2">
+                  <div class="px-2 py-1 text-gray-500 font-semibold w-20 text-left">Position</div>
+                  <div class="px-2 py-1  text-left flex-auto">{{$user->position}}</div>
+                </div>
                 <div class="flex flex-row ">
                   <div class="px-2 py-1 text-gray-500 font-semibold w-20 text-left">Phone</div>
                   <div class="px-2 py-1  text-left flex-auto">{{$user->number_phone}}</div>
@@ -349,7 +353,7 @@
             </div>
           </a> 
           <div class="px-4">
-            <button class="modal-open rounded-xl text-base p-3 bg-blue-400 text-white font-semibold mt-4 mx-auto w-full z-10 pointer hover:bg-blue-600 focus:outline-none px-6" data-target="editModal" data-toggle="modal" id="modal-edit" data-name="{{$user->name}}" data-role="{{$user->role}}" data-email="{{$user->email}}" data-division="{{$user->division}}" data-roles="{{$user->roles}}" data-number_phone="{{$user->number_phone}}" data-address="{{$user->address}}"><i class="fas fa-user-circle mr-2"></i> Edit Account</button>
+            <button class="modal-open rounded-xl text-base p-3 bg-blue-400 text-white font-semibold mt-4 mx-auto w-full z-10 pointer hover:bg-blue-600 focus:outline-none px-6" data-target="editModal" data-toggle="modal" id="modal-edit" data-name="{{$user->name}}" data-role="{{$user->role}}" data-email="{{$user->email}}" data-division="{{$user->division}}" data-roles="{{$user->roles}}" data-position="{{$user->position}}" data-number_phone="{{$user->number_phone}}" data-address="{{$user->address}}"><i class="fas fa-user-circle mr-2"></i> Edit Account</button>
           </div>
         </div>
 
@@ -394,6 +398,7 @@
     <th data-visible="false">Division</th>
     <th data-visible="false">Role</th>
     <th data-visible="false">Address</th>
+    <th data-visible="false">Position</th>
     <th data-visible="true">Order</th>
   </tr>
 </thead>
@@ -408,6 +413,7 @@
     <td>{{$user->division}}</td>
     <td>{{$user->roles}}</td>
     <td>{{$user->address}}</td>
+    <td>{{$user->position}}</td>
 
     <td>
       <a class="contents" href="@if($user->role == 'Employee') {{route('admin.can_order',$user->code_number)}} @else # @endif" @if($user->can_order == 1) onclick="return confirm('Disable feature can order for {!! $user->name !!} ?')" @else onclick="return confirm('enable feature can order for {!! $user->name !!} ?')" @endif>
@@ -461,9 +467,10 @@
     role = _self.data("role"),
     division = _self.data("division"),
     roles = _self.data("roles"),
+    position = _self.data("position"),
     number_phone = _self.data("number_phone"),
     address = _self.data("address");
-
+    console.log(position);
     $("#accountDelete").attr("href", "{!! url('admin/delete/account/') !!}/"+email);
     $("#resetPassword").attr("href", "{!! url('admin/reset/password/') !!}/"+email);
     $("#editName").val(name);
@@ -471,6 +478,7 @@
     $("#prevEmail").val(email);
     $("#editRole").val(role);
     $("#editDivision").val(division);
+    $("#editPosition").val(position);
     $("#editRoles").val(roles);
     $("#editNumber_phone").val(number_phone);
     $("#editAddress").val(address);
