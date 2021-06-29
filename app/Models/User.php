@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Schedule;
 
 class User extends Authenticatable
 {
@@ -34,6 +35,8 @@ class User extends Authenticatable
         'number_phone',
         'code_number',
         'address',
+        'can_order',
+        'can_order_directly',
         'last_seen',
         'leave_count',
         'is_active',

@@ -26,6 +26,9 @@
                         <x-jet-nav-link href="{{ route('admin.index.menu') }}" :active="request()->routeIs('admin.index.menu')">
                             {{ __('Foods') }}
                         </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('admin.index.request') }}" :active="request()->routeIs('admin.index.request')">
+                            {{ __('Request') }}
+                        </x-jet-nav-link>
                         <x-jet-nav-link href="{{ route('admin.index.slideshow') }}" :active="request()->routeIs('admin.index.slideshow')">
                             {{ __('Slideshow') }}
                         </x-jet-nav-link>
@@ -132,6 +135,9 @@
                         </x-jet-nav-link>
                         <x-jet-nav-link href="{{ route('employee.create.order') }}" :active="request()->routeIs('employee.create.order')">
                             {{ __('Create Order') }}
+                        </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('employee.index.request') }}" :active="request()->routeIs('employee.index.request')">
+                            {{ __('Request') }}
                         </x-jet-nav-link>
                         <x-jet-nav-link href="{{ route('employee.history.order') }}" :active="request()->routeIs('employee.history.order')">
                             {{ __('Order History') }}

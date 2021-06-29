@@ -587,4 +587,31 @@ class AdminActionController extends Controller
 
 		return redirect()->back()->with(['message' => 'Reset Password for '.$user->name.' succesfully.']);
 	}
+	//manage Request
+	public function index_request(Request $request)
+	{
+		//declare variable
+		$from = null;
+		$to = null;
+
+		if ($request->from != null && $request->to != null) {
+			$from = Carbon::parse($request->from);
+			$to = Carbon::parse($request->to);
+			$requests = DB::table('requests')->where('type', 'Activation Order')->whereBetween('date',[$from->format('Y-m-d'), $to->format('Y-m-d')])->orderBy('date','desc')->get();
+		}
+		else{
+			$requests = DB::table('requests')->where('type', 'Activation Order')->get();
+		}
+
+		return view('Admin.index_request',compact('requests','from','to'));
+	}
+	public function deactivated_user_order(Request $request, $id)
+	{
+		$user = User::find($id);
+		$user->update([
+			'can_order_directly' => 0
+		]);
+
+		return redirect()->back()->with(['message' => 'Deactivated feature direct order '.$user->name.' succesfully.']);
+	}
 }

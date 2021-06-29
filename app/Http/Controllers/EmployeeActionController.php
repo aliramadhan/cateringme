@@ -76,6 +76,37 @@ class EmployeeActionController extends Controller
 
         return view('Employee.index_history_review',compact('now','start','stop'));   
     }
+    public function index_request()
+    {
+        //declare variables
+        $user = auth()->user();
+        $requests = DB::table('requests')->where('employee_id',$user->id)->where('type', 'Activation Order')->get();
+
+        return view('Employee.index_request',compact('requests','user'));   
+    }
+    public function create_request(Request $request)
+    {
+        //Validation Request
+        $this->validate($request, [
+            'desc' => ['required'],
+        ]);
+        $now = Carbon::now();
+        $user = auth()->user();
+        DB::table('requests')->insert([
+            'employee_id' => $user->id,
+            'employee_name' => $user->name,
+            'date' => $now,
+            'type' => 'Activation Order',
+            'desc' => $request->desc,
+            'is_cancel_order' => 0,
+            'status' => 'Accept'
+        ]);
+        $user->update([
+            'can_order_directly' => 1
+        ]);
+        $message = 'Request submit successfully.';
+        return redirect()->back()->with(['message' => $message]);
+    }
     public function get_photos(Request $request)
     {
         //declare variable

@@ -69,6 +69,10 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth:sanctum','role:Admin'
     Route::post('/slideshow', [ AdminActionController::class, 'store_slideshow'])->name('admin.store.slideshow');
     Route::get('/slideshow/{id}/destroy', [ AdminActionController::class, 'delete_slideshow'])->name('admin.delete.slideshow');
 
+    //Manage Request
+    Route::get('/request', [ AdminActionController::class, 'index_request'])->name('admin.index.request');
+    Route::post('/user-deactivated-can-order-directly/{id}', [AdminActionController::class, 'deactivated_user_order'])->name('admin.deactivated.order.direct');
+
     //Report
     Route::get('/order', [ AdminActionController::class, 'index_order_catering'])->name('admin.index.order_catering');
     Route::get('/order/today', [ AdminActionController::class, 'index_order'])->name('admin.index.order');
@@ -114,6 +118,10 @@ Route::group(['prefix' => 'employee',  'middleware' => ['auth:sanctum','role:Emp
     Route::get('/order/{id}', [ EmployeeActionController::class, 'delete_order'])->name('employee.delete.order');
     Route::get('/history/order', [ EmployeeActionController::class, 'history_order'])->name('employee.history.order');
     Route::get('/history/review', [ EmployeeActionController::class, 'history_review'])->name('employee.history.review');
+
+    //Manage Request
+    Route::get('/request', [ EmployeeActionController::class, 'index_request'])->name('employee.index.request');
+    Route::post('/request', [ EmployeeActionController::class, 'create_request'])->name('employee.create.request');
 
     //Get data
     Route::post('/get_photos', [ EmployeeActionController::class, 'get_photos'])->name('employee.get_photos');
