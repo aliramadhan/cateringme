@@ -77,14 +77,14 @@
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$request->employee_name}}</td>
-                <td>{{$request->date}}</td>
+                <td>{{date('D, d M Y', strtotime($request->date))}}</td>
                 <td>{{$request->desc}}</td>
                 <td>{{Carbon\Carbon::parse($request->created_at)->format('H:s, d, M Y')}}</td>
                 <td>
                     @if($user->can_order_directly)
                         <form method="POST" action="{{route('admin.deactivated.order.direct',['id' => $user->id])}}">
                         @csrf
-                            <input type="submit" name="submit" class="btn btn-danger" value="Deactivated" onclick="return confirm('Deactivated feature direct order {{$user->name}}');">
+                            <input type="submit" name="submit" class="btn btn-danger rounded-lg" value="Deactivated" onclick="return confirm('Deactivated feature direct order {{$user->name}}');">
                         </form>
                     @else
                         -
