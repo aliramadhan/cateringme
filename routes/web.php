@@ -122,6 +122,7 @@ Route::group(['prefix' => 'employee',  'middleware' => ['auth:sanctum','role:Emp
     //Manage Request
     Route::get('/request', [ EmployeeActionController::class, 'index_request'])->name('employee.index.request');
     Route::post('/request', [ EmployeeActionController::class, 'create_request'])->name('employee.create.request');
+    Route::delete('/request/destroy/{id}', [ EmployeeActionController::class, 'destroy_request'])->name('employee.destroy.request');
 
     //Get data
     Route::post('/get_photos', [ EmployeeActionController::class, 'get_photos'])->name('employee.get_photos');

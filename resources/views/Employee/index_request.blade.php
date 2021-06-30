@@ -114,6 +114,16 @@
           <td>{{date('D, d M Y', strtotime($request->date))}}</td>
           <td>{{$request->type}}</td>
           <td>{{$request->desc}}</td>
+          <td>
+            @if(!auth()->user()->can_order_directly)
+                <form method="POST" action="{{route('employee.destroy.request',['id' => $request->id])}}">
+                @csrf
+                    <input type="submit" name="submit" class="btn btn-danger rounded-lg" value="Delete" onclick="return confirm('Delete this request?');">
+                </form>
+            @else
+                -
+            @endif
+          </td>
         </tr>
       @endforeach
     </tbody>

@@ -107,6 +107,10 @@ class EmployeeActionController extends Controller
         $message = 'Request submit successfully.';
         return redirect()->back()->with(['message' => $message]);
     }
+    public function destroy_request(Request $request, $id)
+    {
+        return dd($id);
+    }
     public function get_photos(Request $request)
     {
         //declare variable
