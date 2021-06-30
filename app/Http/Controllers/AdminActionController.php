@@ -607,10 +607,12 @@ class AdminActionController extends Controller
 	}
 	public function deactivated_user_order(Request $request, $id)
 	{
-		$user = User::find($id);
+        $setRequest = DB::table('requests')->where('id',$id)->first();
+		$user = User::find($setRequest->employee_id);
 		$user->update([
 			'can_order_directly' => 0
 		]);
+		DB::table('requests')->where('id',$id)->update(['status' => "Accept"]);
 
 		return redirect()->back()->with(['message' => 'Deactivated feature direct order '.$user->name.' succesfully.']);
 	}

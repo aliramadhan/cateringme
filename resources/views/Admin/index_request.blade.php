@@ -81,8 +81,8 @@
                 <td>{{$request->desc}}</td>
                 <td>{{Carbon\Carbon::parse($request->created_at)->format('H:s, d, M Y')}}</td>
                 <td>
-                    @if($user->can_order_directly)
-                        <form method="POST" action="{{route('admin.deactivated.order.direct',['id' => $user->id])}}">
+                    @if($request->status == 'Waiting')
+                        <form method="POST" action="{{route('admin.deactivated.order.direct',['id' => $request->id])}}">
                         @csrf
                             <input type="submit" name="submit" class="btn btn-danger rounded-lg" value="Deactivated" onclick="return confirm('Deactivated feature direct order {{$user->name}}');">
                         </form>

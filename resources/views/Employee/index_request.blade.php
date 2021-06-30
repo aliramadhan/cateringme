@@ -115,7 +115,7 @@
           <td>{{$request->type}}</td>
           <td>{{$request->desc}}</td>
           <td>
-            @if(!auth()->user()->can_order_directly)
+            @if($request->status != 'Waiting')
                 <form method="POST" action="{{route('employee.destroy.request',['id' => $request->id])}}">
                 @csrf
                 @method('DELETE')
