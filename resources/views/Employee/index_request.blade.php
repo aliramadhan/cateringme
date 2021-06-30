@@ -118,6 +118,7 @@
             @if(!auth()->user()->can_order_directly)
                 <form method="POST" action="{{route('employee.destroy.request',['id' => $request->id])}}">
                 @csrf
+                @method('DELETE')
                     <input type="submit" name="submit" class="btn btn-danger rounded-lg" value="Delete" onclick="return confirm('Delete this request?');">
                 </form>
             @else

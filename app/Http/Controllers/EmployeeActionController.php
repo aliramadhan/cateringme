@@ -109,7 +109,16 @@ class EmployeeActionController extends Controller
     }
     public function destroy_request(Request $request, $id)
     {
-        return dd($id);
+        $setRequest = DB::table('requests')->where('id',$id)->first();
+        if ($setRequest != null) {
+            DB::table('requests')->where('id',$id)->delete();
+            $message = 'Request deleted successfully.';
+        }
+        else{
+            $message = 'Request not found or already deleted.';
+        }
+
+        return redirect()->back()->with(['message' => $message]);
     }
     public function get_photos(Request $request)
     {
