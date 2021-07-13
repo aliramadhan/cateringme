@@ -23,6 +23,9 @@ class LastSeenUserActivity
         if (Auth::check()) {
             $expireTime = Carbon::now()->addMinute(1); // keep online for 1 min
             Cache::put('Catering_online'.Auth::user()->id, true, $expireTime);
+            //latest url visit
+            $expireTime = Carbon::now()->addHour(12); // keep online for 1 min
+            Cache::put('latest_url_'.Auth::user()->id, request()->url(), $expireTime);
 
             //Last Seen
             User::where('id', Auth::user()->id)->update(['last_seen' => Carbon::now()]);
