@@ -1,11 +1,11 @@
 <x-app-layout>
    <div class="notify z-50 font-semibold absolute left-0"><span id="notifyType" class=""></span></div>
     <x-slot name="header" >
-      <div class="flex justify-between items-center">
+      <div class="text-left flex justify-between items-start md:items-center flex-col md:flex-row space-y-2">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          {{ __('Index Request') }}
+          {{ __('Order Activation Request') }}
         </h2>
-        <button type="button" class="bg-blue-500 text-white py-2 px-6 rounded-xl opacity-75 hover:opacity-100 duration-200 modal-open text-lg shadow-2xl w-full md:w-auto" data-toggle="modal" data-target="reviewModal"><i class="fas fa-feather-alt mr-2"></i>Request</button>
+        <button type="button" class="bg-blue-500 text-white py-2 px-6 rounded-xl opacity-75 hover:opacity-100 duration-200 modal-open text-base shadow-2xl w-full md:w-auto" data-toggle="modal" data-target="reviewModal"><i class="fas fa-feather-alt mr-2"></i>Send Request</button>
       </div>
     </x-slot>
 
@@ -60,12 +60,12 @@
  <div class="py-12">
         <div class="max-w-7xl mx-auto  lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg Static h-full">
-          <div class="px-4 py-2 border-b border-gray-200 flex justify-between items-center bg-white sm:py-4 sm:px-6 sm:items-baseline">
-            <div class="flex-shrink min-w-0 flex items-center">
+          <div class="px-4 py-2 border-b border-gray-200 bg-white sm:py-4 sm:px-6 sm:items-baseline">
+            
               <h3 class="flex-shrink min-w-0 font-regular text-base md:text-lg leading-snug truncate">
-               Index your Request in Catering App
+               History of your catering order activation request
              </h3>
-           </div>
+           
           
            <div class="ml-4 flex items-center gap-4 lg:w-4/12 md:w-5/12 w-full">
 
