@@ -54,25 +54,25 @@
                 <span class="z-10 h-full leading-snug font-normal absolute text-center text-gray-400 absolute bg-transparent rounded text-base items-center justify-center w-10 pl-3 flex items-center md:py-3">
                     <img src="{{ asset('resources/image/padlock.svg')}}" alt="lock" class="w-6 opacity-50" >
                 </span>
-                <x-jet-input  type="password" id="password" name="password" autocomplete="current-password" required autofocus placeholder="{{ __('Password') }}" class="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-12 text-lg hover:border-blue-400 duration-1000"/>
+                <x-jet-input  type="password" id="password" name="password" autocomplete="current-password" required autofocus placeholder="{{ __('Password') }}" class="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline  w-full pl-12 text-lg hover:border-blue-400 duration-1000"/>
             </div>
         </div>
 
         <div class="block">
             <label for="remember_me" class="flex items-center">
                 <input id="remember_me" type="checkbox" class="form-checkbox h-5 w-5" name="remember">
-                <span class="ml-2 text-sm text-gray-600 font-semibold text-lg">{{ __('remember me') }}</span>
+                <span class="ml-2 text-base tracking-wide text-gray-600 font-base ">{{ __('Remember Me') }}</span>
             </label>
         </div>
 
-        <div class="flex md:flex-row flex-col-reverse justify-end md:mt-4 mt-0 items-center">
+        <div class="flex md:flex-row flex-col-reverse justify-between mt-4  md:items-center items-start">
             @if (Route::has('password.request'))
-            <a class="underline  text-gray-600 hover:text-gray-900 text-base md:py-2  content-center text-right text-purple-500 font-semibold no-underline hover:text-purple-700 duration-300" href="{{ route('password.request') }}">
+            <a class="underline text-gray-600 hover:text-gray-900 text-base md:py-2  content-center text-left text-purple-500 font-semibold no-underline hover:text-purple-700 duration-300" href="{{ route('password.request') }}">
                 {{ __('Forgot password?') }}
             </a>
             @endif
 
-            <x-jet-button id="auto" class="ml-0 md:ml-4 px-6 md:py-2 py-4 text-xl md:text-base text-center shadow w-full md:w-auto bg-gradient-to-r from-blue-400  to-purple-500 text-white md:mb-0 mb-2">
+            <x-jet-button id="auto" class="ml-0 md:ml-4 px-6 md:py-2 text-xl md:text-base text-center shadow-lg w-full md:w-auto bg-gradient-to-r from-blue-500 to-purple-600 text-white md:mb-0 mb-2">
                 {{ __('Sign In') }}
             </x-jet-button>
         </div>

@@ -35,8 +35,8 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <x-jet-button id="auto" class="ml-0 md:ml-4 px-8 py-2 text-center shadow w-full md:w-auto bg-gradient-to-r from-red-400  to-blue-400 text-white">
-                {{ __('Reset Password') }}
+                <x-jet-button id="auto" class="ml-0 md:ml-4 px-6 md:py-2 py-4 text-xl md:text-base text-center shadow-lg w-full md:w-auto bg-gradient-to-r from-blue-500 to-purple-600 text-white md:mb-0 mb-2 tracking-wider px-4">
+                {{ __('Send Link') }}
             </x-jet-button>
             </div>
         </form>
