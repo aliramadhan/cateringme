@@ -35,10 +35,13 @@
             color: #fff;
           }
   </style>
-  <x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('Dashboard') }}
+  <x-slot name="header" >
+    <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 items-start md:items-center">
+    <h2 class="font-semibold text-2xl tracking-tight text-gray-800 leading-tight">
+      Welcome Back, <span class="font-normal tracking-wide capitalize">{{ $user->name }}</span> 
     </h2>
+    <label class="bg-gray-200 px-3 py-1 rounded-md tracking-wide">{{ $user->division }} </label> 
+    </div>
   </x-slot>
 
   @if($menu_today != null)
