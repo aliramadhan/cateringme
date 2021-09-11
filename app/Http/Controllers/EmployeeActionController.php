@@ -99,7 +99,9 @@ class EmployeeActionController extends Controller
             'type' => 'Activation Order',
             'desc' => $request->desc,
             'is_cancel_order' => 0,
-            'status' => 'Waiting'
+            'status' => 'Waiting',
+            'created_at' => $now,
+            'updated_at' => $now
         ]);
         $user->update([
             'can_order_directly' => 1
