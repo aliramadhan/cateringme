@@ -165,6 +165,7 @@ class AdminActionController extends Controller
 		try {
 			$create_Account = User::create([
 				'name' => $request->name,
+				'username' => $request->username,
 				'email' => $request->email,
 				'password' => Hash::make($password),
 				'role' => $role,
