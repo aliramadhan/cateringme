@@ -298,7 +298,7 @@
   </div>
 
   <div class="relative md:h-screen h-full">
-    <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide text-base overflow-y-auto bg-gray-100" >      
+    <div class=" inset-0 w-full h-full  text-gray-600 flex text-5xl p-6 transition-all ease-in-out duration-1000 transform translate-x-0 slide text-base overflow-y-auto overflow-x-hidden bg-gray-100" >      
 
 
 
@@ -336,27 +336,27 @@
               <div class="text-center text-gray-400 text-sm font-semibold">
                 <p>{{$user->role}}</p>
               </div>
-              <div class="flex flex-col text-sm hide-scroll">
+              <div class="flex flex-col text-sm hide-scroll px-2">
 
-                <div class="flex flex-row mt-2">
-                  <div class="px-2 py-1 text-gray-500 font-semibold w-20 text-left">Position</div>
-                  <div class="px-2 py-1  text-left flex-auto">{{$user->position}}</div>
+                <div class="grid grid-cols-3 mt-2">
+                  <div class=" py-1 text-gray-500 font-semibold text-left flex justify-between"><label>Position</label>:</div>
+                  <div class="pl-1 py-1 col-span-2 text-left ">{{$user->position}}</div>
                 </div>
-                <div class="flex flex-row mt-2">
-                  <div class="px-2 py-1 text-gray-500 font-semibold w-20 text-left">Address</div>
-                  <div class="px-2 py-1  text-left flex-auto">{{$user->address}}</div>
+                <div class="grid grid-cols-3">
+                  <div class=" py-1 text-gray-500 font-semibold text-left flex justify-between"><label>Address</label>:</div>
+                  <div class="pl-1 py-1 col-span-2 text-left ">{{$user->address}}</div>
                 </div>
-                <div class="flex flex-row ">
-                  <div class="px-2 py-1 text-gray-500 font-semibold w-20 text-left">Phone</div>
-                  <div class="px-2 py-1  text-left flex-auto">{{$user->number_phone}}</div>
+                <div class="grid grid-cols-3 ">
+                  <div class=" py-1 text-gray-500 font-semibold text-left flex justify-between"><label>Phone</label>:</div>
+                  <div class="pl-1 py-1 col-span-2 text-left ">{{$user->number_phone}}</div>
                 </div>
-                <div class="flex flex-row " >
-                  <div class="px-2 py-1 text-gray-500 font-semibold w-20 text-left">Email</div>
-                  <div class="px-2 py-1  text-left flex-auto">{{$user->email}}</div>
+                <div class="grid grid-cols-3 " >
+                  <div class=" py-1 text-gray-500 font-semibold text-left flex justify-between"><label>Email</label>:</div>
+                  <div class="pl-1 py-1 col-span-2 text-left ">{{$user->email}}</div>
                 </div>
-                <div class="flex flex-row mt-2">
-                  <div class="px-2 py-1 text-gray-500 font-semibold w-20 text-left">Joined at</div>
-                  <div class="px-2 py-1  text-left flex-auto">{{Carbon\Carbon::parse($user->joined_at)->format('d, l F Y')}}</div>
+                <div class="grid grid-cols-3">
+                  <div class=" py-1 text-gray-500 font-semibold text-left flex justify-between"><label>Joined at</label>:</div>
+                  <div class="pl-1 py-1 col-span-2 text-left ">{{Carbon\Carbon::parse($user->joined_at)->format('d, l F Y')}}</div>
                 </div>
 
 
