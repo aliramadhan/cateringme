@@ -84,7 +84,7 @@
         </div>
 
 
-        <div class="mt-4 grid grid-cols-2 gap-2">
+        <div class="mt-4 grid grid-cols-2 gap-4">
           <div>
             <x-jet-label for="division" value="{{ __('Division') }}" />
             <select id="division"  name="division" class="block mt-1 w-full form-select" required>
@@ -103,7 +103,7 @@
           </div>
         </div>
 
-        <div class="mt-4 grid grid-cols-2 gap-2">
+        <div class="mt-4 grid grid-cols-2 gap-4">
           <div>
             <x-jet-label for="position" value="{{ __('Position') }}" />
             <x-jet-input id="position" class="block mt-1 w-full" type="text" name="position" :value="old('position')" required autofocus autocomplete="position" placeholder="Junior Designer/Senior Designer" />
@@ -116,7 +116,7 @@
           </div>
 
 
-          <div class="mt-4 grid grid-cols-2 gap-2">
+          <div class="mt-4 grid grid-cols-2 gap-4">
             <div>
              <x-jet-label for="address" value="{{ __('Address') }}" />
              <x-jet-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required />
@@ -196,7 +196,7 @@
 
        </div>       
 
-       <div class="mt-4 grid grid-cols-2 gap-2">
+       <div class="mt-4 grid grid-cols-2 gap-4">
         <div>
           <x-jet-label for="editDivision" value="{{ __('Division') }}" />
           <select id="editDivision"  name="division" class="block mt-1 w-full form-select" required>
@@ -215,7 +215,7 @@
         </div>
       </div>
       
-      <div class="mt-4 grid grid-cols-2 gap-2">
+      <div class="mt-4 grid grid-cols-2 gap-4">
        <div>
         <x-jet-label for="editPosition" value="{{ __('Position') }}" />
         <x-jet-input id="editPosition" class="block mt-1 w-full" type="text" name="position" :value="old('number_phone')" required autofocus autocomplete="position" placeholder="Junior Designer/Senior Designer" />
@@ -228,7 +228,7 @@
 
       </div>
 
-      <div class="mt-4 grid grid-cols-2 gap-2">
+      <div class="mt-4 grid grid-cols-2 gap-4">
         <div>
           <x-jet-label for="editAddress" value="{{ __('Address') }}" />
           <x-jet-input id="editAddress" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required />
