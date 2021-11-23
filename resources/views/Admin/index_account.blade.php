@@ -431,7 +431,7 @@
     <td>{{Carbon\Carbon::parse($user->joined_at)->format('d, l F Y')}}</td>
 
     <td>
-      <a class="contents" href="@if($user->role == 'Employee') {{route('admin.can_order',$user->code_number)}} @else # @endif" @if($user->can_order == 1) onclick="return confirm('Disable feature can order for {!! $user->name !!} ?')" @else onclick="return confirm('enable feature can order for {!! $user->name !!} ?')" @endif>
+      <a class="contents" href="@if($user->role == 'Employee') {{route('admin.can_order',$user->id)}} @else # @endif" @if($user->can_order == 1) onclick="return confirm('Disable feature can order for {!! $user->name !!} ?')" @else onclick="return confirm('enable feature can order for {!! $user->name !!} ?')" @endif>
         @if($user->can_order == 1)  
         <button class="bg-green-200 text-green-600 py-2 font-semibold px-4 hover:bg-green-300 hover:text-green-700 transition-500" style="border-radius: 20px;">Active</button>
         @else
