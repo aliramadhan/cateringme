@@ -310,7 +310,7 @@
 
 
           <div class="transform bg-white shadow-xl rounded-xl pb-3 hover:-translate-y-2 hover:shadow-2xl duration-500">
-           <a class="z-0" href="@if($user->roles == 'Employee') {{route('admin.can_order',$user->code_number)}} @else # @endif" @if($user->can_order == 1 && $user->roles == 'Employee') onclick="return confirm('Disable feature can order for {!! $user->name !!} ?')" @elseif($user->can_order == 0 && $user->roles == 'Employee') onclick="return confirm('enable feature can order for {!! $user->name !!} ?')" @endif>  
+           <a class="z-0" href="@if($user->roles == 'Employee') {{route('admin.can_order',$user->id)}} @else # @endif" @if($user->can_order == 1 && $user->roles == 'Employee') onclick="return confirm('Disable feature can order for {!! $user->name !!} ?')" @elseif($user->can_order == 0 && $user->roles == 'Employee') onclick="return confirm('enable feature can order for {!! $user->name !!} ?')" @endif>  
              @if($user->roles == 'Employee')         
 
              <div class="flex flex-row text-base absolute bg-gray-600 absolute rounded-tl-xl rounded-br-xl text-white px-4 hover:bg-gray-700 duration-500 cursor-pointer">

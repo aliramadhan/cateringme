@@ -368,7 +368,7 @@ class AdminActionController extends Controller
 	public function can_order($code)
 	{
 		//declare variable
-		$user = User::where('code_number',$code)->first();
+		$user = User::where('id',$code)->first();
 		//check if user founded
 		if($user == null){
 			return redirect()->back()->withErrors(['message' => 'User not found.']);
