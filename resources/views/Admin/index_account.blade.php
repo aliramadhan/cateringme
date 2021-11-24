@@ -68,15 +68,15 @@
       <form method="POST" action="{{ route('admin.store.account') }}">
         @csrf
         <div class="grid grid-cols-2 gap-4">
-        <div>
-          <x-jet-label for="name" value="{{ __('Full Name') }}" />
-          <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+          <div>
+            <x-jet-label for="name" value="{{ __('Full Name') }}" />
+            <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+          </div>
+          <div>
+            <x-jet-label for="username" value="{{ __('Nickname') }}" />
+            <x-jet-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus autocomplete="username" />
+          </div>
         </div>
-        <div>
-          <x-jet-label for="username" value="{{ __('Nickname') }}" />
-          <x-jet-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus autocomplete="username" />
-        </div>
-       </div>
 
         <div class="mt-4 ">
           <x-jet-label for="email" value="{{ __('Email') }}" />            
@@ -168,14 +168,14 @@
         @csrf
         @method('PUT')
         <div class="grid grid-cols-2 gap-4">
-        <div>
-          <x-jet-label for="editName" value="{{ __('Full Name') }}" />
-          <x-jet-input id="editName" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-        </div>
           <div>
-          <x-jet-label for="username" value="{{ __('Nickname') }}" />
-          <x-jet-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus autocomplete="username" />
-        </div>
+            <x-jet-label for="editName" value="{{ __('Full Name') }}" />
+            <x-jet-input id="editName" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+          </div>
+          <div>
+            <x-jet-label for="username" value="{{ __('Nickname') }}" />
+            <x-jet-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus autocomplete="username" />
+          </div>
         </div>
         <div class="mt-4">
 
@@ -311,7 +311,7 @@
 
           <div class="transform bg-white shadow-xl rounded-xl pb-3 hover:-translate-y-2 hover:shadow-2xl duration-500">
            <a class="z-0" href="@if($user->roles == 'Employee') {{route('admin.can_order',$user->id)}} @else # @endif" @if($user->can_order == 1 && $user->roles == 'Employee') onclick="return confirm('Disable feature can order for {!! $user->name !!} ?')" @elseif($user->can_order == 0 && $user->roles == 'Employee') onclick="return confirm('enable feature can order for {!! $user->name !!} ?')" @endif>  
-             @if($user->roles == 'Employee')         
+            @if($user->roles != 'Catering')         
 
              <div class="flex flex-row text-base absolute bg-gray-600 absolute rounded-tl-xl rounded-br-xl text-white px-4 hover:bg-gray-700 duration-500 cursor-pointer">
               <div class="px-2 py-1 font-semibold ">Can Order?</div>
@@ -326,19 +326,22 @@
             @endif
             <div class="photo-wrapper p-2">
 
-              <img class="w-32 h-32 rounded-full mx-auto object-cover mt-12" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}">
+              <img class="w-32 h-32 rounded-full mx-auto object-cover mt-12" src="{{ $user->profile_photo_url }}" >
             </div>
 
             <div class="p-2">
 
 
-              <h3 class="text-center text-xl text-gray-900 font-medium leading-8">{{$user->name}}</h3>
-              <div class="text-center text-gray-400 text-sm font-semibold">
-                <p>{{$user->role}}</p>
+              <h3 class="text-center text-xl text-gray-900 font-medium leading-8">{{$user->username}}</h3>
+              <div class="text-center text-gray-400 text-sm font-semibold tracking-wider">
+                <p>{{$user->roles}}</p>
               </div>
               <div class="flex flex-col text-sm hide-scroll px-2">
-
                 <div class="grid grid-cols-3 mt-2">
+                  <div class=" py-1 text-gray-500 font-semibold text-left flex justify-between"><label>Full Name</label>:</div>
+                  <div class="pl-1 py-1 col-span-2 text-left ">{{$user->name}}</div>
+                </div>
+                <div class="grid grid-cols-3 ">
                   <div class=" py-1 text-gray-500 font-semibold text-left flex justify-between"><label>Position</label>:</div>
                   <div class="pl-1 py-1 col-span-2 text-left ">{{$user->position}}</div>
                 </div>
