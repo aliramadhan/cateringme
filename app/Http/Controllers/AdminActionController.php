@@ -214,6 +214,7 @@ class AdminActionController extends Controller
 		}
 
 		$user->update([
+			'username' => $request->username,
 			'name' => $request->name,
 			'division' => $request->division,
 			'roles' => $request->roles,
