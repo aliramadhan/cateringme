@@ -214,8 +214,8 @@ class AdminActionController extends Controller
 		}
 
 		$user->update([
-			'username' => $request->username,
 			'name' => $request->name,
+			'username' => $request->username,
 			'division' => $request->division,
 			'roles' => $request->roles,
 			'number_phone' => $request->number_phone,
@@ -587,7 +587,7 @@ class AdminActionController extends Controller
 		];
 		$send_mail = Mail::to($email)->send(new ResetPasswordUser($data));
 
-		return redirect()->route('admin.index.account')->with(['message' => 'Reset Password for '.$user->name.' succesfully.']);
+		return redirect()->back()->with(['message' => 'Reset Password for '.$user->name.' succesfully.']);
 	}
 	//manage Request
 	public function index_request(Request $request)

@@ -6,15 +6,15 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Catering App') }}</title>
-        <link rel="shortcut icon" href="{{ asset('resources/image/logo.png') }}">
+        <link rel="shortcut icon" href="{{ asset('image/logo.png') }}">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
         <!-- Styles -->
 
-        <link rel="stylesheet" href="{{ asset('public/css/app.css') }}">
-        <link rel="stylesheet" href="{{ asset('resources/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>
         <script type="text/javascript">
@@ -68,7 +68,7 @@
 
 
       </script>
-        <script src="{{ asset('resources/js/modal.js') }}" defer></script>
+        <script src="{{ asset('js/modal.js') }}" defer></script>
 </html>
 
    

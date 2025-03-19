@@ -256,11 +256,11 @@
                                 </x-jet-dropdown-link>
                                 <x-jet-dropdown-link href="https://catering.pahlawandesignstudio.com/">
                                    <i class="fas fa-utensils mr-2"></i>{{ __('Catering') }}
-                                </x-jet-dropdown-link>
-                                @else
+                               </x-jet-dropdown-link>
+                               @else
                                 <x-jet-dropdown-link href="#">
-                                    <i class="fas fa-utensils mr-2"></i>{{ __('Catering App') }}
-                                </x-jet-dropdown-link>
+                                 <i class="fas fa-utensils mr-2"></i>{{ __('Catering') }}
+                             </x-jet-dropdown-link>
                                 @endif
 
                             </x-slot>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>24Slides Catering App</title>
+  <title>24Slides</title>
   <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" />
@@ -37,25 +37,22 @@
     display: flex;">
     
     <p style="    color: #ffffff;
-    font-size: 1.5rem;">Your New Account for Office Catering Registered! </p>
+    font-size: 1.5rem;">Your New Account successfully Registered! </p>
   </div>
 
   <div style="    padding:2em;background-color: #fff;border-bottom-width: 1px;">
   <p>
     Hey {{$data['name']}}!<br><br>
-    Congratulations, your account has been successfully created.<br>        
-    Now you can use this catering application by entering your following email and password<br><br>
+    Congratulations, your account has been successfully created on  <a href="https://pahlawandesignstudio.com/" style="
+    text-decoration: none;font-weight: 600;">pahlawandesignstudio.com</a>  <br>        
+    Now you can access it by  entering your following email and password<br><br>
     This your password:  <b>{{$data['password']}}</b> <br><br> 
-    You can also change it on the profile view on the webpage.<br> Access your account here:
-    <a href="https://catering.pahlawandesignstudio.com/" style="
-    text-decoration: none;font-weight: 600;">catering.pahlawandesignstudio.com</a>  
-
+    You can also change it on the profile view on the webpage.<br>
   </p>
   <br>
   <p style="    font-size: 0.875rem;">
-    Best Regard!<br>
-    <a href="mailto:ainun@24slides.com&subject=My%20Ask&body=for Employee Happiness" style="text-decoration: none;font-weight: 600;color: #000000;"><i>Employee Happiness</i></a>
-    
+    regards,<br>
+    <a href="mailto:tikakartika@24slides.com&subject=My%20Ask&body=for People Success" style="text-decoration: none;font-weight: 600;color: #000000;"><i>People Success</i></a>    
   </p>
 </div>
 

@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'asset_url'  => 'http://localhost/cateringme/public',
+    'asset_url'  => 'https://catering.pahlawandesignstudio.com/public',
 
     'asset_base_url' => '/assets',
     'asset_base_url' => '/application',

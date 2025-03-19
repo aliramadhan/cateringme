@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Catering - 24Slides Indonesia</title>
     <link rel="shortcut icon" href="{{ asset('resources/image/logo.png') }}">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
@@ -27,14 +27,14 @@
      <script src="{{asset('resources/table/bootstrap-table-export.min.js')}}"></script>
    
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('public/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('resources/css/app.css') }}">
 
     @livewireStyles
 
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="{{ asset('public/js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <link rel="stylesheet" href="{{ asset('resources/css/style.css') }}">
     <script type="text/javascript">
       function notifu() {

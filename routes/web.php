@@ -23,6 +23,7 @@ Route::get('setcookie', function(){
     Session::start();
     return redirect()->route('dashboard');
 });
+
 Route::get('/', function () {
     return redirect()->route('login');
 });
@@ -127,4 +128,13 @@ Route::group(['prefix' => 'employee',  'middleware' => ['auth:sanctum','role:Emp
     //Get data
     Route::post('/get_photos', [ EmployeeActionController::class, 'get_photos'])->name('employee.get_photos');
     Route::get('/get-schedule',[ EmployeeActionController::class, 'get_schedule'])->name('employee.get_schedule');
+});
+
+
+Route::get('clear_cache', function () {
+
+    \Artisan::call('config:clear');
+
+    dd("Cache is cleared");
+
 });
